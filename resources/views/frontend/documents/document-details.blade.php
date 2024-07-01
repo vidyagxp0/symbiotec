@@ -27,7 +27,8 @@
                                     @endif
                                     <button  onclick="location.href='{{ url('documents/generatePdf', $document->id) }}';">Download
                                     </button>
-                                    <button onclick="location.href='{{ url('documents/printPDF', $document->id) }}';" target="__blank">
+                                    {{-- <button onclick="location.href='{{ url('documents/printPDF', $document->id) }}';" target="__blank"> --}}
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signature-modal">
                                             Print
                                     </button>
                                     {{-- @if ($document->stage >= 7)
@@ -262,7 +263,7 @@
                             <div class="main-title d-flex justify-content-between pa-5">
                                 <div>Preview</div>
                                 <div>
-                                    <button class="btn btn-primary rounded-pill">Issue Copies</button>
+                                    {{-- <button class="btn btn-primary rounded-pill">Issue Copies</button> --}}
                                 </div>
                             </div>
 
