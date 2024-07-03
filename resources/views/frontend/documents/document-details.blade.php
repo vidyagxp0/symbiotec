@@ -98,14 +98,14 @@
                                 @if ($document->stage == 1)
                                     <input type="hidden" name="stage_id" value="2" />
                                     <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#approve-sign">
-                                        Send For HOD Review<i class="fa-regular fa-paper-plane"></i>
+                                        Send For Review<i class="fa-regular fa-paper-plane"></i>
                                     </button>
                                 @endif
 
                                 @if ($document->stage == 3)
                                     <input type="hidden" name="stage_id" value="4" />
                                     <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#approve-sign">
-                                        Send For Review<i class="fa-regular fa-paper-plane"></i>
+                                        Send For Final Review<i class="fa-regular fa-paper-plane"></i>
                                     </button>
                                 @endif
 
@@ -115,28 +115,27 @@
                                         Send For Approval<i class="fa-regular fa-paper-plane"></i>
                                     </button>
                                 @endif
-
-                                {{-- @if ($document->stage == 3)
-                                    <input type="hidden" name="stage_id" value="4" />
+                                @if ($document->stage == 7)
+                                    <input type="hidden" name="stage_id" value="8" />
                                     <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#approve-sign">
-                                        Send For Approval<i class="fa-regular fa-paper-plane"></i>
+                                        Send For Final Approval<i class="fa-regular fa-paper-plane"></i>
                                     </button>
-                                @endif --}}
+                                @endif
                                 @if ($document->training_required == 'yes')
-                                    @if ($document->stage == 7)
+                                    @if ($document->stage == 9)
                                         <input type="hidden" name="stage_id" value="6" />
                                         <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#approve-sign">
                                             Send For Training<i class="fa-regular fa-paper-plane"></i>
                                         </button>
                                     @endif
-                                    @if ($document->stage == 9)
+                                    @if ($document->stage == 10)
                                         <input type="hidden" name="stage_id" value="8" />
                                         <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#approve-sign">
                                             Send For Effective<i class="fa-regular fa-paper-plane"></i>
                                         </button>
                                     @endif
                                 @elseif($document->training_required == 'no')
-                                    @if ($document->stage == 7)
+                                    @if ($document->stage == 10)
                                         <input type="hidden" name="stage_id" value="8" />
                                         <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#approve-sign">
                                             Send For Effective<i class="fa-regular fa-paper-plane"></i>
@@ -156,45 +155,42 @@
                                             <div class="">Draft</div>
                                         @endif
                                         @if ($document->stage >= 2)
-                                            <div class="active">In-HOD Review</div>
+                                            <div class="active">In Review</div>
                                         @else
-                                            <div class="">In-HOD Review</div>
+                                            <div class="">In Review</div>
                                         @endif
                                         @if ($document->stage >= 3)
-                                            <div class="active">HOD Review Complete</div>
+                                            <div class="active">Reviewer Cycle-I</div>
                                         @else
-                                            <div class="">HOD Review Complete</div>
+                                            <div class="">Reviewer Cycle-I</div>
                                         @endif
                                         @if ($document->stage >= 4)
-                                            <div class="active">In-Review</div>
+                                            <div class="active">Final Review</div>
                                         @else
-                                            <div class="">In-Review</div>
-                                        @endif
-                                        @if ($document->stage == 9)
-                                            <div class="active">Rejected</div>
+                                            <div class="">Final Review</div>
                                         @endif
                                         @if ($document->stage >= 5)      
-                                            <div class="active">Reviewed</div>
-                                            {{-- && $document->stage < 10 --}}
+                                            <div class="active">Initiator Update</div>
                                         @else
-                                            <div class="">Reviewed</div>
+                                            <div class="">Initiator Update</div>
                                         @endif
                                         @if ($document->stage >= 6)            
-                                            <div class="active">For-Approval</div>
-                                            {{-- && $document->stage < 10 --}}
+                                            <div class="active">In Approval</div>
                                         @else
-                                            <div class="">For-Approval</div>
+                                            <div class="">In Approval</div>
                                         @endif
-                                        {{-- @if ($document->stage == 10)
-                                            <div class="active">Rejected</div>
-                                        @endif --}}
                                         @if ($document->stage >= 7)
-                                            <div class="active">Approved</div>
+                                            <div class="active">Approval Cycle-I</div>
                                         @else
-                                            <div class="">Approved</div>
+                                            <div class="">Approval Cycle-I</div>
+                                        @endif
+                                        @if ($document->stage >= 8)
+                                            <div class="active">Final Approval</div>
+                                        @else
+                                            <div class="">Final Approval</div>
                                         @endif
                                         @if ($document->training_required == 'yes')
-                                            @if ($document->stage >= 8)
+                                            @if ($document->stage >= 10)
                                                 <div class="active">Pending-Traning</div>
                                             @else
                                                 <div class="">Pending-Traning</div>
@@ -205,20 +201,16 @@
                                                 <div class="">Traning-Complete</div>
                                             @endif
                                         @endif
-                                        @if ($document->stage >= 10)
+                                        @if ($document->stage >= 11)
                                             <div class="active">Effective</div>
                                         @else
                                             <div class="">Effective</div>
                                         @endif
-                                        @if ($document->stage == 11)
+                                        @if ($document->stage == 12)
                                             <div class="active">Obsolete</div>
                                         @else
                                             <div class="">Obsolete</div>
                                         @endif
-                                        {{-- <div class="{{ $document->stage == 0 ? 'active' : '' }}">Draft</div>
-                                        <div class="{{ $document->stage == 1 ? 'active' : '' }}">Reviewed</div>
-                                        <div class="{{ $document->stage == 2 ? 'active' : '' }}">Approved</div>
-                                        <div class="{{ $document->stage == 3 ? 'active' : '' }}">Effective</div> --}}
                                     </div>
                                 @else 
                                     <div class="bg-danger text-white rounded-pill text-center">
@@ -1123,15 +1115,18 @@
                     @if ($document->stage == 3)
                         <input type="hidden" name="stage_id" value="4" />
                     @endif
+                    @if ($document->stage == 5)
+                        <input type="hidden" name="stage_id" value="6" />
+                    @endif
+                    @if ($document->stage == 7)
+                        <input type="hidden" name="stage_id" value="8" />
+                    @endif
                     @if ($document->training_required == 'yes')
-                        @if ($document->stage == 7)
-                            <input type="hidden" name="stage_id" value="8" />
-                        @endif
-                        @if ($document->stage == 8)
-                            <input type="hidden" name="stage_id" value="9" />
+                        @if ($document->stage == 9)
+                            <input type="hidden" name="stage_id" value="10" />
                         @endif
                     @else
-                        @if ($document->stage == 7)
+                        @if ($document->stage == 11)
                             <input type="hidden" name="stage_id" value="10" />
                         @endif
                     @endif

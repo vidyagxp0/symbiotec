@@ -33,7 +33,7 @@
                                         @endif
                                     @endif
                                     
-                                    @if (Helpers::checkRoles(4))
+                                    @if (Helpers::checkRoles(2))
                                         @if (empty($hod_reject))
                                             @if (empty($stagehod_submit))
                                                 @php
@@ -112,8 +112,7 @@
                             </div>
                         </div>
                     </div>
-
-                    @if (Helpers::checkRoles(4) && Helpers::checkRoles_check_hods($document) && ($document->stage >= 2))
+                    @if (Helpers::checkRoles(2) AND Helpers::checkRoles_check_reviewers($document) && $document->stage == 2 )
                         <div class="col-8">
                             <div class="inner-block tracker">
                                 <div class="d-flex justify-content-between align-items-center hods">
@@ -125,30 +124,27 @@
                                             @if ($stagereview && empty($stagereview_submit))
                                                 @if($document->stage < 3)
                                                 <button data-bs-toggle="modal" data-bs-target="#review-cancel">
-                                                    Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                    Reject with comment&nbsp;<i class="fa-regular fa-circle-xmark"></i>
                                                 </button>
                                                 @endif
                                             @endif
                                         @elseif($document->stage == 2)
                                             <button data-bs-toggle="modal" data-bs-target="#review-cancel">
-                                                Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                Reject with comment&nbsp;<i class="fa-regular fa-circle-xmark"></i>
                                             </button>
                                         @endif
 
                                         @if (empty($stagehod) && $document->stage == 2)
                                             @if (empty($review_reject))
                                                 <button data-bs-toggle="modal" data-bs-target="#review-sign">
-                                                    Review&nbsp;<i class="fa-regular fa-paper-plane"></i>
+                                                    Accept with comment&nbsp;<i class="fa-regular fa-paper-plane"></i>
                                                 </button>
                                                 <button data-bs-toggle="modal" data-bs-target="#review-cancel">
-                                                    Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
-                                                </button>
-                                                <button data-bs-toggle="modal" data-bs-target="#cancel-record">
-                                                    Cancel&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                    Reject with comment&nbsp;<i class="fa-regular fa-circle-xmark"></i>
                                                 </button>
                                             @elseif($document->stage == 2)
                                                 <button data-bs-toggle="modal" data-bs-target="#review-sign">
-                                                    Review&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                    Accept with comment&nbsp;<i class="fa-regular fa-circle-xmark"></i>
                                                 </button>
                                             @endif
                                         @endif
@@ -184,8 +180,7 @@
                             </div>
                         </div>
                     @endif
-
-                    @if (Helpers::checkRoles(2) AND Helpers::checkRoles_check_reviewers($document) && $document->stage == 4)
+                    @if (Helpers::checkRoles(2) AND Helpers::checkRoles_check_reviewers($document) && $document->stage == 4 )
                         <div class="col-8">
                             <div class="inner-block tracker">
                                 <div class="d-flex justify-content-between align-items-center reviewer">
@@ -195,13 +190,13 @@
                                     <div class="buttons"> 
                                         @if (empty($review_reject))
                                             @if ($stagereview && empty($stagereview_submit))
-                                                @if($document->stage < 3)
+                                                @if($document->stage < 3 || $document->stage == 4)
                                                 <button data-bs-toggle="modal" data-bs-target="#review-cancel">
                                                     Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
                                                 </button>
                                                 @endif
                                             @endif
-                                        @elseif($document->stage == 2)
+                                        @elseif($document->stage == 2 || $document->stage == 4)
                                             <button data-bs-toggle="modal" data-bs-target="#review-cancel">
                                                 Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
                                             </button>
@@ -210,14 +205,14 @@
                                         @if (empty($stagereview))
                                             @if (empty($review_reject))
                                                 <button data-bs-toggle="modal" data-bs-target="#review-sign">
-                                                    Review&nbsp;<i class="fa-regular fa-paper-plane"></i>
+                                                    Reviewed&nbsp;<i class="fa-regular fa-paper-plane"></i>
                                                 </button>
                                                 <button data-bs-toggle="modal" data-bs-target="#review-cancel">
                                                     Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
                                                 </button>
-                                            @elseif($document->stage == 2)
+                                            @elseif($document->stage == 2 || $document->stage == 4)
                                                 <button data-bs-toggle="modal" data-bs-target="#review-sign">
-                                                    Review&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                    Reviewed&nbsp;<i class="fa-regular fa-circle-xmark"></i>
                                                 </button>
                                             @endif
                                         @endif
@@ -234,7 +229,7 @@
                                 <div class="status">
                                     <div class="head">Current Status</div>
                                     <div class="progress-bars">
-                                        @if ($document->stage >= 4)
+                                        @if ($document->stage >= 2)
                                             <div class="active">Draft</div>
                                         @else
                                             <div>Draft</div>
@@ -266,40 +261,103 @@
                             </div>
                         </div>
                     @endif
-                    @if (Helpers::checkRoles(1) AND Helpers::checkRoles_check_approvers($document) && $document->stage == 6)
+                    @if (Helpers::checkRoles(1) AND Helpers::checkRoles_check_approvers($document) &&  $document->stage == 6)
                         <div class="col-8">
                             <div class="inner-block tracker">
                                 <div class="d-flex justify-content-between align-items-center approver">
                                     <div class="main-title">
                                         Record Workflow
                                     </div>
-                                    <div class="buttons">
+                                    <div class="buttons"> 
+                                        @if (empty($approval_reject))
+                                            @if ($approverviews && empty($approverviews_submit))
+                                                @if($document->stage < 7)
+                                                <button data-bs-toggle="modal" data-bs-target="#review-cancel">
+                                                    Reject with comment&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                </button>
+                                                @endif
+                                            @endif
+                                        @elseif($document->stage == 6)
+                                            <button data-bs-toggle="modal" data-bs-target="#review-cancel">
+                                                Reject with comment&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                            </button>
+                                        @endif
+
+                                        @if (empty($stageapprove1) && $document->stage == 6)
+                                            @if (empty($approval_reject))
+                                                <button data-bs-toggle="modal" data-bs-target="#review-sign">
+                                                    Accept with comment&nbsp;<i class="fa-regular fa-paper-plane"></i>
+                                                </button>
+                                                <button data-bs-toggle="modal" data-bs-target="#review-cancel">
+                                                    Reject with comment&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                </button>
+                                            @elseif($document->stage == 6)
+                                                <button data-bs-toggle="modal" data-bs-target="#review-sign">
+                                                    Accept with comment&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                </button>
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="status">
+                                    <div class="head">Current Status</div>
+                                    <div class="progress-bars">
+                                        
+                                        @if ($document->stage < 13)
+                                            @if ($document->stage >= 6)
+                                                <div class="active">Draft</div>
+                                            @else
+                                                <div>Draft</div>
+                                            @endif
+                                            
+                                            @if ($stageapprove1)
+                                                @if ($stageapprove1->stage == 'Approver accept with comment' AND $document->stage >= 6)
+                                                    <div class="active">Accepted</div>
+                                                @else
+                                                    <div>Accepted</div>
+                                                @endif
+                                            @else
+                                                <div>Accepted</div>
+                                            @endif
+                                        @else 
+                                            <div class="bg-danger rounded-pill text-white">{{ Helpers::getDocStatusByStage($document->stage) }}</div>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    @if (Helpers::checkRoles(1) AND Helpers::checkRoles_check_approvers($document) &&  $document->stage == 8)
+                        <div class="col-8">
+                            <div class="inner-block tracker">
+                                <div class="d-flex justify-content-between align-items-center approver">
+                                    <div class="main-title">
+                                        Record Workflow
+                                    </div>
+                                    {{-- <div class="buttons">
                                         @if (empty($review_approve))
                                             @if ($stageapprove && empty($stageapprove_submit))
                                              @if ($stageapprove->stage != 'Approved')
                                                 <button data-bs-toggle="modal" data-bs-target="#review-cancel">
-                                                    Reject&nbsp;<i class="fa-regular fa-paper-plane"></i>
+                                                    {{$document->stage == 6 ? 'Reject with comment' : 'Reject'}}&nbsp;<i class="fa-regular fa-paper-plane"></i>
                                                 </button>
                                                 @endif
                                             @endif
-                                        @elseif($document->stage == 4)
+                                        @elseif($document->stage == 6 || $document->stage == 8)
                                             <button data-bs-toggle="modal" data-bs-target="#review-cancel">
-                                                Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                {{$document->stage == 6 ? 'Reject with comment' : 'Reject'}}&nbsp;<i class="fa-regular fa-circle-xmark"></i>
                                             </button>
                                         @endif
                                         
                                         @if (empty($stageapprove))
                                             @if (empty($approval_reject))
                                                 <button data-bs-toggle="modal" data-bs-target="#review-sign">
-                                                    Approve&nbsp;<i class="fa-regular fa-paper-plane"></i>
+                                                    {{$document->stage == 6 ? 'Approve with comment' : 'Approve'}}&nbsp;<i class="fa-regular fa-paper-plane"></i>
                                                 </button>
                                                 <button data-bs-toggle="modal" data-bs-target="#review-cancel">
-                                                    Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                    {{$document->stage == 6 ? 'Reject with comment' : 'Reject'}}&nbsp;<i class="fa-regular fa-circle-xmark"></i>
                                                 </button>
-                                                {{-- @elseif($document->stage == 4)
-                                                <button data-bs-toggle="modal" data-bs-target="#review-sign">
-                                                    Approve&nbsp;<i class="fa-regular fa-circle-xmark"></i>
-                                                </button>--}}
                                             @endif
                                         @endif
                                         @if ($stageapprove && empty($stageapprove_submit))
@@ -309,12 +367,42 @@
                                                 </button>
                                             @endif
                                         @endif
+                                    </div> --}}
+                                    <div class="buttons"> 
+                                        @if (empty($approval_reject))
+                                            @if ($stageapprove && empty($stageapprove_submit))
+                                                @if($document->stage < 9)
+                                                <button data-bs-toggle="modal" data-bs-target="#review-cancel">
+                                                    Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                </button>
+                                                @endif
+                                            @endif
+                                        @elseif($document->stage == 8)
+                                            <button data-bs-toggle="modal" data-bs-target="#review-cancel">
+                                                Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                            </button>
+                                        @endif
+
+                                        @if (empty($stageapprove_submit) && $document->stage == 8)
+                                            @if (empty($approval_reject))
+                                                <button data-bs-toggle="modal" data-bs-target="#review-sign">
+                                                    Accept&nbsp;<i class="fa-regular fa-paper-plane"></i>
+                                                </button>
+                                                <button data-bs-toggle="modal" data-bs-target="#review-cancel">
+                                                    Reject&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                </button>
+                                            @elseif($document->stage == 8)
+                                                <button data-bs-toggle="modal" data-bs-target="#review-sign">
+                                                    Accept&nbsp;<i class="fa-regular fa-circle-xmark"></i>
+                                                </button>
+                                            @endif
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="status">
                                     <div class="head">Current Status</div>
                                     <div class="progress-bars">
-                                        @if ($document->stage >= 6)
+                                        @if ($document->stage >= 8)
                                             <div class="active">Draft</div>
                                         @else
                                             @if ($stageapprove)
@@ -856,21 +944,21 @@
                             which is legally binding equivalent of a hand written signature.
                         </div>
                         <div class="group-input">
-                            <label for="username">Username</label>
+                            <label for="username">Username <span class="text-danger">*</span></label>
                             <input type="text" value="{{ old('username') }}" name="username" required>
                             @if ($errors->has('username'))
                                 <p class="text-danger">User name not matched</p>
                             @endif
                         </div>
                         <div class="group-input">
-                            <label for="password">Password</label>
+                            <label for="password">Password <span class="text-danger">*</span></label>
                             <input type="password" value="{{ old('password') }}" name="password" required>
                             @if ($errors->has('username'))
                                 <p class="text-danger">E-signature not matched</p>
                             @endif
                         </div>
                         <div class="group-input">
-                            <label for="comment">Comment<span class="text-danger">*</span></label>
+                            <label for="comment">Comment <span class="text-danger">*</span></label>
                             <textarea required name="comment" value="{{ old('comment') }}"></textarea>
                         </div>
                     </div>
@@ -890,6 +978,9 @@
 
 
                     @if ($document->stage == 6)
+                        <input type="hidden" name="stage_id" value="Approved-temp" />
+                    @endif
+                    @if ($document->stage == 8)
                         <input type="hidden" name="stage_id" value="Approved" />
                     @endif
 
@@ -939,31 +1030,31 @@
                             </select>
                         </div> --}}
                         <div class="group-input">
-                            <label for="username">Username</label>
+                            <label for="username">Username <span class="text-danger">*</span></label>
                             <input type="text" value="{{ old('username') }}" name="username" required>
                             @if ($errors->has('username'))
                                 <p class="text-danger">User name not matched</p>
                             @endif
                         </div>
                         <div class="group-input">
-                            <label for="password">Password</label>
+                            <label for="password">Password <span class="text-danger">*</span></label>
                             <input type="password" value="{{ old('password') }}" name="password" required>
                             @if ($errors->has('username'))
                                 <p class="text-danger">E-signature not matched</p>
                             @endif
                         </div>
                         <div class="group-input">
-                            <label for="comment">Comment<span class="text-danger">*</span></label>
+                            <label for="comment">Comment <span class="text-danger">*</span></label>
                             <textarea required name="comment" value="{{ old('comment') }}"></textarea>
                         </div> 
                     </div>
                     @if (Helpers::checkRoles(4) && $document->stage == 2)
                         <input type="hidden" name="stage_id" value="Cancel-by-HOD" />
                     @endif
-                    @if (Helpers::checkRoles(1) AND Helpers::checkRoles_check_approvers($document) && $document->stage == 6)
+                    @if (Helpers::checkRoles(1) AND Helpers::checkRoles_check_approvers($document) && ($document->stage == 6 || $document->stage == 8))
                         <input type="hidden" name="stage_id" value="Cancel-by-Approver" />
                     @endif
-                    @if (Helpers::checkRoles(2) AND Helpers::checkRoles_check_reviewers($document) && $document->stage == 4)
+                    @if (Helpers::checkRoles(2) AND Helpers::checkRoles_check_reviewers($document) && ( $document->stage == 2 || $document->stage == 4))
                         <input type="hidden" name="stage_id" value="Cancel-by-Reviewer" />
                     @endif
 
