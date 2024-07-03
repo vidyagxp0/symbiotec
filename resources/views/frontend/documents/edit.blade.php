@@ -2618,7 +2618,7 @@
                         @if ($document->document_content && !empty($document->document_content->annexuredata))
                             @foreach (unserialize($document->document_content->annexuredata) as $data)
                                 <div class="group-input mb-3">
-                                    <label>Annexure A-{{ $loop->index + 1; }}</label>
+                                    <label>Annexure A-{{ $loop->index + 1 }}</label>
                                     <textarea class="summernote" name="annexuredata[]">{{ $data }}</textarea>
                                 </div>
                             @endforeach
