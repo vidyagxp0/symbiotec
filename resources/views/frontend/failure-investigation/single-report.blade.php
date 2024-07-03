@@ -3056,7 +3056,7 @@
                                     </tr>
 
                                     <tbody>
-                                    @if($root_cause_data && is_array($root_cause_data))
+                                    {{-- @if($root_cause_data && is_array($root_cause_data))
                                         @php
                                             $serialNumber = 1;
                                         @endphp
@@ -3079,7 +3079,7 @@
                                                 <td class="w-20">Not Applicable</td>
                                                 <td class="w-20">Not Applicable</td>
                                             </tr>
-                                    @endif
+                                    @endif --}}
                                 </tbody>
                                 </table>
                             </div>

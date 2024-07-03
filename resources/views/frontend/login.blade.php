@@ -254,14 +254,14 @@
                 {{-- </div> --}}
                 <div style="padding: 24px; margin-top: 34px;" class="col-lg-6">
                      <div class="logo" style="display: flex display: flex;flex-direction: row; gap: 65px;">
-                     <img src="{{ asset('user/images/agio-removebg-preview.png') }}" alt="..." style="filter: none; scale: 0.7; max-width: 100px; margin: auto; margin-bottom: 14px;">
+                     {{-- <img src="{{ asset('user/images/agio-removebg-preview.png') }}" alt="..." style="filter: none; scale: 0.7; max-width: 100px; margin: auto; margin-bottom: 14px;"> --}}
 
 
                      <img  src="{{ asset('user/images/vidhyaGxp.png') }}" alt="..." style="filter: none; scale: 1.8; max-width: 100px; margin: auto">
 
 
                     </div> 
-                    <div class="head">
+                    <div class="head" style="margin-top: 2rem;">
                         Welcome To VidyaGxP
                     </div>
                     <form action="{{ url('rcms_check') }}" method="POST">

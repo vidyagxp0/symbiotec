@@ -35,6 +35,11 @@
     <script src="{{ asset('user/js/virtual-select.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('user/css/style.css') }}">
     {{-- @toastr_css --}}
+    <style>
+        .tox-statusbar__branding{
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -65,7 +70,7 @@
         <div class="container-fluid header-top">
             <div class="container">
                 <div class="text-center text-light">
-                    <small>{{ env('APP_NAME') }}</small>
+                    <small>{{ config('site.site_name') }}</small>
                 </div>
             </div>
         </div>

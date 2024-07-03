@@ -110,7 +110,7 @@ class DeviationController extends Controller
         $deviation->assign_to = $request->assign_to;
         $deviation->Facility = $request->Facility;
         $deviation->due_date = $request->due_date;
-        $deviation->intiation_date = $initiationDate;
+        // $deviation->intiation_date = Carbon::parse($initiationDate)->format('d-M-Y');
         $deviation->Deviation_category = $deviationCategory;
         $deviation->days = $days;
         $deviation->Initiator_Group = $request->Initiator_Group;
