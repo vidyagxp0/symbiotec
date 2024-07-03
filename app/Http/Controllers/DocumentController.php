@@ -37,10 +37,12 @@ use App\Services\DocumentService;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
@@ -1813,12 +1815,30 @@ class DocumentController extends Controller
             }
         }
 
+        $directoryPath = public_path("user/pdf/doc");
+        $filePath = $directoryPath . '/SOP' . $id . '.pdf';
+
+        if (!File::isDirectory($directoryPath)) {
+            File::makeDirectory($directoryPath, 0755, true, true); // Recursive creation with read/write permissions
+        }  
+
+        $pdf->save($filePath);
+
         return $pdf->stream('SOP'.$id.'.pdf');
     }
 
     public function printPDF($id)
     {
-        $roles = explode(',', Auth::user()->role);
+
+        $issue_copies = request('issue_copies');
+        $print_reason = request('print_reason');
+
+        if (intval($issue_copies) < 1)
+        {
+            return "Cannot issue less than 1 copies! Requested $issue_copies no. of copies.";
+        }
+
+        $roles = Auth::user()->userRoles()->select('id')->distinct()->pluck('id')->toArray();
         $controls = PrintControl::whereIn('role_id', $roles)->first();
 
         if ($controls) {
@@ -1832,6 +1852,8 @@ class DocumentController extends Controller
             $data['document_type_name'] = DocumentType::where('id', $data->document_type_id)->value('name');
             $data['document_type_code'] = DocumentType::where('id', $data->document_type_id)->value('typecode');
             $data['document_division'] = Division::where('id', $data->division_id)->value('name');
+            $data['issue_copies'] = $issue_copies;
+
 
             $data['year'] = Carbon::parse($data->created_at)->format('Y');
             // $document = Document::where('id', $id)->get();
@@ -1839,21 +1861,35 @@ class DocumentController extends Controller
 
             $pdf = App::make('dompdf.wrapper');
             $time = Carbon::now();
-            $pdf = PDF::loadview('frontend.documents.pdfpage', compact('data', 'time', 'document'))
+            
+            $pdf = PDF::loadview('frontend.documents.pdfpage', compact('data', 'time', 'document', 'issue_copies', 'print_reason'))
                 ->setOptions([
                     'defaultFont' => 'sans-serif',
                     'isHtml5ParserEnabled' => true,
                     'isRemoteEnabled' => true,
                     'isPhpEnabled' => true,
                 ]);
+
             $pdf->setPaper('A4');
             $pdf->render();
             $canvas = $pdf->getDomPDF()->getCanvas();
+            $canvas2 = $pdf->getDomPDF()->getCanvas();
             $height = $canvas->get_height();
             $width = $canvas->get_width();
 
+            
+            $canvas2->page_script(function ($pageNumber, $pageCount, $canvas, $fontMetrics) use ($issue_copies, $canvas2) {
+                $current_copy = round($pageNumber/$issue_copies) < 1 ? 1 : ceil($pageNumber/$issue_copies);
+                $current_copy = $current_copy > $issue_copies ? $issue_copies : $current_copy;
+                $text = "Issued Copy $current_copy of $issue_copies";
+                $pageWidth = $canvas->get_width();
+                $pageHeight = $canvas->get_height();
+                $size = 10;
+                $width = $fontMetrics->getTextWidth($text, null, $size);
+                $canvas2->text($pageWidth - $width - 50, $pageHeight - 30, $text, null, $size);
+            });
+                        
             $canvas->page_script('$pdf->set_opacity(0.1,"Multiply");');
-
             $canvas->page_text(
                 $width / 4,
                 $height / 2,
@@ -1866,6 +1902,7 @@ class DocumentController extends Controller
                 -20
             );
 
+
             if ($controls->daily != 0) {
                 $user = PrintHistory::where('user_id', Auth::user()->id)->where('document_id', $id)->where('date', Carbon::now()->format('d-m-Y'))->count();
                 if ($user + 1 <= $controls->daily) {
@@ -1875,6 +1912,8 @@ class DocumentController extends Controller
                     $download->user_id = Auth::user()->id;
                     $download->role_id = Auth::user()->role;
                     $download->date = Carbon::now()->format('d-m-Y');
+                    $download->print_reason = $print_reason;
+                    $download->issue_copies = $issue_copies;
                     $download->save();
 
                     // download PDF file with download method
@@ -1895,6 +1934,8 @@ class DocumentController extends Controller
                     $download->user_id = Auth::user()->id;
                     $download->role_id = Auth::user()->role;
                     $download->date = Carbon::now()->format('d-m-Y');
+                    $download->print_reason = $print_reason;
+                    $download->issue_copies = $issue_copies;
                     $download->save();
 
                     // download PDF file with download method
@@ -1914,11 +1955,13 @@ class DocumentController extends Controller
                     $download->user_id = Auth::user()->id;
                     $download->role_id = Auth::user()->role;
                     $download->date = Carbon::now()->format('d-m-Y');
+                    $download->print_reason = $print_reason;
+                    $download->issue_copies = $issue_copies;
                     $download->save();
 
                     // download PDF file with download method
 
-                    return $pdf->download('SOP'.$id.'.pdf');
+                    return $pdf->stream('SOP'.$id.'.pdf');
                 } else {
                     toastr()->error('You breach your monthly print limit.');
 
@@ -1934,6 +1977,8 @@ class DocumentController extends Controller
                     $download->user_id = Auth::user()->id;
                     $download->role_id = Auth::user()->role;
                     $download->date = Carbon::now()->format('d-m-Y');
+                    $download->print_reason = $print_reason;
+                    $download->issue_copies = $issue_copies;
                     $download->save();
 
                     // download PDF file with download method
@@ -1954,6 +1999,8 @@ class DocumentController extends Controller
                     $download->user_id = Auth::user()->id;
                     $download->role_id = Auth::user()->role;
                     $download->date = Carbon::now()->format('d-m-Y');
+                    $download->print_reason = $print_reason;
+                    $download->issue_copies = $issue_copies;
                     $download->save();
 
                     // download PDF file with download method
@@ -1974,6 +2021,68 @@ class DocumentController extends Controller
 
             return back();
         }
+    }
+
+    public function printAnnexure($documentId, $annexure_number)
+    {
+        try {
+            $document = Document::findOrFail($documentId);
+            
+            if ( $document->doc_content && !empty($document->doc_content->annexuredata) )
+            {
+                $annexure_data = unserialize($document->doc_content->annexuredata);
+
+                $annexure_data = $annexure_data[$annexure_number-1];
+
+                $document = Document::find($documentId);
+                $data = Document::find($documentId);
+                $data->department = Department::find($data->department_id);
+                $data['originator'] = User::where('id', $data->originator_id)->value('name');
+                $data['originator_email'] = User::where('id', $data->originator_id)->value('email');
+                $data['document_content'] = DocumentContent::where('document_id', $documentId)->first();
+                $data['document_type_name'] = DocumentType::where('id', $data->document_type_id)->value('name');
+                $data['document_type_code'] = DocumentType::where('id', $data->document_type_id)->value('typecode');
+                $data['document_division'] = Division::where('id', $data->division_id)->value('name');
+                $data['year'] = Carbon::parse($data->created_at)->format('Y');
+                $pdf = App::make('dompdf.wrapper');
+                $time = Carbon::now();
+                $pdf = PDF::loadview('frontend.documents.reports.annexure_report', compact('data', 'time', 'document', 'annexure_number', 'annexure_data'))
+                    ->setOptions([
+                        'defaultFont' => 'sans-serif',
+                        'isHtml5ParserEnabled' => true,
+                        'isRemoteEnabled' => true,
+                        'isPhpEnabled' => true,
+                    ]);
+                $pdf->setPaper('A4');
+                $pdf->render();
+                $canvas = $pdf->getDomPDF()->getCanvas();
+                $height = $canvas->get_height();
+                $width = $canvas->get_width();
+
+                $canvas->page_script('$pdf->set_opacity(0.1,"Multiply");');
+
+                $canvas->page_text(
+                    $width / 4,
+                    $height / 2,
+                    $data->status,
+                    null,
+                    25,
+                    [0, 0, 0],
+                    2,
+                    6,
+                    -20
+                );
+
+                return $pdf->stream('SOP'.$documentId.'.pdf');
+                
+            } else {
+                throw new \Exception('Annexure Data Not Found');
+            }
+
+        } catch(\Exception $e) {
+            return $e->getMessage();
+        }
+
     }
 
     public function import(Request $request)
@@ -2114,6 +2223,28 @@ class DocumentController extends Controller
     
             toastr()->success('Document is revised, you can change the body!!');
             return redirect()->route('documents.edit', $newdoc->id);
+        }
+    }
+
+    public function revision_history($id)
+    {
+        try {
+            $document = Document::find($id);
+            $revised_document = Document::findOrFail($id);
+            $parent_document = Document::findOrFail($revised_document->revised_doc);
+
+            $revision_history = DocumentService::comapre_documents($parent_document, $revised_document);
+
+            if ($revision_history['status'] == 'error')
+            {
+                throw new Exception($revision_history['message']);
+            }
+
+
+            return view('frontend.documents.revision_history', compact('revised_document', 'parent_document', 'document', 'revision_history'));
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
     }
 }

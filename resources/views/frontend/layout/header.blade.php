@@ -65,7 +65,7 @@
         <div class="container-fluid header-top">
             <div class="container">
                 <div class="text-center text-light">
-                    <small>{{ env('APP_NAME') }}</small>
+                    <small>{{ config('site.site_name') }}</small>
                 </div>
             </div>
         </div>

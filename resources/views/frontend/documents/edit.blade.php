@@ -2605,16 +2605,27 @@
                 {{-- HOD REMARKS TAB END --}}
 
                 <div id="annexures" class="tabcontent">
+
+                    <div class="d-flex justify-content-end">
+                        <div>
+                            <button 
+                            data-bs-toggle="modal" data-bs-target="#annexure-modal"
+                            type="button" class="btn btn-primary">Annexure Print</button>
+                        </div>
+                    </div>
+
                     <div class="input-fields">
                         @if ($document->document_content && !empty($document->document_content->annexuredata))
                             @foreach (unserialize($document->document_content->annexuredata) as $data)
-                                <label>Annexure</label>
-                                <textarea class="summernote" name="annexuredata[]">{{ $data }}</textarea>
+                                <div class="group-input mb-3">
+                                    <label>Annexure A-{{ $loop->index + 1; }}</label>
+                                    <textarea class="summernote" name="annexuredata[]">{{ $data }}</textarea>
+                                </div>
                             @endforeach
                         @else
-                            @for ($i = 1; $i <= 30; $i++)
-                                <div class="group-input">
-                                    <label for="annexure-{{ $i }}">Annexure</label>
+                            @for ($i = 1; $i <= 20; $i++)
+                                <div class="group-input mb-3">
+                                    <label for="annexure-{{ $i }}">Annexure A-{{ $i }}</label>
                                     <textarea class="summernote" name="annexuredata[]" id="annexure-{{ $i }}"></textarea>
                                 </div>
                             @endfor
@@ -3276,6 +3287,33 @@
                 @endif
 
             </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="annexure-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Annexure Print</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form action="{{ route('document.print.pdf', $document->id) }}" method="GET" target="_blank">
+                    @csrf
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        @for ($i = 1; $i <= 20; $i++)
+                            <a href='{{ route('document.print.annexure', ['document' => $document->id, 'annexure' => $i]) }}' target="_blank">Print Annexure A-{{ $i }}</a> <br>
+                        @endfor
+                    </div>
+    
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary rounded">Submit</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

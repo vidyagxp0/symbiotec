@@ -172,4 +172,64 @@ class DocumentService
     }
 
 
+    static function comapre_documents(Document $doc1, Document $doc2)
+    {
+        $res = [
+            'status' => 'ok',
+            'data' => []
+        ];
+
+        try {
+
+            $data = [];
+
+            $fields = [
+                'short_description',
+                'effective_date',
+                'next_review_date',
+                'review_period',
+                'reviewers',
+                'approvers',
+                'revision_summary',
+                'revision_type',
+                'sop_type',
+                'training_required',
+                'due_dateDoc',
+            ];
+
+            $content_fields = [
+                'purpose',
+                'scope',
+                'responsibility',
+                'abbreviation',
+                'defination',
+                'materials_and_equipments',
+                'procedure',
+                'reporting',
+                'references',
+            ];
+
+            foreach ($fields as $field)
+            {
+                if ($doc1->$field !== $doc2->$field)
+                {
+                    array_push($data, [
+                        'field' => $field,
+                        'before' => $doc1->$field,
+                        'after' => $doc2->$field
+                    ]);
+                }
+            }
+
+            $res['data'] = $data;
+
+        } catch (\Exception $e) {
+            $res['status'] = 'error';
+            $res['message'] = $e->getMessage();
+        }
+
+        return $res;
+    }
+
+
 }

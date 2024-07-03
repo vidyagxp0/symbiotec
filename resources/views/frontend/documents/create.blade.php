@@ -1034,9 +1034,9 @@
 
                     <div id="annexures" class="tabcontent">
                         <div class="input-fields">
-                            @for ($i = 1; $i <= 30; $i++)
+                            @for ($i = 1; $i <= 20; $i++)
                                 <div class="group-input">
-                                    <label for="annexure-{{ $i }}">Annexure</label>
+                                    <label for="annexure-{{ $i }}">Annexure A-{{ $i }}</label>
                                     <textarea class="summernote" name="annexuredata[]" id="annexure-{{ $i }}"></textarea>
                                 </div>
                             @endfor
