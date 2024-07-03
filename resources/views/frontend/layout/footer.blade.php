@@ -86,7 +86,7 @@
 <script>
     $(document).ready(function() {
         
-        const api_key = '{{ config("data.openai_api_key") }}';
+        const api_key = '{{ env("OPEN_AI_KEY") }}';
 
         const languages = [
             "Afrikaans", "Albanian", "Amharic", "Arabic", "Armenian", "Azerbaijani",

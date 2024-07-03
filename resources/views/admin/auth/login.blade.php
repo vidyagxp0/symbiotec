@@ -16,11 +16,11 @@
             <div class="card-body login-card-body">
             <div class="login-logo">
               <div class="logo-container">
-                        <div class="logo" style="display:flex;">
-                    <img src="{{ asset('user/images/vidyagxplogo.png') }}" alt="..." class="w-100 h-100" style="max-width: 300px">
+                        <div class="logo" style="display:flex; justify-content: center;">
+                    <img src="{{ asset('user/images/vidyagxplogo.png') }}" alt="..." style="max-width: 300px; width: 50%; height 50%; scale: 2;">
                         </div>
                         <div class="logo">
-                            <img src="{{ asset('user/images/agio.jpg') }}" alt="..." class="w-100 h-100" style="max-width: 150px">
+                            {{-- <img src="{{ asset('user/images/agio.jpg') }}" alt="..." class="w-100 h-100" style="max-width: 150px"> --}}
                         </div>
                     </div>
             <!-- <img style="border-radius: 8% " src="{{ asset('images/logo/logo.png') }}" height="80" alt=""><br> -->
