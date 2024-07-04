@@ -1838,7 +1838,7 @@ class DocumentController extends Controller
             return "Cannot issue less than 1 copies! Requested $issue_copies no. of copies.";
         }
 
-        $roles = Auth::user()->userRoles()->select('id')->distinct()->pluck('id')->toArray();
+        $roles = Auth::user()->userRoles()->select('role_id')->distinct()->pluck('role_id')->toArray();
         $controls = PrintControl::whereIn('role_id', $roles)->first();
 
         if ($controls) {
@@ -1879,6 +1879,8 @@ class DocumentController extends Controller
 
             
             $canvas2->page_script(function ($pageNumber, $pageCount, $canvas, $fontMetrics) use ($issue_copies, $canvas2) {
+                // $page_switch_at = floor($pageCount/$issue_copies);
+
                 $current_copy = round($pageNumber/$issue_copies) < 1 ? 1 : ceil($pageNumber/$issue_copies);
                 $current_copy = $current_copy > $issue_copies ? $issue_copies : $current_copy;
                 $text = "Issued Copy $current_copy of $issue_copies";
