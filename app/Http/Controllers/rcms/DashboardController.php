@@ -22,6 +22,7 @@ use App\Models\RootCauseAnalysis;
 use App\Models\Observation;
 use App\Models\QMSDivision;
 use App\Models\FailureInvestigation;
+use App\Models\Evaluation;
 use App\Models\Ootc;
 use App\Models\RecordNumber;
 use Helpers;
@@ -85,6 +86,7 @@ class DashboardController extends Controller
         $datas15 = Ootc::orderByDesc('id')->get();
         $datas16 = errata::orderByDesc('id')->get();
         $datas17 = OOS_micro::orderByDesc('id')->get();
+        $evaluation = Evaluation::orderByDesc('id')->get();
 
         $datas25 = NonConformance::orderByDesc('id')->get();
         $incident = Incident::orderByDesc('id')->get();
@@ -550,6 +552,27 @@ class DashboardController extends Controller
                 "parent" => $data->cc_id ? $data->cc_id : "-",
                 "record" => $data->record,
                 "type" => "Incident",
+                "parent_id" => $data->parent_id,
+                "parent_type" => $data->parent_type,
+                "division_id" => $data->division_id,
+                "short_description" => $data->short_description ? $data->short_description : "-",
+                "initiator_id" => $data->initiator_id,
+                "initiated_through" => $data->initiated_through,
+                "intiation_date" => $data->intiation_date,
+                "stage" => $data->status,
+                "date_open" => $data->created_at,
+                "due_date" => $data->due_date,
+                "date_close" => $data->updated_at,
+            ]);
+        }
+
+        foreach ($evaluation as $data) {
+            $data->create = Carbon::parse($data->created_at)->format('d-M-Y h:i A');
+            array_push($table, [
+                "id" => $data->id,
+                "parent" => $data->parent_id ? $data->parent_id : "-",
+                "record" => $data->record,
+                "type" => "Evaluation",
                 "parent_id" => $data->parent_id,
                 "parent_type" => $data->parent_type,
                 "division_id" => $data->division_id,

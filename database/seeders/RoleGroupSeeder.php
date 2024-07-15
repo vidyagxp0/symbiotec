@@ -41,7 +41,8 @@ class RoleGroupSeeder extends Seeder
             'Non Conformance' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
             'Incident' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
             'Failure Investigation' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
-            'ERRATA' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP']
+            'ERRATA' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
+            'Evaluation' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP']
             // Add other processes and their roles here
         ];
         
@@ -86,7 +87,8 @@ class RoleGroupSeeder extends Seeder
             'Change Control',
             'Non Conformance',
             'Incident',
-            'Failure Investigation'
+            'Failure Investigation',
+            "Evaluation"
         ];
         
         $incrementCount = $start_from_id;

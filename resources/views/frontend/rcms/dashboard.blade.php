@@ -267,6 +267,19 @@
                                                             </div>
                                                         </a>
                                                     @endif
+
+                                                @elseif ($datas->type == 'Evaluation')
+                                                    <a href="{{ url('evaluation-show', $datas->id) }}" style="color: blue">
+                                                        {{ str_pad(($total_count - $loop->index), 4, '0', STR_PAD_LEFT) }}
+                                                    </a>
+                                                    @if (!empty($datas->parent_id))
+                                                        <a
+                                                            href="{{ url('rcms/qms-dashboard_new', $datas->id) }}/internal_audit">
+                                                            <div class="icon" onclick="showChild()"
+                                                                data-bs-toggle="tooltip" title="Related Records">
+                                                            </div>
+                                                        </a>
+                                                    @endif
                                                 @elseif ($datas->type == 'Risk-Assesment')
                                                     <a href="{{ route('showRiskManagement', $datas->id) }}" style="color: blue">
                                                         {{ str_pad(($total_count - $loop->index), 4, '0', STR_PAD_LEFT) }}

@@ -12,7 +12,7 @@ use App\Http\Controllers\RiskManagementController;
 use App\Http\Controllers\ChangeControlController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DocumentDetailsController;
-use App\Http\Controllers\rcms\DesktopController;
+use App\Http\Controllers\rcms\{DesktopController,EvaluationController};
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\MytaskController;
 use App\Http\Controllers\CabinateController;
@@ -212,6 +212,8 @@ Route::post('reject_Risk/{id}', [RiskManagementController::class, 'RejectStateCh
 Route::get('riskAuditTrial/{id}', [RiskManagementController::class, 'riskAuditTrial']);
 Route::get('auditDetailsrisk/{id}', [RiskManagementController::class, 'auditDetailsrisk'])->name('showriskAuditDetails');
 Route::post('child/{id}', [RiskManagementController::class, 'child'])->name('riskAssesmentChild');
+
+Route::get('get-doc-detail/{id}', [EvaluationController::class, 'getDocDetail'])->name('get-doc-detail');
 
 
 

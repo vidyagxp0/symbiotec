@@ -67,6 +67,8 @@ class FormDivisionController extends Controller
         }
         elseif ($request->process_name == 'Deviation') {
             return redirect()->route('deviation');
+        } elseif ($request->process_name == 'Evaluation') {
+            return redirect()->route('evaluation');
         }
         elseif ($request->process_name == "New Document") {
 

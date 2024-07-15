@@ -12,6 +12,7 @@ use App\Http\Controllers\rcms\InternalauditController;
 use App\Http\Controllers\rcms\LabIncidentController;
 use App\Http\Controllers\rcms\ObservationController;
 use App\Http\Controllers\rcms\IncidentController;
+use App\Http\Controllers\rcms\EvaluationController;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\rcms\AuditProgramController;
 use App\Http\Controllers\rcms\CapaController;
@@ -282,6 +283,15 @@ Route::group(['prefix' => 'rcms'], function () {
             Route::post('launch-extension-investigation/{id}', [FailureInvestigationController::class, 'launchExtensionInvestigation'])->name('launch-extension-investigation');
 
             /********************* Fallure Investigation Routes Ends *******************/
+
+            /********************* Evaluations Routes Start *******************/
+            Route::get('evaluation', [EvaluationController::class, 'index'])->name('evaluation');
+            Route::post('evaluation-store', [EvaluationController::class, 'store'])->name('evaluation-store');
+            Route::get('evaluation-show/{id}', [EvaluationController::class, 'show']);
+            Route::post('evaluation-update/{id}', [EvaluationController::class, 'update'])->name('evaluation-update');
+
+
+            /********************* Evaluations Routes Ends *******************/
 
             // =====================extesnion new report and audit trail ===============
             Route::get('singleReportNew/{id}', [ExtensionNewController::class, 'singleReport'])->name('singleReportNew');
