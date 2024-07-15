@@ -38,14 +38,20 @@
         <tbody id="searchTable">
             @if (count($documents) > 0)
             @foreach ($documents as $doc)
-            {{-- {{dd($doc);}} --}}
+                @php
+                    $documentType = DB::table('document_types')->where('id', $doc->document_type_id)->select('name')->first();
+                    $originator = DB::table('users')->where('id', $doc->originator_id)->select('name')->first();
+
+                    $documentTypeName = $documentType ? $documentType->name : 'N/A';
+                    $originatorName = $originator ? $originator->name : 'N/A';
+                @endphp
             <tr>
                 <td class="pr-id" style="text-decoration:underline"><a href="{{ route('documents.edit', $doc->id) }}">
                         000{{ $doc->id }}
                     </a>
                 </td>
                 <td class="division">
-                    {{ $doc->document_type_name }}
+                    {{ $documentTypeName }}
                 </td>
                 <td class="division">
                     {{ Helpers::getDivisionName($doc->division_id) }}
@@ -62,7 +68,7 @@
                     {{ $doc->created_at }}
                 </td>
                 <td class="assign-name">
-                    {{ $doc->originator_name }}
+                    {{ $originatorName }}
                 </td>
                 <td class="modify-date">
                     {{ $doc->updated_at }}

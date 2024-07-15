@@ -81,13 +81,13 @@
                                     <div class="head">Document Number</div>
                                     <div>000{{ $document->id }}</div>
                                 </div>
-                                {{-- <div>
-                                    <div class="head">Department</div>
-                                    <div>{{ $document->department_name->name }}</div>
-                                </div> --}}
+                                @php
+                                    $documentType = DB::table('document_types')->where('id', $document->document_type_id)->select('name')->first();
+                                    $documentTypeName = $documentType ? $documentType->name : 'N/A';
+                                @endphp
                                 <div>
                                     <div class="head">Document Type</div>
-                                    <div>{{ $document->document_type_id }}</div>
+                                    <div>{{ $documentTypeName }}</div>
                                 </div>
                                 <div>
                                     <div class="head">Working Status</div>

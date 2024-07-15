@@ -99,6 +99,7 @@
                 <button class="tablinks" onclick="openData(event, 'doc-content')">Document Content</button>
                 <button class="tablinks" onclick="openData(event, 'hod-remarks-tab')">HOD Remarks</button>
                 <button class="tablinks" onclick="openData(event, 'annexures')">Annexures</button>
+                <button class="tablinks" onclick="openData(event, 'Format')">Format</button>
                 <button class="tablinks" onclick="openData(event, 'distribution-retrieval')">Distribution & Retrieval</button>
                 {{-- <button class="tablinks" onclick="openData(event, 'print-download')">Print and Download Control </button> --}}
                 <button class="tablinks" onclick="openData(event, 'sign')">Signature</button>
@@ -136,12 +137,12 @@
                                 <div class="col-lg-12">
                                     <div class="group-input">
                                         @if(isset($_GET['id']))
-                                        <label for="Division Code"><b>Site/Location Code</b></label>
+                                        <label for="Division Code"><b>Function Code</b></label>
                                         <input readonly type="text" name="division_id" value="{{ Helpers::getDivisionName($_GET['id'])}}">
                                         <input type="hidden" name="division_id" value="{{$_GET['id']}}">
                                         {{-- <div class="static">{{ Helpers::getDivisionName(session()->get('division')) }}</div> --}}
                                         @else
-                                        <label for="Division Code"><b>Site/Location Code </b></label>
+                                        <label for="Division Code"><b>Function Code </b></label>
                                         {{-- <input readonly type="text" name="division_id"
                                             value="">
                                         <input type="hidden" name="division_id" value=""> --}}
@@ -310,7 +311,7 @@
                                     </div>
                                     {{-- <p id="minorError" style="color:red">** Department is required</p> --}}
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="group-input">
                                         <label for="doc-type">Document Type<span class="text-danger">*</span></label>
                                         <select name="document_type_id" id="doc-type" required>
@@ -329,26 +330,131 @@
                                         <label for="doc-code">Document Type Code</label>
                                         <div class="default-name"> <span id="document_type_code">Not selected</span></div>               
                                      </div>
-                                </div>
-                                {{-- <div class="col-md-6">
+                                </div> --}}
+                                <div class="col-md-6">
                                     <div class="group-input">
-                                        <label for="doc-type">Document Sub Type<span class="text-danger">*</span></label>
-                                        <select name="document_subtype_id" id="doc-subtype">
+                                        <label for="doc-type">Document Type<span class="text-danger">*</span></label>
+                                        <select name="document_type_id" id="doc-type" required>
                                             <option value="" selected>Enter your Selection</option>
-                                            @foreach ($documentsubTypes as $type)
-                                                <option data-id="{{ $type->code }}" value="{{ $type->id }}">
-                                                    {{ $type->docSubtype }}</option>
-                                            @endforeach
+                                            <option data-id="QC" value="QC">Quality Control</option>
+                                            <option data-id="PP01" value="PP01">Production – Plant 01</option>
+                                            <option data-id="PP03" value="PP03">Production – Plant 03</option>
+                                            <option data-id="PC1" value="PC1">Production – C1</option>
+                                            <option data-id="PP02" value="PP02">Production – Plant 02</option>
+                                            <option data-id="PB02" value="PB02">Production Biotechnology – Plant 02</option>
+                                            <option data-id="CM" value="CM">Commercial</option>
+                                            <option data-id="MB" value="MB">Microbiology</option>
+                                            <option data-id="RA" value="RA">Regulatory Affairs</option>
+                                            <option data-id="WH" value="WH">Warehouse</option>
+                                            <option data-id="QA" value="QA">Quality Assurance</option>
+                                            <option data-id="EG" value="EG">Engineering and Maintenance</option>
+                                            <option data-id="PA/HR/CHR" value="PA/HR/CHR">Personnel and Administration/ Human Resource/ Corporate Human Resource</option>
+                                            <option data-id="GN" value="GN">General Production SOP</option>
+                                            <option data-id="IT" value="IT">Information Technology</option>
+                                            <option data-id="CIT" value="CIT">Central Information Technology</option>
                                         </select>
                                     </div>
-                                </div> --}}
-                                {{-- <div class="col-md-6">
+                                    <p id="doc-typeError" style="color:red">** Department is required</p>
+                                </div>
+                                <div class="col-md-6">
                                     <div class="group-input">
-                                        <label for="doc-code">Document SubType Code</label>
-                                        <div class="default-name"> <span id="document_subtype_code">Not selected</span>
-                                        </div>
+                                        <label for="doc-code">Document Type Code</label>
+                                        <select name="document_subtype_id" id="doc-code" required>
+                                        </select>
                                     </div>
-                                </div> --}}
+                                </div>
+                                
+                                <!-- Add hidden inputs or data attributes for subtypes -->
+                                <div id="document-subtypes" style="display:none;">
+                                    <!-- Quality Control Subtypes -->
+                                    <div data-type="QC" data-code="QC">Quality Control Lab</div>
+                                    <div data-type="QC" data-code="SQC">Steroid Quality Control Lab</div>
+                                    <div data-type="QC" data-code="HQC">Hormone Quality Control Lab</div>
+                                    <div data-type="QC" data-code="PMUQC">PMU</div>
+                                    <div data-type="QC" data-code="P2U4QC">Biotech</div>
+                                
+                                    <!-- Production – Plant 01 Subtypes -->
+                                    <div data-type="PP01" data-code="PR">Production Unit 1</div>
+                                    <div data-type="PP01" data-code="PR5">Production Unit-5</div>
+                                
+                                    <!-- Production – Plant 03 Subtypes -->
+                                    <div data-type="PP03" data-code="PR3">Production Unit 3</div>
+                                    <div data-type="PP03" data-code="PR5">Production Unit-5</div>
+                                    <div data-type="PP03" data-code="PR1">Production Unit 1</div>
+                                
+                                    <!-- Production – C1 Subtypes -->
+                                    <div data-type="PC1" data-code="PR1">Production Unit 1</div>
+                                
+                                    <!-- Production – Plant 02 Subtypes -->
+                                    <div data-type="PP02" data-code="PR2">Production Unit 2</div>
+                                
+                                    <!-- Production Biotechnology – Plant 02 Subtypes -->
+                                    <div data-type="PB02" data-code="U4PR">Unit-4 General SOPs</div>
+                                    <div data-type="PB02" data-code="U5PR">Unit-5 General SOPs</div>
+                                    <div data-type="PB02" data-code="U4IL">Inoculums Lab Unit-4</div>
+                                    <div data-type="PB02" data-code="U5IL">Inoculums Lab Unit-5</div>
+                                    <div data-type="PB02" data-code="U4FR">Fermentation Unit-4</div>
+                                    <div data-type="PB02" data-code="U5FER">Fermentation Unit-5</div>
+                                    <div data-type="PB02" data-code="U4DS">Downstream Unit-4</div>
+                                    <div data-type="PB02" data-code="U5DS">Downstream Unit-5 Block-A and Block-B</div>
+                                
+                                    <!-- Add subtypes for other Document Types if needed -->
+                                    <div data-type="CM" data-code="CM">CM</div>
+                                    <div data-type="MB" data-code="MB">MB</div>
+                                    <div data-type="RA" data-code="RA">RA</div>
+                                    <div data-type="WH" data-code="WH">WH</div>
+                                    <div data-type="QA" data-code="QA">QA</div>
+                                    <div data-type="EG" data-code="EG">EG</div>
+                                    <div data-type="PA/HR/CHR" data-code="PA/HR/CHR">PA/HR/CHR</div>
+                                    <div data-type="GN" data-code="GN">GN</div>
+                                    <div data-type="IT" data-code="IT">IT</div>
+                                    <div data-type="CIT" data-code="CIT">CIT</div>
+
+                                </div>
+                                
+
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function () {
+                                        const docTypeSelect = document.getElementById('doc-type');
+                                        const docCodeSelect = document.getElementById('doc-code');
+                                        const subtypesContainer = document.getElementById('document-subtypes');
+
+                                        docTypeSelect.addEventListener('change', function () {
+                                            const selectedType = docTypeSelect.options[docTypeSelect.selectedIndex].value;
+                                            const subtypes = subtypesContainer.querySelectorAll(`[data-type="${selectedType}"]`);
+                                            
+                                            // Clear previous options
+                                            docCodeSelect.innerHTML = '';
+
+                                            if (subtypes.length > 0) {
+                                                subtypes.forEach(subtype => {
+                                                    const code = subtype.getAttribute('data-code');
+                                                    const description = subtype.textContent;
+                                                    
+                                                    const option = document.createElement('option');
+                                                    option.value = code;
+                                                    let x = code == description ? code : `${code} - ${description}`;
+                                                    option.textContent = x;
+                                                    docCodeSelect.appendChild(option);
+                                                });
+                                            }
+                                        });
+                                    });
+                                </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 <div class="col-md-6">
                                     <div class="group-input">
                                         <label for="doc-lang">Document Language</label>
@@ -486,7 +592,7 @@
 
                                 </div>
 
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <div class="group-input">
                                         <label for="hods">HOD's<span class="text-danger">*</span></label>
                                         <select id="choices-multiple-remove-button" class="choices-multiple-reviewer"
@@ -498,9 +604,8 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    {{-- <p id="hodError" style="color:red">** HOD's are required</p> --}}
 
-                                </div>
+                                </div> --}}
 
                             </div>
                             <div class="row">
@@ -942,6 +1047,7 @@
                                         </div> --}}
                                     </div>
                                 </div>
+                                
                                 {{-- <div class="col-md-12">  ---By Aditya
                                     <div class="group-input">
                                         <label for="annexure">
@@ -995,6 +1101,27 @@
                                 </div> --}}
                             </div>
                         </div>
+                        <div class="button-block">
+                            <button type="submit" value="save" name="submit" id="DocsaveButton" class="saveButton">Save</button>
+                            <button type="button" class="backButton" onclick="previousStep()">Back</button>
+                            <button type="button" class="nextButton" onclick="nextStep()">Next</button>
+                            <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white"> Exit </a>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="format">
+                        <div class="col-md-12">
+                            <div class="group-input">
+                                <label for="ann" id="ann">
+                                    Format
+                                </label>
+                                <div><small class="text-primary">Please insert "NA" in the data field if it does not require completion</small></div>
+                                
+                                <textarea name="format" class="tiny"></textarea>
+                            </div>
+                        </div>
+
                         <div class="button-block">
                             <button type="submit" value="save" name="submit" id="DocsaveButton" class="saveButton">Save</button>
                             <button type="button" class="backButton" onclick="previousStep()">Back</button>

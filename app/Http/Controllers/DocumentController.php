@@ -129,9 +129,10 @@ class DocumentController extends Controller
     {
         $query = Document::join('users', 'documents.originator_id', 'users.id')
                     // ->join('document_types', 'documents.document_type_id', 'document_types.id')
-                    ->join('divisions', 'documents.division_id', 'divisions.id')
-                    ->select('documents.*', 'users.name as originator_name', 'divisions.name as division_name')
+                    // ->join('divisions', 'documents.division_id', 'divisions.id')
+                    // ->select('documents.*', 'users.name as originator_name', 'divisions.name as division_name')
                     ->orderByDesc('documents.id');
+
 
         // Apply filters
         if ($request->has('status')) {
@@ -149,7 +150,7 @@ class DocumentController extends Controller
         $count = $query->where('documents.originator_id', Auth::user()->id)->count();
         $documents = $query->paginate(10);
         
-        // dd($request->all(), $query->paginate(10));
+        // dd($count);
         $divisions = QMSDivision::where('status', '1')->select('id', 'name')->get();
         // $divisions = QMSDivision::where('status', '1')->select('id', 'name')->get();
         $documentValues = Document::withoutTrashed()->select('id', 'document_type_id')->get();
@@ -164,7 +165,8 @@ class DocumentController extends Controller
         $OriTypeIds = $OriValues->pluck('originator_id')->unique()->toArray();
         $originator = User::whereIn('id', $OriTypeIds)->select('id', 'name')->get();
 
-        // return $documents;
+        $doctype = DocumentType::where('id', $doc->document_type_id)->value('name');
+        $originatorName = User::where('id', $doc->originator_id)->value('name');
 
         // $count = Document::where('documents.originator_id', Auth::user()->id)->count();
         // $documents = Document::join('users', 'documents.originator_id', 'users.id')->join('document_types', 'documents.document_type_id', 'document_types.id')
@@ -200,7 +202,7 @@ class DocumentController extends Controller
         }
 
         $documents = $query->get();
-
+// dd($documents);
         foreach ($documents as $doc) {
             $doctype = DocumentType::where('id', $doc->document_type_id)->value('name');
             $originatorName = User::where('id', $doc->originator_id)->value('name');
@@ -464,7 +466,7 @@ class DocumentController extends Controller
             $document->status = Stage::where('id', 1)->value('name');
             $document->due_dateDoc = $request->due_dateDoc;
             $document->department_id = $request->department_id;
-            $document->document_type_id = $request->document_type_id;
+            $document->document_type_id = DocumentType::where('typecode', $request->document_type_id)->value('id');
             $document->document_subtype_id = $request->document_subtype_id;
             $document->document_language_id = $request->document_language_id;
             $document->effective_date = $request->effective_date;
@@ -711,9 +713,7 @@ class DocumentController extends Controller
             
         }
         $print_history = PrintHistory::join('users', 'print_histories.user_id', 'users.id')->select('print_histories.*', 'users.name as user_name')->where('document_id', $id)->get();
-        $document = Document::join('users', 'documents.originator_id', 'users.id')->leftjoin('document_types', 'documents.document_type_id', 'document_types.id')
-            ->join('divisions', 'documents.division_id', 'divisions.id')->leftjoin('departments', 'documents.department_id', 'departments.id')
-            ->select('documents.*', 'users.name as originator_name', 'document_types.name as document_type_name', 'divisions.name as division_name', 'departments.name as dept_name')->where('documents.id', $id)->first();
+        $document = Document::where('documents.id', $id)->first();
         $document->date = Carbon::parse($document->created_at)->format('d-M-Y');
         $document['document_content'] = DocumentContent::where('document_id', $id)->first();
         $document_distribution_grid = DocumentGridData::where('document_id', $id)->get();
@@ -816,7 +816,7 @@ class DocumentController extends Controller
                 $document->due_dateDoc = $request->due_dateDoc;
                 $document->sop_type = $request->sop_type;
                 $document->department_id = $request->department_id;
-                $document->document_type_id = $request->document_type_id;
+                $document->document_type_id = DocumentType::where('typecode', $request->document_type_id)->value('id');;
                 $document->document_subtype_id = $request->document_subtype_id;
                 $document->document_language_id = $request->document_language_id;
                 // $document->effective_date = $request->effective_date ? $request->effective_date : $document->effectve_date;
@@ -2163,7 +2163,7 @@ class DocumentController extends Controller
             $newdoc->notify_to = json_encode($document->notify_to);
             $newdoc->reference_record = $document->reference_record;
             $newdoc->department_id = $document->department_id;
-            $newdoc->document_type_id = $document->document_type_id;
+            $newdoc->document_type_id = DocumentType::where('typecode', $request->document_type_id)->value('id');
             $newdoc->document_subtype_id = $document->document_subtype_id;
             $newdoc->document_language_id = $document->document_language_id;
             $newdoc->keywords = $document->keywords;
