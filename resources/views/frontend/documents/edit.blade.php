@@ -79,6 +79,7 @@
                 <button class="tablinks" onclick="openData(event, 'doc-content')">Document Content</button>
                 <button class="tablinks" onclick="openData(event, 'hod-remarks-tab')">HOD Remarks</button>
                 <button class="tablinks" onclick="openData(event, 'annexures')">Annexures</button>
+                <button class="tablinks" onclick="openData(event, 'Format')">Format</button>
                 <button class="tablinks" onclick="openData(event, 'distribution-retrieval')">Distribution & Retrieval</button>
                 {{-- <button class="tablinks" onclick="openData(event, 'print-download')">Print and Download Control </button> --}}
                 <button class="tablinks" onclick="openData(event, 'sign')">Signature</button>
@@ -89,31 +90,33 @@
                 @csrf
                 @method('PUT')
 
-                {{-- <textarea id="editor"><h1>Test</h1></textarea>
-                <script>
-                    const editor = Jodit.make('#editor');
-                </script> --}}
+                @php
+                    $documentType = DB::table('document_types')->where('id', $document->document_type_id)->select('typecode')->first();
+                    $originator = DB::table('users')->where('id', $document->originator_id)->select('name')->first();
 
-                <!-- Tab content -->
-                {{-- @foreach ($history as $tempHistory) --}}
+                    $documentTypeName = $documentType ? $documentType->typecode : 'N/A';
+                    $originatorName = $originator ? $originator->name : 'N/A';
+                @endphp
+
+
                 <div id="doc-info" class="tabcontent">
                     <div class="input-fields">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="group-input">
                                     <label for="originator">Originator</label>
-                                    <div class="default-name">{{ $document->originator_name }}</div>
+                                    <div class="default-name">{{ $originatorName }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="group-input">
                                     <label for="open-date">Date Opened</label>
-                                    <div class="default-name"> {{ $document->date }}</div>
+                                    <div class="default-name"> {{ $document->created_at }}</div>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="group-input">
-                                    <label for="Division Code"><b>Site/Location Code</b></label>
+                                    <label for="Division Code"><b>Function Code</b></label>
                                     <input disabled type="text" name="division_code"
                                         value="{{ Helpers::getDivisionName($document->division_id) }}">
                                     {{-- <div class="static">{{ Helpers::getDivisionName(session()->get('division')) }}</div> --}}
@@ -265,7 +268,6 @@
                                 </div>
                                 @if (Auth::user()->role != 3 && $document->stage < 8)
 
-                                <-- Add Comment  -->
                                 <div class="comment">
                                     <div>
                                         <p class="timestamp" style="color: blue">Modify by {{ Auth::user()->name }}
@@ -687,15 +689,28 @@
                                     </div>
                                 @endif
                             </div>
+                            
                             <div class="col-md-6">
                                 <div class="group-input">
-                                    <label for="doc-type">Document Type</label>
-                                    <select name="document_type_id" id="doc-type" {{Helpers::isRevised($document->stage)}} >
-                                        <option value="">Enter your Selection</option>
-                                        @foreach (Helpers::getDocumentTypes() as $code => $type)
-                                            <option data-id="{{ $code }}" value="{{ $code }}" {{ $code == $document->document_type_id ? 'selected' : '' }}>
-                                                {{ $type }}</option>
-                                        @endforeach
+                                    <label for="doc-type">Document Type<span class="text-danger">*</span></label>
+                                    <select name="document_type_id" id="doc-type" required {{Helpers::isRevised($document->stage)}}>
+                                        <option value="" selected>Enter your Selection</option>
+                                        <option data-id="QC" value="QC" {{ $documentTypeName == 'QC' ? 'selected' : '' }}>Quality Control</option>
+                                        <option data-id="PP01" value="PP01" {{ $documentTypeName == 'PP01' ? 'selected' : '' }}>Production – Plant 01</option>
+                                        <option data-id="PP03" value="PP03" {{ $documentTypeName == 'PP03' ? 'selected' : '' }}>Production – Plant 03</option>
+                                        <option data-id="PC1" value="PC1" {{ $documentTypeName == 'PC1' ? 'selected' : '' }}>Production – C1</option>
+                                        <option data-id="PP02" value="PP02" {{ $documentTypeName == 'PP02' ? 'selected' : '' }}>Production – Plant 02</option>
+                                        <option data-id="PB02" value="PB02" {{ $documentTypeName == 'PB02' ? 'selected' : '' }}>Production Biotechnology – Plant 02</option>
+                                        <option data-id="CM" value="CM" {{ $documentTypeName == 'CM' ? 'selected' : '' }}>Commercial</option>
+                                        <option data-id="MB" value="MB" {{ $documentTypeName == 'MB' ? 'selected' : '' }}>Microbiology</option>
+                                        <option data-id="RA" value="RA" {{ $documentTypeName == 'RA' ? 'selected' : '' }}>Regulatory Affairs</option>
+                                        <option data-id="WH" value="WH" {{ $documentTypeName == 'WH' ? 'selected' : '' }}>Warehouse</option>
+                                        <option data-id="QA" value="QA" {{ $documentTypeName == 'QA' ? 'selected' : '' }}>Quality Assurance</option>
+                                        <option data-id="EG" value="EG" {{ $documentTypeName == 'EG' ? 'selected' : '' }}>Engineering and Maintenance</option>
+                                        <option data-id="PA/HR/CHR" value="PA/HR/CHR" {{ $documentTypeName == 'PA/HR/CHR' ? 'selected' : '' }}>Personnel and Administration/ Human Resource/ Corporate Human Resource</option>
+                                        <option data-id="GN" value="GN" {{ $documentTypeName == 'GN' ? 'selected' : '' }}>General Production SOP</option>
+                                        <option data-id="IT" value="IT" {{ $documentTypeName == 'IT' ? 'selected' : '' }}>Information Technology</option>
+                                        <option data-id="CIT" value="CIT" {{ $documentTypeName == 'CIT' ? 'selected' : '' }}>Central Information Technology</option>
                                     </select>
                                     @foreach ($history as $tempHistory)
                                         @if (
@@ -717,7 +732,6 @@
                                         @endif
                                     @endforeach
                                 </div>
-
                                 @if (Auth::user()->role != 3 && $document->stage < 8)
                                     {{-- Add Comment  --}}
                                     <div class="comment">
@@ -731,21 +745,103 @@
                                     </div>
                                 @endif
 
+                                <p id="doc-typeError" style="color:red">** Department is required</p>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="group-input">
                                     <label for="doc-code">Document Type Code</label>
-                                    <div class="default-name"> <span id="document_type_code">
-                                            @foreach (Helpers::getDocumentTypes() as $code => $type)
-                                                {{ $code == $document->document_type_id ? $code : '' }}
-                                            @endforeach
-
-                                        </span> </div>
-
+                                    <select name="document_subtype_id" id="doc-code" required {{Helpers::isRevised($document->stage)}}>
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
                                 </div>
                             </div>
-                            <p id="doc-typeError" style="color:red">**Document Type is required</p>
+                            
+                            <!-- Add hidden inputs or data attributes for subtypes -->
+                            <div id="document-subtypes" style="display:none;">
+                                <!-- Quality Control Subtypes -->
+                                <div data-type="QC" data-code="QC">Quality Control Lab</div>
+                                <div data-type="QC" data-code="SQC">Steroid Quality Control Lab</div>
+                                <div data-type="QC" data-code="HQC">Hormone Quality Control Lab</div>
+                                <div data-type="QC" data-code="PMUQC">PMU</div>
+                                <div data-type="QC" data-code="P2U4QC">Biotech</div>
+                            
+                                <!-- Production – Plant 01 Subtypes -->
+                                <div data-type="PP01" data-code="PR">Production Unit 1</div>
+                                <div data-type="PP01" data-code="PR5">Production Unit-5</div>
+                            
+                                <!-- Production – Plant 03 Subtypes -->
+                                <div data-type="PP03" data-code="PR3">Production Unit 3</div>
+                                <div data-type="PP03" data-code="PR5">Production Unit-5</div>
+                                <div data-type="PP03" data-code="PR1">Production Unit 1</div>
+                            
+                                <!-- Production – C1 Subtypes -->
+                                <div data-type="PC1" data-code="PR1">Production Unit 1</div>
+                            
+                                <!-- Production – Plant 02 Subtypes -->
+                                <div data-type="PP02" data-code="PR2">Production Unit 2</div>
+                            
+                                <!-- Production Biotechnology – Plant 02 Subtypes -->
+                                <div data-type="PB02" data-code="U4PR">Unit-4 General SOPs</div>
+                                <div data-type="PB02" data-code="U5PR">Unit-5 General SOPs</div>
+                                <div data-type="PB02" data-code="U4IL">Inoculums Lab Unit-4</div>
+                                <div data-type="PB02" data-code="U5IL">Inoculums Lab Unit-5</div>
+                                <div data-type="PB02" data-code="U4FR">Fermentation Unit-4</div>
+                                <div data-type="PB02" data-code="U5FER">Fermentation Unit-5</div>
+                                <div data-type="PB02" data-code="U4DS">Downstream Unit-4</div>
+                                <div data-type="PB02" data-code="U5DS">Downstream Unit-5 Block-A and Block-B</div>
+                            
+                                <!-- Add subtypes for other Document Types if needed -->
+                                <div data-type="CM" data-code="CM">CM</div>
+                                <div data-type="MB" data-code="MB">MB</div>
+                                <div data-type="RA" data-code="RA">RA</div>
+                                <div data-type="WH" data-code="WH">WH</div>
+                                <div data-type="QA" data-code="QA">QA</div>
+                                <div data-type="EG" data-code="EG">EG</div>
+                                <div data-type="PA/HR/CHR" data-code="PA/HR/CHR">PA/HR/CHR</div>
+                                <div data-type="GN" data-code="GN">GN</div>
+                                <div data-type="IT" data-code="IT">IT</div>
+                                <div data-type="CIT" data-code="CIT">CIT</div>
+                            </div>
+                            
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function () {
+                                    const docTypeSelect = document.getElementById('doc-type');
+                                    const docCodeSelect = document.getElementById('doc-code');
+                                    const subtypesContainer = document.getElementById('document-subtypes');
+                                    const selectedDocumentType = "{{ $documentTypeName }}";
+                                    const selectedDocumentSubType = "{{ $document->document_subtype_id }}";
+                            
+                                    function populateSubtypes(selectedType, selectedSubType) {
+                                        const subtypes = subtypesContainer.querySelectorAll(`[data-type="${selectedType}"]`);
+                                        // Clear previous options
+                                        docCodeSelect.innerHTML = '';
+                            
+                                        if (subtypes.length > 0) {
+                                            subtypes.forEach(subtype => {
+                                                const code = subtype.getAttribute('data-code');
+                                                const description = subtype.textContent;
+                                                const option = document.createElement('option');
+                                                option.value = code;
+                                                let x = code == description ? code : `${code} - ${description}`;
+                                                option.textContent = x;
+                                                if (code == selectedSubType) {
+                                                    option.selected = true;
+                                                }
+                                                docCodeSelect.appendChild(option);
+                                            });
+                                        }
+                                    }
+                            
+                                    // Initial population of subtypes on page load
+                                    populateSubtypes(selectedDocumentType, selectedDocumentSubType);
+                            
+                                    docTypeSelect.addEventListener('change', function () {
+                                        const selectedType = docTypeSelect.options[docTypeSelect.selectedIndex].value;
+                                        populateSubtypes(selectedType, null);
+                                    });
+                                });
+                            </script>
+                            
 
                             {{-- <div class="col-md-6">
                                 <div class="group-input">
@@ -1304,65 +1400,6 @@
                                         <div class="button">Add Comment</div>
                                     </div>
                                 @endif
-
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="group-input">
-                                    <label for="hods">HOD's</label>
-                                    <select   @if($document->stage != 1 && !Helpers::userIsQA()) disabled @endif id="choices-multiple-remove-button" class="choices-multiple-approver" {{ !Helpers::userIsQA() ? Helpers::isRevised($document->stage) : ''}} 
-                                        name="hods[]" placeholder="Select HOD's" multiple>
-                                        @foreach ($hods as $hod)
-                                                <option value="{{ $hod->id }}"
-                                                    @if ($document->hods) @php
-                                                   $data = explode(",",$document->hods);
-                                                    $count = count($data);
-                                                    $i=0;
-                                                @endphp
-                                                @for ($i = 0; $i < $count; $i++)
-                                                    @if ($data[$i] == $hod->id)
-                                                     selected @endif
-                                                @endfor>
-                                            {{ $hod->name }}
-                                            </option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                    @foreach ($history as $tempHistory)
-                                        @if (
-                                            $tempHistory->activity_type == 'Approvers' &&
-                                                !empty($tempHistory->comment)  &&
-                                                $tempHistory->user_id == Auth::user()->id)
-                                            @php
-                                                $users_name = DB::table('users')
-                                                    ->where('id', $tempHistory->user_id)
-                                                    ->value('name');
-                                            @endphp
-                                            <p style="color: blue">Modify by {{ $users_name }} at
-                                                {{ $tempHistory->created_at }}
-                                            </p>
-                                            <input class="input-field"
-                                                style="background: #ffff0061;
-                                    color: black;"
-                                                type="text" value="{{ $tempHistory->comment }}" disabled>
-                                        @endif
-                                    @endforeach
-                                </div>
-                                {{-- <p id="approverError" style="color:red">**Approvers are required</p> --}}
-
-                                @if (Auth::user()->role != 3 && $document->stage < 8)
-                                    {{-- Add Comment  --}}
-                                    <div class="comment">
-                                        <div>
-                                            <p class="timestamp" style="color: blue">Modify by {{ Auth::user()->name }}
-                                                at {{ date('d-M-Y h:i:s') }}</p>
-
-                                            <input class="input-field" type="text" name="approvers_comment">
-                                        </div>
-                                        <div class="button">Add Comment</div>
-                                    </div>
-                                @endif
-
                             </div>
 
                             {{-- <div class="col-md-6">
@@ -2497,39 +2534,8 @@
                                 </div>
                             </div>
 
-                            {{-- @if (Auth::user()->role != 3 && $document->stage < 8)
-                                <div class="comment">
-                                    <div>
-                                        <p class="timestamp" style="color: blue">Modify by {{ Auth::user()->name }} at
-                                            {{ date('d-M-Y h:i:s') }}</p>
 
-                                        <input class="input-field" type="text" name="ann_comment">
-                                    </div>
-                                    <div class="button">Add Comment</div>
-                                </div>
-                            @endif --}}
-                            {{-- <div class="col-md-12">
-                                <div class="group-input">
-                                    <label for="test">
-                                        Revision History<button type="button" name="reporting2"
-                                            onclick="addDocRow('revision')">+</button>
-                                    </label>
-                                    <div><small class="text-primary">Please mention brief summary</small></div>
-                                    <table class="table-bordered table" id="revision">
-                                        <thead>
-                                            <tr>
-                                                <th class="sop-num">SOP Revision No.</th>
-                                                <th class="dcrf-num">Change Control No./ DCRF No.</th>
-                                                <th class="changes">Changes</th>
-                                                //<th class="deleteRow">&nbsp;</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div> --}}
                             @if (Auth::user()->role != 3 && $document->stage < 8)
 
                                 {{-- Add Comment  --}}
@@ -2543,12 +2549,44 @@
                                     <div class="button">Add Comment</div>
                                 </div>
                             @endif
+
+                            {{-- <div class="col-md-12">
+                                <div class="group-input">
+                                    <label for="ann" id="ann">
+                                        Format
+                                    </label>
+                                    <div><small class="text-primary">Please insert "NA" in the data field if it does not require completion</small></div>
+                                    
+                                    <textarea name="format" class="tiny">{{ $document->format }}</textarea>
+                                </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="button-block">
                         <button type="submit" name="submit" value="save" class="saveButton">Save</button>
                         <button type="button" class="backButton" onclick="previousStep()">Back</button>
                         <button type="button" class="nextButton" onclick="nextStep()">Next</button>
+                    </div>
+                </div>
+
+                <div id="format">
+                    <div class="col-md-12">
+                        <div class="group-input">
+                            <label for="ann" id="ann">
+                                Format
+                            </label>
+                            <div><small class="text-primary">Please insert "NA" in the data field if it does not require completion</small></div>
+                            
+                            <textarea name="format" class="tiny"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="button-block">
+                        <button type="submit" value="save" name="submit" id="DocsaveButton" class="saveButton">Save</button>
+                        <button type="button" class="backButton" onclick="previousStep()">Back</button>
+                        <button type="button" class="nextButton" onclick="nextStep()">Next</button>
+                        <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white"> Exit </a>
+                        </button>
                     </div>
                 </div>
 

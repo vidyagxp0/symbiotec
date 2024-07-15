@@ -15,7 +15,7 @@ class RoleGroupSeeder extends Seeder
      */
     public function run()
     {
-        $sites = ['Corporate', 'Plant'];
+        $sites = ['Corporate Quality Assurance (CQA)', 'Plant 1', 'Plant 2', 'Plant 3', 'Plant 4', 'C1'];
         
         $processes_roles = [
             'OOS Microbiology' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
@@ -36,7 +36,7 @@ class RoleGroupSeeder extends Seeder
             'OOT' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
             'OOC' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
             'Deviation' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
-            'New Document' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
+            'New Document' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP', 'Trainer'],
             'Market Complaint' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
             'Non Conformance' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
             'Incident' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],

@@ -1,9 +1,8 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\DocumentType;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\DocumentType;
 use Illuminate\Database\Seeder;
 
 class DocumentSeeder extends Seeder
@@ -15,95 +14,35 @@ class DocumentSeeder extends Seeder
      */
     public function run()
     {
+        // Clear existing records
+        DocumentType::truncate();
 
-        $department  = new DocumentType();
-        $department->name = "Standard Test Procedure ";
-        $department->departmentid = 1;
-        $department->typecode = "STP";
-        $department->save();
+        // Seed new records
+        $documentTypes = [
+            ['name' => 'Quality Control', 'departmentid' => 1, 'typecode' => 'QC'],
+            ['name' => 'Production – Plant 01', 'departmentid' => 2, 'typecode' => 'PP01'],
+            ['name' => 'Production – Plant 03', 'departmentid' => 3, 'typecode' => 'PP03'],
+            ['name' => 'Production – C1', 'departmentid' => 4, 'typecode' => 'PC1'],
+            ['name' => 'Production – Plant 02', 'departmentid' => 5, 'typecode' => 'PP02'],
+            ['name' => 'Production Biotechnology – Plant 02', 'departmentid' => 6, 'typecode' => 'PB02'],
+            ['name' => 'Commercial', 'departmentid' => 7, 'typecode' => 'CM'],
+            ['name' => 'Microbiology', 'departmentid' => 8, 'typecode' => 'MB'],
+            ['name' => 'Regulatory Affairs', 'departmentid' => 9, 'typecode' => 'RA'],
+            ['name' => 'Warehouse', 'departmentid' => 10, 'typecode' => 'WH'],
+            ['name' => 'Quality Assurance', 'departmentid' => 11, 'typecode' => 'QA'],
+            ['name' => 'Engineering and Maintenance', 'departmentid' => 12, 'typecode' => 'EG'],
+            ['name' => 'Personnel and Administration/ Human Resource/ Corporate Human Resource', 'departmentid' => 13, 'typecode' => 'PA/HR/CHR'],
+            ['name' => 'General Production SOP', 'departmentid' => 14, 'typecode' => 'GN'],
+            ['name' => 'Information Technology', 'departmentid' => 15, 'typecode' => 'IT'],
+            ['name' => 'Central Information Technology', 'departmentid' => 16, 'typecode' => 'CIT']
+        ];
 
-        $department  = new DocumentType();
-        $department->name = "Standard Operating Procedure";
-        $department->departmentid = 2;
-        $department->typecode = "SOP";
-        $department->save();
-
-        $department  = new DocumentType();
-        $department->name = "Work Instruction";
-        $department->departmentid = 3;
-        $department->typecode = "WI";
-        $department->save();
-
-        $department  = new DocumentType();
-        $department->name = "Specification ";
-        $department->departmentid = 4;
-        $department->typecode = "Spec";
-        $department->save();
-
-        $department  = new DocumentType();
-        $department->name = "Validation Protocol  ";
-        $department->departmentid = 5;
-        $department->typecode = "VP";
-        $department->save();
-
-        $department  = new DocumentType();
-        $department->name = "Process Flow Diagram   ";
-        $department->departmentid = 6;
-        $department->typecode = "PFD";
-        $department->save();
-
-        $department  = new DocumentType();
-        $department->name = "Qualification Protocol   ";
-        $department->departmentid = 7;
-        $department->typecode = "QP";
-        $department->save();
-
-        $department  = new DocumentType();
-        $department->name = "Standard Operation Procedure for Microbiology   ";
-        $department->departmentid = 8;
-        $department->typecode = "SOP-M";
-        $department->save();
-
-        $department  = new DocumentType();
-        $department->name = "Standard Operation Procedure for Chemistry/Wet Chemistry   ";
-        $department->departmentid = 9;
-        $department->typecode = "SOP-C";
-        $department->save(); 
-        
-        $department  = new DocumentType();
-        $department->name = "Standard Operation Procedure for Instrumental/Analytical Tests   ";
-        $department->departmentid = 10;
-        $department->typecode = "SOP-A";
-        $department->save(); 
-
-        $department  = new DocumentType();
-        $department->name = "Standard Operation Procedure for Equipment/ Instruments SOP   ";
-        $department->departmentid = 11;
-        $department->typecode = "SOP-E";
-        $department->save(); 
-
-        $department  = new DocumentType();
-        $department->name = "Quality Policies   ";
-        $department->departmentid = 12;
-        $department->typecode = "QP";
-        $department->save(); 
-
-        $department  = new DocumentType();
-        $department->name = "Method Validation    ";
-        $department->departmentid = 13;
-        $department->typecode = "MV";
-        $department->save(); 
-
-        $department  = new DocumentType();
-        $department->name = "Validation Protocol   ";
-        $department->departmentid = 14;
-        $department->typecode = "VP";
-        $department->save(); 
-
-        $department  = new DocumentType();
-        $department->name = "Electron   ";
-        $department->departmentid = 15;
-        $department->typecode = "EIR";
-        $department->save(); 
+        foreach ($documentTypes as $type) {
+            $documentType = new DocumentType();
+            $documentType->name = $type['name'];
+            $documentType->departmentid = $type['departmentid'];
+            $documentType->typecode = $type['typecode'];
+            $documentType->save();
+        }
     }
 }

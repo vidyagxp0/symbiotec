@@ -725,33 +725,36 @@ class Helpers
                 $status = 'Draft';
                 break;
             case '2':
-                $status = 'In-HOD Review';
+                $status = 'In Review';
                 break;
             case '3':
-                $status = 'HOD Review Complete';
+                $status = 'Reviewer Cycle-I';
                 break;
             case '4':
-                $status = 'In-Review';
+                $status = 'Final Review';
                 break;
             case '5':
-                $status = 'Reviewed';
+                $status = 'Initiator Update';
                 break;
             case '6':
-                $status = 'For-Approval';
+                $status = 'In Approval';
                 break;
             case '7':
-                $status = 'Approved';
+                $status = 'Approval Cycle-I';
                 break;
             case '8':
-                $status = $training_required ? 'Pending-Traning' : 'Effective';
+                $status = 'Final Approval';
                 break;
             case '9':
-                $status = $training_required ? 'Traning-Complete' : 'Obsolete';
+                $status = $training_required ? 'Pending-Traning' : 'Effective';
                 break;
             case '10':
-                $status = $training_required ? 'Effective' : 'Obsolete';
+                $status = $training_required ? 'Traning-Complete' : 'Obsolete';
                 break;
             case '11':
+                $status = $training_required ? 'Effective' : 'Obsolete';
+                break;
+            case '12':
                 $status = 'Obsolete';
                 break;
             case '13':

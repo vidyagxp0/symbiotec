@@ -16,7 +16,7 @@
                     <div class="division-tabs">
                         <div class="left-block">
                             <div class="head">
-                                Site/Location
+                                Function
                             </div>
                             <div class="tab">
                                 @php
