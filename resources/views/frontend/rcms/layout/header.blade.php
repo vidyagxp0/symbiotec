@@ -156,7 +156,7 @@
                             <a href="{{ url('rcms/qms-dashboard') }}" data-bs-toggle="tooltip" title="Dekstop">
                                 <i class="fa-solid fa-house-user"></i>
                             </a>
-                            <button class="btn-transparent bg-transparent text-black" data-bs-toggle="modal" data-bs-target="#log-list-modal" title="Logs">
+                            <button class="btn-transparent bg-transparent text-black" data-bs-toggle="modal" data-bs-target="#log-sop-modal" title="Logs">
                                 <i class="fa-solid fa-gauge-high"></i>
                             </button>
                             
@@ -194,7 +194,7 @@
                         {{-- <div>
                                     <a href="/analytics">Analytics</a>
                                     </div>  --}}
-
+                                   
                         @if (Auth::user())
                             @if (Helpers::checkRoles(3) || Helpers::checkRoles(1) || Helpers::checkRoles(2))
                                 <div>
@@ -405,3 +405,25 @@
         </div>
     </div>
     {{-- LOG LIST MODAL END --}}
+
+     {{-- SOP List START --}}
+     <div class="modal fade" id="log-sop-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">SOP Reports</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                {{-- @foreach ($logs_list as $log_list) --}}
+                    <p> <a href="/sop-index-show" target="_blank">SOP </a> </p>
+                {{-- @endforeach --}}
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    {{-- SOP List MODAL END --}}

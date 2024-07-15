@@ -600,6 +600,8 @@ Route::get('/test-sms', function() {
 	// Process your response here
 	return $response;
 });
+// ====================SOP Index==============
+Route::view('sop-index-show', 'frontend.sop-index.sop-index-show');
 
 //=====================================================================
 // >>>>>>> B-backup
