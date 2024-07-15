@@ -22,104 +22,105 @@ class UserLoginSeeder extends Seeder
      */
     public function run()
     {
+        $roleGroupCount = Roles::count();
         $users = [
-            [
-                'name' => 'Umesh Kulkarni',
-                'email' => 'qa05@agio-pharma.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
-            [
-                'name' => 'Sandip Patil',
-                'email' => 'qc02@agio-pharma.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
-            [
-                'name' => 'Somnath Shinde',
-                'email' => 'somnath@agio-pharma.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
-            [
-                'name' => 'Nandlal Gupta',
-                'email' => 'cqa2@agio-pharma.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
-            [
-                'name' => 'Mahadev Patil',
-                'email' => 'engineering@agio-pharma.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
-            [
-                'name' => 'Sachin Bhasme',
-                'email' => 'injection_pune@agio-pharma.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
-            [
-                'name' => 'Tirupati Survase',
-                'email' => 'tab-qms@agio-pharma.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
-            [
-                'name' => 'Sanjay / Rahul',
-                'email' => 'edp.agiopune@gmail.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
-            [
-                'name' => 'Anil Bade',
-                'email' => 'stores_pune@agio-pharma.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
-            [
-                'name' => 'Sanjay Dhumal',
-                'email' => 'sanjayd@agio-pharma.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
-            [
-                'name' => 'Satyam Dabekar',
-                'email' => 'satyam.agio@gmail.com',
-                'password' => Hash::make(1),
-                'departmentid' => 1,
-                'roles' => range(1, 433),
-            ],
+            // [
+            //     'name' => 'Umesh Kulkarni',
+            //     'email' => 'qa05@agio-pharma.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
+            // [
+            //     'name' => 'Sandip Patil',
+            //     'email' => 'qc02@agio-pharma.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
+            // [
+            //     'name' => 'Somnath Shinde',
+            //     'email' => 'somnath@agio-pharma.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
+            // [
+            //     'name' => 'Nandlal Gupta',
+            //     'email' => 'cqa2@agio-pharma.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
+            // [
+            //     'name' => 'Mahadev Patil',
+            //     'email' => 'engineering@agio-pharma.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
+            // [
+            //     'name' => 'Sachin Bhasme',
+            //     'email' => 'injection_pune@agio-pharma.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
+            // [
+            //     'name' => 'Tirupati Survase',
+            //     'email' => 'tab-qms@agio-pharma.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
+            // [
+            //     'name' => 'Sanjay / Rahul',
+            //     'email' => 'edp.agiopune@gmail.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
+            // [
+            //     'name' => 'Anil Bade',
+            //     'email' => 'stores_pune@agio-pharma.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
+            // [
+            //     'name' => 'Sanjay Dhumal',
+            //     'email' => 'sanjayd@agio-pharma.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
+            // [
+            //     'name' => 'Satyam Dabekar',
+            //     'email' => 'satyam.agio@gmail.com',
+            //     'password' => Hash::make(1),
+            //     'departmentid' => 1,
+            //     'roles' => range(1, $roleGroupCount),
+            // ],
             [
                 'name' => 'Himanshu Patil',
                 'email' => 'himanshupatil5690@gmail.com',
                 'password' => '$2y$10$ybcHMuQ8soPzXcdljEQ/wOUx0JximT3yb5naubluqz3TjOz/tGBlC',
                 'departmentid' => 1,
-                'roles' => range(1, 433),
+                'roles' => range(1, $roleGroupCount),
             ],
             [
                 'name' => 'Vikash Prajapati',
                 'email' => 'vikash@gmail.com',
                 'password' => '$2y$10$ybcHMuQ8soPzXcdljEQ/wOUx0JximT3yb5naubluqz3TjOz/tGBlC',
                 'departmentid' => 1,
-                'roles' => range(1, 433),
+                'roles' => range(1, $roleGroupCount),
             ],
             [
                 'name' => 'Gautam Solanki',
                 'email' => 'gautamsolankigxp@gmail.com',
                 'password' => '$2y$10$ybcHMuQ8soPzXcdljEQ/wOUx0JximT3yb5naubluqz3TjOz/tGBlC',
                 'departmentid' => 1,
-                'roles' => range(1, 433),
+                'roles' => range(1, $roleGroupCount),
             ],
         ];
 
@@ -135,6 +136,12 @@ class UserLoginSeeder extends Seeder
 
             foreach ($userData['roles'] as $roleId) {
                 $checkRole = Roles::find($roleId);
+
+                if ($checkRole === null) {
+                    // Log or handle the missing role
+                    // echo "Role ID {$roleId} does not exist.\n";
+                    continue;
+                }
 
                 // Split the string using the '-' delimiter
                 $roleArray = explode('-', $checkRole->name);
