@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Capa;
 use App\Models\CC;
+use App\Models\Division;
 use App\Models\Document;
 use App\Models\DocumentGridData;
 use App\Models\DocumentType;
@@ -58,29 +59,87 @@ class DocumentService
     static function update_document_numbers()
     {
         try {
-            
-            $document_types = DocumentType::all();
 
-            foreach ($document_types as $document_type)
+            $divisions = QMSDivision::all();
+
+
+            foreach ($divisions as $division)
             {
-                $documents = Document::where('document_type_id', $document_type->id)->get();
+                $division_name = '';
 
-                $record_number = 0;
+                switch ($division->name) {
+                    case 'Corporate Quality Assurance (CQA)':
+                        $division_name = 'CQA';
+                        break;
+                    case 'Plant 1':
+                        $division_name = 'P1';
+                        break;
+                    case 'Plant 2':
+                        $division_name = 'P2';
+                        break;
+                    case 'Plant 3':
+                        $division_name = 'P3';
+                        break;
+                    case 'Plant 4':
+                        $division_name = 'P4';
+                        break;
+                    case 'C1':
+                        $division_name = 'C1';
+                        break;
+                    
+                    default:
+                        break;
+                }
 
-                foreach ($documents as $document)
+                $departments = DocumentType::all();
+
+                foreach ($departments as $department)
                 {
-                    if ($document->revised !== 'Yes') {
+                    $record_number = 0;
+
+                    $documents = Document::where([
+                        'division_id' => $division->id,
+                        'document_type_id' => $department->id
+                    ])->get();
+
+                    foreach ($documents as $document)
+                    {
                         $record_number++;
-                        $document->document_number = $record_number; 
-                        $document->save();
-                    } else {
-                        $parent_document = Document::find($document->revised_doc);
-                        if ($parent_document) {
-                            $document->document_number = $parent_document->document_number;
-                            $document->save();
+
+                        switch ($division_name) {
+                            case 'CQA':
+                                $document->document_number =  'CQA-' . str_pad($record_number, 4, '0', STR_PAD_LEFT) . '-R' . $document->major;
+                                break;
+
+                            case 'P1':
+                                $document->document_number = $department->typecode . '-' . str_pad($record_number, 4, '0', STR_PAD_LEFT) . '-R' . $document->major;
+                                break;
+
+                            case 'P2':
+                                $document->document_number = 'P2' . $department->typecode . '-' . str_pad($record_number, 4, '0', STR_PAD_LEFT) . '-R' . $document->major;
+                                break;
+
+                            case 'P3':
+                                $document->document_number = 'P3' . $department->typecode . '-' . str_pad($record_number, 4, '0', STR_PAD_LEFT) . '-R' . $document->major;
+                                break;
+
+                            case 'P4':
+                                $document->document_number = 'P4' . $department->typecode . '-' . str_pad($record_number, 4, '0', STR_PAD_LEFT) . '-R' . $document->major;
+                                break;
+
+                            case 'C1':
+                                $document->document_number = 'C1' . $department->typecode . '-' . str_pad($record_number, 4, '0', STR_PAD_LEFT) . '-R' . $document->major;
+                                break;
+
+                            default:
+                                # code...
+                                break;
                         }
+
+                        $document->save();
                     }
                 }
+               
             }
 
         } catch (\Exception $e) {

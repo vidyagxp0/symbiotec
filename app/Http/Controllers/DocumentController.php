@@ -127,11 +127,8 @@ class DocumentController extends Controller
        }
     public function index(Request $request)
     {
-        $query = Document::join('users', 'documents.originator_id', 'users.id')
-                    // ->join('document_types', 'documents.document_type_id', 'document_types.id')
-                    // ->join('divisions', 'documents.division_id', 'divisions.id')
-                    // ->select('documents.*', 'users.name as originator_name', 'divisions.name as division_name')
-                    ->orderByDesc('documents.id');
+        $query = Document::query();
+        $query->where('originator_id', auth()->id());
 
 
         // Apply filters
@@ -165,8 +162,8 @@ class DocumentController extends Controller
         $OriTypeIds = $OriValues->pluck('originator_id')->unique()->toArray();
         $originator = User::whereIn('id', $OriTypeIds)->select('id', 'name')->get();
 
-        $doctype = DocumentType::where('id', $doc->document_type_id)->value('name');
-        $originatorName = User::where('id', $doc->originator_id)->value('name');
+        // $doctype = DocumentType::where('id', $doc->document_type_id)->value('name');
+        // $originatorName = User::where('id', $doc->originator_id)->value('name');
 
         // $count = Document::where('documents.originator_id', Auth::user()->id)->count();
         // $documents = Document::join('users', 'documents.originator_id', 'users.id')->join('document_types', 'documents.document_type_id', 'document_types.id')
@@ -713,7 +710,7 @@ class DocumentController extends Controller
             
         }
         $print_history = PrintHistory::join('users', 'print_histories.user_id', 'users.id')->select('print_histories.*', 'users.name as user_name')->where('document_id', $id)->get();
-        $document = Document::where('documents.id', $id)->first();
+        $document = Document::find($id);
         $document->date = Carbon::parse($document->created_at)->format('d-M-Y');
         $document['document_content'] = DocumentContent::where('document_id', $id)->first();
         $document_distribution_grid = DocumentGridData::where('document_id', $id)->get();
@@ -894,6 +891,8 @@ class DocumentController extends Controller
             
 
             $document->update();
+
+            DocumentService::update_document_numbers();
 
             DocumentService::handleDistributionGrid($document, $request->distribution);
 
