@@ -1832,6 +1832,7 @@ class DocumentController extends Controller
 
         $issue_copies = request('issue_copies');
         $print_reason = request('print_reason');
+        $print_specimen = request('print_specimen');
 
         if (intval($issue_copies) < 1)
         {
@@ -1862,7 +1863,7 @@ class DocumentController extends Controller
             $pdf = App::make('dompdf.wrapper');
             $time = Carbon::now();
             
-            $pdf = PDF::loadview('frontend.documents.pdfpage', compact('data', 'time', 'document', 'issue_copies', 'print_reason'))
+            $pdf = PDF::loadview('frontend.documents.pdfpage', compact('data', 'time', 'document', 'issue_copies', 'print_reason', 'print_specimen'))
                 ->setOptions([
                     'defaultFont' => 'sans-serif',
                     'isHtml5ParserEnabled' => true,
@@ -1881,14 +1882,14 @@ class DocumentController extends Controller
             $canvas2->page_script(function ($pageNumber, $pageCount, $canvas, $fontMetrics) use ($issue_copies, $canvas2) {
                 // $page_switch_at = floor($pageCount/$issue_copies);
 
-                $current_copy = round($pageNumber/$issue_copies) < 1 ? 1 : ceil($pageNumber/$issue_copies);
-                $current_copy = $current_copy > $issue_copies ? $issue_copies : $current_copy;
+                $pages_per_copy = round($pageCount/$issue_copies) < 1 ? 1 : ceil($pageCount/$issue_copies);
+                $current_copy = round($pageNumber/$pages_per_copy) < 1 ? 1 : round($pageNumber/$pages_per_copy);
                 $text = "Issued Copy $current_copy of $issue_copies";
                 $pageWidth = $canvas->get_width();
                 $pageHeight = $canvas->get_height();
-                $size = 8;
+                $size = 7;
                 $width = $fontMetrics->getTextWidth($text, null, $size);
-                $canvas2->text($pageWidth - $width - 50, $pageHeight - 30, $text, null, $size);
+                $canvas2->text($pageWidth - $width - 50, $pageHeight - 11, $text, null, $size);
             });
                         
             $canvas->page_script('$pdf->set_opacity(0.1,"Multiply");');

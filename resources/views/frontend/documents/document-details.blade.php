@@ -1220,6 +1220,15 @@
                             <label for="print_reason">Print Reason <span class="text-danger">*</span></label>
                             <textarea name="print_reason" class="form-control w-100" maxlength="255" required></textarea>
                         </div>
+                        <div class="group-input mb-3">
+                            <label for="print_specimen">Print Specimen <span class="text-danger">*</span></label>
+                            <select name="print_specimen" class="form-control w-100" required>
+                                <option value="uncontrolled" selected>Uncontrolled Copy</option>
+                                <option value="controlled">Controlled Copy</option>
+                                <option value="master">Master Copy</option>
+                                <option value="obsolete">Obsolete Copy</option>
+                            </select>
+                        </div>
                     </div>
     
                     <!-- Modal footer -->

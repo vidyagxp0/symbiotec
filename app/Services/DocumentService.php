@@ -220,6 +220,18 @@ class DocumentService
                     ]);
                 }
             }
+            
+            foreach ($content_fields as $content_field)
+            {
+                if ($doc1->$content_field !== $doc2->$content_field)
+                {
+                    array_push($data, [
+                        'field' => $content_field,
+                        'before' => $doc1->$content_field,
+                        'after' => $doc2->$content_field
+                    ]);
+                }
+            }
 
             $res['data'] = $data;
 
