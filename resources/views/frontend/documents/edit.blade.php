@@ -79,7 +79,7 @@
                 <button class="tablinks" onclick="openData(event, 'doc-content')">Document Content</button>
                 <button class="tablinks" onclick="openData(event, 'hod-remarks-tab')">HOD Remarks</button>
                 <button class="tablinks" onclick="openData(event, 'annexures')">Annexures</button>
-                <button class="tablinks" onclick="openData(event, 'Format')">Format</button>
+                <button class="tablinks" onclick="openData(event, 'format')">Format</button>
                 <button class="tablinks" onclick="openData(event, 'distribution-retrieval')">Distribution & Retrieval</button>
                 {{-- <button class="tablinks" onclick="openData(event, 'print-download')">Print and Download Control </button> --}}
                 <button class="tablinks" onclick="openData(event, 'sign')">Signature</button>
@@ -2567,28 +2567,7 @@
                         <button type="button" class="backButton" onclick="previousStep()">Back</button>
                         <button type="button" class="nextButton" onclick="nextStep()">Next</button>
                     </div>
-                </div>
-
-                <div id="format">
-                    <div class="col-md-12">
-                        <div class="group-input">
-                            <label for="ann" id="ann">
-                                Format
-                            </label>
-                            <div><small class="text-primary">Please insert "NA" in the data field if it does not require completion</small></div>
-                            
-                            <textarea name="format" class="tiny"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="button-block">
-                        <button type="submit" value="save" name="submit" id="DocsaveButton" class="saveButton">Save</button>
-                        <button type="button" class="backButton" onclick="previousStep()">Back</button>
-                        <button type="button" class="nextButton" onclick="nextStep()">Next</button>
-                        <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white"> Exit </a>
-                        </button>
-                    </div>
-                </div>
+                </div>              
 
                 {{-- HOD REMARKS TAB START --}}
                 <div id="hod-remarks-tab" class="tabcontent">
@@ -2675,6 +2654,26 @@
                         <button type="button" class="nextButton" onclick="nextStep()">Next</button>
                     </div>
                 </div>
+
+                <div id="format" class="tabcontent">
+
+                    <div class="input-fields">
+                        <div class="group-input">
+                            <label for="hod-remark">Format</label>
+                            <textarea class="tiny" name="hod_comments">{{ $document->format }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="button-block">
+                        <button type="submit" value="save" name="submit" id="DocsaveButton" class="saveButton">Save</button>
+                        <button type="button" class="backButton" onclick="previousStep()">Back</button>
+                        <button type="button" class="nextButton" onclick="nextStep()">Next</button>
+                        <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white"> Exit </a>
+                        </button>
+                    </div>
+
+                </div>
+                {{-- HOD REMARKS TAB END --}}
 
                 <div id="distribution-retrieval" class="tabcontent">
                     <div class="orig-head">
