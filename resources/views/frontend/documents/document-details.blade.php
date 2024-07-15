@@ -990,6 +990,7 @@
                                 <option value="controlled">Controlled Copy</option>
                                 <option value="master">Master Copy</option>
                                 <option value="obsolete">Obsolete Copy</option>
+                                <option value="reference">For Reference</option>
                             </select>
                         </div>
                     </div>
@@ -1025,50 +1026,10 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="group-input">
-                        <label for="revision">Choose Revision Version</label>
-                        <label for="major">
-                            Major Version<span  class="text-primary" data-bs-toggle="modal"
-                            data-bs-target="#document-management-system-modal"
-                            style="font-size: 0.8rem; font-weight: 400;">
-                            (Launch Instruction)
-                            </span>
+                        <label for="change_control_no">
+                            Change Control No.
                         </label>
-                        <input type="number" name="major" id="major" min="0">
-                                {{-- <option value="0">-- Select --</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                            </select> --}}
-                        
-                        <label for="minor">
-                            {{-- <input type="radio" name="revision" id="minor"> --}}
-                            Minor Version<span  class="text-primary" data-bs-toggle="modal"
-                            data-bs-target="#document-management-system-modal-minor"
-                            style="font-size: 0.8rem; font-weight: 400;">
-                            (Launch Instruction)
-                            </span>
-                        </label>
-                        <input type="number" name="minor" id="minor" min="0" max="9">
-                                {{-- <option value="">-- Select --</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                            </select> --}}
-                       
-
+                        <input type="text" name="change_control_no" maxlength="100">
                         <label for="reason">
                             Comment
                         </label>

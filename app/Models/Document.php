@@ -45,5 +45,10 @@ class Document extends Model
     {
         return $this->hasOne(DocumentContent::class);
     }
+    
+    public function doc_type()
+    {
+        return $this->belongsTo(DocumentType::class, 'document_type_id');
+    }
 
 }

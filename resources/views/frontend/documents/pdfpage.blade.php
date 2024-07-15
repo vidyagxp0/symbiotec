@@ -453,7 +453,7 @@
                 <tr>
                     <td class="w-20">DEPT.</td>
                     <td class="w-80" style="text-align: left">
-                        TEST DEPARTMENT
+                        {{ $document->doc_type ? $document->doc_type->name : '' }}
                     </td>
                 </tr>
             </tbody>
@@ -463,7 +463,7 @@
                 <tr>
                     <td class="w-20">TITLE.</td>
                     <td class="w-80" style="text-align: left">
-                        SOP TITLE
+                        {{ $document->document_name }}
                     </td>
                 </tr>
             </tbody>
@@ -473,7 +473,7 @@
                 <tr>
                     <td class="w-20">SOP NO.</td>
                     <td class="w-30" style="text-align: left">
-                        CQA/2024/001
+                        {{ $document->document_number }}
                     </td>
                     <td class="w-20">LABEL</td>
                     <td class="w-30" style="text-align: left">
@@ -491,6 +491,9 @@
                                 @case('obsolete')
                                     <img src="{{ asset('asset/obsolete-copy.jpg') }}" style="width: 80px;" alt="">
                                     @break
+                                @case('reference')
+                                    <img src="{{ asset('asset/for-reference.jpg') }}" style="width: 80px;" alt="">
+                                    @break
                                 @default
                                     
                             @endswitch
@@ -504,11 +507,11 @@
                 <tr>
                     <td class="w-20">Effective Date</td>
                     <td class="w-30" style="text-align: left">
-                        
+                        {{ $document->effective_date }}
                     </td>
                     <td class="w-20">Review Date</td>
                     <td class="w-30" style="text-align: left">
-                        
+                        {{ $document->next_review_date }}
                     </td>
                 </tr>
             </tbody>
@@ -553,7 +556,7 @@
                     <td class="border" colspan="1">{{ $data->originator }}</td>
                     <td class="border" colspan="1">{{ $document->originator && $document->originator->department ? $document->originator->department->name : '' }}</td>
                     <td class="border" colspan="1">{{ $data->originator_email }}</td>
-                    <td class="border" colspan="1">{{ !$signatureOriginatorData || $signatureOriginatorData->create_at == null ? " " : $signatureOriginatorData->created_at->format('d M Y') }}</td>
+                    {{-- <td class="border" colspan="1">{{ $signatureOriginatorData && $signatureOriginatorData->created_at == null ? " " : $signatureOriginatorData->created_at->format('d M Y') }}</td> --}}
                 </tr>
                 <tr>
                     <td class="border" colspan="1">Reviewed By.</td>
