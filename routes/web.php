@@ -575,5 +575,31 @@ Route::post('RejectState_extension/{id}', [ExtensionNewController::class, 'rejec
 
 Route::get('trainer_qualification', [TrainerController::class, 'index'])->name('trainer_qualification');
 
+Route::get('/test-sms', function() {
+    // Account details
+	$apiKey = urlencode('NTE3ODc4NDk0ZTRiNjI1MTY1NjI3NDRjNzc3NDZiNjg=');
+	
+	// Message details
+	$numbers = array(919425959395, 917354654474);
+	$sender = urlencode('VIDYAGXP');
+	$message = rawurlencode('You are absent today. Aage se dhyan rakhna gandu');
+ 
+	$numbers = implode(',', $numbers);
+ 
+	// Prepare data for POST request
+	$data = array('apikey' => $apiKey, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
+ 
+	// Send the POST request with cURL
+	$ch = curl_init('https://api.textlocal.in/send/');
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$response = curl_exec($ch);
+	curl_close($ch);
+	
+	// Process your response here
+	return $response;
+});
+
 //=====================================================================
 // >>>>>>> B-backup

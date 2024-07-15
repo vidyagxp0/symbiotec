@@ -1757,7 +1757,7 @@ class DocumentController extends Controller
         // $pdf = PDF::loadview('frontend.documents.new-pdf', compact('data', 'time', 'document'))
         $pdf = PDF::loadview('frontend.documents.pdfpage', compact('data', 'time', 'document'))
             ->setOptions([
-                'defaultFont' => 'sans-serif',
+                'defaultFont' => 'arial',
                 'isHtml5ParserEnabled' => true,
                 'isRemoteEnabled' => true,
                 'isPhpEnabled' => true,
@@ -1886,7 +1886,7 @@ class DocumentController extends Controller
                 $text = "Issued Copy $current_copy of $issue_copies";
                 $pageWidth = $canvas->get_width();
                 $pageHeight = $canvas->get_height();
-                $size = 10;
+                $size = 8;
                 $width = $fontMetrics->getTextWidth($text, null, $size);
                 $canvas2->text($pageWidth - $width - 50, $pageHeight - 30, $text, null, $size);
             });

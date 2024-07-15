@@ -2393,7 +2393,7 @@
     preparePendingApproverChart()
     preparePendingHODChart()
     preparePendingTrainingChart()
-	prepareSeverityDeviationChart()
+	  prepareSeverityDeviationChart()
     preparePriorityLevelChart()
     preparePriorityLevelChartRca()
     preparedelayedCharts()

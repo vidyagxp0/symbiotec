@@ -296,6 +296,12 @@
             margin-bottom: 15px;
         }
 
+        body {
+            position: relative;
+            padding-top: 70px;
+            padding-bottom: 60px;
+        }
+
         @page {
             size: A4;
             margin-top: 220px;
@@ -309,8 +315,7 @@
             top: -215px;
             right: 0;
             left: 0;
-            display: block;
-
+            margin-bottom: 20px;
         }
 
        
@@ -431,83 +436,115 @@
 <body>
 
     <header class="">
-        <table class="border" style="height: 147px;">
+        <p style="text-align: center; font-weight: bold;">
+            COMPANY NAME
+        </p>
+        <table class="table-bordered">
             <tbody>
                 <tr>
-                    <td class="logo w-20">
-                        <img src="{{ asset('user/images/vidyagxplogo.png') }}" alt="..." style="margin-top: 0.5rem; margin-bottom: 1rem;"> 
-                    </td>
-                    <td class="title w-60" 
-                    style="height: 150px; padding: 0px;  margin: 0px; border-left: 1px solid rgb(104, 104, 104); border-right: 1px solid rgb(104, 104, 104);">
-                        <p 
-                        style="margin-top: -0.1rem; border-bottom: 1px solid rgb(104, 104, 104);">{{ config('site.pdf_title') }}</p>
-                        <br>
-                        <p style="margin-top: -2rem; margin-bottom: 0px;">
-                            {{ $data->document_name }}
-                        </p>
-                    </td>
-                    <td class="logo w-20">
-                        <img src="{{ asset('user/images/vidyagxplogo.png') }}" alt="..." style="margin-top: 0.5rem; margin-bottom: 1rem;"> 
+                    <td class="w-100" style="text-align: center; font-weight: bold;">
+                        STANDARD OPERATING PROCEDURE
                     </td>
                 </tr>
             </tbody>
         </table>
-        <table class="border border-top-none p-10">
+        <table class="table-bordered">
             <tbody>
                 <tr>
-                    <td class="doc-num w-100"> 
-                        @php
-                        $temp = DB::table('document_types')
-                            ->where('name', $data->document_type_name)
-                            ->value('typecode');
-                       @endphp
-                        @if($data->revised === 'Yes') 
-                               
-                        {{ Helpers::getDivisionName($data->division_id) }}
-                        /@if($data->document_type_name){{  $temp }} /@endif{{ $data->year }}
-                        /000{{ $data->document_number }}/R{{$data->major}}.{{$data->minor}}
-
-                        @else
-                        {{ Helpers::getDivisionName($data->division_id) }}
-                        /@if($data->document_type_name){{  $temp }} /@endif{{ $data->year }}
-                        /000{{ $data->document_number }}/R{{$data->major}}.{{$data->minor}}
-                    @endif
+                    <td class="w-20">DEPT.</td>
+                    <td class="w-80" style="text-align: left">
+                        TEST DEPARTMENT
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table-bordered">
+            <tbody>
+                <tr>
+                    <td class="w-20">TITLE.</td>
+                    <td class="w-80" style="text-align: left">
+                        SOP TITLE
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table-bordered">
+            <tbody>
+                <tr>
+                    <td class="w-20">TITLE.</td>
+                    <td class="w-80" style="text-align: left">
+                        SOP TITLE
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table-bordered">
+            <tbody>
+                <tr>
+                    <td class="w-20">SOP NO.</td>
+                    <td class="w-30" style="text-align: left">
+                        CQA/2024/001
+                    </td>
+                    <td class="w-20">COPY</td>
+                    <td class="w-30" style="text-align: left">
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table-bordered">
+            <tbody>
+                <tr>
+                    <td class="w-20">SOP NO.</td>
+                    <td class="w-30" style="text-align: left">
+                        CQA/2024/001
+                    </td>
+                    <td class="w-20">COPY</td>
+                    <td class="w-30" style="text-align: left">
+                        
+                    </td>
                 </tr>
             </tbody>
         </table>
     </header>
 
     <footer class="footer">
-        <table class="border p-20">
+        <table class="table-bordered">
+            <thead>
+                <th class="border" style="border-right: none;" colspan="1"></th>
+                <th class="border" style="border-left: none;" colspan="1"> Name</th>
+                <th class="border" colspan="1"> Designation</th>
+                <th class="border" colspan="1"> Signature</th>
+                <th class="border" colspan="1"> Date</th>
+            </thead>
             <tbody>
-               
                 <tr>
-                    <td class="text-left w-36">
-                        @php
-                            $temp = DB::table('document_types')
-                                ->where('name', $data->document_type_name)
-                                ->value('typecode');
-                        @endphp
-                        @if($data->revised === 'Yes')  
-                            {{ Helpers::getDivisionName($data->division_id) }}
-                            /@if($data->document_type_name){{  $temp }} /@endif{{ $data->year }}
-                            /000{{ $data->document_number }}/R{{$data->major}}.{{$data->minor}}
-
-                            @else
-                            {{ Helpers::getDivisionName($data->division_id) }}
-                            /@if($data->document_type_name){{  $temp }} /@endif{{ $data->year }}
-                            /000{{ $data->document_number }}/R{{$data->major}}.{{$data->minor}}                           
-                        @endif
-                        
-                    <td class="w-36">Printed On : {{ $time }}</td>
-                    <td class="text-right w-20"></td>
+                    <td class="border" colspan="1">Prepared By.</td>
+                    <td class="border" colspan="1">Himanshu Patil</td>
+                    <td class="border" colspan="1"></td>
+                    <td class="border" colspan="1"></td>
+                    <td class="border" colspan="1"></td>
+                </tr>
+                <tr>
+                    <td class="border" colspan="1">Reviewed By.</td>
+                    <td class="border" colspan="1"></td>
+                    <td class="border" colspan="1"></td>
+                    <td class="border" colspan="1"></td>
+                    <td class="border" colspan="1"></td>
+                </tr>
+                <tr>
+                    <td class="border" colspan="1">Approved By.</td>
+                    <td class="border" colspan="1"></td>
+                    <td class="border" colspan="1"></td>
+                    <td class="border" colspan="1"></td>
+                    <td class="border" colspan="1"></td>
                 </tr>
             </tbody>
         </table>
     </footer>
     
     @if ($printing)
-        <div class="footer-info">
+        <div class="footer-info" style="font-size: 0.6rem;">
             <table class="border p-10">
                 <tbody>
                     <tr class="border">
@@ -522,19 +559,8 @@
         
     @while ($total_copies != 0)
 
-        <section  class="main-section" id="pdf-page" style="position: relative; {{ $printing ? 'margin-bottom: 150px;' : '' }}">
+        <section  class="main-section" style="position: relative; {{ $printing ? 'margin-bottom: 200px;' : 'margin-bottom: 30px;' }}">
             <section style="page-break-after: never;">
-                <div class="other-container" style="margin-bottom: 15px;">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th class="text-right">
-                                    <div> <span class="bold">Legacy Document Number:</span> {{ !empty($document->legacy_number) ? $document->legacy_number : 'NA' }}</div>
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
 
                 <div class="other-container">
                     <table>
@@ -1575,11 +1601,11 @@
         if ( isset($pdf) ) {
             $pdf->page_script('
                 if ($PAGE_COUNT > 1) {
-                    $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "normal");
-                    $size = 12;
+                    $font = $fontMetrics->get_font("Arial, Helvetica, sans-serif", "light");
+                    $size = 10;
                     $pageText = "Page " . $PAGE_NUM . " of " . $PAGE_COUNT;
-                    $y = 788;
-                    $x = 480;
+                    $y = 15;
+                    $x = 495;
                     $pdf->text($x, $y, $pageText, $font, $size);
                 }
             ');
