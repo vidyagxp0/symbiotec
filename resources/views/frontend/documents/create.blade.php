@@ -173,6 +173,40 @@
                                     <p id="short_descError" style="color:red">**Short description is required</p>
 
                                 </div>
+
+                                <div class="col-md-6">
+                                    <div class="group-input">
+                                        <label for="doc-type">Document Type<span class="text-danger">*</span></label>
+                                        <select name="document_type_id" id="doc-type" required>
+                                            <option value="" selected>Enter your Selection</option>
+                                            <option data-id="QC" value="QC">Quality Control</option>
+                                            <option data-id="PP01" value="PP01">Production – Plant 01</option>
+                                            <option data-id="PP03" value="PP03">Production – Plant 03</option>
+                                            <option data-id="PC1" value="PC1">Production – C1</option>
+                                            <option data-id="PP02" value="PP02">Production – Plant 02</option>
+                                            <option data-id="PB02" value="PB02">Production Biotechnology – Plant 02</option>
+                                            <option data-id="CM" value="CM">Commercial</option>
+                                            <option data-id="MB" value="MB">Microbiology</option>
+                                            <option data-id="RA" value="RA">Regulatory Affairs</option>
+                                            <option data-id="WH" value="WH">Warehouse</option>
+                                            <option data-id="QA" value="QA">Quality Assurance</option>
+                                            <option data-id="EG" value="EG">Engineering and Maintenance</option>
+                                            <option data-id="PA/HR/CHR" value="PA/HR/CHR">Personnel and Administration/ Human Resource/ Corporate Human Resource</option>
+                                            <option data-id="GN" value="GN">General Production SOP</option>
+                                            <option data-id="IT" value="IT">Information Technology</option>
+                                            <option data-id="CIT" value="CIT">Central Information Technology</option>
+                                        </select>
+                                    </div>
+                                    <p id="doc-typeError" style="color:red">** Department is required</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="group-input">
+                                        <label for="doc-code">Document Type Code</label>
+                                        <select name="document_subtype_id" id="doc-code" required>
+                                        </select>
+                                    </div>
+                                </div>
+                                
                                 <div class="col-md-12">
                                     <div class="group-input">
                                         <label for="sop_type">SOP Type<span class="text-danger">*</span></label>
@@ -185,6 +219,8 @@
                                     </div>
 
                                 </div>
+
+                               
 
                                 <div class="col-md-4 new-date-data-field">
                                     <div class="group-input input-date">
@@ -297,7 +333,8 @@
                                     {{-- <p id="majorError" style="color:red">** Department is required</p> --}}
                                 </div>
 
-                                <div class="col-6">
+                                <input type="hidden" name="minor" id="minor" min="0" max="9" required>
+                                <div class="col-6" style="display: none;">
                                     <div class="group-input">
                                         <label for="minor">Document Version <small>(Minor)</small><span class="text-danger">*</span> 
                                             <span  class="text-primary" data-bs-toggle="modal"
@@ -306,7 +343,6 @@
                                             (Launch Instruction)
                                             </span>
                                         </label>
-                                        <input type="number" name="minor" id="minor" min="0" max="9" required>
                                        
                                     </div>
                                     {{-- <p id="minorError" style="color:red">** Department is required</p> --}}
@@ -331,38 +367,7 @@
                                         <div class="default-name"> <span id="document_type_code">Not selected</span></div>               
                                      </div>
                                 </div> --}}
-                                <div class="col-md-6">
-                                    <div class="group-input">
-                                        <label for="doc-type">Document Type<span class="text-danger">*</span></label>
-                                        <select name="document_type_id" id="doc-type" required>
-                                            <option value="" selected>Enter your Selection</option>
-                                            <option data-id="QC" value="QC">Quality Control</option>
-                                            <option data-id="PP01" value="PP01">Production – Plant 01</option>
-                                            <option data-id="PP03" value="PP03">Production – Plant 03</option>
-                                            <option data-id="PC1" value="PC1">Production – C1</option>
-                                            <option data-id="PP02" value="PP02">Production – Plant 02</option>
-                                            <option data-id="PB02" value="PB02">Production Biotechnology – Plant 02</option>
-                                            <option data-id="CM" value="CM">Commercial</option>
-                                            <option data-id="MB" value="MB">Microbiology</option>
-                                            <option data-id="RA" value="RA">Regulatory Affairs</option>
-                                            <option data-id="WH" value="WH">Warehouse</option>
-                                            <option data-id="QA" value="QA">Quality Assurance</option>
-                                            <option data-id="EG" value="EG">Engineering and Maintenance</option>
-                                            <option data-id="PA/HR/CHR" value="PA/HR/CHR">Personnel and Administration/ Human Resource/ Corporate Human Resource</option>
-                                            <option data-id="GN" value="GN">General Production SOP</option>
-                                            <option data-id="IT" value="IT">Information Technology</option>
-                                            <option data-id="CIT" value="CIT">Central Information Technology</option>
-                                        </select>
-                                    </div>
-                                    <p id="doc-typeError" style="color:red">** Department is required</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="group-input">
-                                        <label for="doc-code">Document Type Code</label>
-                                        <select name="document_subtype_id" id="doc-code" required>
-                                        </select>
-                                    </div>
-                                </div>
+                                
                                 
                                 <!-- Add hidden inputs or data attributes for subtypes -->
                                 <div id="document-subtypes" style="display:none;">

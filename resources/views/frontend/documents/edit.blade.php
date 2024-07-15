@@ -206,6 +206,72 @@
 
                             </div>
 
+                            <div class="col-md-6">
+                                <div class="group-input">
+                                    <label for="doc-type">Document Type<span class="text-danger">*</span></label>
+                                    <select name="document_type_id" id="doc-type" required {{Helpers::isRevised($document->stage)}}>
+                                        <option value="" selected>Enter your Selection</option>
+                                        <option data-id="QC" value="QC" {{ $documentTypeName == 'QC' ? 'selected' : '' }}>Quality Control</option>
+                                        <option data-id="PP01" value="PP01" {{ $documentTypeName == 'PP01' ? 'selected' : '' }}>Production – Plant 01</option>
+                                        <option data-id="PP03" value="PP03" {{ $documentTypeName == 'PP03' ? 'selected' : '' }}>Production – Plant 03</option>
+                                        <option data-id="PC1" value="PC1" {{ $documentTypeName == 'PC1' ? 'selected' : '' }}>Production – C1</option>
+                                        <option data-id="PP02" value="PP02" {{ $documentTypeName == 'PP02' ? 'selected' : '' }}>Production – Plant 02</option>
+                                        <option data-id="PB02" value="PB02" {{ $documentTypeName == 'PB02' ? 'selected' : '' }}>Production Biotechnology – Plant 02</option>
+                                        <option data-id="CM" value="CM" {{ $documentTypeName == 'CM' ? 'selected' : '' }}>Commercial</option>
+                                        <option data-id="MB" value="MB" {{ $documentTypeName == 'MB' ? 'selected' : '' }}>Microbiology</option>
+                                        <option data-id="RA" value="RA" {{ $documentTypeName == 'RA' ? 'selected' : '' }}>Regulatory Affairs</option>
+                                        <option data-id="WH" value="WH" {{ $documentTypeName == 'WH' ? 'selected' : '' }}>Warehouse</option>
+                                        <option data-id="QA" value="QA" {{ $documentTypeName == 'QA' ? 'selected' : '' }}>Quality Assurance</option>
+                                        <option data-id="EG" value="EG" {{ $documentTypeName == 'EG' ? 'selected' : '' }}>Engineering and Maintenance</option>
+                                        <option data-id="PA/HR/CHR" value="PA/HR/CHR" {{ $documentTypeName == 'PA/HR/CHR' ? 'selected' : '' }}>Personnel and Administration/ Human Resource/ Corporate Human Resource</option>
+                                        <option data-id="GN" value="GN" {{ $documentTypeName == 'GN' ? 'selected' : '' }}>General Production SOP</option>
+                                        <option data-id="IT" value="IT" {{ $documentTypeName == 'IT' ? 'selected' : '' }}>Information Technology</option>
+                                        <option data-id="CIT" value="CIT" {{ $documentTypeName == 'CIT' ? 'selected' : '' }}>Central Information Technology</option>
+                                    </select>
+                                    @foreach ($history as $tempHistory)
+                                        @if (
+                                            $tempHistory->activity_type == 'Document' &&
+                                                !empty($tempHistory->comment)  &&
+                                                $tempHistory->user_id == Auth::user()->id)
+                                            @php
+                                                $users_name = DB::table('users')
+                                                    ->where('id', $tempHistory->user_id)
+                                                    ->value('name');
+                                            @endphp
+                                            <p style="color: blue">Modify by {{ $users_name }} at
+                                                {{ $tempHistory->created_at }}
+                                            </p>
+                                            <input class="input-field"
+                                                style="background: #ffff0061;
+                                    color: black;"
+                                                type="text" value="{{ $tempHistory->comment }}" disabled>
+                                        @endif
+                                    @endforeach
+                                </div>
+                                @if (Auth::user()->role != 3 && $document->stage < 8)
+                                    {{-- Add Comment  --}}
+                                    <div class="comment">
+                                        <div>
+                                            <p class="timestamp" style="color: blue">Modify by {{ Auth::user()->name }}
+                                                at {{ date('d-M-Y h:i:s') }}</p>
+
+                                            <input class="input-field" type="text" name="document_type_id_comment">
+                                        </div>
+                                        <div class="button">Add Comment</div>
+                                    </div>
+                                @endif
+
+                                <p id="doc-typeError" style="color:red">** Department is required</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="group-input">
+                                    <label for="doc-code">Document Type Code</label>
+                                    <select name="document_subtype_id" id="doc-code" required {{Helpers::isRevised($document->stage)}}>
+                                        <!-- Options will be populated by JavaScript -->
+                                    </select>
+                                </div>
+                            </div>
+
                             <script>
                                 var maxLength = 255;
                                 $('#short_desc').keyup(function() {
@@ -622,8 +688,9 @@
                                     <div class="button">Add Comment</div>
                                 </div>
                             @endif 
-                            </div>
-                            <div class="col-6">
+                        </div>
+                        <input type="hidden" name="minor" id="minor" min="0" max="9"  value="{{ $document->minor }}" required {{Helpers::isRevised($document->stage)}} >
+                            <div class="col-6" style="display: none;">
                                 <div class="group-input">
                                     <label for="minor">Document Version <small>(Minor)</small><span class="text-danger">*</span> 
                                         <span  class="text-primary" data-bs-toggle="modal"
@@ -632,7 +699,6 @@
                                         (Launch Instruction)
                                         </span>
                                     </label>
-                                    <input type="number" name="minor" id="minor" min="0" max="9"  value="{{ $document->minor }}" required {{Helpers::isRevised($document->stage)}} >
                                     {{-- <select  name="minor">
                                         <option  value="00">-- Select --</option>
                                         <option @if ($document->minor =='0') selected @endif
@@ -690,71 +756,7 @@
                                 @endif
                             </div>
                             
-                            <div class="col-md-6">
-                                <div class="group-input">
-                                    <label for="doc-type">Document Type<span class="text-danger">*</span></label>
-                                    <select name="document_type_id" id="doc-type" required {{Helpers::isRevised($document->stage)}}>
-                                        <option value="" selected>Enter your Selection</option>
-                                        <option data-id="QC" value="QC" {{ $documentTypeName == 'QC' ? 'selected' : '' }}>Quality Control</option>
-                                        <option data-id="PP01" value="PP01" {{ $documentTypeName == 'PP01' ? 'selected' : '' }}>Production – Plant 01</option>
-                                        <option data-id="PP03" value="PP03" {{ $documentTypeName == 'PP03' ? 'selected' : '' }}>Production – Plant 03</option>
-                                        <option data-id="PC1" value="PC1" {{ $documentTypeName == 'PC1' ? 'selected' : '' }}>Production – C1</option>
-                                        <option data-id="PP02" value="PP02" {{ $documentTypeName == 'PP02' ? 'selected' : '' }}>Production – Plant 02</option>
-                                        <option data-id="PB02" value="PB02" {{ $documentTypeName == 'PB02' ? 'selected' : '' }}>Production Biotechnology – Plant 02</option>
-                                        <option data-id="CM" value="CM" {{ $documentTypeName == 'CM' ? 'selected' : '' }}>Commercial</option>
-                                        <option data-id="MB" value="MB" {{ $documentTypeName == 'MB' ? 'selected' : '' }}>Microbiology</option>
-                                        <option data-id="RA" value="RA" {{ $documentTypeName == 'RA' ? 'selected' : '' }}>Regulatory Affairs</option>
-                                        <option data-id="WH" value="WH" {{ $documentTypeName == 'WH' ? 'selected' : '' }}>Warehouse</option>
-                                        <option data-id="QA" value="QA" {{ $documentTypeName == 'QA' ? 'selected' : '' }}>Quality Assurance</option>
-                                        <option data-id="EG" value="EG" {{ $documentTypeName == 'EG' ? 'selected' : '' }}>Engineering and Maintenance</option>
-                                        <option data-id="PA/HR/CHR" value="PA/HR/CHR" {{ $documentTypeName == 'PA/HR/CHR' ? 'selected' : '' }}>Personnel and Administration/ Human Resource/ Corporate Human Resource</option>
-                                        <option data-id="GN" value="GN" {{ $documentTypeName == 'GN' ? 'selected' : '' }}>General Production SOP</option>
-                                        <option data-id="IT" value="IT" {{ $documentTypeName == 'IT' ? 'selected' : '' }}>Information Technology</option>
-                                        <option data-id="CIT" value="CIT" {{ $documentTypeName == 'CIT' ? 'selected' : '' }}>Central Information Technology</option>
-                                    </select>
-                                    @foreach ($history as $tempHistory)
-                                        @if (
-                                            $tempHistory->activity_type == 'Document' &&
-                                                !empty($tempHistory->comment)  &&
-                                                $tempHistory->user_id == Auth::user()->id)
-                                            @php
-                                                $users_name = DB::table('users')
-                                                    ->where('id', $tempHistory->user_id)
-                                                    ->value('name');
-                                            @endphp
-                                            <p style="color: blue">Modify by {{ $users_name }} at
-                                                {{ $tempHistory->created_at }}
-                                            </p>
-                                            <input class="input-field"
-                                                style="background: #ffff0061;
-                                    color: black;"
-                                                type="text" value="{{ $tempHistory->comment }}" disabled>
-                                        @endif
-                                    @endforeach
-                                </div>
-                                @if (Auth::user()->role != 3 && $document->stage < 8)
-                                    {{-- Add Comment  --}}
-                                    <div class="comment">
-                                        <div>
-                                            <p class="timestamp" style="color: blue">Modify by {{ Auth::user()->name }}
-                                                at {{ date('d-M-Y h:i:s') }}</p>
-
-                                            <input class="input-field" type="text" name="document_type_id_comment">
-                                        </div>
-                                        <div class="button">Add Comment</div>
-                                    </div>
-                                @endif
-
-                                <p id="doc-typeError" style="color:red">** Department is required</p>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="group-input">
-                                    <label for="doc-code">Document Type Code</label>
-                                    <select name="document_subtype_id" id="doc-code" required {{Helpers::isRevised($document->stage)}}>
-                                        <!-- Options will be populated by JavaScript -->
-                                    </select>
-                                </div>
-                            </div>
+                            
                             
                             <!-- Add hidden inputs or data attributes for subtypes -->
                             <div id="document-subtypes" style="display:none;">
