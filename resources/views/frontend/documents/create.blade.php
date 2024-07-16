@@ -176,7 +176,7 @@
 
                                 <div class="col-md-6">
                                     <div class="group-input">
-                                        <label for="doc-type">Document Type<span class="text-danger">*</span></label>
+                                        <label for="doc-type">Department Type<span class="text-danger">*</span></label>
                                         <select name="document_type_id" id="doc-type" required>
                                             <option value="" selected>Enter your Selection</option>
                                             <option data-id="QC" value="QC">Quality Control</option>
@@ -201,7 +201,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="group-input">
-                                        <label for="doc-code">Document Type Code</label>
+                                        <label for="doc-code">Department Type Code</label>
                                         <select name="document_subtype_id" id="doc-code" required>
                                         </select>
                                     </div>
@@ -209,7 +209,7 @@
                                 
                                 <div class="col-md-12">
                                     <div class="group-input">
-                                        <label for="sop_type">SOP Type<span class="text-danger">*</span></label>
+                                        <label for="sop_type">Document Type<span class="text-danger">*</span></label>
                                         <select name="sop_type" required>
                                             <option value="" disabled selected>Enter your selection</option>
                                             <option value="SOP (Standard Operating procedure)">SOP (Standard Operating procedure)</option>
