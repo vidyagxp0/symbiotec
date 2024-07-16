@@ -28,9 +28,7 @@
                             <div class="head">Site/Division/Process</div>
                             <div>:</div>
                             <div> 
-                                {{ Helpers::getDivisionName($document->division_id) }}
-                                        /{{ $document->document_type_id }} /{{ $document->created_at->format('Y') }}
-                                        /000{{ $document->id }}/R{{$document->major}}.{{$document->minor}}
+                                {{ $document->document_number }}
                             </div>
                         </div>
                         <div class="list-item">
@@ -49,16 +47,14 @@
                         <table class="table table-bordered" id='auditTable'>
                             <thead>
                                 <tr>
-                                    <th>Data Field</th>
+                                    <th>Sr. No.</th>
+                                    <th>Document</th>
+                                    <th>Revision Summary</th>
                                     <th>
-                                        {{ Helpers::getDivisionName($parent_document->division_id) }}
-                                        /{{ $parent_document->document_type_id }} /{{ $parent_document->created_at->format('Y') }}
-                                        /000{{ $parent_document->id }}/R{{$parent_document->major}}.{{$parent_document->minor}}
+                                        Change Control No.
                                     </th>
                                     <th>
-                                        {{ Helpers::getDivisionName($document->division_id) }}
-                                        /{{ $document->document_type_id }} /{{ $document->created_at->format('Y') }}
-                                        /000{{ $document->id }}/R{{$document->major}}.{{$document->minor}}
+                                        Effective Date
                                     </th>
                                 </tr>
                             </thead>
@@ -66,9 +62,15 @@
 
                                 @foreach ($revision_history['data'] as $data)
                                     <tr>
-                                        <td>{{ $data['field'] }}</td>
-                                        <td>{{ $data['before'] }}</td>
-                                        <td>{{ $data['after'] }}</td>
+                                        <td>{{ $loop->index }}</td>
+                                        <td>{{ $document->document_number }}</td>
+                                        <td>
+                                                {{ $data['field'] }}
+                                            <br>{{ $data['before'] }}
+                                            <br>{{ $data['after'] }}
+                                        </td>
+                                        <td>{{ $document->change_control_no }}</td>
+                                        <td>{{ $document->effective_date }}</td>
                                     </tr>
                                 @endforeach
 

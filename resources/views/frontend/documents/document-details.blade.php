@@ -57,11 +57,7 @@
                                 <div>
                                     <div class="head">Document Number</div>
                                     <div>
-                                        @if($document->revised === 'Yes') 
-                                            000{{ $document->revised_doc }}
-                                        @else
-                                            000{{ $document->id }}
-                                        @endif
+                                        {{ $document->document_number }}
                                        </div>
                                 </div>
                                 {{-- <div>
@@ -1030,6 +1026,8 @@
                             Change Control No.
                         </label>
                         <input type="text" name="change_control_no" maxlength="100">
+                    </div>
+                    <div class="group-input">
                         <label for="reason">
                             Comment
                         </label>
