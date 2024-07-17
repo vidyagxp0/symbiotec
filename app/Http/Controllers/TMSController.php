@@ -183,8 +183,7 @@ class TMSController extends Controller
         }
     }
     public function create(){
-        if(Helpers::checkRoles(6) || Helpers::checkRoles(3)){
-
+        if(Helpers::checkRoles(6)){
             $quize = Quize::where('trainer_id', Auth::user()->id)->get();
             $due = DocumentTraining::where('trainer', Auth::user()->id)->whereIn('status', ["Past-due", 'Assigned', 'Complete'])->get();
             $traineesPerson = UserRole::where(['q_m_s_roles_id' => 6])->distinct()->pluck('user_id');
@@ -192,10 +191,9 @@ class TMSController extends Controller
             foreach($due as $temp){
                 $temp->training = Document::find($temp->document_id);
                 if($temp->training){
-                    $temp->originator = User::where('id',$temp->training->originator_id)->value('name');
+                    $temp->originator = User::where('id', $temp->training->originator_id)->value('name');
                     $temp->document_type_name = DocumentType::where('id',$temp->training->document_type_id)->value('name');
-                    $temp->typecode = DocumentType::where('id',$temp->training->document_type_id)->value('typecode');
-                    // $temp->division_name = QMSDivision::where('id',$temp->training->division_id)->value('name');
+                    $temp->typecode = $temp->training->document_subtype_id;
                     $temp->division_name = Helpers::getDivisionName($temp->training->division_id);
                     $temp->major = $temp->training->major;
                     $temp->minor = $temp->training->minor;
@@ -265,7 +263,7 @@ class TMSController extends Controller
 
 
             foreach($request->sops as $data){
-                $sop =  DocumentTraining::where('document_id',$data)->first();
+                $sop =  DocumentTraining::where('document_id',$data)->latest()->first();
                 $sop->status = "Assigned";
                 $sop->training_plan = $training->id;
                 $sop->update();
@@ -441,12 +439,14 @@ class TMSController extends Controller
         if(Auth::user()->email == $request->email && Hash::check($request->password,Auth::user()->password)){
             $document = DocumentTraining::where('document_id',$id)->first();
             $document->train = Training::find($document->training_plan);
+
             $trainingStatus = new TrainingStatus();
             $trainingStatus->user_id = Auth::user()->id;
             $trainingStatus->sop_id = $id;
             $trainingStatus->training_id = $document->training_plan;
             $trainingStatus->status = "Complete";
             $trainingStatus->save();
+
             $TrainingHistory = new TrainingHistory();
             $TrainingHistory->plan_id =  $document->training_plan;
             $TrainingHistory->sop_id =  $id;
@@ -458,6 +458,7 @@ class TMSController extends Controller
             $TrainingHistory->user_name = Auth::user()->name;
             $TrainingHistory->origin_state = "Assigned";
             $TrainingHistory->save();
+
             $history = new DocumentHistory();
             $history->document_id = $id;
             $history->activity_type = "Training Complete";
@@ -469,11 +470,13 @@ class TMSController extends Controller
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = "Pending-Training";
             $history->save();
+
             $criteria = $this->effective($id);
             if(count(TrainingStatus::where('sop_id',$id)->where('training_id',$document->training_plan)->where('status',"Complete")->get()) >= $criteria){
                 $document = DocumentTraining::where('document_id',$id)->first();
                 $document->status = "Complete";
                 $document->update();
+
                 $history = new DocumentHistory();
                 $history->document_id = $id;
                 $history->activity_type = "Training Complete";
@@ -485,6 +488,7 @@ class TMSController extends Controller
                 $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
                 $history->origin_state = "Pending-Training";
                 $history->save();
+
                 $TrainingHistory = new TrainingHistory();
                 $TrainingHistory->plan_id =  $document->training_plan;
                 $TrainingHistory->sop_id =  $id;
@@ -496,10 +500,12 @@ class TMSController extends Controller
                 $TrainingHistory->user_name = Auth::user()->name;
                 $TrainingHistory->origin_state = "Assigned";
                 $TrainingHistory->save();
+
                 $document->doc = Document::find($id);
-                $document->doc->stage = 10;
+                $document->doc->stage = 12;
                 $document->doc->status = "Effective";
                 $document->doc->update();
+
                 $user_data = User::find($document->doc->originator_id);
                 try {
                     Mail::send('mail.complete-training', ['document' => $document],

@@ -135,38 +135,6 @@
 
                                 }
                             </script>
-                                 {{-- <script>
-                                    document.addEventListener('DOMContentLoaded', function () {
-                                        var selectField = document.getElementById('training-select');
-                                        var inputsToToggle = [];
-
-                                        // Add elements with class 'facility-name' to inputsToToggle
-                                        var facilityNameInputs = document.getElementsByClassName('assessment_required');
-                                        
-                                        for (var i = 0; i < facilityNameInputs.length; i++) {
-                                            inputsToToggle.push(facilityNameInputs[i]);
-                                        }
-
-                                                                        
-                                        selectField.addEventListener('change', function () {
-                                            var isRequired = this.value === 'Classroom Training';
-
-                                            inputsToToggle.forEach(function (input) {
-                                                input.required = isRequired;
-                                            });
-
-                                            // Show or hide the asterisk icon based on the selected value
-                                            var asteriskIcon = document.getElementById('assessmentrequiredAstrik');
-                                            asteriskIcon.style.display = isRequired ? 'inline' : 'none';
-                                        });
-                                    });
-                                </script> --}}
-                            {{-- <div class="col-6">
-                                <div class="group-input">
-                                    <label for="classRoom_trainingName">Training Start Date & Time </label>
-                                    <input type="datetime-local" name="training_start_date">
-                                </div>
-                            </div> --}}
                             
                             <div class="col-12">
                                 <div class="group-input">
@@ -301,15 +269,6 @@
                                     }
                                 }
                             </script>
-                            {{-- <div class="col-lg-6" id="trainee-criteria">
-                                <div class="group-input">
-                                    <label for="trainee-criteria">Trainee Criteria(in %)</label>
-                                    <input type="number" id="effective" name="trainee_criteria">
-                                </div>
-                                <p id="trainingCriteria" style="color: red">
-                                    ** Trainee Criteria is missing...
-                                </p>
-                            </div> --}}
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for=""></label>
@@ -344,10 +303,9 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           
                                             @foreach ($due as $temp)
                                                 @if ($temp->root_document)
-                                                    @if ($temp->root_document->stage >= 8 && $temp->trainer == auth()->id() && $temp->root_document->status == 'Under-Training' && $temp->status == 'Past-due')
+                                                    @if ($temp->root_document->stage >= 10 && $temp->trainer == auth()->id() && $temp->status == 'Past-due')
                                                         <tr>
                                                             <td class="text-center">
                                                                 <input 
@@ -428,65 +386,6 @@
                         </div>
                     </div>
                 </div>
-
-                {{-- <div class="inner-block add-question" id="question-select">
-                    <div class="main-head">
-                        Select Questions for Trainees
-                    </div>
-                    <div class="inner-block-content">
-                        <div class="question-container">
-                            <div class="left-block">
-                                <div class="head">Select Questions</div>
-                                <div class="table-max">
-                                    <table class="table table-bordered left-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Question</th>
-                                                <th>Type</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="training-question">
-                                            <tr data-item="item1">
-                                                <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est nesciunt at
-                                                    cupiditate.</td>
-                                                <td>Single Select Questions</td>
-                                            </tr>
-                                            <tr data-item="item2">
-                                                <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae dolor
-                                                    reiciendis
-                                                    ullam.</td>
-                                                <td>Multi Selection Questions</td>
-                                            </tr>
-                                            <tr data-item="item3">
-                                                <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae dolor
-                                                    reiciendis
-                                                    ullam.</td>
-                                                <td>Exact Answer Questions</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="right-block">
-                                <div class="head">Selected Questions</div>
-                                <div class="table-max">
-                                    <table class="table table-bordered right-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Question</th>
-                                                <th>Type</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="training-ques-selected">
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
                 <div class="foot-btns">
                     <a href="{{ route('TMS.index') }}"><button>Cancel</button></a>
                     <button type="submit" id="SubmitTraining">Create</button>

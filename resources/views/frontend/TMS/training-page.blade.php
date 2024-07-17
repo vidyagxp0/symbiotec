@@ -75,15 +75,15 @@ window.addEventListener("popstate", function(event) {
                             </select>
                         </div>
                         <div class="group-input">
-                            <label for="username">Username</label>
+                            <label for="username">Username <span class="text-danger">*</span></label>
                             <input type="text" name="email" required>
                         </div>
                         <div class="group-input">
-                            <label for="password">Password</label>
+                            <label for="password">Password <span class="text-danger">*</span></label>
                             <input type="password" name="password" required>
                         </div>
                         <div class="group-input">
-                            <label for="comment">Comment</label>
+                            <label for="comment">Comment <span class="text-danger">*</span></label>
                             <textarea name="comment"></textarea>
                         </div>
                     </div>
@@ -96,7 +96,7 @@ window.addEventListener("popstate", function(event) {
         </div>
     </div>
     <script>
-    var timer2 = "00:10"; // Set the initial time to 10 minutes
+    var timer2 = "19:59"; // Set the initial time to 10 minutes
     var interval = setInterval(function() {
         var timer = timer2.split(':');
         var minutes = parseInt(timer[0], 10);

@@ -21,19 +21,19 @@ class StageSeeder extends Seeder
         $stage->save();
 
         $stage = new Stage();
-        $stage->name = "In-HOD Review";
+        $stage->name = "In Review";
         $stage->save();
 
         $stage = new Stage();
-        $stage->name = "HOD Review Complete";
+        $stage->name = "Reviewer Cycle-I";
         $stage->save();
 
         $stage = new Stage();
-        $stage->name = "In-Review";
+        $stage->name = "Final Review";
         $stage->save();
 
         $stage = new Stage();
-        $stage->name = "Reviewed";
+        $stage->name = "Initiator Update";
         $stage->save();
 
         $stage = new Stage();
@@ -41,27 +41,27 @@ class StageSeeder extends Seeder
         $stage->save();
 
         $stage = new Stage();
-        $stage->name = "Approved";
+        $stage->name = "Approval Cycle-I";
         $stage->save();
 
         $stage = new Stage();
-        $stage->name = "Under-Training";
+        $stage->name = "Final Approval";
         $stage->save();
 
         $stage = new Stage();
-        $stage->name = "Training-Complete";
+        $stage->name = "Training Pending";
+        $stage->save();
+
+        $stage = new Stage();
+        $stage->name = "Training Started";
+        $stage->save();
+
+        $stage = new Stage();
+        $stage->name = "Training Complete";
         $stage->save();
 
         $stage = new Stage();
         $stage->name = "Effective";
-        $stage->save();
-
-        $stage = new Stage();
-        $stage->name = "Cancel-by-Reviewer";
-        $stage->save();
-
-        $stage = new Stage();
-        $stage->name = "Cancel-by-Approver";
         $stage->save();
 
         $stage = new Stage();

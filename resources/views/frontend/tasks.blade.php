@@ -79,12 +79,12 @@
                                                                 $showEdit = false;
                                                             @endphp
                                                             @if(Helpers::checkRoles(2))
-                                                                @if($temp->stage <=2 )
+                                                                @if($temp->stage <=4 )
                                                                     @php $showEdit = true; @endphp
                                                                 @endif
                                                             @endif
                                                             @if(Helpers::checkRoles(1))
-                                                                @if($temp->stage <=4 )
+                                                                @if($temp->stage <=8 )
                                                                     @php $showEdit = true; @endphp
                                                                 @endif
                                                             @endif

@@ -194,43 +194,45 @@ $divisions = DB::table('q_m_s_divisions')->select('id', 'name')->get();
                         </thead>
                         <tbody id="searchTable">
                             @foreach ($documents2 as $temp)
-                            @php
-                            $trainingStatusCheck = DB::table('training_statuses')
-                            ->where([
-                            'user_id' => Auth::user()->id,
-                            'sop_id' => $temp->id,
-                            'training_id' => $temp->traningstatus->training_plan,
-                            'status' => 'Complete'
-                            ])->first();
-                            $trainingPlanName = DB::table('trainings')
-                            ->where('id', $temp->traningstatus->training_plan)
-                            ->first();
-                            $traininerName = DB::table('users')
-                            ->where('id', $trainingPlanName->trainner_id)
-                            ->first();
-                            @endphp
-                            <tr>
-                                <td>{{ $trainingPlanName ? $trainingPlanName->traning_plan_name : ''}}</td>
-                                <td>{{ $temp->document_name }}</td>
-                                <td>{{ $traininerName ? $traininerName->name : ''}}</td>
-                                <td>{{ $temp->traningstatus->status }}</td>
-                                <td>{{ \Carbon\Carbon::parse($temp->due_dateDoc)->format('d M Y') }}</td>
-                                <td>
-                                    {{ $trainingStatusCheck ? \Carbon\Carbon::parse($trainingStatusCheck->created_at)->format('d M Y') : '-' }}
-                                </td>
-                                @if($trainingStatusCheck)
-                                <th>Completed</th>
-                                @else
-                                @if($temp->traningstatus->status == "Complete")
-                                <th>Training Criteria Met</th>
-                                @elseif( $temp->due_dateDoc < now()) <th>Training Date Passed</th>
-
+                                @php
+                                    $trainingStatusCheck = DB::table('training_statuses')
+                                    ->where([
+                                    'user_id' => Auth::user()->id,
+                                    'sop_id' => $temp->id,
+                                    'training_id' => $temp->traningstatus->training_plan,
+                                    'status' => 'Complete'
+                                    ])->first();
+                                    
+                                    $trainingPlanName = DB::table('trainings')
+                                    ->where('id', $temp->traningstatus->training_plan)
+                                    ->first();
+                                    
+                                    $traininerName = DB::table('users')
+                                    ->where('id', $trainingPlanName->trainner_id)
+                                    ->first();
+                                @endphp
+                                <tr>
+                                    <td>{{ $trainingPlanName ? $trainingPlanName->traning_plan_name : ''}}</td>
+                                    <td>{{ $temp->document_name }}</td>
+                                    <td>{{ $traininerName ? $traininerName->name : ''}}</td>
+                                    <td>{{ $temp->traningstatus->status }}</td>
+                                    <td>{{ $trainingPlanName->training_end_date ? \Carbon\Carbon::parse($trainingPlanName->training_end_date)->format('d M Y H:i A') : '-' }}</td>
+                                    <td>
+                                        {{ $trainingStatusCheck ? \Carbon\Carbon::parse($trainingStatusCheck->created_at)->format('d M Y') : '-' }}
+                                    </td>
+                                    @if($trainingStatusCheck)
+                                        <th>Completed</th>
                                     @else
-                                    <td><a href="{{ url('TMS-details', $temp->traningstatus->training_plan) }}/{{ $temp->id }}"><i class="fa-solid fa-eye"></i></a></td>
+                                        @if($temp->traningstatus->status == "Complete")
+                                            <th>Training Criteria Met</th>
+                                        @elseif( $temp->due_dateDoc < now()) 
+                                            <th>Training Date Passed</th>
+                                        @else
+                                            <td><a href="{{ url('TMS-details', $temp->traningstatus->training_plan) }}/{{ $temp->id }}"><i class="fa-solid fa-eye"></i></a></td>
+                                        @endif
                                     @endif
-                                    @endif
-                            </tr>
-                            @endforeach
+                                </tr>
+                                @endforeach
                         </tbody>
                     </table>
                 </div>
