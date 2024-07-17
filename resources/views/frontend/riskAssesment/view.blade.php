@@ -1258,6 +1258,12 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="group-input">
+                                                <label for="root-cause-methodology">Hazard Analysis (HACCP)</label>
+                                                <textarea name="hazard_analysis">{{$data->hazard_analysis}}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="group-input">
                                                 <label for="root-cause-methodology">Root Cause Methodology</label>
                                                 <select  name="root_cause_methodology[]" multiple {{ $data->stage == 0 || $data->stage == 7 ? 'disabled' : '' }}
                                                     placeholder="-- Select --" data-search="false"

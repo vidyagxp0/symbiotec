@@ -68,6 +68,10 @@ class StageSeeder extends Seeder
         $stage->name = "Obsolete";
         $stage->save();
 
+        $stage = new Stage();
+        $stage->name = "Closed/Cancel";
+        $stage->save();
+
         $stage = new RecordNumber();
         $stage->counter = 0;
         $stage->save();

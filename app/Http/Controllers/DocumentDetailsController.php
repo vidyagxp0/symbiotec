@@ -476,7 +476,7 @@ class DocumentDetailsController extends Controller
                       $document->status = Stage::where('id', 7)->value('name');
                     }
                     if($document->stage = 8){
-                      $document->stage = $document->training_required == 'yes' ? 9 : 11;
+                      $document->stage = $document->training_required == 'yes' ? 9 : 12;
                       $document->status = $document->training_required == 'yes' ? Stage::where('id', 9)->value('name') : Stage::where('id', 11)->value('name');
                     }
                     try {
@@ -499,7 +499,7 @@ class DocumentDetailsController extends Controller
                       $document->status = Stage::where('id', 7)->value('name');
                     }
                     if($document->stage = 8){
-                      $document->stage = $document->training_required == 'yes' ? 9 : 11;
+                      $document->stage = $document->training_required == 'yes' ? 9 : 12;
                       $document->status = $document->training_required == 'yes' ? Stage::where('id', 9)->value('name') : Stage::where('id', 11)->value('name');
                     }
                   try {
@@ -546,7 +546,7 @@ class DocumentDetailsController extends Controller
                     $document->status = Stage::where('id', 7)->value('name');
                   }
                   if($document->stage = 8){
-                    $document->stage = $document->training_required == 'yes' ? 9 : 11;
+                    $document->stage = $document->training_required == 'yes' ? 9 : 12;
                     $document->status = $document->training_required == 'yes' ? Stage::where('id', 9)->value('name') : Stage::where('id', 11)->value('name');
                   }
                   try {

@@ -671,19 +671,12 @@
                         <div id="CCForm2" class="inner-block cctabcontent">
                         <div class="inner-block-content">
                                 <div class="row">
-                                    {{-- <div class="col-12">
+                                    <div class="col-12">
                                         <div class="group-input">
-                                            <label for="root-cause-methodology">Root Cause Methodology</label>
-                                            <select name="root_cause_methodology[]"  placeholder="-- Select --"
-                                                data-search="false" data-silent-initial-value-set="true"
-                                                id="root-cause-methodology">
-                                                <option @if ($data->root_cause_methodology== '1') selected @endif value="1">Why-Why Chart</option>
-                                                <option @if ($data->root_cause_methodology== '2') selected @endif value="2">Failure Mode and Efect Analysis</option>
-                                                <option @if ($data->root_cause_methodology== '3') selected @endif value="3">Fishbone or Ishikawa Diagram</option>
-                                                <option @if ($data->root_cause_methodology== '4') selected @endif value="4">Is/Is Not Analysis</option>
-                                            </select>
+                                            <label for="root-cause-methodology">Hazard Analysis (HACCP)</label>
+                                            <textarea name="hazard_analysis">{{$data->hazard_analysis}}</textarea>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <div class="col-12">
                                         <div class="group-input">
                                             <label for="root-cause-methodology">Root Cause Methodology</label>
