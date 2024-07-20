@@ -171,7 +171,7 @@
                         </div>
                         <div class="create">
                             <a href="{{ url('rcms/form-division') }}"> <button class="button_theme1">Create
-                                    Record</button> </a>
+                                    Record new</button> </a>
                         </div>
                     </div>
                 </div>

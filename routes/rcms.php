@@ -395,6 +395,9 @@ Route::group(['prefix' => 'rcms'], function () {
             // Route::get('rcms/marketComplaintSingleReport/{id}', [MarketComplaintController::class, 'singleReport']);
             Route::get('pdf-report/{id}', [MarketComplaintController::class, 'singleReport']);
 
+// Regulatory inspection==================
+// Route::get('regulatory-inspection', [DashboardController::class, 'index'])->name('regulatory-inspection');
+Route::view('regulatory_dashboard', 'frontend.rcms.regulatory_dashboard');
 
             /********************* Incident Routes Starts *******************/
 
