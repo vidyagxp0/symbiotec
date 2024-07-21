@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('regulatory_audit_trails', function (Blueprint $table) {
+        Schema::create('regulatory_insp_audit_trails', function (Blueprint $table) {
             $table->id();
             $table->integer('regulatory_id')->nullable();
             $table->text('activity_type')->nullable();
@@ -41,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regulatory_audit_trails');
+        Schema::dropIfExists('regulatory_insp_audit_trails');
     }
 };

@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('regulatory_inspection_grid', function (Blueprint $table) {
+        Schema::create('regulatory_grids', function (Blueprint $table) {
 
             $table->id();
-            $table->integer('reg_id')->nullable();
+            $table->integer('audit_id')->nullable();
             $table->text('type')->nullable();
             $table->text('severity_level')->nullable();
             $table->text('observation_id')->nullable();
@@ -44,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('regulatory_inspection_grid');
+        Schema::dropIfExists('regulatory_grids');
     }
 };

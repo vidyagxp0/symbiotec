@@ -7,7 +7,7 @@ use App\Models\RegulatoryInspection;
 use App\Models\RecordNumber;
 use Carbon\Carbon;
 use App\Models\RegulatoryGrid;
-use App\Models\Regulatory_Insp_AuditTrail;
+use App\Models\RegulatoryInspAuditTrail;
 use Auth;
 use App\Models\User;
 use App\Models\RoleGroup;
@@ -287,8 +287,8 @@ class RegulatoryController extends Controller
 
 // new added supplier audit trail code 
 if (!empty($internalAudit->severity_level)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'Severity Level';
     $history->previous = "Null";
     $history->current = $internalAudit->severity_level;
@@ -304,8 +304,8 @@ if (!empty($internalAudit->severity_level)) {
 }
 
 if (!empty($internalAudit->initiated_if_other)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'Initial Through Others';
     $history->previous = "Null";
     $history->current = $internalAudit->initiated_if_other;
@@ -321,8 +321,8 @@ if (!empty($internalAudit->initiated_if_other)) {
 }
 
 if (!empty($internalAudit->initiated_through)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'Initiated Through';
     $history->previous = "Null";
     $history->current = $internalAudit->initiated_through;
@@ -338,8 +338,8 @@ if (!empty($internalAudit->initiated_through)) {
 }
 
 if (!empty($internalAudit->initial_comments)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'Initial Comments';
     $history->previous = "Null";
     $history->current = $internalAudit->initial_comments;
@@ -355,8 +355,8 @@ if (!empty($internalAudit->initial_comments)) {
 }
 
 if (!empty($internalAudit->if_comments)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'If Comments';
     $history->previous = "Null";
     $history->current = $internalAudit->if_comments;
@@ -372,8 +372,8 @@ if (!empty($internalAudit->if_comments)) {
 }
 
 if (!empty($internalAudit->External_Auditing_Agency)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'Supplier Auditing Agency';
     $history->previous = "Null";
     $history->current = $internalAudit->External_Auditing_Agency;
@@ -389,8 +389,8 @@ if (!empty($internalAudit->External_Auditing_Agency)) {
 }
 
 if (!empty($internalAudit->Relevant_Guidelines)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'Relevant Guidelines';
     $history->previous = "Null";
     $history->current = $internalAudit->Relevant_Guidelines;
@@ -406,8 +406,8 @@ if (!empty($internalAudit->Relevant_Guidelines)) {
 }
 
 if (!empty($internalAudit->QA_Comments)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'QA Comments';
     $history->previous = "Null";
     $history->current = $internalAudit->QA_Comments;
@@ -423,8 +423,8 @@ if (!empty($internalAudit->QA_Comments)) {
 }
 
 if (!empty($internalAudit->Audit_Category)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'Audit Category';
     $history->previous = "Null";
     $history->current = $internalAudit->Audit_Category;
@@ -440,8 +440,8 @@ if (!empty($internalAudit->Audit_Category)) {
 }
 
 if (!empty($internalAudit->file_attachment_guideline)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'File Attachment Guideline';
     $history->previous = "Null";
     $history->current = $internalAudit->file_attachment_guideline;
@@ -457,8 +457,8 @@ if (!empty($internalAudit->file_attachment_guideline)) {
 }
 
 if (!empty($internalAudit->Supplier_Details)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'Supplier Details';
     $history->previous = "Null";
     $history->current = $internalAudit->Supplier_Details;
@@ -474,8 +474,8 @@ if (!empty($internalAudit->Supplier_Details)) {
 }
 
 if (!empty($internalAudit->Supplier_Site)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'Supplier Site';
     $history->previous = "Null";
     $history->current = $internalAudit->Supplier_Site;
@@ -491,8 +491,8 @@ if (!empty($internalAudit->Supplier_Site)) {
 }
 
 if (!empty($internalAudit->due_date_extension)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $internalAudit->id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $internalAudit->id;
     $history->activity_type = 'Due Date Extension';
     $history->previous = "Null";
     $history->current = $internalAudit->due_date_extension;
@@ -509,8 +509,8 @@ if (!empty($internalAudit->due_date_extension)) {
 
 // new added supplieer audit trail code
         if (!empty($internalAudit->date)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Date of Initiator';
             $history->previous = "Null";
             $history->current = $internalAudit->date;
@@ -529,8 +529,8 @@ if (!empty($internalAudit->due_date_extension)) {
 
 
         if (!empty($internalAudit->assign_to)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Assigned to';
             $history->previous = $previousAssignedToName ? $previousAssignedToName->name : 'Null';
             $history->current = $currentAssignedToName ? $currentAssignedToName->name : 'Null';
@@ -570,8 +570,8 @@ if (!empty($internalAudit->due_date_extension)) {
             // Get the full name for the Initiator Group
             $initiatorGroupFullName = $initiatorGroupNames[$internalAudit->Initiator_Group] ?? $internalAudit->Initiator_Group;
         
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Initiator Group';
             $history->previous = "Null";
             $history->current = $initiatorGroupFullName; // Use the full name here
@@ -588,8 +588,8 @@ if (!empty($internalAudit->due_date_extension)) {
         
 
         if (!empty($internalAudit->short_description)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Short Description';
             $history->previous = "Null";
             $history->current = $internalAudit->short_description;
@@ -605,8 +605,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->audit_type)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Type of Audit';
             $history->previous = "Null";
             $history->current = $internalAudit->audit_type;
@@ -622,8 +622,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->if_other)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'If Other';
             $history->previous = "Null";
             $history->current = $internalAudit->if_other;
@@ -639,8 +639,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->initial_comments)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Description';
             $history->previous = "Null";
             $history->current = $internalAudit->initial_comments;
@@ -656,8 +656,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->start_date)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Audit Schedule Start Date';
             $history->previous = "Null";
             $history->current = $internalAudit->start_date->format('d-M-Y');
@@ -673,8 +673,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->end_date)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Audit Schedule End Date';
             $history->previous = "Null";
             $history->current = $internalAudit->end_date->format('d-M-Y');
@@ -690,8 +690,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->audit_agenda)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Audit Agenda';
             $history->previous = "Null";
             $history->current = $internalAudit->audit_agenda;
@@ -708,8 +708,8 @@ if (!empty($internalAudit->due_date_extension)) {
 
 
         if (!empty($internalAudit->material_name)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Product/Material Name';
             $history->previous = "Null";
             $history->current = $internalAudit->material_name;
@@ -727,8 +727,8 @@ if (!empty($internalAudit->due_date_extension)) {
         $previousleadauditor = User::find($lastDocument->lead_auditor);
         $currentleadauditor = User::find($internalAudit['lead_auditor']);
         if (!empty($internalAudit->lead_auditor)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Lead Auditor';
             $history->previous = $previousleadauditor ? $previousleadauditor->name : 'Null';
             $history->current = $currentleadauditor ? $currentleadauditor->name : 'Null';
@@ -747,8 +747,8 @@ if (!empty($internalAudit->due_date_extension)) {
         $previousauditteam = User::where('id',$lastDocument->Audit_team)->value('name');
         $currentauditteam = User::where('id',$internalAudit->Audit_team)->value('name');
         if (!empty($internalAudit->Audit_team)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Audit Team';
             $history->previous = $previousauditteam;
             $history->current = $currentauditteam;
@@ -768,8 +768,8 @@ if (!empty($internalAudit->due_date_extension)) {
         $previousauditee = User::where('id',$lastDocument->Auditee)->value('name');
         $currentauditee = User::where('id',$internalAudit->Auditee)->value('name');
         if (!empty($internalAudit->Auditee)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Auditee';
             $history->previous = $previousauditee;
             $history->current = $currentauditee;
@@ -787,8 +787,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->Auditor_Details)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Supplier Auditor Details';
             $history->previous = "Null";
             $history->current = $internalAudit->Auditor_Details;
@@ -804,8 +804,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->Comments)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Comments';
             $history->previous = "Null";
             $history->current = $internalAudit->Comments;
@@ -821,8 +821,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->Audit_Comments1)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Audit Comments';
             $history->previous = "Null";
             $history->current = $internalAudit->Audit_Comments1;
@@ -838,8 +838,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->Remarks)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Remarks';
             $history->previous = "Null";
             $history->current = $internalAudit->Remarks;
@@ -858,8 +858,8 @@ if (!empty($internalAudit->due_date_extension)) {
 
 
         if (!empty($internalAudit->Audit_Comments2)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Audit Comments';
             $history->previous = "Null";
             $history->current = $internalAudit->Audit_Comments2;
@@ -875,8 +875,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->inv_attachment)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'File Attachment';
             $history->previous = "Null";
             $history->current = $internalAudit->inv_attachment;
@@ -892,8 +892,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->file_attachment)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'File Attachment';
             $history->previous = "Null";
             $history->current = $internalAudit->file_attachment;
@@ -909,8 +909,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->Audit_file)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Audit Attachments';
             $history->previous = "Null";
             $history->current = $internalAudit->Audit_file;
@@ -926,8 +926,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->report_file)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Report Attachments';
             $history->previous = "Null";
             $history->current = $internalAudit->report_file;
@@ -944,8 +944,8 @@ if (!empty($internalAudit->due_date_extension)) {
 
        
         if (!empty($internalAudit->myfile)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Initial Attachment';
             $history->previous = "Null";
             $history->current = $internalAudit->myfile;
@@ -961,8 +961,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->due_date)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Due Date';
             $history->previous = "Null";
             $history->current = $internalAudit->due_date;
@@ -978,8 +978,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->audit_start_date)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Audit Start Date';
             $history->previous = "Null";
             $history->current = $internalAudit->audit_start_date->format('d-M-Y');
@@ -995,8 +995,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         if (!empty($internalAudit->audit_end_date)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $internalAudit->id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $internalAudit->id;
             $history->activity_type = 'Audit End Date';
             $history->previous = "Null";
             $history->current = $internalAudit->audit_end_date->format('d-M-Y');
@@ -1267,8 +1267,8 @@ if (!empty($internalAudit->due_date_extension)) {
         $data4->update();
         if ($lastDocument->date != $internalAudit->date || !empty($request->date_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Date of Initiator';
             $history->previous = $lastDocument->date;
             $history->current = $internalAudit->date;
@@ -1285,8 +1285,8 @@ if (!empty($internalAudit->due_date_extension)) {
         
         if ($lastDocument->assign_to != $internalAudit->assign_to || !empty($request->assign_to_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Assigned to';
             $history->previous = $previousAssignedToName ? $previousAssignedToName->name : 'Null';
             $history->current = $currentAssignedToName ? $currentAssignedToName->name : 'Null';
@@ -1328,8 +1328,8 @@ if (!empty($internalAudit->due_date_extension)) {
             $previousInitiatorGroupFullName = $initiatorGroupNames[$lastDocument->Initiator_Group] ?? $lastDocument->Initiator_Group;
             $currentInitiatorGroupFullName = $initiatorGroupNames[$internalAudit->Initiator_Group] ?? $internalAudit->Initiator_Group;
         
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Initiator Group';
             $history->previous = $previousInitiatorGroupFullName; // Use the full name here
             $history->current = $currentInitiatorGroupFullName; // Use the full name here
@@ -1347,8 +1347,8 @@ if (!empty($internalAudit->due_date_extension)) {
 
         if ($lastDocument->initiator_group_code != $internalAudit->initiator_group_code || !empty($request->initiator_group_code_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Initiator Group Code';
             $history->previous = $lastDocument->initiator_group_code;
             $history->current = $internalAudit->initiator_group_code;
@@ -1364,8 +1364,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
         if ($lastDocument->short_description != $internalAudit->short_description || !empty($request->short_description_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Short Description';
             $history->previous = $lastDocument->short_description;
             $history->current = $internalAudit->short_description;
@@ -1383,8 +1383,8 @@ if (!empty($internalAudit->due_date_extension)) {
 
         if ($lastDocument->initiated_if_other != $internalAudit->initiated_if_other || !empty($request->initiated_if_other_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Initiated Through Others';
             $history->previous = $lastDocument->initiated_if_other;
             $history->current = $internalAudit->initiated_if_other;
@@ -1399,8 +1399,8 @@ if (!empty($internalAudit->due_date_extension)) {
             $history->save();
         }
         if ($lastDocument->audit_type != $internalAudit->audit_type ) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Type of Audit';
             $history->previous = $lastDocument->audit_type;
             $history->current = $internalAudit->audit_type;
@@ -1419,8 +1419,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
         if ($lastDocument->if_other != $internalAudit->if_other || !empty($request->if_other_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'If Other';
             $history->previous = $lastDocument->if_other;
             $history->current = $internalAudit->if_other;
@@ -1436,8 +1436,8 @@ if (!empty($internalAudit->due_date_extension)) {
         }
         if ($lastDocument->initial_comments != $internalAudit->initial_comments || !empty($request->initial_comments_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Initial Comments';
             $history->previous = $lastDocument->initial_comments;
             $history->current = $internalAudit->initial_comments;
@@ -1455,8 +1455,8 @@ if (!empty($internalAudit->due_date_extension)) {
 $internalStartDate = !is_null($internalAudit->start_date) ? Carbon::parse($internalAudit->start_date) : null;
 
 if ((!is_null($lastStartDate) && !is_null($internalStartDate) && $lastStartDate->format('d-M-Y') != $internalStartDate->format('d-M-Y')) || !empty($request->start_date_comment)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'Audit Schedule Start Date';
     $history->previous = !is_null($lastStartDate) ? $lastStartDate->format('d-M-Y') : 'N/A';
     $history->current = !is_null($internalStartDate) ? $internalStartDate->format('d-M-Y') : 'N/A';
@@ -1474,8 +1474,8 @@ if ((!is_null($lastStartDate) && !is_null($internalStartDate) && $lastStartDate-
 $internalEndDate = !is_null($internalAudit->end_date) ? Carbon::parse($internalAudit->end_date) : null;
 
 if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->format('d-M-Y') != $internalEndDate->format('d-M-Y')) || !empty($request->end_date_comment)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'Audit Schedule End Date';
     $history->previous = !is_null($lastEndDate) ? $lastEndDate->format('d-M-Y') : 'N/A';
     $history->current = !is_null($internalEndDate) ? $internalEndDate->format('d-M-Y') : 'N/A';
@@ -1491,8 +1491,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
 }
         if ($lastDocument->audit_agenda != $internalAudit->audit_agenda || !empty($request->audit_agenda_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Audit Agenda';
             $history->previous = $lastDocument->audit_agenda;
             $history->current = $internalAudit->audit_agenda;
@@ -1508,8 +1508,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         }
         if ($lastDocument->material_name != $internalAudit->material_name || !empty($request->material_name_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Product/Material Name';
             $history->previous = $lastDocument->material_name;
             $history->current = $internalAudit->material_name;
@@ -1527,8 +1527,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         $currentleadauditor = User::find($internalAudit['lead_auditor']);
         if ($lastDocument->lead_auditor != $internalAudit->lead_auditor || !empty($request->lead_auditor_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Lead Auditor';
             $history->previous = $previousleadauditor ? $previousleadauditor->name : 'Null';
             $history->current = $currentleadauditor ? $currentleadauditor->name : 'Null';
@@ -1546,8 +1546,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         if ($lastDocument->Audit_team != $internalAudit->Audit_team || !empty($request->Audit_team_comment)) {
             $previousauditteam = User::where('id',$lastDocument->Audit_team)->value('name');
             $currentauditteam = User::where('id',$internalAudit->Audit_team)->value('name');
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Audit Team';
             $history->previous = $previousauditteam;
             $history->current = $currentauditteam;
@@ -1566,8 +1566,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
             $previousAuditeeName = User::where('id', $lastDocument->Auditee)->value('name');
             $currentAuditeeName = User::where('id', $internalAudit->Auditee)->value('name');
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Auditee';
             $history->previous = $previousAuditeeName; 
             $history->current = $currentAuditeeName;
@@ -1585,8 +1585,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         }
         if ($lastDocument->Auditor_Details != $internalAudit->Auditor_Details || !empty($request->Auditor_Details_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Supplier Auditor Details';
             $history->previous = $lastDocument->Auditor_Details;
             $history->current = $internalAudit->Auditor_Details;
@@ -1602,8 +1602,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         }
         if ($lastDocument->Comments != $internalAudit->Comments || !empty($request->Comments_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Comments';
             $history->previous = $lastDocument->Comments;
             $history->current = $internalAudit->Comments;
@@ -1619,8 +1619,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         }
         if ($lastDocument->Audit_Comments1 != $internalAudit->Audit_Comments1 || !empty($request->Audit_Comments1_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Audit Comments';
             $history->previous = $lastDocument->Audit_Comments1;
             $history->current = $internalAudit->Audit_Comments1;
@@ -1636,8 +1636,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         }
         if ($lastDocument->Remarks != $internalAudit->Remarks || !empty($request->Remarks_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Remarks';
             $history->previous = $lastDocument->Remarks;
             $history->current = $internalAudit->Remarks;
@@ -1655,8 +1655,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         
         // if ($lastDocument->Reference_Recores2 != $internalAudit->Reference_Recores2 || !empty($request->Reference_Recores2_comment)) {
 
-        //     $history = new Regulatory_Insp_AuditTrail();
-        //     $history->supplier_id = $id;
+        //     $history = new RegulatoryInspAuditTrail();
+        //     $history->regulatory_id = $id;
         //     $history->activity_type = 'Reference Recores';
         //     $history->previous = $lastDocument->Reference_Recores2;
         //     $history->current = $internalAudit->Reference_Recores2;
@@ -1672,8 +1672,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         // }
         if ($lastDocument->Audit_Comments2 != $internalAudit->Audit_Comments2 || !empty($request->Audit_Comments2_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Audit Comments';
             $history->previous = $lastDocument->Audit_Comments2;
             $history->current = $internalAudit->Audit_Comments2;
@@ -1689,8 +1689,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         }
         if ($lastDocument->inv_attachment != $internalAudit->inv_attachment || !empty($request->inv_attachment_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'File Attachment';
             $history->previous = $lastDocument->inv_attachment;
             $history->current = $internalAudit->inv_attachment;
@@ -1706,8 +1706,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         }
         if ($lastDocument->file_attachment != $internalAudit->file_attachment || !empty($request->file_attachment_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'File Attachment';
             $history->previous = $lastDocument->file_attachment;
             $history->current = $internalAudit->file_attachment;
@@ -1723,8 +1723,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         }
         if ($lastDocument->Audit_file != $internalAudit->Audit_file || !empty($request->Audit_file_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Audit Attachments';
             $history->previous = $lastDocument->Audit_file;
             $history->current = $internalAudit->Audit_file;
@@ -1740,8 +1740,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         }
         if ($lastDocument->report_file != $internalAudit->report_file || !empty($request->report_file_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Report Attachments';
             $history->previous = $lastDocument->report_file;
             $history->current = $internalAudit->report_file;
@@ -1757,8 +1757,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         }
         if ($lastDocument->myfile != $internalAudit->myfile || !empty($request->myfile_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Initial Attachment';
             $history->previous = $lastDocument->myfile;
             $history->current = $internalAudit->myfile;
@@ -1775,8 +1775,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         
         if ($lastDocument->due_date != $internalAudit->due_date || !empty($request->due_date_comment)) {
 
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Due Date';
             $history->previous = $lastDocument->due_date;
             $history->current = $internalAudit->due_date;
@@ -1794,8 +1794,8 @@ if ((!is_null($lastEndDate) && !is_null($internalEndDate) && $lastEndDate->forma
         $requestAuditStartDate = !is_null($request->audit_start_date) ? Carbon::parse($request->audit_start_date) : null;
         
         if ((!is_null($lastAuditStartDate) && !is_null($requestAuditStartDate) && $lastAuditStartDate->format('d-M-Y') != $requestAuditStartDate->format('d-M-Y')) || !empty($request->audit_start_date_comment)) {
-            $history = new Regulatory_Insp_AuditTrail();
-            $history->supplier_id = $id;
+            $history = new RegulatoryInspAuditTrail();
+            $history->regulatory_id = $id;
             $history->activity_type = 'Audit Start Date';
             $history->previous = !is_null($lastAuditStartDate) ? $lastAuditStartDate->format('d-M-Y') : 'N/A';
             $history->current = !is_null($requestAuditStartDate) ? $requestAuditStartDate->format('d-M-Y') : 'N/A';
@@ -1815,8 +1815,8 @@ $lastAuditEndDate = !is_null($lastDocument->audit_end_date) ? Carbon::parse($las
 $requestAuditEndDate = !is_null($request->audit_end_date) ? Carbon::parse($request->audit_end_date) : null;
 
 if ((!is_null($lastAuditEndDate) && !is_null($requestAuditEndDate) && $lastAuditEndDate->format('d-M-Y') != $requestAuditEndDate->format('d-M-Y')) || !empty($request->audit_end_date_comment)) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'Audit End Date';
     $history->previous = !is_null($lastAuditEndDate) ? $lastAuditEndDate->format('d-M-Y') : 'N/A';
     $history->current = !is_null($requestAuditEndDate) ? $requestAuditEndDate->format('d-M-Y') : 'N/A';
@@ -1838,8 +1838,8 @@ if ((!is_null($lastAuditEndDate) && !is_null($requestAuditEndDate) && $lastAudit
 
 // Severity Level
 if ($lastDocument->severity_level != $internalAudit->severity_level) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'Severity Level';
     $history->previous = $lastDocument->severity_level;
     $history->current = $internalAudit->severity_level;
@@ -1856,8 +1856,8 @@ if ($lastDocument->severity_level != $internalAudit->severity_level) {
 
 // Initiated Through
 if ($lastDocument->initiated_through != $internalAudit->initiated_through) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'Initiated Through';
     $history->previous = $lastDocument->initiated_through;
     $history->current = $internalAudit->initiated_through;
@@ -1874,8 +1874,8 @@ if ($lastDocument->initiated_through != $internalAudit->initiated_through) {
 
 // Initial Comments
 // if ($lastDocument->initial_comments != $internalAudit->initial_comments) {
-//     $history = new Regulatory_Insp_AuditTrail();
-//     $history->supplier_id = $id;
+//     $history = new RegulatoryInspAuditTrail();
+//     $history->regulatory_id = $id;
 //     $history->activity_type = 'Initial Comments';
 //     $history->previous = $lastDocument->initial_comments;
 //     $history->current = $internalAudit->initial_comments;
@@ -1892,8 +1892,8 @@ if ($lastDocument->initiated_through != $internalAudit->initiated_through) {
 
 // IF Comments
 if ($lastDocument->if_comments != $internalAudit->if_comments) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'IF Comments';
     $history->previous = $lastDocument->if_comments;
     $history->current = $internalAudit->if_comments;
@@ -1910,8 +1910,8 @@ if ($lastDocument->if_comments != $internalAudit->if_comments) {
 
 // External Auditing Agency
 if ($lastDocument->External_Auditing_Agency != $internalAudit->External_Auditing_Agency) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'External Auditing Agency';
     $history->previous = $lastDocument->External_Auditing_Agency;
     $history->current = $internalAudit->External_Auditing_Agency;
@@ -1928,8 +1928,8 @@ if ($lastDocument->External_Auditing_Agency != $internalAudit->External_Auditing
 
 // Relevant Guidelines
 if ($lastDocument->Relevant_Guidelines != $internalAudit->Relevant_Guidelines) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'Relevant Guidelines';
     $history->previous = $lastDocument->Relevant_Guidelines;
     $history->current = $internalAudit->Relevant_Guidelines;
@@ -1946,8 +1946,8 @@ if ($lastDocument->Relevant_Guidelines != $internalAudit->Relevant_Guidelines) {
 
 // QA Comments
 if ($lastDocument->QA_Comments != $internalAudit->QA_Comments) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'QA Comments';
     $history->previous = $lastDocument->QA_Comments;
     $history->current = $internalAudit->QA_Comments;
@@ -1964,8 +1964,8 @@ if ($lastDocument->QA_Comments != $internalAudit->QA_Comments) {
 
 // Audit Category
 if ($lastDocument->Audit_Category != $internalAudit->Audit_Category) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'Audit Category';
     $history->previous = $lastDocument->Audit_Category;
     $history->current = $internalAudit->Audit_Category;
@@ -1982,8 +1982,8 @@ if ($lastDocument->Audit_Category != $internalAudit->Audit_Category) {
 
 // File Attachment Guideline
 if ($lastDocument->file_attachment_guideline != $internalAudit->file_attachment_guideline) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'File Attachment Guideline';
     $history->previous = $lastDocument->file_attachment_guideline;
     $history->current = $internalAudit->file_attachment_guideline;
@@ -2000,8 +2000,8 @@ if ($lastDocument->file_attachment_guideline != $internalAudit->file_attachment_
 
 // Supplier Details
 if ($lastDocument->Supplier_Details != $internalAudit->Supplier_Details) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'Supplier Details';
     $history->previous = $lastDocument->Supplier_Details;
     $history->current = $internalAudit->Supplier_Details;
@@ -2018,8 +2018,8 @@ if ($lastDocument->Supplier_Details != $internalAudit->Supplier_Details) {
 
 // Supplier Site
 if ($lastDocument->Supplier_Site != $internalAudit->Supplier_Site) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'Supplier Site';
     $history->previous = $lastDocument->Supplier_Site;
     $history->current = $internalAudit->Supplier_Site;
@@ -2036,8 +2036,8 @@ if ($lastDocument->Supplier_Site != $internalAudit->Supplier_Site) {
 
 // Due Date Extension
 if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
-    $history = new Regulatory_Insp_AuditTrail();
-    $history->supplier_id = $id;
+    $history = new RegulatoryInspAuditTrail();
+    $history->regulatory_id = $id;
     $history->activity_type = 'Due Date Extension';
     $history->previous = $lastDocument->due_date_extension;
     $history->current = $internalAudit->due_date_extension;
@@ -2074,8 +2074,8 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $changeControl->audit_schedule_on = Carbon::now()->format('d-M-Y');
                 $changeControl->comment = $request->comment;
 
-                        $history = new Regulatory_Insp_AuditTrail();
-                        $history->supplier_id = $id;
+                        $history = new RegulatoryInspAuditTrail();
+                        $history->regulatory_id = $id;
                         $history->activity_type = 'Activity Log';
                         $history->current = $changeControl->audit_schedule_by;
                         $history->comment = $request->comment;
@@ -2123,8 +2123,8 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $changeControl->audit_preparation_completed_on = Carbon::now()->format('d-M-Y');
                 $changeControl->audit_preparation_comment = $request->comment;
 
-                        $history = new Regulatory_Insp_AuditTrail();
-                        $history->supplier_id = $id;
+                        $history = new RegulatoryInspAuditTrail();
+                        $history->regulatory_id = $id;
                         $history->activity_type = 'Activity Log';
                         $history->current = $changeControl->audit_preparation_completed_by;
                         $history->comment = $request->comment;
@@ -2166,8 +2166,8 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $changeControl->audit_mgr_more_info_reqd_on = Carbon::now()->format('d-M-Y');
                 $changeControl->pending_response_comment = $request->comment;
 
-                        $history = new Regulatory_Insp_AuditTrail();
-                        $history->supplier_id = $id;
+                        $history = new RegulatoryInspAuditTrail();
+                        $history->regulatory_id = $id;
                         $history->activity_type = 'Activity Log';
                         $history->current = $changeControl->audit_mgr_more_info_reqd_by;
                         $history->comment = $request->comment;
@@ -2208,8 +2208,8 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $changeControl->audit_observation_submitted_on = Carbon::now()->format('d-M-Y');
                 $changeControl->capa_execution_in_progress_comment = $request->comment;
 
-                        $history = new Regulatory_Insp_AuditTrail();
-                        $history->supplier_id = $id;
+                        $history = new RegulatoryInspAuditTrail();
+                        $history->regulatory_id = $id;
                         $history->activity_type = 'Activity Log';
                         $history->current =$changeControl->audit_observation_submitted_by;
                         $history->comment = $request->comment;
@@ -2238,8 +2238,8 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $changeControl->response_feedback_verified_on = Carbon::now()->format('d-M-Y');
                 $changeControl->comment_closed_done_by_comment = $request->comment;
 
-                $history = new Regulatory_Insp_AuditTrail();
-                        $history->supplier_id = $id;
+                $history = new RegulatoryInspAuditTrail();
+                        $history->regulatory_id = $id;
                         $history->activity_type = 'Activity Log';
                         $history->current =$changeControl->audit_response_completed_by;
                         $history->comment = $request->comment;
@@ -2284,8 +2284,8 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $changeControl->rejected_on = Carbon::now()->format('d-M-Y');
                 $changeControl->comment_rejected_comment = $request->comment;
 
-                        $history = new Regulatory_Insp_AuditTrail();
-                        $history->supplier_id = $id;
+                        $history = new RegulatoryInspAuditTrail();
+                        $history->regulatory_id = $id;
                         $history->activity_type = 'Activity Log';
                         $history->current = $changeControl->rejected_by;
                         $history->comment = $request->comment;
@@ -2310,8 +2310,8 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $changeControl->rejected_on = Carbon::now()->format('d-M-Y');
                 $changeControl->comment_rejected_comment = $request->comment;
 
-                $history = new Regulatory_Insp_AuditTrail();
-                        $history->supplier_id = $id;
+                $history = new RegulatoryInspAuditTrail();
+                        $history->regulatory_id = $id;
                         $history->activity_type = 'Activity Log';
                         $history->current = $changeControl->rejected_by;
                         $history->comment = $request->comment;
@@ -2351,8 +2351,8 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $changeControl->comment_cancelled_comment = $request->comment;
 
 
-                $history = new Regulatory_Insp_AuditTrail();
-                $history->supplier_id = $id;
+                $history = new RegulatoryInspAuditTrail();
+                $history->regulatory_id = $id;
                 $history->activity_type = 'Activity Log';
                 $history->current = $changeControl->rejected_by;
                 $history->comment = $request->comment;
@@ -2375,8 +2375,8 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $changeControl->cancelled_by = Auth::user()->name;
                 $changeControl->cancelled_on = Carbon::now()->format('d-M-Y');
                 $changeControl->comment_cancelled_comment = $request->comment;
-                $history = new Regulatory_Insp_AuditTrail();
-                $history->Supplier_id = $id;
+                $history = new RegulatoryInspAuditTrail();
+                $history->regulatory_id = $id;
                 $history->activity_type = 'Activity Log';
                 $history->current = $changeControl->cancelled_by;
                 $history->comment = $request->comment;
@@ -2399,8 +2399,8 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $changeControl->cancelled_by = Auth::user()->name;
                 $changeControl->cancelled_on = Carbon::now()->format('d-M-Y');
                 $changeControl->comment_cancelled_comment = $request->comment;
-                $history = new Regulatory_Insp_AuditTrail();
-                $history->supplier_id = $id;
+                $history = new RegulatoryInspAuditTrail();
+                $history->regulatory_id = $id;
                 $history->activity_type = 'Activity Log';
                 $history->current = $changeControl->cancelled_by;
                 $history->comment = $request->comment;
@@ -2432,7 +2432,7 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
     
     public function AuditTrialSupplierShow($id)
     {
-    $audit = Regulatory_Insp_AuditTrail::where('supplier_id', $id)
+    $audit = RegulatoryInspAuditTrail::where('regulatory_id', $id)
                 ->orderByDESC('id')
                 ->paginate(5); // Adjust the number as needed for items per page
                 $today = Carbon::now()->format('d-m-y');
@@ -2447,7 +2447,7 @@ public static function auditReport($id)
     // dd($doc);
     if (!empty($doc)) {
         $doc->originator = User::where('id', $doc->initiator_id)->value('name');
-        $data = Regulatory_Insp_AuditTrail::where('supplier_id', $id)->get();
+        $data = RegulatoryInspAuditTrail::where('regulatory_id', $id)->get();
         $pdf = App::make('dompdf.wrapper');
         $time = Carbon::now();
         $pdf = PDF::loadview('frontend.externalAudit.auditReport_Supplier', compact('data', 'doc'))
