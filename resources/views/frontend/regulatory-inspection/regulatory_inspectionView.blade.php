@@ -170,7 +170,7 @@ function addMultipleFiles(input, block_id) {
 
         <div class="division-bar">
             <strong>Site Division/Project</strong> :
-            {{ Helpers::getDivisionName($data->division_id) }} / Supplier Audit
+            {{ Helpers::getDivisionName($data->division_id) }} / Regulatory Inspection
         </div>
     </div>
 

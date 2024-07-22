@@ -81,5 +81,17 @@ class FormDivisionController extends Controller
         elseif ($request->process_name == 'Incident') {
             return redirect()->route('incident');
         }
+        elseif ($request->process_name == "Regulatory Inspection") {
+            return redirect('regulatory_inspection_index');
+        }
+    }
+
+    public function formDivisionRegulatory(Request $request)
+    {
+        $request->session()->forget('division');
+        $request->session()->put('division', $request->division_id);
+        if ($request->process_name == "Internal Audit") {
+            return redirect('audit');
+        } 
     }
 }

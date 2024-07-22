@@ -1,6 +1,29 @@
 @extends('frontend.rcms.Regulatorylayout.main_regulatory')
 
+<script>
+    // Function to update the options of the second dropdown based on the selection in the first dropdown
+    function updateQueryOptions() {
+        var scopeSelect = document.getElementById('scope');
+        var querySelect = document.getElementById('query');
+        var scopeValue = scopeSelect.value;
 
+        // Clear existing options in the query dropdown
+        querySelect.innerHTML = '';
+
+        // Add options based on the selected scope
+        if (scopeValue === 'Regulatory Inspection') {
+            querySelect.options.add(new Option('Opened', '1'));
+            querySelect.options.add(new Option('Audit Preparation', '2'));
+            querySelect.options.add(new Option('Pending Audit', '3'));
+            querySelect.options.add(new Option('Pending Response', '4'));
+            querySelect.options.add(new Option('CAPA Execution in Progress', '5'));
+            querySelect.options.add(new Option('Closed - Done', '6'));
+
+
+        } 
+
+    }
+</script>
 <style>
     #short_width{
         display: inline-block;
@@ -75,7 +98,7 @@
                             <table class="table table-bordered" id="auditTable">
                                 <thead class="table-header11">
                                     <tr>
-                                        <th>IDnnnnnnnnnnn</th>
+                                        <th>ID</th>
                                         <th>Parent ID</th>
                                         <th>Division</th>
                                         <th>Process</th>
@@ -87,14 +110,99 @@
                                         <th>Status</th>
                                     </tr>
                                 </thead>
-                               <tbody>
-                                
-                               </tbody>
+                                <tbody id="searchTable">
+                                    @php
+                                        $table = json_encode($datag);
+                                        $tables = json_decode($table);
+                                        $total_count = count($datag);
+
+                                    @endphp
+                                    @foreach (collect($tables->data)->sortByDesc('date_open') as $datas)
+                                        <tr>
+                                            <td>
+                                                @if ($datas->type == 'Regulatory Inspection')
+                                                    <a href="{{ route('showregulatory', $datas->id) }}" style="color: blue">
+                                                        {{ str_pad(($total_count - $loop->index), 4, '0', STR_PAD_LEFT) }}
+                                                    </a>
+                                                    <a href="{{ url('rcms/qms-dashboard', $datas->id) }}/CC">
+                                                        <div class="icon" onclick="showChild()" data-bs-toggle="tooltip"
+                                                            title="Related Records">
+                                                        </div>
+                                                    </a>
+                                                    
+                                                @endif
+                                            </td>
+                                            @if ($datas->parent_id != null)
+                                                        <td>
+                                                            {{ str_pad($datas->parent_id, 4, '0', STR_PAD_LEFT) }}
+                                                        </td>
+                                                    @else
+                                                        <td>
+                                                            -
+                                                        </td>
+                                            @endif
+                                            <td class="viewdetails" data-id="{{ $datas->id }}"
+                                                data-type="{{ $datas->type }}" data-bs-toggle="modal"
+                                                data-bs-target="#record-modal">
+                                                @if ($datas->division_id)
+                                                    {{ Helpers::getDivisionName($datas->division_id) }}
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td class="viewdetails" data-id="{{ $datas->id }}"
+                                                data-type="{{ $datas->type }}" data-bs-toggle="modal"
+                                                data-bs-target="#record-modal" style="{{ $datas->type == 'Capa' ? 'text-transform: uppercase' : '' }}">
+                                                {{ $datas->type }}
+                                            </td>
+
+                                            <td class="viewdetails" data-id="{{ $datas->id }}"
+                                                data-type="{{ $datas->type }}" data-bs-toggle="modal"
+                                                data-bs-target="#record-modal">
+                                                {{ ucwords(str_replace('_', ' ', $datas->initiated_through)) }}
+                                            </td>
+
+                                            <td id="short_width" class="viewdetails" data-id="{{ $datas->id }}"
+                                                data-type="{{ $datas->type }}" data-bs-toggle="modal"
+                                                data-bs-target="#record-modal">
+                                                {{ $datas->short_description }}
+                                            </td>
+                                            @php
+                                                $date = new \DateTime($datas->date_open);
+                                                $formattedDate = $date->format('d-M-Y H:i:s');
+                                            @endphp
+
+                                            <td class="viewdetails" data-id="{{ $datas->id }}"
+                                                data-type="{{ $datas->type }}" data-bs-toggle="modal"
+                                                data-bs-target="#record-modal">
+                                                {{ $formattedDate }}
+                                            </td>
+                                            <td class="viewdetails" data-id="{{ $datas->id }}"
+                                                data-type="{{ $datas->type }}" data-bs-toggle="modal"
+                                                data-bs-target="#record-modal">
+                                                {{ Helpers::getInitiatorName($datas->initiator_id) }}
+                                            </td>
+                                            <td class="viewdetails" data-id="{{ $datas->id }}"
+                                                data-type="{{ $datas->type }}" data-bs-toggle="modal"
+                                                data-bs-target="#record-modal">
+                                                @if (property_exists($datas, 'due_date'))
+                                                    {{ $datas->type !== 'Extension' ? Helpers::getdateFormat($datas->due_date) : ''  }}
+                                                @endif
+                                            </td>
+                                            <td class="viewdetails" data-id="{{ $datas->id }}"
+                                                data-type="{{ $datas->type }}" data-bs-toggle="modal"
+                                                data-bs-target="#record-modal">
+                                                {{ $datas->stage }}
+                                            </td>
+
+                                        </tr>
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
-                        {{-- <div class="scope-pagination">
+                        <div class="scope-pagination">
                             {{ $datag->links() }}
-                        </div>  --}}
+                        </div> 
                     </div>
                 </div>
             </div>

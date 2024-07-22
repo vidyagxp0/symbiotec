@@ -612,7 +612,7 @@ Route::view('sop-index-show', 'frontend.sop-index.sop-index-show');
 // ================================= Supplier Audit========================================================
 // Route::view('supplier_audit', 'frontend.New_forms.supplier_audit');
 Route::get('/regulatory_inspection_index', [RegulatoryController::class, 'regulatory_inspection'])->name('regulatory_inspection_index');
-Route::get('showSupplierAudit/{id}', [RegulatoryController::class, 'show'])->name('showSupplierAudit');
+Route::get('showregulatory/{id}', [RegulatoryController::class, 'show'])->name('showregulatory');
 Route::post('regulatory_audit_store', [RegulatoryController::class, 'create'])->name('regulatory_audit_store');
 Route::post('regulatoryUpdate/{id}', [RegulatoryController::class, 'update'])->name('regulatoryUpdate');
 Route::post('SupplierAuditStateChange_view/{id}', [RegulatoryController::class, 'SupplierAuditStateChange'])->name('SupplierAuditStateChange_view');

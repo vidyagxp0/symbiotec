@@ -1,4 +1,4 @@
-@extends('frontend.rcms.layout.main_rcms')
+@extends('frontend.rcms.Regulatorylayout.main_regulatory')
 @section('rcms_container')
     <style>
         header {
@@ -83,8 +83,8 @@
                                         // Loop through processes to ensure unique process names
                                         foreach ($pro as $process) {
                                             if (!isset($uniqueProcesses[$process->process_name])) {
-                                                if($process->process_name != 'Regulatory Inspection'){
-                                                $uniqueProcesses[$process->process_name] = $process;
+                                                if($process->process_name == 'Regulatory Inspection'){
+                                                    $uniqueProcesses[$process->process_name] = $process;
                                                 }
                                             }
                                         }

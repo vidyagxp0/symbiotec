@@ -8,13 +8,14 @@ use App\Models\RecordNumber;
 use Carbon\Carbon;
 use App\Models\RegulatoryGrid;
 use App\Models\RegulatoryInspAuditTrail;
-use Auth;
 use App\Models\User;
 use App\Models\RoleGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use PDF;
+use Illuminate\Support\Facades\Auth;
+
 
 class RegulatoryController extends Controller
 {

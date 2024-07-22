@@ -28,6 +28,7 @@ use App\Http\Controllers\RiskManagementController;
 use App\Http\Controllers\rcms\DeviationController;
 use App\Http\Controllers\rcms\LogController;
 use App\Http\Controllers\rcms\OOCController;
+use App\Http\Controllers\RegulatoryDashboardController;
 use App\Http\Controllers\tms\TrainerController;
 use App\Models\EffectivenessCheck;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,7 @@ Route::group(['prefix' => 'rcms'], function () {
     Route::get('rcms_login', [UserLoginController::class, 'userlogin']);
     Route::view('rcms_dashboard', 'frontend.rcms.dashboard');
     Route::view('form-division', 'frontend.forms.form-division');
+    Route::view('form-division-regulatory', 'frontend.rcms.Regulatorylayout.form-division-regulatory');
     Route::get('/logout', [UserLoginController::class, 'rcmslogout'])->name('rcms.logout');
 
     Route::get('/qms-logs/{slug}', [LogController::class, 'index'])->name('rcms.logs.show');
@@ -395,9 +397,9 @@ Route::group(['prefix' => 'rcms'], function () {
             // Route::get('rcms/marketComplaintSingleReport/{id}', [MarketComplaintController::class, 'singleReport']);
             Route::get('pdf-report/{id}', [MarketComplaintController::class, 'singleReport']);
 
-// Regulatory inspection==================
-// Route::get('regulatory-inspection', [DashboardController::class, 'index'])->name('regulatory-inspection');
-Route::view('regulatory_dashboard', 'frontend.rcms.regulatory_dashboard');
+            // Regulatory inspection==================
+            // Route::view('regulatory_dashboard', 'frontend.rcms.regulatory_dashboard');
+            Route::get('regulatory_dashboard', [RegulatoryDashboardController::class, 'index'])->name('regulatory_dashboard');    
 
             /********************* Incident Routes Starts *******************/
 
