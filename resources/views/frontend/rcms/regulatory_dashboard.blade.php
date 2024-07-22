@@ -129,6 +129,16 @@
                                                             title="Related Records">
                                                         </div>
                                                     </a>
+                                                @endif
+                                                @if ($datas->type == 'Regulatory Change')
+                                                    <a href="{{ url('rcms/regulatory-action-view', $datas->id) }}" style="color: blue">
+                                                        {{ str_pad(($total_count - $loop->index), 4, '0', STR_PAD_LEFT) }}
+                                                    </a>
+                                                    <a href="{{ url('rcms/regulatory_dashboard', $datas->id) }}/CC">
+                                                        <div class="icon" onclick="showChild()" data-bs-toggle="tooltip"
+                                                            title="Related Records">
+                                                        </div>
+                                                    </a>
                                                     
                                                 @endif
                                             </td>

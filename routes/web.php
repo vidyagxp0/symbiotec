@@ -392,6 +392,9 @@ Route::view('out-of-specification', 'frontend.forms.out-of-specification');
 
 Route::view('action-item', 'frontend.forms.action-item');
 
+
+
+
 // Route::view('effectiveness-check', 'frontend.forms.effectiveness-check');
 Route::get('effectiveness-check', [EffectivenessCheckController::class, 'effectiveness_check']);
 
@@ -617,9 +620,9 @@ Route::post('regulatory_audit_store', [RegulatoryController::class, 'create'])->
 Route::post('regulatoryUpdate/{id}', [RegulatoryController::class, 'update'])->name('regulatoryUpdate');
 Route::post('SupplierAuditStateChange_view/{id}', [RegulatoryController::class, 'SupplierAuditStateChange'])->name('SupplierAuditStateChange_view');
 Route::post('RejectStateAuditee/{id}', [RegulatoryController::class, 'RejectStateAuditee'])->name('RejectStateAuditee');
-Route::post('CancelStateSupplierAudit/{id}', [RegulatoryController::class, 'CancelStateSupplierAudit'])->name('CancelStateSupplierAudit');
+Route::post('CancelStateRegulatoryInspection/{id}', [RegulatoryController::class, 'CancelStateRegulatoryInspection'])->name('CancelStateRegulatoryInspection');
 Route::get('AuditTrialSupplierShow/{id}', [RegulatoryController::class, 'AuditTrialSupplierShow'])->name('ShowexternalAuditTrials');
 Route::get('ExternalAuditTrialDetails/{id}', [RegulatoryController::class, 'AuditTrialExternalDetails'])->name('ExternalAuditTrialDetailsShow');
 Route::post('child_external_Supplier/{id}', [RegulatoryController::class, 'child_external_Supplier'])->name('child_external_Supplier');
 Route::get('auditReport/{id}', [RegulatoryController::class, 'auditReport'])->name('SupplierAuditTrialReport');
-Route::get('singleReport/{id}', [RegulatoryController::class, 'singleReport'])->name('SupplierSingleReport');
+Route::get('rcms/regulatorySingleReport/{id}', [RegulatoryController::class, 'regulatorySingleReport'])->name('regulatorySingleReport');

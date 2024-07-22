@@ -29,7 +29,9 @@ use App\Http\Controllers\rcms\DeviationController;
 use App\Http\Controllers\rcms\LogController;
 use App\Http\Controllers\rcms\OOCController;
 use App\Http\Controllers\RegulatoryDashboardController;
+use App\Http\Controllers\RegulatoryActionController;
 use App\Http\Controllers\tms\TrainerController;
+
 use App\Models\EffectivenessCheck;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +65,7 @@ Route::group(['prefix' => 'rcms'], function () {
             Route::post('send-initialQA/{id}', [CCController::class, 'sendToInitialQA']);
             Route::post('send-cft-from-QA/{id}', [CCController::class, 'sendToCft']);
 
+            Route::get('action-items-create', [ActionItemController::class, 'showAction']);
             Route::resource('actionItem', ActionItemController::class);
             Route::post('action-stage-cancel/{id}', [ActionItemController::class, 'actionStageCancel']);
             Route::get('action-item-audittrialshow/{id}', [ActionItemController::class, 'actionItemAuditTrialShow'])->name('showActionItemAuditTrial');
@@ -70,7 +73,21 @@ Route::group(['prefix' => 'rcms'], function () {
             Route::get('actionitemSingleReport/{id}', [ActionItemController::class, 'singleReport'])->name('actionitemSingleReport');
             Route::get('actionitemAuditReport/{id}', [ActionItemController::class, 'auditReport'])->name('actionitemAuditReport');
             Route::get('actionitemauditTrailPdf/{id}', [ActionItemController::class, 'auditTrailPdf'])->name('actionitemauditTrailPdf');
-
+            Route::post('send-At/{id}', [ActionItemController::class, 'stageChange']);
+                // ========================================regulatory action ================
+                Route::get('regulatory-action-task-create', [RegulatoryActionController::class, 'showAction']);
+                Route::get('regulatory-action-view/{id}', [RegulatoryActionController::class, 'show']);
+                Route::post('regulatory-action-task' , [RegulatoryActionController::class,'Create'])->name('regulatory_action_create');
+                Route::post('regulatory-actionView/{id}' , [RegulatoryActionController::class,'update']);
+                Route::post('action-stage-cancel/{id}', [RegulatoryActionController::class, 'actionStageCancel']);
+                Route::get('RegulatoryActionAuditTrialShow/{id}', [RegulatoryActionController::class, 'RegulatoryActionAuditTrialShow'])->name('RegulatoryActionAuditTrialShow');
+                // Route::get('action-item-audittrialdetails/{id}', [RegulatoryActionController::class, 'RegulatoryActionAuditTrialShow'])->name('showaudittrialactionItem');
+                Route::get('regulatoryactionSingleReport/{id}', [RegulatoryActionController::class, 'singleReport'])->name('regulatoryactionSingleReport');
+                Route::get('regulatoryactionAuditReport/{id}', [RegulatoryActionController::class, 'auditReport'])->name('regulatoryactionAuditReport');
+                Route::get('actionitemauditTrailPdf/{id}', [RegulatoryActionController::class, 'auditTrailPdf'])->name('actionitemauditTrailPdf');
+                Route::post('action-stage-cancel/{id}', [RegulatoryActionController::class, 'actionStageCancel']);
+                Route::post('send-At/{id}', [RegulatoryActionController::class, 'stageChange']);
+// ========================
             Route::get('effective-audit-trial-show/{id}', [EffectivenessCheckController::class, 'effectiveAuditTrialShow'])->name('show_effective_AuditTrial');
             Route::get('effective-audit-trial-details/{id}', [EffectivenessCheckController::class, 'effectiveAuditTrialDetails'])->name('show_audittrial_effective');
             Route::get('effectiveSingleReport/{id}', [EffectivenessCheckController::class, 'singleReport'])->name('effectiveSingleReport');
@@ -89,7 +106,6 @@ Route::group(['prefix' => 'rcms'], function () {
             Route::get('extensionAuditReport/{id}', [ExtensionController::class, 'auditReport'])->name('extensionAuditReport');
 
 
-            Route::post('send-At/{id}', [ActionItemController::class, 'stageChange']);
             Route::post('send-rejection-field/{id}', [CCController::class, 'stagereject']);
             Route::post('send-cft-field/{id}', [CCController::class, 'stageCFTnotReq']);
 
@@ -105,6 +121,7 @@ Route::group(['prefix' => 'rcms'], function () {
             Route::get('audit/{id}', [CCController::class, 'audit_pdf']);
 
             Route::get('ccView/{id}/{type}', [DashboardController::class, 'ccView'])->name('ccView');
+            Route::get('ccView/{id}/{type}', [RegulatoryDashboardController::class, 'ccViewRegulatory'])->name('ccView');
             Route::view('summary_pdf', 'frontend.change-control.summary_pdf');
             Route::view('audit_trial_pdf', 'frontend.change-control.audit_trial_pdf');
             Route::view('change_control_single_pdf', 'frontend.change-control.change_control_single_pdf');
@@ -229,7 +246,6 @@ Route::group(['prefix' => 'rcms'], function () {
 
             /********************* Deviation Routes Ends *******************/
 
-            Route::get('action-items-create', [ActionItemController::class, 'showAction']);
 
             /********************* Non Conformance Routes Starts *******************/
 

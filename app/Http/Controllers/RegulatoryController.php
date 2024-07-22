@@ -2439,7 +2439,7 @@ if ($lastDocument->due_date_extension != $internalAudit->due_date_extension) {
                 $today = Carbon::now()->format('d-m-y');
     $document = RegulatoryInspection::where('id', $id)->first();
     $document->initiator = User::where('id', $document->initiator_id)->value('name');
-    return view('frontend.externalAudit.RegulatoryInspection_audit-trail', compact('audit', 'document', 'today'));
+    return view('frontend.regulatory-inspection.regulatory_audit-trail', compact('audit', 'document', 'today'));
 }
 
 public static function auditReport($id)
@@ -2471,7 +2471,7 @@ public static function auditReport($id)
     }
 }
 
-public static function singleReport($id)
+public static function regulatorySingleReport($id)
 {
     $data = RegulatoryInspection::with('division')->find($id);
     if (!empty($data)) {
@@ -2486,7 +2486,7 @@ public static function singleReport($id)
         // return $sgrid;
     //  dd($sgrid);
             //  dd($sgrid->area_of_audit);
-        $pdf = PDF::loadview('frontend.externalAudit.supplier_singleReport', compact('data','sgrid','grid_data1'))
+        $pdf = PDF::loadview('frontend\regulatory-inspection\regulatory_singleReport', compact('data','sgrid','grid_data1'))
             ->setOptions([
                 'defaultFont' => 'sans-serif',
                 'isHtml5ParserEnabled' => true,

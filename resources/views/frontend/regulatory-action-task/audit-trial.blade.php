@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 @extends('frontend.layout.main')
 @section('container')
     <div id="audit-trial">
@@ -9,7 +18,7 @@
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                <title>Connexo - Software</title>
+                <title>VidyaGxP - Software</title>
                 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
             </head>
 
@@ -145,7 +154,7 @@
                 }
 
                 .table_bg {
-                    background: #0e7676cc;
+                    background: #4274da57;
                 }
 
                 .heading {
@@ -153,8 +162,7 @@
                     padding: 10px;
                     margin-bottom: 10px;
                     margin-top: 10px;
-                    /* background: #4274da; */
-                    background: #0e7676cc;
+                    background: #4274da;
                 }
 
                 .heading-new {
@@ -174,33 +182,14 @@
                 <header>
                     <table>
                         <tr>
-
+                            <div class="logo">
+                                <img src="https://development.vidyagxp.com/public/user/images/logo.png" alt=""
+                                    class="w-100">
+                            </div>
                         </tr>
                     </table>
 
                  
-                    <div class="d-fle justify-content-between align-items-center">
-                        @if ($document)
-                            <div style="color: green; font-weight: 600">The Audit Trail has been reviewed.</div>
-                        @else
-                            <div style="color: red; font-weight: 600">The Audit Trail has is yet to be reviewed.</div>
-                        @endif
-                        <div class="buttons-new">
-                            @if ($document->stage < 6)
-                                {{-- <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#auditReviewer">
-                                    Review
-                                </button> --}}
-                            @endif
-
-                            <button class="button_theme1"><a class="text-white"
-                                    href="{{ url('/showSupplierAudit' , $document->id) }}"> Back
-                                </a>
-                            </button>
-                            <button class="button_theme1" onclick="window.print();">
-                                Print
-                            </button>
-                        </div>
-                    </div>
 
                     <table>
                         <div class="heading">
@@ -209,10 +198,9 @@
                                 Audit Trail
                             </div>
 
-                            <div> <strong>Record ID.</strong>{{ Helpers::divisionNameForQMS($document->division_id) }}/RI/{{ Helpers::year($document->created_at) }}/{{ str_pad($document->record, 4, '0', STR_PAD_LEFT) }}</div>
-
-                                               <div style="margin-bottom: 5px;  font-weight: bold;"> Originator
-                                    :{{ $document->initiator ? $document->initiator : '' }}</div>
+                            <div> <strong>Record ID.</strong> {{ str_pad($document->record, 4, '0', STR_PAD_LEFT) }}</div>
+                            <div style="margin-bottom: 5px;  font-weight: bold;"> Originator
+                                :{{ $document->initiator ? $document->initiator : '' }}</div>
                             <div style="margin-bottom: 5px; font-weight: bold;">Short Description :
                                 {{ $document->short_description }}</div>
                             <div style="margin-bottom: 5px;  font-weight: bold;">Due Date : {{ $document->due_date }}</div>
@@ -236,7 +224,6 @@
                         <th>Action Type</th>
                         <th>Performer</th>
                     </tr>
-
                     <tr>
                         @php
                             $previousItem = null;
@@ -255,7 +242,8 @@
                             </td>
                             <td>
                                 <div>
-                                    <strong> Data Field Name :</strong>{{ $dataDemo->activity_type ? $dataDemo->activity_type : 'Not Applicable' }}
+                                    <strong> Data Field Name :</strong><a
+                                        href="{{ url('rcms/action-item-audittrialshow/',$document->id)}}">{{ $dataDemo->activity_type ? $dataDemo->activity_type : 'Not Applicable' }}</a>
                                 </div>
                                 <div style="margin-top: 5px;">
                                     @if($dataDemo->activity_type == "Activity Log")
@@ -287,9 +275,8 @@
                                 <div><strong> Peformed By
                                         :</strong>{{ $dataDemo->user_name ? $dataDemo->user_name : 'Not Applicable' }}
                                 </div>
-
                                 <div style="margin-top: 5px;"> <strong>Performed On
-                                        :</strong>{{ $dataDemo->created_at ? $dataDemo->created_at->format('d-M-Y') : 'Not Applicable' }}
+                                        :</strong>{{ $dataDemo->created_at ? $dataDemo->created_at : 'Not Applicable' }}
                                 </div>
                                 <div style="margin-top: 5px;"><strong> Comments
                                         :</strong>{{ $dataDemo->comment ? $dataDemo->comment : 'Not Applicable' }}</div>

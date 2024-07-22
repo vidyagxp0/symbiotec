@@ -83,9 +83,9 @@
                                         // Loop through processes to ensure unique process names
                                         foreach ($pro as $process) {
                                             if (!isset($uniqueProcesses[$process->process_name])) {
-                                                if($process->process_name != 'Regulatory Inspection'){
+                                                // if($process->process_name != 'Regulatory Inspection'){
                                                 $uniqueProcesses[$process->process_name] = $process;
-                                                }
+                                                // }
                                             }
                                         }
 
