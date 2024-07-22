@@ -54,6 +54,11 @@
 .td_desc{
     width: 10px;
 }
+.main-dahsboard{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
 </style>
 @section('rcms_container')
     <div id="rcms-dashboard">
@@ -63,30 +68,21 @@
 
                 <div>
                     <div class="inner-block scope-table" style="height: calc(100vh - 170px); padding: 0;">
-                       <div class="grid-block">
-                            <div class="group-input">
-                                <label for="scope">Process</label>
-                                <select id="scope" name="form">
-                                    <option value="">All Records</option>
-                                 
-                                </select>
+                       <div class="col-lg-12 main-dahsboard">
+                          <div class="col-lg-6">
+                            <div class="inner-block">
+                                <div class="main-head">
+                                    Regulatory Inspection Dashboardsdsdsds      
+                                </div>
                             </div>
-                            <div class="group-input">
-                                <label for="query">Criteria</label>
-                                <select id="query" name="stage">
-                                    <option value="">All Records</option>
-                                    <option value="Closed">Closed Records</option>
-                                    <option value="Opened">Opened Records</option>
-                                    <option value="Cancelled">Cancelled Records</option>
-                                    <option value="">Initial Deviation Category= Minor</option>
-                                    <option value="">Initial Deviation Category= Major</option>
-                                    <option value="">Initial Deviation Category= Critical</option>
-                                     <option value="">Post Categorization Of Deviation= Minor</option>
-                                    <option value="">Post Categorization Of Deviation= Major</option>
-                                    <option value="">Post Categorization Of Deviation= Critical</option>
-                                </select>
+                          </div>
+                          <div class="col-lg-6">
+                            <div class="inner-block">
+                                <div class="main-head">
+                                    Regulatory Inspection Dashboard
+                                </div>
                             </div>
-                            <div class="item-btn" onclick="window.print()">Print</div>
+                          </div>
                         </div>
 
 
