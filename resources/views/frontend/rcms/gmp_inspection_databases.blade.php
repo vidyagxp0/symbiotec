@@ -85,9 +85,33 @@
                 
                     The European Medicine Agency (EMA) developed a database which contains both information on GMP and on GDP compliance. The competent authority in each European Member State is responsible for entering the data into the central database. On the one hand, the database provides information about the manufacturing (GMP) and distribution (GDP) authorisation. On the other hand, the database contains information about inspections which have been performed by the competent EU authorities. This enables EU member states to verify if other EU authorities have performed inspections at a specific site. For the time being, non-compliance information is only provided for GDP inspection outcomes.                    </div>
                     <div class="">
-                    <a href="http://maintenance.ema.europa.eu/"  target="_blank"><button>Access EudraGMDP here</button> </a>
+                    <a href="http://maintenance.ema.europa.eu/"  target="_blank" class="btn btn-primary my-5">Access EudraGMDP here </a>
+
+                    <div class="ce_text cell block">
+                    
+                                <h2>FDA Inspection Database</h2>
+                          
+                      
+                          <p>All GMP Inspections are entered into a central database. In order to verify if a certain manufacturing site was inspected on a certain date, frame users may consult the FDA Inspection Database. For each inspection, the database indicates the outcome of the inspection:</p>
+                    <ul>
+                    <li>NAI = no action indicated</li>
+                    <li>VAI = voluntary action indicated</li>
+                    <li>OAI = official action indicated</li>
+                    </ul>  
+                      
+                      <a class="btn btn-primary btn-v1 my-5" target="_blank" href="http://www.accessdata.fda.gov/scripts/inspsearch/">
+                    
+                            
+                            Access FDA Inspection Database
+                            
+                        </a>
+                    
+                    </div>
+
                 </div>
                 </div>
+
+
                
 
             </div>
