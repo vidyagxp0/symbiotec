@@ -193,7 +193,7 @@
                             @endif
 
                             <button class="button_theme1"><a class="text-white"
-                                    href="{{ url('/showSupplierAudit' , $document->id) }}"> Back
+                                    href="{{ url('/showregulatory' , $document->id) }}"> Back
                                 </a>
                             </button>
                             <button class="button_theme1" onclick="window.print();">
