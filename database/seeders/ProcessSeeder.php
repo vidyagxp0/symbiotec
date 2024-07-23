@@ -61,16 +61,19 @@ class ProcessSeeder extends Seeder
         $process->save();
 
         $processNames = [
-            "Extension",
+            "Regulatory Inspection",
+            "Regulatory Change",
+            "Critical Action",
             "Action Item",
-            "Observation",
             "Root Cause Analysis",
+            "Observation",
+            "CAPA",
+            "Extension",
             "Risk Assessment",
             "Management Review",
             "External Audit",
             "Internal Audit",
             "Audit Program",
-            "CAPA",
             "Change Control",
             "New Document",
             "Lab Incident",
@@ -86,9 +89,7 @@ class ProcessSeeder extends Seeder
             "Failure Investigation",
             "ERRATA",
             "OOS Microbiology",
-            "Regulatory Inspection",
-            "Regulatory Change",
-            "Critical Action",
+        
 
 
         ];

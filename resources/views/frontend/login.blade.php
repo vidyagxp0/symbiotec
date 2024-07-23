@@ -254,7 +254,7 @@
                 {{-- </div> --}}
                 <div style="padding: 24px; margin-top: 34px;" class="col-lg-6">
                      <div class="logo" style="display: flex display: flex;flex-direction: row; gap: 65px;">
-                     {{-- <img src="{{ asset('user/images/agio-removebg-preview.png') }}" alt="..." style="filter: none; scale: 0.7; max-width: 100px; margin: auto; margin-bottom: 14px;"> --}}
+                      <img src="https://sunpharma.com/wp-content/uploads/2020/12/logo.png" alt="..." style="filter: none; scale: 0.6; max-width: 100px; margin: auto; margin-bottom: 14px;"> 
 
 
                      <img  src="{{ asset('user/images/vidhyaGxp.png') }}" alt="..." style="filter: none; scale: 1.8; max-width: 100px; margin: auto">
