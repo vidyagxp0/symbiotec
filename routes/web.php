@@ -16,6 +16,7 @@ use App\Http\Controllers\rcms\DesktopController;
 use App\Http\Controllers\UserLoginController;
 use App\Http\Controllers\MytaskController;
 use App\Http\Controllers\CabinateController;
+use App\Http\Controllers\CriticalActionController;
 use App\Http\Controllers\rcms\{CCController,DeviationController, IncidentController};
 use App\Http\Controllers\rcms\EffectivenessCheckController;
 use App\Http\Controllers\rcms\ObservationController;
@@ -605,3 +606,14 @@ Route::view('sop-index-show', 'frontend.sop-index.sop-index-show');
 
 //=====================================================================
 // >>>>>>> B-backup
+
+//=================Critical-Action================================
+Route::get('critical-action', [CriticalActionController::class,'index'])->name('critical-action');
+Route::post('critical-action-store', [CriticalActionController::class,'store'])->name('critical-action-store');
+Route::get('critical-action-view/{id}', [CriticalActionController::class,'show'])->name('critical-action-view');
+Route::put('critical-action-update/{id}', [CriticalActionController::class,'update'])->name('critical-action-update');
+Route::post('send-At/{id}', [CriticalActionController::class, 'stageChange']);
+Route::post('critical-action-cancelstage/{id}', [CriticalActionController::class, 'actionStageCancel']);
+Route::get('critical-action-audittrialshow/{id}', [CriticalActionController::class, 'actionItemAuditTrialShow'])->name('showActionItemAuditTrial');
+Route::get('critical-action-SingleReport/{id}', [CriticalActionController::class, 'singleReport'])->name('actionitemSingleReport');
+Route::get('critical-action-AuditReport/{id}', [CriticalActionController::class, 'auditReport'])->name('actionitemAuditReport');
