@@ -827,11 +827,11 @@ if(!empty($request->attach_files2)){
         $data = Observation::find($id);
         $lastDocument = Observation::find($id);
         $data = Observation::find($id);
-        $data->initiator_id = Auth::user()->id;
-        $data->parent_id = $request->parent_id;
-        $data->parent_type = $request->parent_type;
-        $data->division_code = $request->division_code;
-        $data->intiation_date = $request->intiation_date;
+        // $data->initiator_id = Auth::user()->id;
+        // $data->parent_id = $request->parent_id;
+        // $data->parent_type = $request->parent_type;
+        // $data->division_code = $request->division_code;
+        // $data->intiation_date = $request->intiation_date;
         $data->due_date = $request->due_date;
         $data->short_description = $request->short_description;
         $data->assign_to = $request->assign_to;

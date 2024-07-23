@@ -638,6 +638,6 @@ Route::get('critical-action-view/{id}', [CriticalActionController::class,'show']
 Route::put('critical-action-update/{id}', [CriticalActionController::class,'update'])->name('critical-action-update');
 Route::post('send-At/{id}', [CriticalActionController::class, 'stageChange']);
 Route::post('critical-action-cancelstage/{id}', [CriticalActionController::class, 'actionStageCancel']);
-Route::get('critical-action-audittrialshow/{id}', [CriticalActionController::class, 'actionItemAuditTrialShow'])->name('showActionItemAuditTrial');
-Route::get('critical-action-SingleReport/{id}', [CriticalActionController::class, 'singleReport'])->name('actionitemSingleReport');
-Route::get('critical-action-AuditReport/{id}', [CriticalActionController::class, 'auditReport'])->name('actionitemAuditReport');
+Route::get('critical-action-audittrialshow/{id}', [CriticalActionController::class, 'actionItemAuditTrialShow'])->name('critial.showActionItemAuditTrial');
+Route::get('critical-action-SingleReport/{id}', [CriticalActionController::class, 'singleReport'])->name('critial.actionitemSingleReport');
+Route::get('critical-action-AuditReport/{id}', [CriticalActionController::class, 'auditReport'])->name('critial.actionitemAuditReport');
