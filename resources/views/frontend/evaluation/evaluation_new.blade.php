@@ -141,7 +141,7 @@
                 <button class="cctablinks" onclick="openCity(event, 'CCForm4')">Reviewer Detail</button>
                 <!-- <button class="cctablinks" onclick="openCity(event, 'CCForm5')">Activity Log</button> -->
             </div>
-            <form action="{{ route('evaluation-store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('evaluation-store') }}" method="POST" enctype="multipart/form-data" id="myForm">
                 @csrf
                 <!-- Tab content -->
                 <div id="step-form">
@@ -163,22 +163,21 @@
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Division Code"><b>Function Code</b></label>
-                                        <input disabled type="text" name="division_code"
+                                        <input disabled type="text" name="division_id"
                                             value="{{ Helpers::getDivisionName(session()->get('division')) }}">
                                         <input type="hidden" name="division_id" value="{{ session()->get('division') }}">
                                     </div>
                                 </div>
 
                                 @php
-                                    // Calculate the due date (30 days from the initiation date)
-                                    $initiationDate = date('Y-m-d'); // Current date as initiation date
-                                    $dueDate = date('Y-m-d', strtotime($initiationDate . '+30 days')); // Due date
+                                    $initiationDate = date('Y-m-d');
+                                    $dueDate = date('Y-m-d', strtotime($initiationDate . '+30 days'));
                                 @endphp
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Initiator</b></label>
-                                        <input disabled type="text" name="division_code"
+                                        <input disabled type="text" name="initiator_id"
                                             value="{{ Auth::user()->name }}">
                                     </div>
                                 </div>
@@ -186,19 +185,20 @@
                                 <div class="col-lg-6">
                                     <div class="group-input ">
                                         <label for="Date Due"><b>Date of Initiation</b></label>
-                                        <input disabled type="text" value="{{ date('d-M-Y') }}" name="intiation_date">
-                                        <input type="hidden" value="{{ date('Y-m-d') }}" name="intiation_date">
+                                        <input disabled type="text" value="{{ date('d-M-Y') }}" name="initiation_date">
+                                        <input type="hidden" value="{{ date('Y-m-d') }}" name="initiation_date">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 new-date-data-field">
-                                    <div class="group-input input-date ">
-                                        <label for="due-date">Due Date<span class="text-danger"></span></label>
-                                        <div><small class="text-primary">If revising Due Date, kindly mention revision
-                                                reason in "Due Date Extension Justification" data field.</small>
-                                        </div>
+                                    <div class="group-input input-date">
+                                        <label for="due-date">Date Due</label>
+                                        <div><small class="text-primary">Please mention expected date of completion</small></div>
                                         <div class="calenderauditee">
-                                            <input type="text" readonly placeholder="DD-MM-YYYY" />
+                                        <div class="calenderauditee">
+                                            <input type="text" id="due_date" readonly placeholder="DD-MM-YYYY" />
+                                            <input type="date" name="due_date" min="{{ \Carbon\Carbon::now()->format('d-M-Y') }}" class="hide-input" oninput="handleDateInput(this, 'due_date')" />
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -363,6 +363,8 @@
                         </div>
                     </div>
 
+
+
                     <div id="CCForm2" class="inner-block cctabcontent">
                         <div class="inner-block-content">
                             <div class="row">
@@ -391,22 +393,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_1" value="" id="checkbox_1">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -416,22 +418,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_2" value="" id="checkbox_2">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_2" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_2" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_2" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -441,22 +443,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_3" value="" id="checkbox_3">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_3" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_3" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_3" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -466,22 +468,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_4" value="" id="checkbox_4">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_4" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_4" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_4" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -491,22 +493,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_5" value="" id="checkbox_5">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_5" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_5" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_5" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -516,22 +518,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_6" value="" id="checkbox_6">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_6" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_6" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_6" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -541,22 +543,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_7" value="" id="checkbox_7">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_7" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_7" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_7" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -566,22 +568,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_8" value="" id="checkbox_8">
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_8" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_8" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_8" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -645,14 +647,14 @@
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Approved By</b></label>
-                                        <input disabled type="text" name="reviewed_by">
+                                        <input disabled type="text" name="approved_by">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Approved On</b></label>
-                                        <input disabled type="text" name="reviewed_on">
+                                        <input disabled type="text" name="approved_on">
                                     </div>
                                 </div>
 
@@ -788,6 +790,19 @@
     </div>
 
 
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myForm').submit(function(event) {
+                $('input[type="checkbox"]').each(function() {
+                    $(this).attr('value', $(this).is(':checked') ? 'yes' : 'no');
+                    // Ensure the checkbox is not unchecked so that its value is sent in the form
+                    $(this).prop('checked', true);
+                });
+            });
+        });
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>

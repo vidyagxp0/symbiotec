@@ -30,6 +30,8 @@
         }
     </style>
 
+    <style></style>
+
     <script>
         function otherController(value, checkValue, blockID) {
             let block = document.getElementById(blockID)
@@ -141,7 +143,7 @@
                 <button class="cctablinks" onclick="openCity(event, 'CCForm4')">Reviewer Detail</button>
                 <!-- <button class="cctablinks" onclick="openCity(event, 'CCForm5')">Activity Log</button> -->
             </div>
-            <form action="{{ route('evaluation-update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('evaluation-update', $data->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <!-- Tab content -->
                 <div id="step-form">
@@ -157,15 +159,14 @@
                                 <div class="col-6">
                                     <div class="group-input">
                                         <label for="RLS Record Number"><b>Record Number</b></label>
-                                        <input disabled type="text" placeholder="{{ Helpers::getDivisionName(session()->get('division')) }}/Evaluation/{{ date('Y') }}/{{ str_pad($record_number, 4, '0', STR_PAD_LEFT) }}" readonly>
+                                        <input disabled type="text" placeholder="{{ Helpers::getDivisionName($data->division_id) }}/Evaluation/{{ date('Y') }}/{{ str_pad($data->record_number, 4, '0', STR_PAD_LEFT) }}" readonly>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Division Code"><b>Function Code</b></label>
                                         <input disabled type="text" name="division_code"
-                                            value="{{ Helpers::getDivisionName(session()->get('division')) }}">
-                                        <input type="hidden" name="division_id" value="{{ session()->get('division') }}">
+                                            value="{{ Helpers::getDivisionName($data->division_id) }}">
                                     </div>
                                 </div>
 
@@ -178,8 +179,7 @@
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Initiator</b></label>
-                                        <input disabled type="text" name="division_code"
-                                            value="{{ Auth::user()->name }}">
+                                        <input disabled type="text" value="{{ Helpers::getInitiatorName($data->initiator_id) }}">
                                     </div>
                                 </div>
 
@@ -236,7 +236,7 @@
                                             class="text-primary">255 </span><span class="text-primary"> characters
                                             remaining</span>
 
-                                        <input id="docname" type="text" name="short_description" maxlength="255"
+                                        <input id="docname" type="text" name="short_description" maxlength="255" value="{{$data->short_description}}"
                                             required>
                                     </div>
                                 </div>
@@ -248,7 +248,7 @@
                                             characters
                                             remaining</span>
 
-                                        <input id="docname" type="text" name="description" maxlength="255" required>
+                                        <input id="docname" type="text" name="description" maxlength="255" required value="{{$data->description}}">
                                     </div>
                                 </div>
 
@@ -259,7 +259,7 @@
                                             <option value="">Select Document</option> 
                                             @if (!empty($document))
                                                 @foreach ($document as $doc)
-                                                    <option value="{{ $doc->id }}">{{ $doc->document_number }}/ {{ $doc->document_name }}</option>
+                                                    <option value="{{ $doc->id }}" @if($data->reference_document == $doc->id) selected @endif>{{ $doc->document_number }}/ {{ $doc->document_name }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -269,42 +269,58 @@
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Document No.</b></label>
-                                        <input disabled type="text" name="site" id="site" readonly>
+                                        <input disabled type="text" name="site" id="site" readonly value="{{ $data->site }}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Department Name</b></label>
-                                        <input disabled type="text" name="department_name" id="department_name" readonly>
+                                        <input disabled type="text" name="department_name" id="department_name" readonly value="{{ $data->department_name }}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Document Name</b></label>
-                                        <input disabled type="text" name="sop_title" id="sop_title" readonly>
+                                        <input disabled type="text" name="sop_title" id="sop_title" readonly value="{{ $data->sop_title }}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Document Review Date</b></label>
-                                        <input disabled type="text" name="sop_review_date" id="sop_review_date" readonly>  
+                                        <input disabled type="text" name="sop_review_date" id="sop_review_date" readonly value="{{ $data->sop_review_date }}">  
                                     </div>
                                 </div>
 
-
-                                <div class="col-lg-12">
+                                <div class="col-12">
                                     <div class="group-input">
-                                        <label for="others">Initial attachment</label>
+                                        <label for="Inv Attachments">Initial Attachments</label>
                                         <div><small class="text-primary">Please Attach all relevant or supporting
                                                 documents</small></div>
                                         <div class="file-attachment-field">
-                                            <div class="file-attachment-list" id="initial_attachment"></div>
+                                            <div disabled class="file-attachment-list" id="initial_attachment">
+                                                @if ($data->initial_attachment)
+                                                    @foreach (json_decode($data->initial_attachment) as $file)
+                                                        <h6 class="file-container text-dark"
+                                                            style="background-color: rgb(243, 242, 240);">
+                                                            <b>{{ $file }}</b>
+                                                            <a href="{{ asset('upload/' . $file) }}"
+                                                                target="_blank"><i class="fa fa-eye text-primary"
+                                                                    style="font-size:20px; margin-right:-10px;"></i></a>
+                                                            <a class="remove-file"
+                                                                data-file-name="{{ $file }}"><i
+                                                                    class="fa-solid fa-circle-xmark"
+                                                                    style="color:red; font-size:20px;"></i></a>
+                                                        </h6>
+                                                    @endforeach
+                                                @endif
+                                            </div>
                                             <div class="add-btn">
                                                 <div>Add</div>
-                                                <input type="file" id="myfile" name="initial_attachment[]"
+                                                <input type="file" id="myfile"
+                                                    name="initial_attachment[]"
                                                     oninput="addMultipleFiles(this, 'initial_attachment')" multiple>
                                             </div>
                                         </div>
@@ -315,10 +331,10 @@
                                     <div class="group-input">
                                         <label for="Initiator Group">Reviewer</label>
                                         <select name="reviewer">
-                                            <option value="">Select Reviewer</option>
+                                            <option >Select Reviewer</option>
                                             @if (!empty($users))
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    <option value="{{ $user->id }}" @if($data->reviewer == $user->id) selected @endif>{{ $user->name }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -329,10 +345,10 @@
                                     <div class="group-input">
                                         <label for="Initiator Group">Approver</label>
                                         <select name="approver">
-                                            <option value="">Select Approver</option>
+                                            <option >Select Approver</option>
                                             @if (!empty($users))
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    <option value="{{ $user->id }}" @if($data->approver == $user->id) selected @endif>{{ $user->name }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -342,14 +358,14 @@
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Initated By</b></label>
-                                        <input disabled type="text" name="initiated_by" value="{{ Auth::user()->name }}">
+                                        <input disabled type="text" name="initiated_by" value="{{ $data->initiated_by }}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Initiated On</b></label>
-                                        <input disabled type="text" name="initiated_on">
+                                        <input disabled type="text" name="initiated_on" value="{{ $data->initiated_on }}">
                                     </div>
                                 </div>
 
@@ -391,22 +407,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_1" id="checkbox_1"  {{ $data->checkbox_1 == "yes" ? 'checked' : 'no' }}>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_1" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->initiatorRemark_1 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_1" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->reviewerRemark_1 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_1" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->approverRemark_1 }}</textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -416,22 +432,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_2"  id="checkbox_2" {{ $data->checkbox_2 == "yes" ? 'checked' : 'no' }}>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_2" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->initiatorRemark_2 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_2" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->reviewerRemark_2 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_2" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->approverRemark_2 }}</textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -441,22 +457,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_3"  id="checkbox_3" {{ $data->checkbox_3 == "yes" ? 'checked' : 'no' }}>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_3" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->initiatorRemark_3 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_3" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->reviewerRemark_3 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_3" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->approverRemark_3 }}</textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -466,22 +482,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_4"  id="checkbox_4" {{ $data->checkbox_4 == "yes" ? 'checked' : 'no' }}>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_4" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->initiatorRemark_4 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_4" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->reviewerRemark_4 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_4" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->approverRemark_4 }}</textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -491,22 +507,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_5"  id="checkbox_5" {{ $data->checkbox_5 == "yes" ? 'checked' : 'no' }}>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_5" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->initiatorRemark_5 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_5" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->reviewerRemark_5 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_5" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->approverRemark_5 }}</textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -516,22 +532,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_6"  id="checkbox_6" {{ $data->checkbox_6 == "yes" ? 'checked' : 'no' }}>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_6" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->initiatorRemark_6 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_6" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->reviewerRemark_6 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_6" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->approverRemark_6 }}</textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -541,22 +557,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_7"  id="checkbox_7" {{ $data->checkbox_7 == "yes" ? 'checked' : 'no' }}>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_7" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->initiatorRemark_7 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_7" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->reviewerRemark_7 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_7" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->approverRemark_7 }}</textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -566,22 +582,22 @@
                                                         <td>
                                                             <div
                                                                 style="display: flex; justify-content: space-around; align-items: center;  margin: 5%; gap:5px">
-                                                                <input type="checkbox" name="" value="">
+                                                                <input type="checkbox" name="checkbox_8"  id="checkbox_8" {{ $data->checkbox_8 == "yes" ? 'checked' : 'no' }}>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="initiatorRemark_8" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->initiatorRemark_8 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="reviewerRemark_8" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->reviewerRemark_8 }}</textarea>
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div style="margin: auto; display: flex; justify-content: center;">
-                                                                <textarea name="remark_1" style="border-radius: 7px; border: 1.5px solid black;"></textarea>
+                                                                <textarea name="approverRemark_8" style="border-radius: 7px; border: 1.5px solid black;">{{ $data->approverRemark_8 }}</textarea>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -597,7 +613,7 @@
                             <div class="col-md-12 mb-4">
                                 <div class="group-input">
                                     <label for="Description Deviation">Evaluation Comments</label>
-                                    <textarea class="summernote" name="Description_Deviation[]" id="summernote-1"></textarea>
+                                    <textarea name="evaluation_comment" id="evaluation_comment">{{ $data->evaluation_comment }}</textarea>
                                 </div>
                             </div>
                             <div class="button-block">
@@ -616,26 +632,43 @@
                             <div class="col-md-12 mb-4">
                                 <div class="group-input">
                                     <label for="Description Deviation">Approval Feedback</label>
-                                    <textarea class="summernote" name="approver_feedback" id="approver_feedback"></textarea>
+                                    <textarea class="summernote" name="approver_feedback" id="approver_feedback">{{ $data->approver_feedback }}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-12 mb-4">
                                 <div class="group-input">
                                     <label for="Description Deviation">Approver Comments</label>
-                                    <textarea class="summernote" name="approver_comment" id="approver_comment"></textarea>
+                                    <textarea class="summernote" name="approver_comment" id="approver_comment">{{ $data->approver_comment }}</textarea>
                                 </div>
                             </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-12">
                                     <div class="group-input">
-                                        <label for="others">Approver attachment</label>
+                                        <label for="Inv Attachments">Initial Attachments</label>
                                         <div><small class="text-primary">Please Attach all relevant or supporting
                                                 documents</small></div>
                                         <div class="file-attachment-field">
-                                            <div class="file-attachment-list" id="approver_attachment"></div>
+                                            <div disabled class="file-attachment-list" id="approver_attachment">
+                                                @if ($data->approver_attachment)
+                                                    @foreach (json_decode($data->approver_attachment) as $file)
+                                                        <h6 class="file-container text-dark"
+                                                            style="background-color: rgb(243, 242, 240);">
+                                                            <b>{{ $file }}</b>
+                                                            <a href="{{ asset('upload/' . $file) }}"
+                                                                target="_blank"><i class="fa fa-eye text-primary"
+                                                                    style="font-size:20px; margin-right:-10px;"></i></a>
+                                                            <a class="remove-file"
+                                                                data-file-name="{{ $file }}"><i
+                                                                    class="fa-solid fa-circle-xmark"
+                                                                    style="color:red; font-size:20px;"></i></a>
+                                                        </h6>
+                                                    @endforeach
+                                                @endif
+                                            </div>
                                             <div class="add-btn">
                                                 <div>Add</div>
-                                                <input type="file" id="myfile" name="approver_attachment[]"
+                                                <input type="file" id="myfile"
+                                                    name="approver_attachment[]"
                                                     oninput="addMultipleFiles(this, 'approver_attachment')" multiple>
                                             </div>
                                         </div>
@@ -645,14 +678,14 @@
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Approved By</b></label>
-                                        <input disabled type="text" name="reviewed_by">
+                                        <input disabled type="text" name="reviewed_by" value="{{ $data->reviewed_by }}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Approved On</b></label>
-                                        <input disabled type="text" name="reviewed_on">
+                                        <input disabled type="text" name="reviewed_on" value="{{ $data->reviewed_on }}">
                                     </div>
                                 </div>
 
@@ -673,43 +706,61 @@
                             <div class="col-md-12 mb-4">
                                 <div class="group-input">
                                     <label for="Description Deviation">Reviewer Feedback</label>
-                                    <textarea class="summernote" name="reviewer_feedback" id="reviewer_feedback"></textarea>
+                                    <textarea class="summernote" name="reviewer_feedback" id="reviewer_feedback">{{ $data->reviewer_feedback }}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-12 mb-4">
                                 <div class="group-input">
                                     <label for="Description Deviation">Reviewer Comments</label>
-                                    <textarea class="summernote" name="reviewer_comment" id="reviewer_comment"></textarea>
+                                    <textarea class="summernote" name="reviewer_comment" id="reviewer_comment">{{ $data->reviewer_comment }}</textarea>
                                 </div>
                             </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-12">
                                     <div class="group-input">
-                                        <label for="others">Reviewer attachment</label>
+                                        <label for="Inv Attachments">Initial Attachments</label>
                                         <div><small class="text-primary">Please Attach all relevant or supporting
                                                 documents</small></div>
                                         <div class="file-attachment-field">
-                                            <div class="file-attachment-list" id="reviewer_attachment"></div>
+                                            <div disabled class="file-attachment-list" id="reviewer_attachment">
+                                                @if ($data->reviewer_attachment)
+                                                    @foreach (json_decode($data->reviewer_attachment) as $file)
+                                                        <h6 class="file-container text-dark"
+                                                            style="background-color: rgb(243, 242, 240);">
+                                                            <b>{{ $file }}</b>
+                                                            <a href="{{ asset('upload/' . $file) }}"
+                                                                target="_blank"><i class="fa fa-eye text-primary"
+                                                                    style="font-size:20px; margin-right:-10px;"></i></a>
+                                                            <a class="remove-file"
+                                                                data-file-name="{{ $file }}"><i
+                                                                    class="fa-solid fa-circle-xmark"
+                                                                    style="color:red; font-size:20px;"></i></a>
+                                                        </h6>
+                                                    @endforeach
+                                                @endif
+                                            </div>
                                             <div class="add-btn">
                                                 <div>Add</div>
-                                                <input type="file" id="myfile" name="reviewer_attachment[]"
+                                                <input type="file" id="myfile"
+                                                    name="reviewer_attachment[]"
                                                     oninput="addMultipleFiles(this, 'reviewer_attachment')" multiple>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Reviewer By</b></label>
-                                        <input disabled type="text" name="reviewed_by">
+                                        <input disabled type="text" name="reviewed_by" value="{{ $data->reviewed_by }}">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator"><b>Reviewer On</b></label>
-                                        <input disabled type="text" name="reviewed_on">
+                                        <input disabled type="text" name="reviewed_on" value="{{ $data->reviewed_on }}">
                                     </div>
                                 </div>
 
@@ -788,8 +839,18 @@
     </div>
 
 
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#myForm').submit(function(event) {
+                $('input[type="checkbox"]').each(function() {
+                    $(this).val($(this).is(':checked') ? 'yes' : 'no');
+                    $(this).prop('checked', true); // Ensure the checkbox is checked so its value is sent in the form
+                });
+            });
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             $('#reference_document').change(function() {

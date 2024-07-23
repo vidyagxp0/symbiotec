@@ -269,7 +269,7 @@
                                                     @endif
 
                                                 @elseif ($datas->type == 'Evaluation')
-                                                    <a href="{{ url('evaluation-show', $datas->id) }}" style="color: blue">
+                                                    <a href="{{ url('rcms/evaluation-show', $datas->id) }}" style="color: blue">
                                                         {{ str_pad(($total_count - $loop->index), 4, '0', STR_PAD_LEFT) }}
                                                     </a>
                                                     @if (!empty($datas->parent_id))
