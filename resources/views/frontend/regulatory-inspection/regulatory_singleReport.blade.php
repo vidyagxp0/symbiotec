@@ -278,9 +278,11 @@
                     <table>
                         <tr>
                             <th class="w-30">Audit Schedule Start Date</th>
-                            <td class="w-20">@if($data->start_date){{ $data->start_date->format('d-M-Y') }}@else Not Applicable @endif</td>
+                            <td class="w-20">
+                            </td>
                             <th class="w-30">Audit Schedule End Date</th>
-                            <td class="w-20">@if($data->end_date){{ $data->end_date->format('d-M-Y') }}@else Not Applicable @endif</td>
+                            <td class="w-20">
+                            </td>
 
                         </tr>
                         <tr>
@@ -439,13 +441,11 @@
                             <th class="w-20">Audit Start Date</th>
                             <td class="w-30">
                                 <div>
-                                    @if($data->audit_start_date){{ $data->audit_start_date->format('d-M-Y') }}@else Not Applicable @endif
                                 </div>
                             </td>
                             <th class="w-20">Audit End Date</th>
                             <td class="w-30">
                                 <div>
-                                    @if($data->audit_end_date){{ $data->audit_end_date->format('d-M-Y') }}@else Not Applicable @endif
                                 </div>
                             </td>
                         </tr>
