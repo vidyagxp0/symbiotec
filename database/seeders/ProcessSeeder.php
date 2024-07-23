@@ -85,7 +85,12 @@ class ProcessSeeder extends Seeder
             "Incident",
             "Failure Investigation",
             "ERRATA",
-            "OOS Microbiology"
+            "OOS Microbiology",
+            "Regulatory Inspection",
+            "Regulatory Change",
+            "Critical Action",
+
+
         ];
 
         // Loop through each process name

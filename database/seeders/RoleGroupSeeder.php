@@ -41,7 +41,11 @@ class RoleGroupSeeder extends Seeder
             'Non Conformance' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
             'Incident' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
             'Failure Investigation' => ['Initiator', 'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
-            'ERRATA' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP']
+            'ERRATA' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
+            'Regulatory Inspection' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
+            'Regulatory Change' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
+            'Critical Action' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP']
+
             // Add other processes and their roles here
         ];
         

@@ -170,8 +170,7 @@
                             </form>
                         </div>
                         <div class="create">
-                            <a href="{{ url('rcms/form-division') }}"> <button class="button_theme1">Create
-                                    Record</button> </a>
+                            <a href="{{ url('rcms/form-division') }}"> <button class="button_theme1">Create Record</button> </a>
                         </div>
                     </div>
                 </div>
@@ -194,6 +193,9 @@
                         <div>
                                     <a href="/rcms/regulatory_dashboard">Regulatory Inspection</a>
                                     </div> 
+                                    <div>
+                                        <a href="/rcms/Compliance_dashboard">Compliance Dashboard</a>
+                                        </div> 
                                    
                         @if (Auth::user())
                             @if (Helpers::checkRoles(3) || Helpers::checkRoles(1) || Helpers::checkRoles(2))
