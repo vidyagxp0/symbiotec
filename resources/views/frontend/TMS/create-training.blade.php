@@ -56,7 +56,7 @@
                             <div class="col-6">
                                 <div class="group-input">
                                     <label for="classRoom_trainingName">Training Due Date <span class="text-danger">*</span></label>
-                                    <input type="datetime-local" name="training_end_date">
+                                    <input type="datetime-local" min="<?=date('Y-m-d\Th:i')?>" name="training_end_date">
                                 </div>
                             </div>
                             <div class="col-6">

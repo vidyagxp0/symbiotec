@@ -889,14 +889,6 @@
                         @if ($document->stage == 9)
                             <input type="hidden" name="stage_id" value="10" />
                         @endif
-                    @else
-                        @if ($document->stage == 11)
-                            <input type="hidden" name="stage_id" value="10" />
-                        @endif
-                    @endif
-
-                    @if ($document->stage == 5)
-                        <input type="hidden" name="stage_id" value="6" />
                     @endif
 
                     <!-- Modal footer -->

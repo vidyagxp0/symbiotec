@@ -720,7 +720,7 @@ class DocumentDetailsController extends Controller
           }
         }
 
-        if (Helpers::checkRoles(3) && $document->originator_id == Auth::user()->id && $request->stage_id == 2 || $request->stage_id == 4 || $request->stage_id == 6 ||  $request->stage_id == 8 || $request->stage_id == 10 || $request->stage_id == 11) {
+        if (Helpers::checkRoles(3) && $document->originator_id == Auth::user()->id && $request->stage_id == 2 || $request->stage_id == 4 || $request->stage_id == 6 ||  $request->stage_id == 8 || $request->stage_id == 10  || $request->stage_id == 13 || $request->stage_id == 11) {
           if ($request->stage_id) {
             $document->stage = $request->stage_id;
             $document->status = Stage::where('id', $request->stage_id)->value('name');
