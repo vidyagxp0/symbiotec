@@ -1,5 +1,9 @@
 @extends('frontend.layout.main')
 @section('container')
+@php 
+    $getDivision = Helpers::getDivisionName(session()->get('division'));
+    $division = "1";
+@endphp
     <style>
         textarea.note-codable {
             display: none !important;
@@ -16,7 +20,11 @@
         </div> --}}
         <div class="division-bar">
             <strong>Site Division/Project</strong> :
-            {{ Helpers::getDivisionName(session()->get('division')) }} / Action Item
+            @if(!empty($getDivision))
+                {{ Helpers::getDivisionName(session()->get('division')) }} / Action Item
+            @else
+                {{ Helpers::getDivisionName($division) }} / Action Item    
+            @endif
         </div>
     </div>
     @php
@@ -57,17 +65,25 @@
                                 <div class="col-lg-6">
                                     <div class="group-input"> 
                                         <label for="RLS Record Number"><b>Record Number</b></label>
-                                        <input disabled type="text" name="record_number"
-                                            value="{{ Helpers::getDivisionName(session()->get('division')) }}/AI/{{ date('Y') }}/{{ $record}}">
-                                        {{-- <div class="static">QMS-EMEA/CAPA/{{ date('Y') }}/{{ $record_number }}</div> --}}
+                                        @if(!empty($getDivision))
+                                            <input disabled type="text" name="record_number" value="{{ Helpers::getDivisionName(session()->get('division')) }}/AI/{{ date('Y') }}/{{ $record}}">
+                                        @else                                        
+                                            <input disabled type="text" name="record_number" value="{{ Helpers::getDivisionName($division) }}/AI/{{ date('Y') }}/{{ $record}}">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-lg-6">  
                                     <div class="group-input">
                                         <label for="Division Code"><b>Division Code</b></label>
-                                        <input disabled type="text" name="division_code"
-                                            value="{{ Helpers::getDivisionName(session()->get('division')) }}">
-                                        <input type="hidden" name="division_id" value="{{ session()->get('division') }}">
+                                        @if(!empty($getDivision))
+                                            <input disabled type="text" name="division_code"
+                                                value="{{ Helpers::getDivisionName(session()->get('division')) }}">
+                                            <input type="hidden" name="division_id" value="{{ session()->get('division') }}">
+                                        @else
+                                            <input disabled type="text" name="division_code"
+                                            value="{{ Helpers::getDivisionName($division) }}">
+                                            <input type="hidden" name="division_id" value="{{ $division }}">
+                                        @endif
                                         {{-- <div class="static">{{ Helpers::getDivisionName(session()->get('division')) }}</div> --}}
                                     </div>
                                 </div>
