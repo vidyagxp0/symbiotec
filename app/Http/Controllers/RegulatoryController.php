@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Hash;
 use PDF;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 
 class RegulatoryController extends Controller
@@ -183,6 +184,7 @@ class RegulatoryController extends Controller
         }
 
      
+        
         $internalAudit->save();
         
 
@@ -1024,7 +1026,7 @@ if (!empty($internalAudit->due_date_extension)) {
         $data->record = str_pad($data->record, 4, '0', STR_PAD_LEFT);
         $data->assign_to_name = User::where('id', $data->assign_id)->value('name');
         $data->initiator_name = User::where('id', $data->initiator_id)->value('name');
-        $sgrid = RegulatoryGrid::where('audit_id', $id)->where('type', "external_audit")->firstOrCreate();
+        $sgrid = RegulatoryGrid::where('audit_id', $id)->where('type', "Regulatory_Inspection")->firstOrCreate();
         $grid_data1 = RegulatoryGrid::where('audit_id', $id)->where('type', "Observation_field_Auditee")->first();
         // foreach($sgrid as $s)
         // return $sgrid;
@@ -1178,30 +1180,28 @@ if (!empty($internalAudit->due_date_extension)) {
         $internalAudit->update();
         // dd($internalAudit);
 
-        $data3 = RegulatoryGrid::where('audit_id', $internalAudit->id)->where('type', 'external_audit')->first();
-        // dd($data3);
+        
+        $data3 = RegulatoryGrid::where('audit_id', $internalAudit->id)->where('type', 'Regulatory_Inspection')->first();
         if($data3){
-
-    $fields = [
-        'audit' => 'area_of_audit',
-        'scheduled_start_date' => 'start_date',
-        'scheduled_start_time' => 'start_time',
-        'scheduled_end_date' => 'end_date',
-        'scheduled_end_time' => 'end_time',
-        'auditor' => 'auditor',
-        'auditee' => 'auditee',
-        'remark' => 'remark'
-    ];
-    
-    foreach ($fields as $requestField => $modelField) {
-        if (!empty($request->$requestField)) {
-            $data3->$modelField = serialize($request->$requestField);
-        }
-    }
-    
-    $data3->update();
-}else{
-            // ===================
+            $fields = [
+                'audit' => 'area_of_audit',
+                'scheduled_start_date' => 'start_date',
+                'scheduled_start_time' => 'start_time',
+                'scheduled_end_date' => 'end_date',
+                'scheduled_end_time' => 'end_time',
+                'auditor' => 'auditor',
+                'auditee' => 'auditee',
+                'remark' => 'remark'
+            ];
+            foreach ($fields as $requestField => $modelField) {
+                if (!empty($request->$requestField)) {
+                    $data3->$modelField = serialize($request->$requestField);
+                }
+            }
+            
+            $data3->update();
+            // dd($data3);
+        }else{
         }
         
         // dd($data3);
@@ -2470,7 +2470,11 @@ public static function auditReport($id)
         
     }
 }
-
+public function singleReportShow($id)
+    {
+        $data = RegulatoryInspection::find($id);
+        return view('frontend.regulatory-inspection.regulatory_singleReportshow', compact('id', 'data'));
+    }
 public static function regulatorySingleReport($id)
 {
     $data = RegulatoryInspection::with('division')->find($id);
@@ -2486,7 +2490,7 @@ public static function regulatorySingleReport($id)
         // return $sgrid;
     //  dd($sgrid);
             //  dd($sgrid->area_of_audit);
-        $pdf = PDF::loadview('frontend\regulatory-inspection\regulatory_singleReport', compact('data','sgrid','grid_data1'))
+        $pdf = PDF::loadview('frontend.regulatory-inspection.regulatory_singleReport', compact('data','sgrid','grid_data1'))
             ->setOptions([
                 'defaultFont' => 'sans-serif',
                 'isHtml5ParserEnabled' => true,
@@ -2500,6 +2504,16 @@ public static function regulatorySingleReport($id)
         $width = $canvas->get_width();
         $canvas->page_script('$pdf->set_opacity(0.1,"Multiply");');
         $canvas->page_text($width / 4, $height / 2, $data->status, null, 25, [0, 0, 0], 2, 6, -20);
+
+        $directoryPath = public_path("user/pdf/reg/");
+        $filePath = $directoryPath . '/reg' . $id . '.pdf';
+
+        if (!File::isDirectory($directoryPath)) {
+            File::makeDirectory($directoryPath, 0755, true, true); // Recursive creation with read/write permissions
+        }  
+
+        $pdf->save($filePath);
+
         return $pdf->stream('Supplier-Audit-SingleReport' . $id . '.pdf');
     }
 }

@@ -627,6 +627,7 @@ Route::get('AuditTrialSupplierShow/{id}', [RegulatoryController::class, 'AuditTr
 Route::get('ExternalAuditTrialDetails/{id}', [RegulatoryController::class, 'AuditTrialExternalDetails'])->name('ExternalAuditTrialDetailsShow');
 Route::post('child_external_Supplier/{id}', [RegulatoryController::class, 'child_external_Supplier'])->name('child_external_Supplier');
 Route::get('auditReport/{id}', [RegulatoryController::class, 'auditReport'])->name('SupplierAuditTrialReport');
+Route::get('rcms/regulatorySingleReport/show/{id}', [RegulatoryController::class, 'singleReportShow'])->name('regulatory.single.report.show');
 Route::get('rcms/regulatorySingleReport/{id}', [RegulatoryController::class, 'regulatorySingleReport'])->name('regulatorySingleReport');
 
 

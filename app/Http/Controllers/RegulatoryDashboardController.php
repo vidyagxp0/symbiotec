@@ -105,7 +105,7 @@ class RegulatoryDashboardController extends Controller
 
         if ($type == "Regulatory Inspection") {
             $data = RegulatoryInspection::find($id);
-            $single = "regulatorySingleReport/" . $data->id;
+            $single = "regulatorySingleReport/show/" . $data->id;
             $audit = "audit_pdf/".$data->id;
             $parent = "#";
             $division = QMSDivision::find($data->division_id);
