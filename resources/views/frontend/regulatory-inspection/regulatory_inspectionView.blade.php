@@ -50,16 +50,33 @@ function addMultipleFiles(input, block_id) {
   <script>
     $(document).ready(function() {
         $('#ObservationAdd').click(function(e) {
+            let index = 0;
             function generateTableRow(serialNumber) {
                 var users = @json($users);
-
+                index++;
                 var html =
                     '<tr>' +
-                    '<td><input disabled type="text" name="serial[]" value="' + serialNumber + '"></td>' +
-                    '<td><input type="text" name="observation_id[]"></td>' +
-                    '<td><input type="text" name="observation_description[]"></td>' +
-                    '<td><input type="text" name="area[]"></td>' +
-                    '<td><input type="text" name="auditee_response[]"></td>' +
+                    '<td><input disabled type="text" name="serial['+index+']" value="' + serialNumber + '"></td>' +
+                        '<td><input type="text" name="observation_detail['+index+']"></td>' +
+                        '<td><input type="text" name="referenceNo['+index+']"></td>' +
+                        '<td><input type="text" name="divisionCode['+index+']"></td>' +
+                        '<td><input type="text" name="auditingAgency['+index+']"></td>' +
+                        '<td><input type="text" name="audittype['+index+']"></td>' +
+                        '<td><input type="text" name="auditStartDate['+index+']"></td>' +
+                        '<td><input type="text" name="auditEndDate['+index+']"></td>' +
+                        '<td><input type="text" name="auditor['+index+']"></td>' +
+                        '<td><input type="text" name="observationCategory['+index+']"></td>' +
+                        '<td><input type="text" name="observationType['+index+']"></td>' +
+                        '<td><input type="text" name="observationArea['+index+']"></td>' +
+                        '<td><input type="text" name="observationAreaSubCat['+index+']"></td>' +
+                        '<td><input type="text" name="capaRequired['+index+']"></td>' +
+                        '<td><input type="text" name="capaOwner['+index+']"></td>' +
+                        '<td><input type="text" name="capaDescription[]"></td>' +
+                        '<td><input type="text" name="capaDueDate['+index+']"></td>' +
+                        '<td><input type="text" name="capaSatus['+index+']"></td>' +
+                        '<td><input type="text" name="delayJustification['+index+']"></td>' +
+                        '<td><input type="text" name="delayCategory['+index+']"></td>' +
+                        '<td><input type="text" name="remarks['+index+']"></td>' +
                     '<td><button type="button" class="removeRowBtn">Remove</button></td>' +
                     '</tr>';
 
@@ -523,7 +540,24 @@ function addMultipleFiles(input, block_id) {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <script>
+                                            $(document).ready(function() {
+        
+                                                $('#initiatedThroughBlock').hide();
+        
+                                                $('select[name="initiated_through"]').change(function() {
+                                                    const selectedVal = $(this).val();
+        
+                                                    if (selectedVal == 'others' ) {
+                                                        $('#initiatedThroughBlock').show();
+                                                    } else {
+                                                        $('#initiatedThroughBlock').hide();
+                                                    }
+        
+                                                })
+                                            })
+                                        </script>
+                                        <div class="col-lg-6" id="initiatedThroughBlock">
                                             <div class="group-input" id="initiated_through_req">
                                                 <label for="If Other">Others<span
                                                         class="text-danger d-none">*</span></label>
@@ -567,14 +601,30 @@ function addMultipleFiles(input, block_id) {
     </div>
 </div>
 
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6" id="IfOthers">
                                             <div class="group-input" id="if_other">
                                                 <label for="If Other">If Other<span
                                                         class="text-danger d-none">*</span></label>
                                                 <textarea name="if_other" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }}>{{ $data->if_other }}</textarea>
                                             </div>
                                         </div>
-                                        
+                                        <script>
+                                            $(document).ready(function() {
+        
+                                                $('#IfOthers').hide();
+        
+                                                $('select[name="audit_type"]').change(function() {
+                                                    const selectedVal = $(this).val();
+        
+                                                    if (selectedVal == 'others' ) {
+                                                        $('#IfOthers').show();
+                                                    } else {
+                                                        $('#IfOthers').hide();
+                                                    }
+        
+                                                })
+                                            })
+                                        </script>
                                         <div class="col-lg-6">
     <div class="group-input">
         <label for="external_agencies">Supplier Agencies</label>
@@ -1099,45 +1149,82 @@ function addMultipleFiles(input, block_id) {
                                                     </div>
                                             </div>
                                         </div>
+                                        <div class="col-lg-6">
+                                            <input type="file" id="file-input" />
+                                            <button type="button" onclick="importExcel()">Import Observations</button>
+                                        </div>
                                         <div class="col-12">
-    <div class="group-input">
-        <label for="audit-agenda-grid">
-            Observation Details
-            <button type="button" name="audit-agenda-grid" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} id="ObservationAdd">+</button>
-            <span class="text-primary" data-bs-toggle="modal" data-bs-target="#observation-field-instruction-modal" style="font-size: 0.8rem; font-weight: 400; cursor: pointer;">
-                (Launch Instruction)
-            </span>
-        </label>
-        <div class="table-responsive">
-            <table class="table table-bordered" id="onservation-field-table" style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th style="width: 4%;">Row#</th>
-                        <th>Observation Details</th>
-                        <th>Pre Comments</th>
-                        <th>CAPA Details if any</th>
-                        <th>Post Comments</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="observationDetail">
-                    @if ($grid_data1->observation_id)
-                    @foreach (unserialize($grid_data1->observation_id) as $key => $tempData)
-                    <tr>
-                        <td>{{ $key + 1 }}</td>
-                        <td><input type="text" name="observation_id[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ $tempData ? $tempData : "" }}"></td>
-                        <td><input type="text" name="observation_description[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($grid_data1->observation_description)[$key] ? unserialize($grid_data1->observation_description)[$key]: "" }}"></td>
-                        <td><input type="text" name="area[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($grid_data1->area)[$key] ? unserialize($grid_data1->area)[$key]: "" }}"></td>
-                        <td><input type="text" name="auditee_response[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($grid_data1->auditee_response)[$key] ? unserialize($grid_data1->auditee_response)[$key]: "" }}"></td>
-                        <td><button type="button" class="removeRowBtn">Remove</button></td>
-                    </tr>
-                    @endforeach
-                    @endif
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                                            <div class="group-input">
+                                                <label for="audit-agenda-grid">
+                                                    Observation Details
+                                                    <button type="button" name="audit-agenda-grid" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} id="ObservationAdd">+</button>
+                                                    <span class="text-primary" data-bs-toggle="modal" data-bs-target="#observation-field-instruction-modal" style="font-size: 0.8rem; font-weight: 400; cursor: pointer;">
+                                                        (Launch Instruction)
+                                                    </span>
+                                                </label>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered" id="onservation-field-table" style="width: 100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Row#</th>
+                                                                <th>Observation Details</th>
+                                                                <th>Reference No.</th>
+                                                                <th>Site/Location</th>
+                                                                <th>Auditing Agency</th>
+                                                                <th>Audit Type</th>
+                                                                <th>Audit Start Date</th>
+                                                                <th>Audit End Date</th>
+                                                                <th>Auditor</th>
+                                                                <th>Observation Category</th>
+                                                                <th>Observation Type</th>
+                                                                <th>Observation Area</th>
+                                                                <th>Observation Area SubCategory</th>
+                                                                <th>CAPA Required</th>
+                                                                <th>CAPA Owner</th>
+                                                                <th>CAPA Short Description</th>
+                                                                <th>CAPA Due Date</th>
+                                                                <th>CAPA Status</th>
+                                                                <th>Delay Justification</th>
+                                                                <th>Delay Category</th>
+                                                                <th>Remarks</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="observationDetail">
+                                                            @if ($sgrid->observation_detail)
+                                                                @foreach (unserialize($sgrid->observation_detail) as $key => $tempData)
+                                                                <tr>
+                                                                    <td>{{ $key + 1 }}</td>
+                                                                    <td><input type="text" name="observation_detail[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observation_detail)[$key] ? unserialize($sgrid->observation_detail)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="referenceNo[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->referenceNo)[$key] ? unserialize($sgrid->referenceNo)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="divisionCode[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->divisionCode)[$key] ? unserialize($sgrid->divisionCode)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="auditingAgency[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditingAgency)[$key] ? unserialize($sgrid->auditingAgency)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="audittype[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->audittype)[$key] ? unserialize($sgrid->audittype)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="auditStartDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditStartDate)[$key] ? unserialize($sgrid->auditStartDate)[$key]: "" }}"></td> 
+                                                                    <td><input type="text" name="auditEndDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditEndDate)[$key] ? unserialize($sgrid->auditEndDate)[$key]: "" }}"></td>                       
+                                                                    <td><input type="text" name="auditor[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditor)[$key] ? unserialize($sgrid->auditor)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="observationCategory[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationCategory)[$key] ? unserialize($sgrid->observationCategory)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="observationType[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationType)[$key] ? unserialize($sgrid->observationType)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="observationArea[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationArea)[$key] ? unserialize($sgrid->observationArea)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="observationAreaSubCat[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationAreaSubCat)[$key] ? unserialize($sgrid->observationAreaSubCat)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="capaRequired[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->capaRequired)[$key] ? unserialize($sgrid->capaRequired)[$key]: "" }}"></td>                        
+                                                                    <td><input type="text" name="capaOwner[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->capaOwner)[$key] ? unserialize($sgrid->capaOwner)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="capaDescription[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->capaDescription)[$key] ? unserialize($sgrid->capaDescription)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="capaDueDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->capaDueDate)[$key] ? unserialize($sgrid->capaDueDate)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="capaSatus[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->capaSatus)[$key] ? unserialize($sgrid->capaSatus)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="delayJustification[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->delayJustification)[$key] ? unserialize($sgrid->delayJustification)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="delayCategory[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->delayCategory)[$key] ? unserialize($sgrid->delayCategory)[$key]: "" }}"></td>
+                                                                    <td><input type="text" name="remarks[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->remarks)[$key] ? unserialize($sgrid->remarks)[$key]: "" }}"></td>
+                                                                    <td><input type="text" readonly name="Action[]" >
+
+                                                                </tr>
+                                                                @endforeach
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-lg-12">
                                             <div class="group-input">
                                                 <label for="Audit Attachments">Audit Attachments</label>
@@ -1701,6 +1788,54 @@ function addMultipleFiles(input, block_id) {
                 }
             </style>
 
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+<script>
+    function importExcel() {
+        const fileInput = document.getElementById('file-input');
+        const file = fileInput.files[0];
+    
+        if (!file) {
+            alert('Please select a file first');
+            return;
+        }
+    
+        const reader = new FileReader();
+    
+        reader.onload = function(event) {
+            const data = new Uint8Array(event.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+    
+            populateTable(jsonData);
+        };
+    
+        reader.readAsArrayBuffer(file);
+    }
+    
+    function populateTable(data) {
+        const tbody = document.getElementById('observationDetail');
+        tbody.innerHTML = ''; // Clear existing table data
+    
+        data.forEach((row, index) => {
+            const tr = document.createElement('tr');
+    
+            Object.keys(row).forEach((key) => {
+                const td = document.createElement('td');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = `${key}[${index}]`;
+                input.value = row[key];
+                td.appendChild(input);
+                tr.appendChild(td);
+            });
+    
+            tbody.appendChild(tr);
+        });
+    }
+    </script>
             <script>
                 VirtualSelect.init({
                     ele: '#Facility, #Group, #Audit, #Auditee , #reference_record'

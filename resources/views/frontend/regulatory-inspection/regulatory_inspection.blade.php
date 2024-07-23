@@ -95,37 +95,34 @@
     <script>
         $(document).ready(function() {
             $('#internalaudit-table').click(function(e) {
+                let index = 0;
                 function generateTableRow(serialNumber) {
                     var users = @json($users);
                     console.log(users);
                     var html =
                         '<tr>' +
-                        '<td><input disabled type="text" name="serial_number[]" value="' + serialNumber +
-                        '"></td>' +
-                        '<td><input type="text" name="audit[]"></td>' +
-                        '<td><div class="group-input new-date-data-field mb-0"><div class="input-date "><div class="calenderauditee"> <input type="text" id="scheduled_start_date' + serialNumber +'" readonly placeholder="DD-MM-YYYY" /><input type="date" name="scheduled_start_date[]" id="scheduled_start_date' + serialNumber +'_checkdate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"  class="hide-input" oninput="handleDateInput(this, `scheduled_start_date' + serialNumber +'`);checkDate(`scheduled_start_date' + serialNumber +'_checkdate`,`scheduled_end_date' + serialNumber +'_checkdate`)" /></div></div></div></td>' +
-
-                        '<td><input type="time" name="scheduled_start_time[]"></td>' +
-                        '<td><div class="group-input new-date-data-field mb-0"><div class="input-date "><div class="calenderauditee"> <input type="text" id="scheduled_end_date' + serialNumber +'" readonly placeholder="DD-MM-YYYY" /><input type="date" name="scheduled_end_date[]" id="scheduled_end_date'+ serialNumber +'_checkdate" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" class="hide-input" oninput="handleDateInput(this, `scheduled_end_date' + serialNumber +'`);checkDate(`scheduled_start_date' + serialNumber +'_checkdate`,`scheduled_end_date' + serialNumber +'_checkdate`)" /></div></div></div></td>' +
-                        '<td><input type="time" name="scheduled_end_time[]"></td>' +
-
-
-                        '<td><select name="auditor[]">' +
-                        '<option value="">Select a value</option>';
-
-                    for (var i = 0; i < users.length; i++) {
-                        html += '<option value="' + users[i].id + '">' + users[i].name + '</option>';
-                    }
-
-                    html += '</select></td>' +
-                        '<td><select name="auditee[]">' +
-                        '<option value="">Select a value</option>';
-
-                    for (var i = 0; i < users.length; i++) {
-                        html += '<option value="' + users[i].id + '">' + users[i].name + '</option>';
-                    }
-                    html += '</select></td>' +
-                        '<td><input type="text" name="remarks[]"></td>' +
+                        '<td><input disabled type="text" name="serial_number[]" value="' + serialNumber + '"></td>' +
+                        '<td><input type="text" name="observation_detail['+index+']"></td>' +
+                        '<td><input type="text" name="referenceNo['+index+']"></td>' +
+                        '<td><input type="text" name="divisionCode['+index+']"></td>' +
+                        '<td><input type="text" name="auditingAgency['+index+']"></td>' +
+                        '<td><input type="text" name="audittype['+index+']"></td>' +
+                        '<td><input type="text" name="auditStartDate['+index+']"></td>' +
+                        '<td><input type="text" name="auditEndDate['+index+']"></td>' +
+                        '<td><input type="text" name="auditor['+index+']"></td>' +
+                        '<td><input type="text" name="observationCategory['+index+']"></td>' +
+                        '<td><input type="text" name="observationType['+index+']"></td>' +
+                        '<td><input type="text" name="observationArea['+index+']"></td>' +
+                        '<td><input type="text" name="observationAreaSubCat['+index+']"></td>' +
+                        '<td><input type="text" name="capaRequired['+index+']"></td>' +
+                        '<td><input type="text" name="capaOwner['+index+']"></td>' +
+                        '<td><input type="text" name="capaDescription['+index+']"></td>' +
+                        '<td><input type="text" name="capaDueDate['+index+']"></td>' +
+                        '<td><input type="text" name="capaSatus['+index+']"></td>' +
+                        '<td><input type="text" name="delayJustification['+index+']"></td>' +
+                        '<td><input type="text" name="delayCategory['+index+']"></td>' +
+                        '<td><input type="text" name="remarks['+index+']"></td>' +
+                        '<td><input type="text" name="Action[]" readonly></td>' +
                         '</tr>';
 
                     return html;
@@ -153,6 +150,21 @@
                     '<td><input type="text" name="observation_description[]"></td>' +
                     '<td><input type="text" name="area[]"></td>' +
                     '<td><input type="text" name="auditee_response[]"></td>' +
+                    '<td><input type="text" name="observation_id[]"></td>' +
+                    '<td><input type="text" name="observation_description[]"></td>' +
+                    '<td><input type="text" name="area[]"></td>' +
+                    '<td><input type="text" name="auditee_response[]"></td>' +
+                    '<td><input type="text" name="observation_id[]"></td>' +
+                    '<td><input type="text" name="observation_description[]"></td>' +
+                    '<td><input type="text" name="area[]"></td>' +
+                    '<td><input type="text" name="auditee_response[]"></td>' +
+                    '<td><input type="text" name="observation_id[]"></td>' +
+                    '<td><input type="text" name="observation_description[]"></td>' +
+                    '<td><input type="text" name="area[]"></td>' +
+                    '<td><input type="text" name="auditee_response[]"></td>' +
+                    '<td><input type="text" name="observation_id[]"></td>' +
+                    '<td><input type="text" name="observation_description[]"></td>' +
+                    '<td><input type="text" name="area[]"></td>' +                    
                     '<td><button type="button" class="removeRowBtn">Remove</button></td>' +
                     '</tr>';
                 return html;
@@ -403,12 +415,30 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+
+                                <div class="col-lg-6" id="initiatedThroughBlock">
                                     <div class="group-input" id="initiated_through_req">
                                         <label for="If Other">Others<span class="text-danger d-none">*</span></label>
                                         <textarea  name="initiated_if_other"></textarea>
                                     </div>
                                 </div>
+                                <script>
+                                    $(document).ready(function() {
+
+                                        $('#initiatedThroughBlock').hide();
+
+                                        $('select[name="initiated_through"]').change(function() {
+                                            const selectedVal = $(this).val();
+
+                                            if (selectedVal == 'others' ) {
+                                                $('#initiatedThroughBlock').show();
+                                            } else {
+                                                $('#initiatedThroughBlock').hide();
+                                            }
+
+                                        })
+                                    })
+                                </script>
                                 {{-- <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="repeat">Repeat</label>
@@ -444,7 +474,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6"  id="IfOthers">
                                     <div class="group-input" id="type_of_audit_req">
                                         <label for="If Other">If Others<span class="text-danger d-none">*</span></label>
                                         <textarea name="if_other"></textarea>
@@ -453,7 +483,23 @@
                                         @enderror
                                     </div>
                                 </div>
-                            
+                                <script>
+                                    $(document).ready(function() {
+
+                                        $('#IfOthers').hide();
+
+                                        $('select[name="audit_type"]').change(function() {
+                                            const selectedVal = $(this).val();
+
+                                            if (selectedVal == 'others' ) {
+                                                $('#IfOthers').show();
+                                            } else {
+                                                $('#IfOthers').hide();
+                                            }
+
+                                        })
+                                    })
+                                </script>      
 <div class="col-lg-6">
     <div class="group-input">
         <label for="supplier_agencies">Supplier Agencies</label>
@@ -864,353 +910,399 @@
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div class="col-lg-6">
+                                    <input type="file" id="file-input" />
+                                    <button type="button" onclick="importExcel()">Import Observations</button>
+                                </div>
                                 <div class="group-input">
-        <label for="audit-agenda-grid">
-            Observation Details
-            <button type="button" name="audit-agenda-grid" id="ObservationAdd">+</button>
-            <span class="text-primary" data-bs-toggle="modal" data-bs-target="#observation-field-instruction-modal" style="font-size: 0.8rem; font-weight: 400; cursor: pointer;">
-                (Launch Instruction)
-            </span>
-        </label>
-        <div class="table-responsive">
-            <table class="table table-bordered" id="onservation-field-table" style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th>Row#</th>
-                        <th>Observation Details</th>
-                        <th>Pre Comments</th>
-                        <th>CAPA Details if any</th>
-                        <th>Post Comments</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                                                <tbody>
-                                                  
+                                    <label for="audit-agenda-grid">
+                                        Observation Details
+                                        <button type="button" name="audit-agenda-grid" id="ObservationAdd">+</button>
+                                        <span class="text-primary" data-bs-toggle="modal" data-bs-target="#observation-field-instruction-modal" style="font-size: 0.8rem; font-weight: 400; cursor: pointer;">
+                                            (Launch Instruction)
+                                        </span>
+                                    </label>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="onservation-field-table" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Row#</th>
+                                                    <th>Observation Details</th>
+                                                    <th>Reference No.</th>
+                                                    <th>Site/Location</th>
+                                                    <th>Auditing Agency</th>
+                                                    <th>Audit Type</th>
+                                                    <th>Audit Start Date</th>
+                                                    <th>Audit End Date</th>
+                                                    <th>Auditor</th>
+                                                    <th>Observation Category</th>
+                                                    <th>Observation Type</th>
+                                                    <th>Observation Area</th>
+                                                    <th>Observation Area SubCategory</th>
+                                                    <th>CAPA Required</th>
+                                                    <th>CAPA Owner</th>
+                                                    <th>CAPA Short Description</th>
+                                                    <th>CAPA Due Date</th>
+                                                    <th>CAPA Status</th>
+                                                    <th>Delay Justification</th>
+                                                    <th>Delay Category</th>
+                                                    <th>Remarks</th>
+                                                    <th>Action</th>
 
-                                                </tbody>
+                                                </tr>
+                                                    </thead>
+                                                                            <tbody id="observationDetail">
 
-                                            </table>
-                                        </div>
-                                    </div> 
-                                
-                                <div class="col-lg-12">
-                                    <div class="group-input">
-                                        <label for="Audit Attachments">Audit Attachments</label>
-                                        <div><small class="text-primary">Please Attach all relevant or supporting
-                                                documents</small></div>
-                                        <div class="file-attachment-field">
-                                            <div class="file-attachment-list" id="audit_attachment"></div>
-                                            <div class="add-btn">
-                                                <div>Add</div>
-                                                <input type="file" id="myfile" name="Audit_file[]"
-                                                    oninput="addMultipleFiles(this, 'audit_attachment')" multiple>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="Audit Comments">Audit Comments</label>
-                                        <textarea class="tiny" name="Audit_Comments1"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="button-block">
-                                <button type="submit" class="saveButton">Save</button>
-                                <button type="button" class="backButton" onclick="previousStep()">Back</button>
-                                <button type="button" class="nextButton" onclick="nextStep()">Next</button>
-                                <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
-                                        Exit </a> </button>
-                            </div>
-                        </div>
-                    </div>
+                                                                                <tr>
+                                                                                    <td><input disabled type="text" name="serial[]" value="1"></td>
+                                                                                    <td><input type="text" class="observation_detail" name="observation_detail[]"></td>
+                                                                                    <td><input type="text" class="referenceNo" name="referenceNo[]"></td>
+                                                                                    <td><input type="text" class="divisionCode" name="divisionCode[]"></td>
+                                                                                    <td><input type="text" class="auditingAgency" name="auditingAgency[]"></td>
+                                                                                    <td><input type="text" class="audittype" name="audittype[]"></td>
+                                                                                    <td><input type="text" class="auditStartDate" name="auditStartDate[]"></td>
+                                                                                    <td><input type="text" class="auditEndDate" name="auditEndDate[]"></td>
+                                                                                    <td><input type="text" class="auditor" name="auditor[]"></td>
+                                                                                    <td><input type="text" class="observationCategory" name="observationCategory[]"></td>
+                                                                                    <td><input type="text" class="observationType" name="observationType[]"></td>
+                                                                                    <td><input type="text" class="observationArea" name="observationArea[]"></td>
+                                                                                    <td><input type="text" class="observationAreaSubCat" name="observationAreaSubCat[]"></td>
+                                                                                    <td><input type="text" class="capaRequired" name="capaRequired[]"></td>
+                                                                                    <td><input type="text" class="capaOwner" name="capaOwner[]"></td>
+                                                                                    <td><input type="text" class="capaDescription" name="capaDescription[]"></td>
+                                                                                    <td><input type="text" class="capaDueDate" name="capaDueDate[]"></td>
+                                                                                    <td><input type="text" class="capaSatus" name="capaSatus[]"></td>
+                                                                                    <td><input type="text" class="delayJustification" name="delayJustification[]"></td>
+                                                                                    <td><input type="text" class="delayCategory" name="delayCategory[]"></td>
+                                                                                    <td><input type="text" class="remarks" name="remarks[]"></td>
+                                                                                    <td><input type="text" readonly class="Action" name="Action[]"></td>
+                                                                                </tr>                                                 
 
-                    <!-- Audit Response & Closure content -->
-                    <div id="CCForm5" class="inner-block cctabcontent">
-                        <div class="inner-block-content">
-                            <div class="row">
-                                <div class="sub-head">
-                                    Audit Response
-                                </div>
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="Remarks">Remarks</label>
-                                        <textarea class="tiny" name="Remarks"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="group-input">
-                                        <label for="Reference Recores">Reference Record</label>
-                                        <select multiple id="reference_record" name="refrence_record[]" id="">
-                                            {{-- <option value="">--Select---</option> --}}
-                                            @foreach ($old_record as $new)
-                                                <option value="{{ $new->id }}">
-                                                    {{ Helpers::getDivisionName($new->division_id) }}/IA/{{ date('Y') }}/{{ Helpers::recordFormat($new->record) }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="group-input">
-                                        <label for="Report Attachments">Report Attachments</label>
-                                        <div><small class="text-primary">Please Attach all relevant or supporting
-                                                documents</small></div>
-                                        {{-- <input type="file" id="myfile" name="report_file[]" multiple> --}}
-                                        {{-- <div class="file-attachment-field">
-                                            <div id="Audit_file_attachment"></div>
-                                            <input type="file" id="myfile" name="report_file[]"
-                                            oninput="addMultipleFiles(this, 'Audit_file_attachment')" multiple>
-                                        </div> --}}
-                                        <div class="file-attachment-field">
-                                            <div class="file-attachment-list" id="report_attachment"></div>
-                                            <div class="add-btn">
-                                                <div>Add</div>
-                                                <input type="file" id="myfile" name="report_file[]"
-                                                    oninput="addMultipleFiles(this, 'report_attachment')" multiple>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                                                            </tbody>
 
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="Audit Attachments">Audit Attachments</label>
-                                        <div><small class="text-primary">Please Attach all relevant or supporting
-                                                documents</small></div>
-                                        {{-- <input type="file" id="myfile" name="myfile[]" multiple> --}}
-                                        {{-- <div class="file-attachment-field">
-                                            <div id="myfile_attachment"></div>
-                                            <input type="file" id="myfile" name="myfile[]"
-                                            oninput="addMultipleFiles(this, 'myfile_attachment')" multiple>
-                                        </div> --}}
-                                        <div class="file-attachment-field">
-                                            <div class="file-attachment-list" id="myfile_attachment"></div>
-                                            <div class="add-btn">
-                                                <div>Add</div>
-                                                <input type="file" id="myfile" name="myfile[]"
-                                                    oninput="addMultipleFiles(this, 'myfile_attachment')" multiple>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="Audit Comments">Audit Comments</label>
-                                        <textarea class="tiny" name="Audit_Comments2"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="due_date_extension">Due Date Extension Justification</label>
-                                        <div><small class="text-primary">Please Mention justification if due date is
-                                                crossed</small></div>
-                                        <textarea class="tiny" name="due_date_extension"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="button-block">
-                                <button type="submit" class="saveButton">Save</button>
-                                <button type="button" class="backButton" onclick="previousStep()">Back</button>
-                                <button type="button" class="nextButton" onclick="nextStep()">Next</button>
-                                <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
-                                        Exit </a> </button>
-                            </div>
-                        </div>
-                    </div>
+                                                                        </table>
+                                                                    </div>
+                                                                </div> 
+                                                            
+                                                            <div class="col-lg-12">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Attachments">Audit Attachments</label>
+                                                                    <div><small class="text-primary">Please Attach all relevant or supporting
+                                                                            documents</small></div>
+                                                                    <div class="file-attachment-field">
+                                                                        <div class="file-attachment-list" id="audit_attachment"></div>
+                                                                        <div class="add-btn">
+                                                                            <div>Add</div>
+                                                                            <input type="file" id="myfile" name="Audit_file[]"
+                                                                                oninput="addMultipleFiles(this, 'audit_attachment')" multiple>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Comments">Audit Comments</label>
+                                                                    <textarea class="tiny" name="Audit_Comments1"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="button-block">
+                                                            <button type="submit" class="saveButton">Save</button>
+                                                            <button type="button" class="backButton" onclick="previousStep()">Back</button>
+                                                            <button type="button" class="nextButton" onclick="nextStep()">Next</button>
+                                                            <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
+                                                                    Exit </a> </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                    <!-- Activity Log content -->
-                    <div id="CCForm6" class="inner-block cctabcontent">
-                        <div class="inner-block-content">
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Schedule On">Schedule Audit By</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Schedule On">Schedule Audit On</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                            <div class="group-input">
-                                                <label for="Audit Schedule On">Comment</label>
-                                                <div class="static"></div>
-                                            </div>
-                                        </div>
-                                
-                                        <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Preparation Completed On"> Completed Audit Preparation
-                                            By</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Preparation Completed On">Completed Audit Preparation 
-                                            On</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                            <div class="group-input">
-                                                <label for="Audit Schedule On">Comment</label>
-                                                <div class="static"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Mgr.more Info Reqd By">Reject By</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Mgr.more Info Reqd On"> Reject On</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                            <div class="group-input">
-                                                <label for="Audit Schedule On">Comment</label>
-                                                <div class="static"></div>
-                                            </div>
-                                        </div>
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Cancelled By">Cancelled By</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Cancelled On">Cancelled On</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                            <div class="group-input">
-                                                <label for="Audit Schedule On">Comment</label>
-                                                <div class="static"></div>
-                                            </div>
-                                        </div>
-                                
-                                
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Observation Submitted By">Issue  Report By</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Observation Submitted On">Issue Report On</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Observation Submitted By">Comment</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                
-                                
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Lead More Info Reqd By">CAPA Plan Proposed By</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Lead More Info Reqd On">CAPA Plan Proposed On</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                            <div class="group-input">
-                                                <label for="Audit Schedule On">Comment</label>
-                                                <div class="static"></div>
-                                            </div>
-                                        </div>
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Lead More Info Reqd By">No CAPA Required By</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="group-input">
-                                        <label for="Audit Lead More Info Reqd On">No CAPA Required On</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                            <div class="group-input">
-                                                <label for="Audit Schedule On">Comment</label>
-                                                <div class="static"></div>
-                                            </div>
-                                        </div>
-                                <!-- <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="Audit Response Completed By">All CAPA Closed By</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="Audit Response Completed On">Audit Response Completed On</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="Response Feedback Verified By">Response Feedback Verified
-                                            By</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="Response Feedback Verified On">Response Feedback Verified
-                                            On</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for=" Rejected By">Rejected By</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="Rejected On">Rejected On</label>
-                                        <div class="static"></div>
-                                    </div>
-                                </div> -->
+                                                <!-- Audit Response & Closure content -->
+                                                <div id="CCForm5" class="inner-block cctabcontent">
+                                                    <div class="inner-block-content">
+                                                        <div class="row">
+                                                            <div class="sub-head">
+                                                                Audit Response
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="group-input">
+                                                                    <label for="Remarks">Remarks</label>
+                                                                    <textarea class="tiny" name="Remarks"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="group-input">
+                                                                    <label for="Reference Recores">Reference Record</label>
+                                                                    <select multiple id="reference_record" name="refrence_record[]" id="">
+                                                                        {{-- <option value="">--Select---</option> --}}
+                                                                        @foreach ($old_record as $new)
+                                                                            <option value="{{ $new->id }}">
+                                                                                {{ Helpers::getDivisionName($new->division_id) }}/IA/{{ date('Y') }}/{{ Helpers::recordFormat($new->record) }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12">
+                                                                <div class="group-input">
+                                                                    <label for="Report Attachments">Report Attachments</label>
+                                                                    <div><small class="text-primary">Please Attach all relevant or supporting
+                                                                            documents</small></div>
+                                                                    {{-- <input type="file" id="myfile" name="report_file[]" multiple> --}}
+                                                                    {{-- <div class="file-attachment-field">
+                                                                        <div id="Audit_file_attachment"></div>
+                                                                        <input type="file" id="myfile" name="report_file[]"
+                                                                        oninput="addMultipleFiles(this, 'Audit_file_attachment')" multiple>
+                                                                    </div> --}}
+                                                                    <div class="file-attachment-field">
+                                                                        <div class="file-attachment-list" id="report_attachment"></div>
+                                                                        <div class="add-btn">
+                                                                            <div>Add</div>
+                                                                            <input type="file" id="myfile" name="report_file[]"
+                                                                                oninput="addMultipleFiles(this, 'report_attachment')" multiple>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
-                            </div>
-                            <div class="button-block">
-                                <!-- <button type="submit" class="saveButton">Save</button> -->
-                                <button type="button" class="backButton" onclick="previousStep()">Back</button>
-                                <!-- <button type="submit">Submit</button> -->
-                                <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
-                                        Exit </a> </button>
-                            </div>
-                        </div>
-                    </div>
+                                                            <div class="col-12">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Attachments">Audit Attachments</label>
+                                                                    <div><small class="text-primary">Please Attach all relevant or supporting
+                                                                            documents</small></div>
+                                                                    {{-- <input type="file" id="myfile" name="myfile[]" multiple> --}}
+                                                                    {{-- <div class="file-attachment-field">
+                                                                        <div id="myfile_attachment"></div>
+                                                                        <input type="file" id="myfile" name="myfile[]"
+                                                                        oninput="addMultipleFiles(this, 'myfile_attachment')" multiple>
+                                                                    </div> --}}
+                                                                    <div class="file-attachment-field">
+                                                                        <div class="file-attachment-list" id="myfile_attachment"></div>
+                                                                        <div class="add-btn">
+                                                                            <div>Add</div>
+                                                                            <input type="file" id="myfile" name="myfile[]"
+                                                                                oninput="addMultipleFiles(this, 'myfile_attachment')" multiple>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Comments">Audit Comments</label>
+                                                                    <textarea class="tiny" name="Audit_Comments2"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="group-input">
+                                                                    <label for="due_date_extension">Due Date Extension Justification</label>
+                                                                    <div><small class="text-primary">Please Mention justification if due date is
+                                                                            crossed</small></div>
+                                                                    <textarea class="tiny" name="due_date_extension"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="button-block">
+                                                            <button type="submit" class="saveButton">Save</button>
+                                                            <button type="button" class="backButton" onclick="previousStep()">Back</button>
+                                                            <button type="button" class="nextButton" onclick="nextStep()">Next</button>
+                                                            <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
+                                                                    Exit </a> </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                </div>
-            </form>
+                                                <!-- Activity Log content -->
+                                                <div id="CCForm6" class="inner-block cctabcontent">
+                                                    <div class="inner-block-content">
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Schedule On">Schedule Audit By</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Schedule On">Schedule Audit On</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                        <div class="group-input">
+                                                                            <label for="Audit Schedule On">Comment</label>
+                                                                            <div class="static"></div>
+                                                                        </div>
+                                                                    </div>
+                                                            
+                                                                    <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Preparation Completed On"> Completed Audit Preparation
+                                                                        By</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Preparation Completed On">Completed Audit Preparation 
+                                                                        On</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                        <div class="group-input">
+                                                                            <label for="Audit Schedule On">Comment</label>
+                                                                            <div class="static"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Mgr.more Info Reqd By">Reject By</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Mgr.more Info Reqd On"> Reject On</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                        <div class="group-input">
+                                                                            <label for="Audit Schedule On">Comment</label>
+                                                                            <div class="static"></div>
+                                                                        </div>
+                                                                    </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Cancelled By">Cancelled By</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Cancelled On">Cancelled On</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                        <div class="group-input">
+                                                                            <label for="Audit Schedule On">Comment</label>
+                                                                            <div class="static"></div>
+                                                                        </div>
+                                                                    </div>
+                                                            
+                                                            
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Observation Submitted By">Issue  Report By</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Observation Submitted On">Issue Report On</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Observation Submitted By">Comment</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Lead More Info Reqd By">CAPA Plan Proposed By</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Lead More Info Reqd On">CAPA Plan Proposed On</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                        <div class="group-input">
+                                                                            <label for="Audit Schedule On">Comment</label>
+                                                                            <div class="static"></div>
+                                                                        </div>
+                                                                    </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Lead More Info Reqd By">No CAPA Required By</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Lead More Info Reqd On">No CAPA Required On</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-4">
+                                                                        <div class="group-input">
+                                                                            <label for="Audit Schedule On">Comment</label>
+                                                                            <div class="static"></div>
+                                                                        </div>
+                                                                    </div>
+                                                            <!-- <div class="col-lg-6">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Response Completed By">All CAPA Closed By</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="group-input">
+                                                                    <label for="Audit Response Completed On">Audit Response Completed On</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="group-input">
+                                                                    <label for="Response Feedback Verified By">Response Feedback Verified
+                                                                        By</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="group-input">
+                                                                    <label for="Response Feedback Verified On">Response Feedback Verified
+                                                                        On</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="group-input">
+                                                                    <label for=" Rejected By">Rejected By</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="group-input">
+                                                                    <label for="Rejected On">Rejected On</label>
+                                                                    <div class="static"></div>
+                                                                </div>
+                                                            </div> -->
 
-        </div>
-    </div>
+                                                        </div>
+                                                        <div class="button-block">
+                                                            <!-- <button type="submit" class="saveButton">Save</button> -->
+                                                            <button type="button" class="backButton" onclick="previousStep()">Back</button>
+                                                            <!-- <button type="submit">Submit</button> -->
+                                                            <button type="button"> <a href="{{ url('rcms/qms-dashboard') }}" class="text-white">
+                                                                    Exit </a> </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
 
 
     <style>
@@ -1236,6 +1328,179 @@
         });
     </script>
 
+
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+<script>
+    function importExcel() {
+        const fileInput = document.getElementById('file-input');
+        const file = fileInput.files[0];
+    
+        if (!file) {
+            alert('Please select a file first');
+            return;
+        }
+    
+        const reader = new FileReader();
+    
+        reader.onload = function(event) {
+            const data = new Uint8Array(event.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+    
+            populateTable(jsonData);
+        };
+    
+        reader.readAsArrayBuffer(file);
+    }
+    
+    function populateTable(data) {
+        const tbody = document.getElementById('observationDetail');
+        tbody.innerHTML = ''; // Clear existing table data
+    
+        data.forEach((row, index) => {
+            const tr = document.createElement('tr');
+    
+            Object.keys(row).forEach((key) => {
+                const td = document.createElement('td');
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.name = `${key}[${index}]`;
+                input.value = row[key];
+                td.appendChild(input);
+                tr.appendChild(td);
+            });
+    
+            tbody.appendChild(tr);
+        });
+    }
+    </script>
+            <script>
+                VirtualSelect.init({
+                    ele: '#Facility, #Group, #Audit, #Auditee , #reference_record'
+                });
+
+                function openCity(evt, cityName) {
+                    var i, cctabcontent, cctablinks;
+                    cctabcontent = document.getElementsByClassName("cctabcontent");
+                    for (i = 0; i < cctabcontent.length; i++) {
+                        cctabcontent[i].style.display = "none";
+                    }
+                    cctablinks = document.getElementsByClassName("cctablinks");
+                    for (i = 0; i < cctablinks.length; i++) {
+                        cctablinks[i].className = cctablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
+
+
+
+                function openCity(evt, cityName) {
+                    var i, cctabcontent, cctablinks;
+                    cctabcontent = document.getElementsByClassName("cctabcontent");
+                    for (i = 0; i < cctabcontent.length; i++) {
+                        cctabcontent[i].style.display = "none";
+                    }
+                    cctablinks = document.getElementsByClassName("cctablinks");
+                    for (i = 0; i < cctablinks.length; i++) {
+                        cctablinks[i].className = cctablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+
+                    // Find the index of the clicked tab button
+                    const index = Array.from(cctablinks).findIndex(button => button === evt.currentTarget);
+
+                    // Update the currentStep to the index of the clicked tab
+                    currentStep = index;
+                }
+
+                const saveButtons = document.querySelectorAll(".saveButton");
+                const nextButtons = document.querySelectorAll(".nextButton");
+                const form = document.getElementById("step-form");
+                const stepButtons = document.querySelectorAll(".cctablinks");
+                const steps = document.querySelectorAll(".cctabcontent");
+                let currentStep = 0;
+
+                function nextStep() {
+                    // Check if there is a next step
+                    if (currentStep < steps.length - 1) {
+                        // Hide current step
+                        steps[currentStep].style.display = "none";
+
+                        // Show next step
+                        steps[currentStep + 1].style.display = "block";
+
+                        // Add active class to next button
+                        stepButtons[currentStep + 1].classList.add("active");
+
+                        // Remove active class from current button
+                        stepButtons[currentStep].classList.remove("active");
+
+                        // Update current step
+                        currentStep++;
+                    }
+                }
+
+                function previousStep() {
+                    // Check if there is a previous step
+                    if (currentStep > 0) {
+                        // Hide current step
+                        steps[currentStep].style.display = "none";
+
+                        // Show previous step
+                        steps[currentStep - 1].style.display = "block";
+
+                        // Add active class to previous button
+                        stepButtons[currentStep - 1].classList.add("active");
+
+                        // Remove active class from current button
+                        stepButtons[currentStep].classList.remove("active");
+
+                        // Update current step
+                        currentStep--;
+                    }
+                }
+            </script>
+
+            <script>
+                document.getElementById('initiator_group').addEventListener('change', function() {
+                    var selectedValue = this.value;
+                    document.getElementById('initiator_group_code').value = selectedValue;
+                });
+            </script>
+                      <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const removeButtons = document.querySelectorAll('.remove-file');
+            
+                            removeButtons.forEach(button => {
+                                button.addEventListener('click', function () {
+                                    const fileName = this.getAttribute('data-file-name');
+                                    const fileContainer = this.closest('.file-container');
+            
+                                    // Hide the file container
+                                    if (fileContainer) {
+                                        fileContainer.style.display = 'none';
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                     <script>
+                        var maxLength = 255;
+                        $('#docname').keyup(function() {
+                            var textlen = maxLength - $(this).val().length;
+                            $('#rchars').text(textlen);});
+                    </script>
+  <script>
+    var maxLength = 255;
+    $('#docname').keyup(function() {
+        var textlen = maxLength - $(this).val().length;
+        $('#rchars').text(textlen);});
+</script>
 
     <script>
         VirtualSelect.init({
