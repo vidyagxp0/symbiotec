@@ -196,38 +196,52 @@ class RegulatoryController extends Controller
         $data3 = new RegulatoryGrid();
         $data3->audit_id = $internalAudit->id;
         $data3->type = "Regulatory_Inspection";
-        if (!empty($request->observation_detail)) {
-            $data3->observation_detail = serialize($request->observation_detail);
+        if (!empty($request->divisionCode)) {
+            $data3->divisionCode = serialize($request->divisionCode);
+        }
+        if (!empty($request->siteId)) {
+            $data3->siteId = serialize($request->siteId);
         }
         if (!empty($request->referenceNo)) {
             $data3->referenceNo = serialize($request->referenceNo);
         }
-        if (!empty($request->divisionCode)) {
-            $data3->divisionCode = serialize($request->divisionCode);
+        if (!empty($request->observationShortDesc)) {
+            $data3->observationShortDesc = serialize($request->observationShortDesc);
+        }
+        if (!empty($request->observation_detail)) {
+            $data3->observation_detail = serialize($request->observation_detail);
+        }
+        if (!empty($request->observationCategory)) {
+            $data3->observationCategory = serialize($request->observationCategory);
+        }
+        if (!empty($request->observationSubCat)) {
+            $data3->observationSubCat = serialize($request->observationSubCat);
+        }
+        if (!empty($request->frequency)) {
+            $data3->frequency = serialize($request->frequency);
         }
         if (!empty($request->auditingAgency)) {
             $data3->auditingAgency = serialize($request->auditingAgency);
         }
-        if (!empty($request->audittype)) {
+         if (!empty($request->audittype)) {
             $data3->audittype = serialize($request->audittype);
         }
-        if (!empty($request->auditStartDate)) {
+         if (!empty($request->auditStartDate)) {
             $data3->auditStartDate = serialize($request->auditStartDate);
         }
-        // dd($request->auditEndDate);
         if (!empty($request->auditEndDate)) {
             $data3->auditEndDate = serialize($request->auditEndDate);
         }
         if (!empty($request->auditor)) {
             $data3->auditor = serialize($request->auditor);
         }
-        if (!empty($request->observationCategory)) {
-            $data3->observationCategory = serialize($request->observationCategory);
+        if (!empty($request->observation_category)) {
+            $data3->observation_category = serialize($request->observation_category);
         }
-         if (!empty($request->observationType)) {
+        if (!empty($request->observationType)) {
             $data3->observationType = serialize($request->observationType);
         }
-         if (!empty($request->observationArea)) {
+        if (!empty($request->observationArea)) {
             $data3->observationArea = serialize($request->observationArea);
         }
         if (!empty($request->observationAreaSubCat)) {
@@ -257,6 +271,7 @@ class RegulatoryController extends Controller
         if (!empty($request->remarks)) {
             $data3->remarks = serialize($request->remarks);
         }
+
         $data3->save();
 
         // -----------------grid ---- Observation Details
@@ -1217,50 +1232,40 @@ if (!empty($internalAudit->due_date_extension)) {
         $internalAudit->update();
         // dd($internalAudit);
 
-        
-        $data3 = RegulatoryGrid::where('audit_id', $internalAudit->id)->where('type', 'Regulatory_Inspection')->first();
-        if($data3){
-            $fields = [
-                'audit' => 'area_of_audit',
-                'scheduled_start_date' => 'start_date',
-                'scheduled_start_time' => 'start_time',
-                'scheduled_end_date' => 'end_date',
-                'scheduled_end_time' => 'end_time',
-                'auditor' => 'auditor',
-                'auditee' => 'auditee',
-                'remark' => 'remark'
-            ];
-            foreach ($fields as $requestField => $modelField) {
-                if (!empty($request->$requestField)) {
-                    $data3->$modelField = serialize($request->$requestField);
-                }
-            }
-            
-            $data3->update();
-            // dd($data3);
-        }else{
+
+        $data4 = RegulatoryGrid::where('audit_id',$internalAudit->id)->where('type','Regulatory_Inspection')->first();
+
+        if (!empty($request->divisionCode)) {
+            $data4->divisionCode = serialize($request->divisionCode);
         }
-        
-        // dd($data3);
-
-        $data4 = RegulatoryGrid::where('audit_id',$internalAudit->id)->where('type','Observation_field_Auditee')->first();
-
-        if (!empty($request->observation_detail)) {
-            $data4->observation_detail = serialize($request->observation_detail);
+        if (!empty($request->siteId)) {
+            $data4->siteId = serialize($request->siteId);
         }
         if (!empty($request->referenceNo)) {
             $data4->referenceNo = serialize($request->referenceNo);
         }
-        if (!empty($request->divisionCode)) {
-            $data4->divisionCode = serialize($request->divisionCode);
+        if (!empty($request->observationShortDesc)) {
+            $data4->observationShortDesc = serialize($request->observationShortDesc);
+        }
+        if (!empty($request->observation_detail)) {
+            $data4->observation_detail = serialize($request->observation_detail);
+        }
+        if (!empty($request->observationCategory)) {
+            $data4->observationCategory = serialize($request->observationCategory);
+        }
+        if (!empty($request->observationSubCat)) {
+            $data4->observationSubCat = serialize($request->observationSubCat);
+        }
+        if (!empty($request->frequency)) {
+            $data4->frequency = serialize($request->frequency);
         }
         if (!empty($request->auditingAgency)) {
             $data4->auditingAgency = serialize($request->auditingAgency);
         }
-        if (!empty($request->audittype)) {
+         if (!empty($request->audittype)) {
             $data4->audittype = serialize($request->audittype);
         }
-        if (!empty($request->auditStartDate)) {
+         if (!empty($request->auditStartDate)) {
             $data4->auditStartDate = serialize($request->auditStartDate);
         }
         if (!empty($request->auditEndDate)) {
@@ -1269,13 +1274,13 @@ if (!empty($internalAudit->due_date_extension)) {
         if (!empty($request->auditor)) {
             $data4->auditor = serialize($request->auditor);
         }
-        if (!empty($request->observationCategory)) {
-            $data4->observationCategory = serialize($request->observationCategory);
+        if (!empty($request->observation_category)) {
+            $data4->observation_category = serialize($request->observation_category);
         }
-         if (!empty($request->observationType)) {
+        if (!empty($request->observationType)) {
             $data4->observationType = serialize($request->observationType);
         }
-         if (!empty($request->observationArea)) {
+        if (!empty($request->observationArea)) {
             $data4->observationArea = serialize($request->observationArea);
         }
         if (!empty($request->observationAreaSubCat)) {
