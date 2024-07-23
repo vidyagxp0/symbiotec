@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RegulatoryInspection;
+use App\Models\CriticalAction;
 use Illuminate\Http\Request;
 use App\Models\RecordNumber;
 use Helpers;
@@ -25,6 +26,8 @@ class RegulatoryDashboardController extends Controller
 
         $RegulatoryInspection = RegulatoryInspection::orderByDesc('id')->get();
         $RegulatoryAction = RegulatoryAction::orderByDesc('id')->get();
+        $CriticalAction = CriticalAction::orderByDesc('id')->get();
+
         foreach ($RegulatoryInspection as $data) {
             $data->create = Carbon::parse($data->created_at)->format('d-M-Y h:i A');
             
@@ -67,6 +70,28 @@ class RegulatoryDashboardController extends Controller
                 "date_close" => $data->updated_at,
             ]);
         }
+        foreach ($CriticalAction as $data) {
+            $data->create = Carbon::parse($data->created_at)->format('d-M-Y h:i A');
+            
+            array_push($table, [
+                "id" => $data->id,
+                "parent" => $data->cc_id ? $data->cc_id : "-",
+                "record" => $data->record,
+                "due_date" => $data->due_date,
+                "type" => "Critical Action",
+                "parent_id" => $data->parent_id,
+                "parent_type" => $data->parent_type,
+                "division_id" => $data->division_id,
+                "short_description" => $data->short_description ? $data->short_description : "-",
+                "initiator_id" => $data->initiator_id,
+                "initiated_through" => $data->initiated_through,
+                "intiation_date" => $data->intiation_date,
+                "stage" => $data->status,
+                "date_open" => $data->created_at,
+                "date_close" => $data->updated_at,
+            ]);
+        }
+
         $table  = collect($table)->sortBy('record')->reverse()->toArray();
         $datag = $this->paginate($table);
         $uniqueProcessNames = QMSProcess::select('process_name')->distinct()->pluck('process_name');

@@ -406,7 +406,7 @@
                                 <div class="col-lg-6">
                                     <div class="group-input" id="initiated_through_req">
                                         <label for="If Other">Others<span class="text-danger d-none">*</span></label>
-                                        <textarea name="initiated_if_other"></textarea>
+                                        <textarea  name="initiated_if_other"></textarea>
                                     </div>
                                 </div>
                                 {{-- <div class="col-lg-6">
@@ -489,7 +489,7 @@
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="Initial Comments">Description</label>
-                                        <textarea name="initial_comments"></textarea>
+                                        <textarea class="tiny" name="initial_comments"></textarea>
                                     </div>
                                 </div>
                                
@@ -678,7 +678,7 @@
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="Comments(If Any)">Comments(If Any)</label>
-                                        <textarea name="if_comments"></textarea>
+                                        <textarea class="tiny" name="if_comments"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -754,26 +754,26 @@
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="Supplier Auditor Details">Supplier Auditor Details</label>
-                                        <textarea name="Auditor_Details"></textarea>
+                                        <textarea class="tiny" name="Auditor_Details"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="Supplier Auditing Agency">Supplier Auditing Agency</label>
-                                        <textarea name="External_Auditing_Agency"></textarea>
+                                        <textarea class="tiny" name="External_Auditing_Agency"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="Relevant Guidelines / Industry Standards">Relevant Guidelines /
                                             Industry Standards</label>
-                                        <textarea name="Relevant_Guidelines"></textarea>
+                                        <textarea class="tiny" name="Relevant_Guidelines"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="QA Comments">QA Comments</label>
-                                        <textarea name="QA_Comments"></textarea>
+                                        <textarea class="tiny" name="QA_Comments"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -822,7 +822,7 @@
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="Comments">Comments</label>
-                                        <textarea name="Comments"></textarea>
+                                        <textarea class="tiny" name="Comments"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -911,7 +911,7 @@
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="Audit Comments">Audit Comments</label>
-                                        <textarea name="Audit_Comments1"></textarea>
+                                        <textarea class="tiny" name="Audit_Comments1"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -935,7 +935,7 @@
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="Remarks">Remarks</label>
-                                        <textarea name="Remarks"></textarea>
+                                        <textarea class="tiny" name="Remarks"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
@@ -997,7 +997,7 @@
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="Audit Comments">Audit Comments</label>
-                                        <textarea name="Audit_Comments2"></textarea>
+                                        <textarea class="tiny" name="Audit_Comments2"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -1005,7 +1005,7 @@
                                         <label for="due_date_extension">Due Date Extension Justification</label>
                                         <div><small class="text-primary">Please Mention justification if due date is
                                                 crossed</small></div>
-                                        <textarea name="due_date_extension"></textarea>
+                                        <textarea class="tiny" name="due_date_extension"></textarea>
                                     </div>
                                 </div>
                             </div>

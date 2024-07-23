@@ -25,6 +25,8 @@ use App\Http\Controllers\DocumentContentController;
 use App\Http\Controllers\ErrataController;
 use App\Http\Controllers\ExtensionNewController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\CriticalActionController;
+
 // use App\Http\Controllers\tms\JobTrainingController;
 use App\Http\Controllers\InductionTrainingcontroller;
 use App\Http\Controllers\OOSMicroController;
@@ -626,3 +628,15 @@ Route::get('ExternalAuditTrialDetails/{id}', [RegulatoryController::class, 'Audi
 Route::post('child_external_Supplier/{id}', [RegulatoryController::class, 'child_external_Supplier'])->name('child_external_Supplier');
 Route::get('auditReport/{id}', [RegulatoryController::class, 'auditReport'])->name('SupplierAuditTrialReport');
 Route::get('rcms/regulatorySingleReport/{id}', [RegulatoryController::class, 'regulatorySingleReport'])->name('regulatorySingleReport');
+
+
+//=================Critical-Action================================
+Route::get('critical-action', [CriticalActionController::class,'index'])->name('critical-action');
+Route::post('critical-action-store', [CriticalActionController::class,'store'])->name('critical-action-store');
+Route::get('critical-action-view/{id}', [CriticalActionController::class,'show'])->name('critical-action-view');
+Route::put('critical-action-update/{id}', [CriticalActionController::class,'update'])->name('critical-action-update');
+Route::post('send-At/{id}', [CriticalActionController::class, 'stageChange']);
+Route::post('critical-action-cancelstage/{id}', [CriticalActionController::class, 'actionStageCancel']);
+Route::get('critical-action-audittrialshow/{id}', [CriticalActionController::class, 'actionItemAuditTrialShow'])->name('showActionItemAuditTrial');
+Route::get('critical-action-SingleReport/{id}', [CriticalActionController::class, 'singleReport'])->name('actionitemSingleReport');
+Route::get('critical-action-AuditReport/{id}', [CriticalActionController::class, 'auditReport'])->name('actionitemAuditReport');

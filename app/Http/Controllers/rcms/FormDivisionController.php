@@ -88,7 +88,7 @@ class FormDivisionController extends Controller
             return redirect('rcms/regulatory-action-task-create');
         }
         elseif ($request->process_name == "Critical Action") {
-            return redirect('regulatory-action-task-create');
+            return redirect('critical-action');
         }
     }
 
