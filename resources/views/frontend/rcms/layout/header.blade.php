@@ -119,7 +119,7 @@
                                     class="w-100 h-100" style="scale: 5; pointer-events: none;">
                             </div>
                             <div class="logo">
-                                {{-- <img src="{{ asset('user/images/agio.jpg') }}" alt="..." class="w-100 h-100"> --}}
+                                 <img src="https://sunpharma.com/wp-content/uploads/2020/12/logo.png" alt="..." class="w-100 h-100"> 
                             </div>
                         </div>
                         <div class="icon-grid">
