@@ -102,7 +102,7 @@
                                         <th>Parent ID</th>
                                         <th>Division</th>
                                         <th>Process</th>
-                                        <th>Initiated Through</th>
+                                        {{-- <th>Initiated Through</th> --}}
                                         <th class="td_desc">Short Description</th>
                                         <th>Date Opened</th>
                                         <th>Originator</th>
@@ -177,11 +177,11 @@
                                                 {{ $datas->type }}
                                             </td>
 
-                                            <td class="viewdetails" data-id="{{ $datas->id }}"
+                                            {{-- <td class="viewdetails" data-id="{{ $datas->id }}"
                                                 data-type="{{ $datas->type }}" data-bs-toggle="modal"
                                                 data-bs-target="#record-modal">
                                                 {{ ucwords(str_replace('_', ' ', $datas->initiated_through)) }}
-                                            </td>
+                                            </td> --}}
 
                                             <td id="short_width" class="viewdetails" data-id="{{ $datas->id }}"
                                                 data-type="{{ $datas->type }}" data-bs-toggle="modal"

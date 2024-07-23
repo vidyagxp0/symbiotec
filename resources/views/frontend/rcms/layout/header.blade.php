@@ -194,7 +194,9 @@
                         <div>
                                     <a href="/rcms/regulatory_dashboard">Regulatory Inspection</a>
                                     </div> 
-                                   
+                                    <div>
+                                        <a href="/rcms/Compliance_dashboard">Compliance Dashboard</a>
+                                        </div> 
                         @if (Auth::user())
                             @if (Helpers::checkRoles(3) || Helpers::checkRoles(1) || Helpers::checkRoles(2))
                                 <div>
