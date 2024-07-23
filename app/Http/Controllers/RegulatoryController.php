@@ -1015,7 +1015,7 @@ if (!empty($internalAudit->due_date_extension)) {
         }
 
         toastr()->success("Record is Create Successfully");
-        return redirect(url('rcms/qms-dashboard'));
+        return redirect(url('rcms/regulatory_dashboard'));
     }
     
     public function show($id)

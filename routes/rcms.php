@@ -415,6 +415,8 @@ Route::group(['prefix' => 'rcms'], function () {
 
             // Regulatory inspection==================
             Route::view('Compliance_dashboard', 'frontend.rcms.Compliance_dashboard');
+            Route::view('gmp_inspection_databases', 'frontend.rcms.gmp_inspection_databases');
+
             Route::get('regulatory_dashboard', [RegulatoryDashboardController::class, 'index'])->name('regulatory_dashboard');    
 
             /********************* Incident Routes Starts *******************/
