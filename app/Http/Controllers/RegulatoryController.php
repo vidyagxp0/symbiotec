@@ -214,6 +214,10 @@ class RegulatoryController extends Controller
         if (!empty($request->auditStartDate)) {
             $data3->auditStartDate = serialize($request->auditStartDate);
         }
+        // dd($request->auditEndDate);
+        if (!empty($request->auditEndDate)) {
+            $data3->auditEndDate = serialize($request->auditEndDate);
+        }
         if (!empty($request->auditor)) {
             $data3->auditor = serialize($request->auditor);
         }
@@ -1258,6 +1262,9 @@ if (!empty($internalAudit->due_date_extension)) {
         }
         if (!empty($request->auditStartDate)) {
             $data4->auditStartDate = serialize($request->auditStartDate);
+        }
+        if (!empty($request->auditEndDate)) {
+            $data4->auditEndDate = serialize($request->auditEndDate);
         }
         if (!empty($request->auditor)) {
             $data4->auditor = serialize($request->auditor);

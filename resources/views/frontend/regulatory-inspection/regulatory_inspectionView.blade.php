@@ -63,6 +63,7 @@ function addMultipleFiles(input, block_id) {
                         '<td><input type="text" name="auditingAgency['+index+']"></td>' +
                         '<td><input type="text" name="audittype['+index+']"></td>' +
                         '<td><input type="text" name="auditStartDate['+index+']"></td>' +
+                        '<td><input type="text" name="auditEndDate['+index+']"></td>' +
                         '<td><input type="text" name="auditor['+index+']"></td>' +
                         '<td><input type="text" name="observationCategory['+index+']"></td>' +
                         '<td><input type="text" name="observationType['+index+']"></td>' +
@@ -1148,7 +1149,10 @@ function addMultipleFiles(input, block_id) {
                                                     </div>
                                             </div>
                                         </div>
-                                        <input type="file" id="file-input" /> <button type="button" onclick="importExcel()">Import Observations</button>
+                                        <div class="col-lg-6">
+                                            <input type="file" id="file-input" />
+                                            <button type="button" onclick="importExcel()">Import Observations</button>
+                                        </div>
                                         <div class="col-12">
                                             <div class="group-input">
                                                 <label for="audit-agenda-grid">
@@ -1196,7 +1200,8 @@ function addMultipleFiles(input, block_id) {
                                                                     <td><input type="text" name="divisionCode[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->divisionCode)[$key] ? unserialize($sgrid->divisionCode)[$key]: "" }}"></td>
                                                                     <td><input type="text" name="auditingAgency[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditingAgency)[$key] ? unserialize($sgrid->auditingAgency)[$key]: "" }}"></td>
                                                                     <td><input type="text" name="audittype[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->audittype)[$key] ? unserialize($sgrid->audittype)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="auditStartDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditStartDate)[$key] ? unserialize($sgrid->auditStartDate)[$key]: "" }}"></td>                        
+                                                                    <td><input type="text" name="auditStartDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditStartDate)[$key] ? unserialize($sgrid->auditStartDate)[$key]: "" }}"></td> 
+                                                                    <td><input type="text" name="auditEndDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditEndDate)[$key] ? unserialize($sgrid->auditEndDate)[$key]: "" }}"></td>                       
                                                                     <td><input type="text" name="auditor[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditor)[$key] ? unserialize($sgrid->auditor)[$key]: "" }}"></td>
                                                                     <td><input type="text" name="observationCategory[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationCategory)[$key] ? unserialize($sgrid->observationCategory)[$key]: "" }}"></td>
                                                                     <td><input type="text" name="observationType[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationType)[$key] ? unserialize($sgrid->observationType)[$key]: "" }}"></td>
@@ -1210,6 +1215,7 @@ function addMultipleFiles(input, block_id) {
                                                                     <td><input type="text" name="delayJustification[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->delayJustification)[$key] ? unserialize($sgrid->delayJustification)[$key]: "" }}"></td>
                                                                     <td><input type="text" name="delayCategory[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->delayCategory)[$key] ? unserialize($sgrid->delayCategory)[$key]: "" }}"></td>
                                                                     <td><input type="text" name="remarks[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->remarks)[$key] ? unserialize($sgrid->remarks)[$key]: "" }}"></td>
+                                                                    <td><input type="text" readonly name="Action[]" >
 
                                                                 </tr>
                                                                 @endforeach

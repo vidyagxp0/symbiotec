@@ -102,25 +102,26 @@
                     var html =
                         '<tr>' +
                         '<td><input disabled type="text" name="serial_number[]" value="' + serialNumber + '"></td>' +
-                        '<td><input type="text" name="observation_detail[]"></td>' +
-                        '<td><input type="text" name="referenceNo[]"></td>' +
-                        '<td><input type="text" name="divisionCode[]"></td>' +
-                        '<td><input type="text" name="auditingAgency[]"></td>' +
-                        '<td><input type="text" name="audittype[]"></td>' +
-                        '<td><input type="text" name="auditStartDate[]"></td>' +
-                        '<td><input type="text" name="auditor[]"></td>' +
-                        '<td><input type="text" name="observationCategory[]"></td>' +
-                        '<td><input type="text" name="observationType[]"></td>' +
-                        '<td><input type="text" name="observationArea[]"></td>' +
-                        '<td><input type="text" name="observationAreaSubCat[]"></td>' +
-                        '<td><input type="text" name="capaRequired[]"></td>' +
-                        '<td><input type="text" name="capaOwner[]"></td>' +
-                        '<td><input type="text" name="capaDescription[]"></td>' +
-                        '<td><input type="text" name="capaDueDate[]"></td>' +
-                        '<td><input type="text" name="capaSatus[]"></td>' +
-                        '<td><input type="text" name="delayJustification[]"></td>' +
-                        '<td><input type="text" name="delayCategory[]"></td>' +
-                        '<td><input type="text" name="remarks[]"></td>' +
+                        '<td><input type="text" name="observation_detail['+index+']"></td>' +
+                        '<td><input type="text" name="referenceNo['+index+']"></td>' +
+                        '<td><input type="text" name="divisionCode['+index+']"></td>' +
+                        '<td><input type="text" name="auditingAgency['+index+']"></td>' +
+                        '<td><input type="text" name="audittype['+index+']"></td>' +
+                        '<td><input type="text" name="auditStartDate['+index+']"></td>' +
+                        '<td><input type="text" name="auditEndDate['+index+']"></td>' +
+                        '<td><input type="text" name="auditor['+index+']"></td>' +
+                        '<td><input type="text" name="observationCategory['+index+']"></td>' +
+                        '<td><input type="text" name="observationType['+index+']"></td>' +
+                        '<td><input type="text" name="observationArea['+index+']"></td>' +
+                        '<td><input type="text" name="observationAreaSubCat['+index+']"></td>' +
+                        '<td><input type="text" name="capaRequired['+index+']"></td>' +
+                        '<td><input type="text" name="capaOwner['+index+']"></td>' +
+                        '<td><input type="text" name="capaDescription['+index+']"></td>' +
+                        '<td><input type="text" name="capaDueDate['+index+']"></td>' +
+                        '<td><input type="text" name="capaSatus['+index+']"></td>' +
+                        '<td><input type="text" name="delayJustification['+index+']"></td>' +
+                        '<td><input type="text" name="delayCategory['+index+']"></td>' +
+                        '<td><input type="text" name="remarks['+index+']"></td>' +
                         '<td><input type="text" name="Action[]" readonly></td>' +
                         '</tr>';
 
@@ -163,8 +164,7 @@
                     '<td><input type="text" name="auditee_response[]"></td>' +
                     '<td><input type="text" name="observation_id[]"></td>' +
                     '<td><input type="text" name="observation_description[]"></td>' +
-                    '<td><input type="text" name="area[]"></td>' +
-                    
+                    '<td><input type="text" name="area[]"></td>' +                    
                     '<td><button type="button" class="removeRowBtn">Remove</button></td>' +
                     '</tr>';
                 return html;
@@ -911,7 +911,10 @@
                                     </div>
                                 </div>
                                 
-                                <input type="file" id="file-input" /> <button type="button" onclick="importExcel()">Import Observations</button>
+                                <div class="col-lg-6">
+                                    <input type="file" id="file-input" />
+                                    <button type="button" onclick="importExcel()">Import Observations</button>
+                                </div>
                                 <div class="group-input">
                                     <label for="audit-agenda-grid">
                                         Observation Details
@@ -949,7 +952,7 @@
 
                                                 </tr>
                                                     </thead>
-                                                                            <tbody>
+                                                                            <tbody id="observationDetail">
 
                                                                                 <tr>
                                                                                     <td><input disabled type="text" name="serial[]" value="1"></td>
@@ -959,6 +962,7 @@
                                                                                     <td><input type="text" class="auditingAgency" name="auditingAgency[]"></td>
                                                                                     <td><input type="text" class="audittype" name="audittype[]"></td>
                                                                                     <td><input type="text" class="auditStartDate" name="auditStartDate[]"></td>
+                                                                                    <td><input type="text" class="auditEndDate" name="auditEndDate[]"></td>
                                                                                     <td><input type="text" class="auditor" name="auditor[]"></td>
                                                                                     <td><input type="text" class="observationCategory" name="observationCategory[]"></td>
                                                                                     <td><input type="text" class="observationType" name="observationType[]"></td>
@@ -972,6 +976,7 @@
                                                                                     <td><input type="text" class="delayJustification" name="delayJustification[]"></td>
                                                                                     <td><input type="text" class="delayCategory" name="delayCategory[]"></td>
                                                                                     <td><input type="text" class="remarks" name="remarks[]"></td>
+                                                                                    <td><input type="text" readonly class="Action" name="Action[]"></td>
                                                                                 </tr>                                                 
 
                                                                             </tbody>
