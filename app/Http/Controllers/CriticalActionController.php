@@ -488,6 +488,9 @@ class CriticalActionController extends Controller
         // ----------------Action History--------------
 
         if ($lastopenState->title != $openState->title || !empty($request->title_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Title')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Title';
@@ -498,14 +501,17 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name =  $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
 
         if ($lastopenState->dept != $openState->dept || !empty($request->dept_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Responsible Department')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Responsible Department';
@@ -516,13 +522,16 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = $lastopenState->status;
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }  
         if ($lastopenState->assign_to != $openState->assign_to || !empty($request->assign_to_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Assigned To')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Assigned To';
@@ -533,14 +542,17 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }  
           
         if ($lastopenState->Reference_Recores1 != $openState->Reference_Recores1 || !empty($request->Reference_Recores1_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Action Item Related Records')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Action Item Related Records';
@@ -551,14 +563,17 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
 
         if ($lastopenState->short_description != $openState->short_description || !empty($request->short_description_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Short Description')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Short Description';
@@ -569,13 +584,16 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
         if ($lastopenState->description != $openState->description || !empty($request->description_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Description')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Description';
@@ -586,13 +604,16 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
         if ($lastopenState->hod_preson != $openState->hod_preson || !empty($request->hod_preson_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'HOD Persons')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'HOD Persons';
@@ -603,13 +624,16 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
         if ($lastopenState->initiatorGroup != $openState->initiatorGroup || !empty($request->initiatorGroup_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Inititator Group')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
 
@@ -621,13 +645,16 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
         if ($lastopenState->action_taken != $openState->action_taken || !empty($request->action_taken_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Action Taken')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Action Taken';
@@ -638,9 +665,15 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
             $history->save();
         }
         if ($lastopenState->start_date != $openState->start_date || !empty($request->start_date_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Actual Start Date')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Actual Start Date';
@@ -651,13 +684,16 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-             $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+             $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
 
             $history->save();
         }
         if ($lastopenState->end_date != $openState->end_date || !empty($request->end_date_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Actual End Date')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Actual End Date';
@@ -668,13 +704,16 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
         if ($lastopenState->comments != $openState->comments || !empty($request->comments_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Comments')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Comments';
@@ -685,13 +724,16 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
         if ($lastopenState->qa_comments != $openState->qa_comments || !empty($request->qa_comments_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'QA Review Comments')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'QA Review Comments';
@@ -702,13 +744,16 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
         if ($lastopenState->due_date_extension != $openState->due_date_extension || !empty($request->due_date_extension_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'QA Review Comments')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'QA Review Comments';
@@ -719,13 +764,16 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
         if ($lastopenState->file_attach != $openState->file_attach || !empty($request->file_attach_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'File Attachments')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'File Attachments';
@@ -736,9 +784,15 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
             $history->save();
         }
         if ($lastopenState->Support_doc != $openState->Support_doc || !empty($request->Support_doc_comment)) {
+            $lastDocumentAuditTrail = CriticalActionAuditTrail::where('cc_id', $openState->id)
+            ->where('activity_type', 'Supporting Documents')
+            ->exists();
             $history = new CriticalActionAuditTrail;
             $history->cc_id = $id;
             $history->activity_type = 'Supporting Documents';
@@ -749,9 +803,9 @@ class CriticalActionController extends Controller
             $history->user_name = Auth::user()->name;
             $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
             $history->origin_state = $lastopenState->status;
-            $history->change_to = "Opened";
-            $history->change_from = "Initiator";
-            $history->action_name = "store";
+            $history->change_to = "Not Applicable";
+            $history->change_from = $lastopenState->status;
+            $history->action_name = $lastDocumentAuditTrail ? 'Update' : 'New';
    
             $history->save();
         }
@@ -809,13 +863,17 @@ class CriticalActionController extends Controller
                         $history = new CriticalActionAuditTrail;
                         $history->cc_id = $id;
                         $history->activity_type = 'Activity Log';
+                        $history->action = 'Submit';
                         $history->current = $changeControl->submitted_by;
                         $history->comment = $request->comment;
                         $history->user_id = Auth::user()->id;
                         $history->user_name = Auth::user()->name;
                         $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
                         $history->origin_state = $lastopenState->status;
-                        $history->stage = "Submitted";
+                        $history->stage = "2";
+                        $history->change_to = "Work In Progress";
+                        $history->change_from = "Opened";
+                        $history->action_name = 'Not Applicable';
                         $history->save();
                     $changeControl->update();
                     $history = new CriticalActionHistory();
@@ -858,6 +916,7 @@ class CriticalActionController extends Controller
                       $history = new CriticalActionAuditTrail;
                         $history->cc_id = $id;
                         $history->activity_type = 'Activity Log';
+                        $history->action = 'Complete';
                         $history->previous = $lastopenState->completed_by;
                         $history->current = $changeControl->completed_by;
                         $history->comment = $request->comment;
@@ -865,7 +924,10 @@ class CriticalActionController extends Controller
                         $history->user_name = Auth::user()->name;
                         $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
                         $history->origin_state = $lastopenState->status;
-                        $history->stage = "Completed";
+                        $history->stage = "3";
+                        $history->change_to = "Closed-Done";
+                        $history->change_from = "Work In Progress";
+                        $history->action_name = 'Not Applicable';
                         $history->save();
                 $changeControl->update();
                 $history = new CriticalActionHistory();
@@ -921,13 +983,17 @@ class CriticalActionController extends Controller
                         $history = new CriticalActionAuditTrail;
                         $history->cc_id = $id;
                         $history->activity_type = 'Activity Log';
+                        $history->action = 'Submit';
                         $history->current = $changeControl->cancelled_by;
                         $history->comment = $request->comment;
                         $history->user_id = Auth::user()->id;
                         $history->user_name = Auth::user()->name;
                         $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
                         $history->origin_state = $lastopenState->status;
-                        $history->stage = "Cancelled";
+                        $history->stage = "0";
+                        $history->change_to = "Cancelled";
+                        $history->change_from = "Opened";
+                        $history->action_name = 'Not Applicable';
                         $history->save();
             $changeControl->update();
             $history = new CriticalActionHistory();
@@ -956,7 +1022,7 @@ class CriticalActionController extends Controller
             //          } 
             //       }
             toastr()->success('Document Sent');
-            return back('critical-action-view/'.$id);
+            return back();
         }
 
         if ($changeControl->stage == 2) {
@@ -968,6 +1034,7 @@ class CriticalActionController extends Controller
 
                         $history = new CriticalActionAuditTrail;
                         $history->cc_id = $id;
+                        $history->action = 'More Information Required';
                         $history->activity_type = 'Activity Log';
                         $history->current = $changeControl->more_information_required_by;
                         $history->comment = $request->comment;
@@ -975,7 +1042,10 @@ class CriticalActionController extends Controller
                         $history->user_name = Auth::user()->name;
                         $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
                         $history->origin_state = $lastopenState->status;
-                        $history->stage = "More Information Required";
+                        $history->stage = "1";
+                        $history->change_to = "Opened";
+                        $history->change_from = "Work In Progress";
+                        $history->action_name = 'Not Applicable';
                         $history->save();
             $changeControl->update();
             $history = new CriticalActionHistory();
