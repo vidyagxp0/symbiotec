@@ -102,25 +102,31 @@
                     var html =
                         '<tr>' +
                         '<td><input disabled type="text" name="serial_number[]" value="' + serialNumber + '"></td>' +
-                        '<td><input type="text" name="observation_detail[]"></td>' +
-                        '<td><input type="text" name="referenceNo[]"></td>' +
-                        '<td><input type="text" name="divisionCode[]"></td>' +
-                        '<td><input type="text" name="auditingAgency[]"></td>' +
-                        '<td><input type="text" name="audittype[]"></td>' +
-                        '<td><input type="text" name="auditStartDate[]"></td>' +
-                        '<td><input type="text" name="auditor[]"></td>' +
-                        '<td><input type="text" name="observationCategory[]"></td>' +
-                        '<td><input type="text" name="observationType[]"></td>' +
-                        '<td><input type="text" name="observationArea[]"></td>' +
-                        '<td><input type="text" name="observationAreaSubCat[]"></td>' +
-                        '<td><input type="text" name="capaRequired[]"></td>' +
-                        '<td><input type="text" name="capaOwner[]"></td>' +
-                        '<td><input type="text" name="capaDescription[]"></td>' +
-                        '<td><input type="text" name="capaDueDate[]"></td>' +
-                        '<td><input type="text" name="capaSatus[]"></td>' +
-                        '<td><input type="text" name="delayJustification[]"></td>' +
-                        '<td><input type="text" name="delayCategory[]"></td>' +
-                        '<td><input type="text" name="remarks[]"></td>' +
+                        '<td><input type="text" name="divisionCode['+index+']"></td>' +
+                        '<td><input type="text" name="siteId['+index+']"></td>' +
+                        '<td><input type="text" name="referenceNo['+index+']"></td>' +
+                        '<td><input type="text" name="observationShortDesc['+index+']"></td>' +
+                        '<td><input type="text" name="observation_detail['+index+']"></td>' +
+                        '<td><input type="text" name="observationCategory['+index+']"></td>' +
+                        '<td><input type="text" name="observationSubCat['+index+']"></td>' +
+                        '<td><input type="text" name="frequency['+index+']"></td>' +
+                        '<td><input type="text" name="auditingAgency['+index+']"></td>' +
+                        '<td><input type="text" name="audittype['+index+']"></td>' +
+                        '<td><input type="text" name="auditStartDate['+index+']"></td>' +
+                        '<td><input type="text" name="auditEndDate['+index+']"></td>' +
+                        '<td><input type="text" name="auditor['+index+']"></td>' +
+                        '<td><input type="text" name="observation_category['+index+']"></td>' +
+                        '<td><input type="text" name="observationType['+index+']"></td>' +
+                        '<td><input type="text" name="observationArea['+index+']"></td>' +
+                        '<td><input type="text" name="observationAreaSubCat['+index+']"></td>' +
+                        '<td><input type="text" name="capaRequired['+index+']"></td>' +
+                        '<td><input type="text" name="capaOwner['+index+']"></td>' +
+                        '<td><input type="text" name="capaDescription['+index+']"></td>' +
+                        '<td><input type="text" name="capaDueDate['+index+']"></td>' +
+                        '<td><input type="text" name="capaSatus['+index+']"></td>' +
+                        '<td><input type="text" name="delayJustification['+index+']"></td>' +
+                        '<td><input type="text" name="delayCategory['+index+']"></td>' +
+                        '<td><input type="text" name="remarks['+index+']"></td>' +
                         '<td><input type="text" name="Action[]" readonly></td>' +
                         '</tr>';
 
@@ -163,8 +169,7 @@
                     '<td><input type="text" name="auditee_response[]"></td>' +
                     '<td><input type="text" name="observation_id[]"></td>' +
                     '<td><input type="text" name="observation_description[]"></td>' +
-                    '<td><input type="text" name="area[]"></td>' +
-                    
+                    '<td><input type="text" name="area[]"></td>' +                    
                     '<td><button type="button" class="removeRowBtn">Remove</button></td>' +
                     '</tr>';
                 return html;
@@ -911,7 +916,10 @@
                                     </div>
                                 </div>
                                 
-                                <input type="file" id="file-input" /> <button type="button" onclick="importExcel()">Import Observations</button>
+                                <div class="col-lg-6">
+                                    <input type="file" id="file-input" />
+                                    <button type="button" onclick="importExcel()">Import Observations</button>
+                                </div>
                                 <div class="group-input">
                                     <label for="audit-agenda-grid">
                                         Observation Details
@@ -925,15 +933,20 @@
                                             <thead>
                                                 <tr>
                                                     <th>Row#</th>
-                                                    <th>Observation Details</th>
+                                                    <th>Site/Location</th>                                                 
+                                                    <th>Site ID</th> 
                                                     <th>Reference No.</th>
-                                                    <th>Site/Location</th>
+                                                    <th>Observation Short Description</th> 
+                                                    <th>Observation Detail Description</th>
+                                                    <th>Observation Category</th>
+                                                    <th>Observation Sub Category</th> 
+                                                    <th>Frequency</th> 
                                                     <th>Auditing Agency</th>
                                                     <th>Audit Type</th>
                                                     <th>Audit Start Date</th>
                                                     <th>Audit End Date</th>
                                                     <th>Auditor</th>
-                                                    <th>Observation Category</th>
+                                                    <th>Observation Category</th> 
                                                     <th>Observation Type</th>
                                                     <th>Observation Area</th>
                                                     <th>Observation Area SubCategory</th>
@@ -949,18 +962,24 @@
 
                                                 </tr>
                                                     </thead>
-                                                                            <tbody>
+                                                                            <tbody id="observationDetail">
 
                                                                                 <tr>
                                                                                     <td><input disabled type="text" name="serial[]" value="1"></td>
-                                                                                    <td><input type="text" class="observation_detail" name="observation_detail[]"></td>
-                                                                                    <td><input type="text" class="referenceNo" name="referenceNo[]"></td>
                                                                                     <td><input type="text" class="divisionCode" name="divisionCode[]"></td>
+                                                                                    <td><input type="text" class="siteId" name="siteId[]"></td>
+                                                                                    <td><input type="text" class="referenceNo" name="referenceNo[]"></td>
+                                                                                    <td><input type="text" class="obsevrationShortDesc" name="obsevrationShortDesc[]"></td>
+                                                                                    <td><input type="text" class="observation_detail" name="observation_detail[]"></td>
+                                                                                    <td><input type="text" class="observationCategory" name="observationCategory[]"></td>
+                                                                                    <td><input type="text" class="observationSubCat" name="observationSubCat[]"></td>
+                                                                                    <td><input type="text" class="frequency" name="frequency[]"></td>
                                                                                     <td><input type="text" class="auditingAgency" name="auditingAgency[]"></td>
                                                                                     <td><input type="text" class="audittype" name="audittype[]"></td>
                                                                                     <td><input type="text" class="auditStartDate" name="auditStartDate[]"></td>
+                                                                                    <td><input type="text" class="auditEndDate" name="auditEndDate[]"></td>
                                                                                     <td><input type="text" class="auditor" name="auditor[]"></td>
-                                                                                    <td><input type="text" class="observationCategory" name="observationCategory[]"></td>
+                                                                                    <td><input type="text" class="observation_category" name="observation_category[]"></td>
                                                                                     <td><input type="text" class="observationType" name="observationType[]"></td>
                                                                                     <td><input type="text" class="observationArea" name="observationArea[]"></td>
                                                                                     <td><input type="text" class="observationAreaSubCat" name="observationAreaSubCat[]"></td>
@@ -968,10 +987,11 @@
                                                                                     <td><input type="text" class="capaOwner" name="capaOwner[]"></td>
                                                                                     <td><input type="text" class="capaDescription" name="capaDescription[]"></td>
                                                                                     <td><input type="text" class="capaDueDate" name="capaDueDate[]"></td>
-                                                                                    <td><input type="text" class="capaSatus" name="capaSatus[]"></td>
+                                                                                    <td><input type="text" class="capaSatus" name="capaSatus[]"></td>  
                                                                                     <td><input type="text" class="delayJustification" name="delayJustification[]"></td>
                                                                                     <td><input type="text" class="delayCategory" name="delayCategory[]"></td>
                                                                                     <td><input type="text" class="remarks" name="remarks[]"></td>
+                                                                                    <td><input type="text" readonly class="Action" name="Action[]"></td>
                                                                                 </tr>                                                 
 
                                                                             </tbody>
