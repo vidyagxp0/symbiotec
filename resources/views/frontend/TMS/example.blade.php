@@ -143,7 +143,6 @@ fetch("{{ url('example',$document->id) }}")
 // Function to load question and choices
 function loadQuestion() {
 
-
   var question = quizData[currentQuestion];
   questionElement.textContent = question.question;
   idElement.textContent = question.id;
@@ -188,7 +187,7 @@ function nextQuestion() {
 }
 
 // Function to go to the previous question
-function previousQuestion() {
+function previousQuestion() { 
   saveAnswer();
   currentQuestion--;
   loadQuestion();
@@ -258,6 +257,16 @@ function displaySummary(marks) {
         summaryText += 'Incorrect';
       }
     } else if (Array.isArray(quizData[i].answer)) {
+      summaryText = question + ' (Single Select): ';
+      console.log(quizData[i].answer , userAnswer);
+      if (quizData[i].answer == userAnswer) {
+        summaryText += 'Correct';
+        marks++;
+      } else {
+        summaryText += 'Incorrect';
+      }
+    }
+    else if (Array.isArray(quizData[i].answer)) {
       summaryText = question + ' (Multiple Select): ';
 
       if (arraysEqual(quizData[i].answer, userAnswer)) {
@@ -306,6 +315,9 @@ function submitQuiz() {
       }
     }
   }
+
+  console.log(marks);
+  
 
   displaySummary(marks);
 
