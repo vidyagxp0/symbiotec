@@ -16,6 +16,12 @@ use Jfcherng\Diff\DiffHelper;
 use Jfcherng\Diff\Factory\RendererFactory;
 use Jfcherng\Diff\Renderer\RendererConstant;
 
+use App\Http\Controllers\ExtensionNewController;
+use App\Models\extension_new;
+use App\Models\QMSProcess;
+use App\Models\Deviation;
+use App\Models\LabIncident;
+
 class Helpers
 {
     public static function getArrayKey(array $array, $key)
@@ -32,6 +38,53 @@ class Helpers
         ];
 
         return $res;
+    }
+
+    public static function getAllRelatedRecords()
+    {
+        $pre = [
+            'DEV' => \App\Models\Deviation::class,
+            'AP' => \App\Models\AuditProgram::class,
+            'AI' => \App\Models\ActionItem::class,
+            'Exte' => \App\Models\extension_new::class,
+            'Obse' => \App\Models\Observation::class,
+            'RCA' => \App\Models\RootCauseAnalysis::class,
+            'RA' => \App\Models\RiskAssessment::class,
+            'MR' => \App\Models\ManagementReview::class,
+            'EA' => \App\Models\Auditee::class,
+            'IA' => \App\Models\InternalAudit::class,
+            'CAPA' => \App\Models\Capa::class,
+            'CC' => \App\Models\CC::class,
+            'ND' => \App\Models\Document::class,
+            'Lab' => \App\Models\LabIncident::class,
+            'EC' => \App\Models\EffectivenessCheck::class,
+            'OOSChe' => \App\Models\OOS::class,
+            'OOT' => \App\Models\OOT::class,
+            'OOC' => \App\Models\OutOfCalibration::class,
+            'MC' => \App\Models\MarketComplaint::class,
+            'NC' => \App\Models\NonConformance::class,
+            'Incident' => \App\Models\Incident::class,
+            'FI' => \App\Models\FailureInvestigation::class,
+            'ERRATA' => \App\Models\errata::class,
+            'OOSMicr' => \App\Models\OOS_micro::class,
+            // Add other models as necessary...
+        ];
+
+        // Create an empty collection to store the related records
+        $relatedRecords = collect();
+
+        // Loop through each model and get the records, adding the process name to each record
+        foreach ($pre as $processName => $modelClass) {
+            $records = $modelClass::all()->map(function ($record) use ($processName) {
+                $record->process_name = $processName; // Attach the process name to each record
+                return $record;
+            });
+
+            // Merge the records into the collection
+            $relatedRecords = $relatedRecords->merge($records);
+        }
+
+        return $relatedRecords;
     }
 
     public static function getDueDate($days = 30, $formatDate = true)
@@ -847,6 +900,24 @@ class Helpers
         }
 
         return $html;
+    }
+
+    public static function check_roles($division_id, $process_name, $role_id, $user_id = null)
+    {
+
+        $process = QMSProcess::where([
+            'division_id' => $division_id,
+            'process_name' => $process_name
+        ])->first();
+
+        $roleExists = DB::table('user_roles')->where([
+            'user_id' => $user_id ? $user_id : Auth::user()->id,
+            'q_m_s_divisions_id' => $division_id,
+            'q_m_s_processes_id' => $process ? $process->id : 0,
+            'q_m_s_roles_id' => $role_id
+        ])->first();
+
+        return $roleExists ? true : false;
     }
 
 }
