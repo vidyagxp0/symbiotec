@@ -223,6 +223,7 @@ Route::post('child/{id}', [RiskManagementController::class, 'child'])->name('ris
 
 
 // ====================================root cause analysis=======================
+Route::post('RCAChildRoot/{id}', [RootCauseController::class, 'RCAChildRoot'])->name('R_C_A_root_child');
 Route::get('root-cause-analysis', [RootCauseController::class, 'rootcause']);
 Route::post('rootstore', [RootCauseController::class, 'root_store'])->name('root_store');
 Route::post('rootUpdate/{id}', [RootCauseController::class, 'root_update'])->name('root_update');
