@@ -709,7 +709,7 @@
                 var formType = $(this).attr('data-type');
                 if (auditid > 0) {
                     // AJAX request
-                    var url = "{{ route('ccView', ['id' => ':auditid', 'type' => ':formType']) }}";
+                    var url = "{{ route('ccViewNew', ['id' => ':auditid', 'type' => ':formType']) }}";
                     url = url.replace(':auditid', auditid).replace(':formType', formType);
 
                     // Empty modal data
