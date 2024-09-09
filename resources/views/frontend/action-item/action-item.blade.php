@@ -1,9 +1,5 @@
 @extends('frontend.layout.main')
 @section('container')
-@php 
-    $getDivision = Helpers::getDivisionName(session()->get('division'));
-    $division = "1";
-@endphp
     <style>
         textarea.note-codable {
             display: none !important;
@@ -20,11 +16,7 @@
         </div> --}}
         <div class="division-bar">
             <strong>Site Division/Project</strong> :
-            @if(!empty($getDivision))
-                {{ Helpers::getDivisionName(session()->get('division')) }} / Action Item
-            @else
-                {{ Helpers::getDivisionName($division) }} / Action Item    
-            @endif
+            {{ Helpers::getDivisionName(session()->get('division')) }} / Action Item
         </div>
     </div>
     @php
@@ -65,25 +57,17 @@
                                 <div class="col-lg-6">
                                     <div class="group-input"> 
                                         <label for="RLS Record Number"><b>Record Number</b></label>
-                                        @if(!empty($getDivision))
-                                            <input disabled type="text" name="record_number" value="{{ Helpers::getDivisionName(session()->get('division')) }}/AI/{{ date('Y') }}/{{ $record}}">
-                                        @else                                        
-                                            <input disabled type="text" name="record_number" value="{{ Helpers::getDivisionName($division) }}/AI/{{ date('Y') }}/{{ $record}}">
-                                        @endif
+                                        <input disabled type="text" name="record_number"
+                                            value="{{ Helpers::getDivisionName(session()->get('division')) }}/AI/{{ date('Y') }}/{{ $record}}">
+                                        {{-- <div class="static">QMS-EMEA/CAPA/{{ date('Y') }}/{{ $record_number }}</div> --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-6">  
                                     <div class="group-input">
                                         <label for="Division Code"><b>Division Code</b></label>
-                                        @if(!empty($getDivision))
-                                            <input disabled type="text" name="division_code"
-                                                value="{{ Helpers::getDivisionName(session()->get('division')) }}">
-                                            <input type="hidden" name="division_id" value="{{ session()->get('division') }}">
-                                        @else
-                                            <input disabled type="text" name="division_code"
-                                            value="{{ Helpers::getDivisionName($division) }}">
-                                            <input type="hidden" name="division_id" value="{{ $division }}">
-                                        @endif
+                                        <input disabled type="text" name="division_code"
+                                            value="{{ Helpers::getDivisionName(session()->get('division')) }}">
+                                        <input type="hidden" name="division_id" value="{{ session()->get('division') }}">
                                         {{-- <div class="static">{{ Helpers::getDivisionName(session()->get('division')) }}</div> --}}
                                     </div>
                                 </div>
@@ -107,6 +91,15 @@
                                         <input type="hidden" value="{{ date('d-M-Y') }}" name="intiation_date">
                                     </div>
                                 </div>
+                                <div class="col-lg-6">
+                                    <div class="group-input"> 
+                                        <label for="RLS Record Number"><b>Parent Record Number</b></label>
+                                        <input readonly type="text" name="parent_record_number"
+                                            value="{{ $expectedParenRecord ?? 'Not Applicable' }}">
+                                        {{-- <div class="static">QMS-EMEA/CAPA/{{ date('Y') }}/{{ $record_number }}</div> --}}
+                                    </div>
+                                </div>
+
                                 {{-- <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Due Date">Due Date</label>
@@ -143,6 +136,34 @@
                                         </div>
                                     </div>
                                 </div>
+                               
+
+                                {{-- <div class="col-lg-6">
+                                    <div class="group-input">
+                                        <label for="Due Date">Parent Record</label>
+                                        @if (!empty($parent_id))
+                                            @if($parent_type == "Risk Assesment")
+                                                <input type="text" name="parent_record" value="{{ str_pad($parentRecord, 4, '0', STR_PAD_LEFT) }}" readonly >
+                                            @elseif($parent_type == "CAPA")
+                                                <input type="text" name="parent_record" value="{{ str_pad($parentRecord, 4, '0', STR_PAD_LEFT) }}" readonly >
+                                            @elseif($parent_type == "OOS Chemical")
+                                                <input type="text" name="parent_record" value="{{ str_pad($parentRecord, 4, '0', STR_PAD_LEFT) }}" readonly >
+                                            @elseif($parent_type == "OOT")
+                                                <input type="text" name="parent_record" value="{{ str_pad($parentRecord, 4, '0', STR_PAD_LEFT) }}" readonly >
+                                            @elseif($parent_type == "Out of Calibration")
+                                                <input type="text" name="parent_record" value="{{ str_pad($parentRecord, 4, '0', STR_PAD_LEFT) }}" readonly >
+                                            @elseif($parent_type == "External Audit")
+                                                <input type="text" name="parent_record" value="{{ str_pad($parentRecord, 4, '0', STR_PAD_LEFT) }}" readonly >
+                                            @elseif($parent_type == "Market Complaint")
+                                                <input type="text" name="parent_record" value="{{ str_pad($parentRecord, 4, '0', STR_PAD_LEFT) }}" readonly >
+                                            @elseif($parent_type == "Management Review")
+                                                <input type="text" name="parent_record" value="{{ str_pad($parentRecord, 4, '0', STR_PAD_LEFT) }}" readonly >
+                                            @else
+                                                <input type="text" name="parent_record" readonly>
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
                                 
                                 <script>
                                 function handleDateInput(dateInput, displayId) {
@@ -156,7 +177,7 @@
                                     const dateInput = document.querySelector('input[name="due_date"]');
                                     handleDateInput(dateInput, 'due_date_display');
                                 });
-                                </script>
+                                </script> --}}
                                 
                                 <style>
                                 .hide-input {
@@ -178,15 +199,15 @@
                                         <label for="Related Records">Action Item Related Records</label>
                                         <select multiple id="related_records" name="related_records[]"
                                             placeholder="Select Reference Records">
-                                            {{-- <option value="">--select record--</option> --}}
-                                            <!-- @if (!empty($old_record)) -->
+                                      @if (!empty($old_record)) 
                                             @foreach ($old_record as $new)
                                                 <option value="{{ $new->id }}">
                                                     {{ Helpers::getDivisionName($new->division_id) }}/AI/{{ date('Y') }}/{{ Helpers::recordFormat($new->record) }}
                                                 </option>
                                             @endforeach
-                                            <!-- @endif -->
+                                         @endif
                                         </select>
+                                        {{-- <input type="longText" name="related_records" > --}}
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -194,8 +215,11 @@
                                         <label for="HOD Persons">HOD Persons</label>
                                         <select   name="hod_preson[]" placeholder="Select HOD Persons" data-search="false"
                                             data-silent-initial-value-set="true" id="hod" >
+                                            <option value="">select person</option>
                                             @foreach ($users as $value)
-                                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                
+                                                <option value="{{ $value->name }}">{{ $value->name }}</option>
+
                                             @endforeach
                                         </select>
                                     </div>
@@ -211,58 +235,27 @@
                                     <div class="group-input">
                                         <label for="Responsible Department">Responsible Department</label>
                                         <select name="departments">
-                                            <option value="">Enter Your Selection Here</option>
-                                            <option value="1">Quality Assurance-CQA</option>
-                                            <option value="2">Research and development</option>
-                                            <option value="3">Regulatory Science</option>
-                                            <option value="4">Supply Chain Management</option>
-                                            <option value="5">Finance</option>
-                                            <option value="6">QA-Digital</option>
-                                            <option value="7">Central Engineering</option>
-                                            <option value="8">Projects</option>
-                                            <option value="9">Marketing</option>
-                                            <option value="10">QCAT</option>
-                                            <option value="11">Marketing</option>
-                                            <option value="12">GMP Pilot Plant</option>
-                                            <option value="13">Manufacturing Sciences and Technology</option>
-                                            <option value="14">Environment, Health and Safety</option>
-                                            <option value="15">Business Relationship Management</option>
-                                            <option value="16">National Regulatory Affairs</option>
-                                            <option value="17">HR</option>
-                                            <option value="18">Admin</option>
-                                            <option value="19">Information Technology</option>
-                                            <option value="20">Program Management QA Analytical (Q13)</option>
-                                            <option value="21">QA Analytical (Q8)</option>
-                                            <option value="22">QA Packaging Development</option>
-                                            <option value="23">QA Engineering</option>
-                                            <option value="24">DS Quality Assurance</option>
-                                            <option value="25">Quality Control (Q13)</option>
-                                            <option value="26">Quality Control (Q8)</option>
-                                            <option value="27">Quality Control (Q15)</option>
-                                            <option value="28">QC Microbiology (B1)</option>
-                                            <option value="29">QC Microbiology (B2)</option>
-                                            <option value="30">Production (B1)</option>
-                                            <option value="31">Production (B2)</option>
-                                            <option value="32">Production (Packing)</option>
-                                            <option value="33">Production (Devices)</option>
-                                            <option value="34">Production (DS)</option>
-                                            <option value="35">Engineering and Maintenance (B1)</option>
-                                            <option value="36">Engineering and Maintenance (B2)</option>
-                                            <option value="37">Engineering and Maintenance (W20)</option>
-                                            <option value="38">Device Technology Principle Management</option>
-                                            <option value="39">Production (82)</option>
-                                            <option value="40">Production (Packing)</option>
-                                            <option value="41">Production (Devices)</option>
-                                            <option value="42">Production (DS)</option>
-                                            <option value="43">Engineering and Maintenance (B1)</option>
-                                            <option value="44">Engineering and Maintenance (B2) Engineering and
-                                                Maintenance (W20)
-                                            </option>
-                                            <option value="45">Device Technology Principle Management</option>
-                                            <option value="46">Warehouse(DP)</option>
-                                            <option value="47">Drug safety</option>
-                                            <option value="48">Others</option>
-                                            <option value="49">Visual Inspection</option>
+                                            <option value="CQA" >Corporate Quality Assurance</option>
+                                            <option value="QA" >Quality Assurance</option>
+                                            <option value="QC" >Quality Control</option>
+                                            <option value="QM" >Quality Control (Microbiology department)</option>
+                                            <option value="PG" >Production General</option>
+                                            <option value="PL" >Production Liquid Orals</option>
+                                            <option value="PT" >Production Tablet and Powder</option>
+                                            <option value="PE" >Production External (Ointment, Gels, Creams and Liquid)</option>
+                                            <option value="PC" >Production Capsules</option>
+                                            <option value="PI" >Production Injectable</option>
+                                            <option value="EN" >Engineering</option>
+                                            <option value="HR" >Human Resource</option>
+                                            <option value="ST" >Store</option>
+                                            <option value="IT" >Electronic Data Processing</option>
+                                            <option value="FD" >Formulation  Development</option>
+                                            <option value="AL" >Analytical research and Development Laboratory</option>
+                                            <option value="PD">Packaging Development</option>
+                                            <option value="PU">Purchase Department</option>
+                                            <option value="DC">Document Cell</option>
+                                            <option value="RA">Regulatory Affairs</option>
+                                            <option value="PV">Pharmacovigilance</option>
                                         </select>
                                     </div>
                                 </div>
@@ -338,7 +331,7 @@
                                 </div>
                                  <div class="col-lg-6  new-date-data-field">
                                     <div class="group-input input-date">
-                                        <label for="end_date">Actual End Date</lable>
+                                        <label for="end_date">Actual End Date</label>
                                         <div class="calenderauditee">
                                         <input type="text" id="end_date"                             
                                                 placeholder="DD-MMM-YYYY" />
@@ -355,9 +348,9 @@
                                         <textarea name="comments"></textarea>
                                     </div>
                                 </div>
-                                {{-- <div class="col-12">
+                                <div class="col-12">
                                     <div class="group-input">
-                                        <label for="Support_doc">Supporting Documents</label>
+                                        <label for="Support_doc">Completion Attachment</label>
                                         <div class="file-attachment-field">
                                             <div class="file-attachment-list" id="Support_doc"></div>
                                             <div class="add-btn">
@@ -368,7 +361,7 @@
                                         </div>
 
                                     </div>
-                                </div> --}}
+                                </div>
                             </div>
                             <div class="button-block">
                                 <button type="submit" class="saveButton">Save</button>
@@ -390,10 +383,21 @@
                                         <textarea name="qa_comments"></textarea>
                                     </div>
                                 </div>
-                                {{--
+                                
+                                <div class="col-12 sub-head">
+                                    Extension Justification
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="group-input">
+                                        <label for="due-dateextension">Due Date Extension Justification</label>
+                                        <textarea name="due_date_extension"></textarea>
+                                    </div>
+                                </div>
+                                
                                 <div class="col-lg-12">
                                     <div class="group-input">
-                                        <label for="file_attach">Final Attachments</label>
+                                        <label for="file_attach">Action Approval</label>
                                         <div class="file-attachment-field">
                                             <div class="file-attachment-list" id="final_attach"></div>
                                             <div class="add-btn">
@@ -403,16 +407,6 @@
                                             </div>
                                         </div>
 
-                                    </div>
-                                </div> --}}
-                                <div class="col-12 sub-head">
-                                    Extension Justification
-                                </div>
-
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="due-dateextension">Due Date Extension Justification</label>
-                                        <textarea name="due_date_extension"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -432,56 +426,139 @@
                                 Electronic Signatures
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="submitted by">Submitted By</label>
-                                        <div class="static"></div>
+                                    <div class="col-lg-3">
+                                        <div class="group-input">
+                                            <label for="submitted by">Submitted By</label>
+                                            <div class="static"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="submitted on">Submitted On</label>
-                                        <div class="Date"></div>
+                                    <div class="col-lg-3">
+                                        <div class="group-input">
+                                            <label for="submitted on">Submitted On</label>
+                                            <div class="Date"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="cancelled by">Cancelled By</label>
-                                        <div class="static"></div>
+                                    <div class="col-lg-6">
+                                        <div class="group-input">
+                                            <label for="submitted on">Submitted Comment</label>
+                                            <div class="static"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="cancelled on">Cancelled On</label>
-                                        <div class="Date"></div>
+
+                                    <div class="col-lg-3">
+                                        <div class="group-input">
+                                            <label for="cancelled by">Cancelled By</label>
+                                            <div class="static"></div> 
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="More information required By">More information required By</label>
-                                        <div class="static"></div> 
+                                    <div class="col-lg-3">
+                                        <div class="group-input">
+                                            <label for="cancelled on">Cancelled On</label>
+                                            <div class="Date"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="More information required On">More information required On</label>
-                                         <div class="Date"></div>
+                                    <div class="col-lg-6">
+                                        <div class="group-input">
+                                            <label for="submitted on">Cancelled Comment</label>
+                                            <div class="static"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="completed by">Completed By</label>
-                                        <div class="static"></div> 
+                                    
+                                    <div class="col-lg-3">
+                                        <div class="group-input">
+                                            <label for="cancelled by">Acknowledge By</label>
+                                            <div class="static"></div> 
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="completed on">Completed On</label>
-                                         <div class="Date"></div>
+                                    <div class="col-lg-3">
+                                        <div class="group-input">
+                                            <label for="cancelled on">Acknowledge On</label>
+                                            <div class="Date"></div>
+                                        </div>
                                     </div>
+                                    <div class="col-lg-6">
+                                        <div class="group-input">
+                                            <label for="submitted on">Acknowledge Comment</label>
+                                            <div class="static"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="group-input">
+                                            <label for="cancelled by">Work Completion By</label>
+                                            <div class="static"></div> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="group-input">
+                                            <label for="cancelled on">Work Completion On</label>
+                                            <div class="Date"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="group-input">
+                                            <label for="submitted on">Work Completion Comment</label>
+                                            <div class="static"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <div class="group-input">
+                                            <label for="cancelled by">QA/CQA Verification By</label>
+                                            <div class="static"></div> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="group-input">
+                                            <label for="cancelled on">QA/CQA Verification On</label>
+                                            <div class="Date"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="group-input">
+                                            <label for="submitted on">QA/CQA Verification Comment</label>
+                                            <div class="static"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-lg-4">
+                                        <div class="group-input">
+                                            <label for="More information required By">More information required By</label>
+                                            <div class="static"></div> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="group-input">
+                                            <label for="More information required On">More information required On</label>
+                                            <div class="Date"></div> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="group-input">
+                                            <label for="submitted on">Comment</label>
+                                            <div class="static"></div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="col-lg-4">
+                                        <div class="group-input">
+                                            <label for="completed by">Completed By</label>
+                                            <div class="static"></div> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="group-input">
+                                            <label for="completed on">Completed On</label>
+                                            <div class="Date"></div> 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="group-input">
+                                            <label for="submitted on">Comment</label>
+                                            <div class="static"></div>
+                                        </div>
+                                    </div> -->
+                                   
                                 </div>
-                              
-                            </div>
                             <div class="button-block">
                                 <button type="button" class="backButton" onclick="previousStep()">Back</button>
                                 <button type="submit" class="saveButton">Save</button>

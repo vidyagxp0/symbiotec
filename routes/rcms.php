@@ -67,13 +67,16 @@ Route::group(['prefix' => 'rcms'], function () {
 
             Route::get('action-items-create', [ActionItemController::class, 'showAction']);
             Route::resource('actionItem', ActionItemController::class);
-            Route::post('action-stage-cancel/{id}', [ActionItemController::class, 'actionStageCancel']);
+            Route::post('action-stage-cancel-new/{id}', [ActionItemController::class, 'actionStageCancel']);
+            
             Route::get('action-item-audittrialshow/{id}', [ActionItemController::class, 'actionItemAuditTrialShow'])->name('showActionItemAuditTrial');
             Route::get('action-item-audittrialdetails/{id}', [ActionItemController::class, 'actionItemAuditTrialDetails'])->name('showaudittrialactionItem');
             Route::get('actionitemSingleReport/{id}', [ActionItemController::class, 'singleReport'])->name('actionitemSingleReport');
             Route::get('actionitemAuditReport/{id}', [ActionItemController::class, 'auditReport'])->name('actionitemAuditReport');
             Route::get('actionitemauditTrailPdf/{id}', [ActionItemController::class, 'auditTrailPdf'])->name('actionitemauditTrailPdf');
-            Route::post('send-At/{id}', [ActionItemController::class, 'stageChange']);
+            Route::post('send-At-new/{id}', [ActionItemController::class, 'stageChange']);
+            Route::post('moreinfoState_actionitem/{id}', [ActionItemController::class, 'actionmoreinfo']);
+
                 // ========================================regulatory action ================
                 Route::get('regulatory-action-task-create', [RegulatoryActionController::class, 'showAction']);
                 Route::get('regulatory-action-view/{id}', [RegulatoryActionController::class, 'show']);
@@ -92,7 +95,8 @@ Route::group(['prefix' => 'rcms'], function () {
             Route::get('effective-audit-trial-details/{id}', [EffectivenessCheckController::class, 'effectiveAuditTrialDetails'])->name('show_audittrial_effective');
             Route::get('effectiveSingleReport/{id}', [EffectivenessCheckController::class, 'singleReport'])->name('effectiveSingleReport');
             Route::get('effectiveAuditReport/{id}', [EffectivenessCheckController::class, 'auditReport'])->name('effectiveAuditReport');
-
+            Route::post('closed-cancelled/{id}', [EffectivenessCheckController::class, 'closedCancelled'])->name('closed-cancelled');
+            Route::post('effectiveness_child/{id}', [EffectivenessCheckController::class, 'effectiveness_child'])->name('effectiveness_child');
 
             // ------------------extension _child---------------------------
             Route::post('extension_child/{id}', [ExtensionController::class, 'extension_child'])->name('extension_child');
@@ -119,8 +123,11 @@ Route::group(['prefix' => 'rcms'], function () {
             Route::get('audit-detail/{id}', [CCController::class, 'auditDetails']);
             Route::get('summary/{id}', [CCController::class, 'summery_pdf']);
             Route::get('audit/{id}', [CCController::class, 'audit_pdf']);
+            Route::post('send-qa-approval/{id}', [CCController::class, 'sentToQAHeadApproval'])->name('send-qa-approval');
+            Route::post('send-reject/{id}', [CCController::class, 'reject'])->name('send-reject');
+            Route::post('send-post-implementation/{id}', [CCController::class, 'sentoPostImplementation'])->name('send-post-implementation');
 
-            Route::get('ccView/{id}/{type}', [DashboardController::class, 'ccView'])->name('ccView');
+            Route::get('ccViewNew/{id}/{type}', [DashboardController::class, 'ccView'])->name('ccViewNew');
             Route::get('ccView/{id}/{type}', [RegulatoryDashboardController::class, 'ccViewRegulatory'])->name('ccView');
             Route::view('summary_pdf', 'frontend.change-control.summary_pdf');
             Route::view('audit_trial_pdf', 'frontend.change-control.audit_trial_pdf');
