@@ -421,6 +421,22 @@
                 {{-- @foreach ($logs_list as $log_list) --}}
                     <p> <a href="/sop-index-show" target="_blank">SOP </a> </p>
                 {{-- @endforeach --}}
+            <!-- </div>
+            <div class="modal-body"> -->
+                
+                {{-- @foreach ($logs_list as $log_list) --}}
+                    <p> <a href="/cc-show" target="">Change Control</a> </p>
+                {{-- @endforeach --}}
+                <p> <a href="/action-item-show" target="_blank">Action Item</a> </p>
+
+                <p> <a href="/rca-show" target="_blank">RCA</a> </p>
+
+                <p> <a href="/extensions-show" target="_blank">Extension</a> </p>
+
+                <p> <a href="/effectiveness-checks" target="_blank">Effectivness Check</a> </p>
+
+                <p> <a href="/capa-show" target="_blank">CAPA</a> </p>
+
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
