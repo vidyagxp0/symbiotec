@@ -157,7 +157,7 @@
                 <td class="w-30">
                     <div class="logo">
                         {{-- <img src="https://dms.mydemosoftware.com/user/images/logo.png" alt="" class="w-100"> --}}
-                        <img src="https://navin.mydemosoftware.com/public/user/images/logo.png" alt="" class="w-100" style="scale: 0.5" >
+                        <img src="https://www.connexo.io/assets/img/logo/logo.png" alt="" class="w-100" style="scale: 0.5" >
 
                     </div>
                 </td>

@@ -720,11 +720,6 @@ class DocumentController extends Controller
         $trainingDoc = DocumentTraining::where('document_id', $id)->first();
         $history = DocumentHistory::where('document_id', $id)->get();
         $documentsubTypes = DocumentSubtype::all();
-// dd($document_distribution_grid);
-        // $history = [];
-        // foreach($historydata as $temp){
-        //     array_push($history,$temp);
-        // }
         $keywords = Keyword::where('document_id', $id)->get();
         $annexure = Annexure::where('document_id', $id)->first();
 

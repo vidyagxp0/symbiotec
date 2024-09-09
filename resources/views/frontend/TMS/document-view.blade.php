@@ -57,7 +57,7 @@
                         <div class="col-lg-6">
                             <div class="group-input">
                                 <label for="due-date">Due Date</label>
-                                <div class="static">{{ \Carbon\Carbon::parse($doc->due_dateDoc)->format('d M Y') }}</div>
+                                <div class="static">{{ \Carbon\Carbon::parse($trainning->training_end_date)->format('d M Y H:i A') }}</div>
 
 
                             </div>

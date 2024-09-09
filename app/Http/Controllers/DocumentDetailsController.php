@@ -63,7 +63,7 @@ class DocumentDetailsController extends Controller
         // $fullPermission = UserRole::where(['user_id' => Auth::user()->id, 'q_m_s_divisions_id' => $document->division_id])->get();
         // $fullPermissionIds = $fullPermission->pluck('q_m_s_roles_id')->toArray();
         
-        if (Helpers::checkRoles(3) && $document->originator_id == Auth::user()->id && $request->stage_id == 2 || $request->stage_id == 4 || $request->stage_id == 6 || $request->stage_id == 8 || $request->stage_id == 11) {
+        if (Helpers::checkRoles(3) && $document->originator_id == Auth::user()->id && $request->stage_id == 2 || $request->stage_id == 4 || $request->stage_id == 6 || $request->stage_id == 8 || $request->stage_id == 10 || $request->stage_id == 13) {
           
           $stage = new StageManage;
           $stage->document_id = $request->document_id;
@@ -476,7 +476,7 @@ class DocumentDetailsController extends Controller
                       $document->status = Stage::where('id', 7)->value('name');
                     }
                     if($document->stage = 8){
-                      $document->stage = $document->training_required == 'yes' ? 9 : 11;
+                      $document->stage = $document->training_required == 'yes' ? 9 : 12;
                       $document->status = $document->training_required == 'yes' ? Stage::where('id', 9)->value('name') : Stage::where('id', 11)->value('name');
                     }
                     try {
@@ -499,7 +499,7 @@ class DocumentDetailsController extends Controller
                       $document->status = Stage::where('id', 7)->value('name');
                     }
                     if($document->stage = 8){
-                      $document->stage = $document->training_required == 'yes' ? 9 : 11;
+                      $document->stage = $document->training_required == 'yes' ? 9 : 12;
                       $document->status = $document->training_required == 'yes' ? Stage::where('id', 9)->value('name') : Stage::where('id', 11)->value('name');
                     }
                   try {
@@ -546,7 +546,7 @@ class DocumentDetailsController extends Controller
                     $document->status = Stage::where('id', 7)->value('name');
                   }
                   if($document->stage = 8){
-                    $document->stage = $document->training_required == 'yes' ? 9 : 11;
+                    $document->stage = $document->training_required == 'yes' ? 9 : 12;
                     $document->status = $document->training_required == 'yes' ? Stage::where('id', 9)->value('name') : Stage::where('id', 11)->value('name');
                   }
                   try {
@@ -720,8 +720,7 @@ class DocumentDetailsController extends Controller
           }
         }
 
-        if (Helpers::checkRoles(3) && $document->originator_id == Auth::user()->id && $request->stage_id == 2 || $request->stage_id == 4 || $request->stage_id == 6 ||  $request->stage_id == 8 || $request->stage_id == 10 || $request->stage_id == 11) {
-          
+        if (Helpers::checkRoles(3) && $document->originator_id == Auth::user()->id && $request->stage_id == 2 || $request->stage_id == 4 || $request->stage_id == 6 ||  $request->stage_id == 8 || $request->stage_id == 10  || $request->stage_id == 13 || $request->stage_id == 11) {
           if ($request->stage_id) {
             $document->stage = $request->stage_id;
             $document->status = Stage::where('id', $request->stage_id)->value('name');
@@ -784,30 +783,10 @@ class DocumentDetailsController extends Controller
               $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
               $history->origin_state = 'Reviewed';
               $history->save();
-
-              $traning = DocumentTraining::where('document_id', $document->id)->first();
-              if ($traning){
-                $traning->trainer = User::find($traning->trainer);
-                try {
-                  Mail::send(
-                    'mail.for_training',
-                    ['document' => $document],
-                    function ($message) use ($traning) {
-                      $message->to($traning->trainer->email)
-                        ->subject('Document is for training');
-                    }
-                  );
-                } catch (\Exception $e) {
-
-                }
-              } 
-
             }
 
             if ($request->stage_id == 10) {
               $document->effective_date = Carbon::now()->format('Y-m-d');
-              // $document->review_period = 3; //3 year
-            
               if ($document->revised == 'Yes')
               {
                 $old_document = Document::where([
@@ -832,6 +811,43 @@ class DocumentDetailsController extends Controller
             if ($request->stage_id == 11) { 
                 $document['stage'] = $request->stage_id;
                 $document['status'] = Stage::where('id', $request->stage_id)->value('name');
+            }
+            if ($request->stage_id == 12) { 
+              $document['stage'] = $request->stage_id;
+              $document['status'] = Stage::where('id', $request->stage_id)->value('name');
+              $history = new DocumentHistory();
+              $history->document_id = $request->document_id;
+              $history->activity_type = 'Send for Effective';
+              $history->previous = '';
+              $history->current = '';
+              $history->comment = $request->comment;
+              $history->action_name = 'Submit'; 
+              $history->change_from = Stage::where('id', $document->stage_id)->value('name');;
+              $history->change_to = 'Effective';
+              $history->user_id = Auth::user()->id;
+              $history->user_name = Auth::user()->name;
+              $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+              $history->origin_state = 'Reviewed';
+              $history->save();
+            }
+            if ($request->stage_id == 13) { 
+              $document['stage'] = $request->stage_id;
+              $document['status'] = Stage::where('id', $request->stage_id)->value('name');
+
+              $history = new DocumentHistory();
+              $history->document_id = $request->document_id;
+              $history->activity_type = 'Send for Effective';
+              $history->previous = '';
+              $history->current = '';
+              $history->comment = $request->comment;
+              $history->action_name = 'Submit'; 
+              $history->change_from = Stage::where('id', $document->stage_id)->value('name');;
+              $history->change_to = 'Effective';
+              $history->user_id = Auth::user()->id;
+              $history->user_name = Auth::user()->name;
+              $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+              $history->origin_state = 'Reviewed';
+              $history->save();
             }
           }
         }

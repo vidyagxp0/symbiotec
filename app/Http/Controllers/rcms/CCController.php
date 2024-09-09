@@ -8146,4 +8146,5 @@ class CCController extends Controller
 
         return view("frontend.forms.effectiveness-check", compact('due_date','parent_record','parent_id','parent_type', 'parent_name', 'record_number'));
     }
+    
 }

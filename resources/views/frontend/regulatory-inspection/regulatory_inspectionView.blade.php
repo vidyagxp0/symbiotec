@@ -1201,41 +1201,70 @@ function addMultipleFiles(input, block_id) {
                                                             </tr>
                                                         </thead>
                                                         <tbody id="observationDetail">
-                                                            @if ($sgrid->observation_detail)
-                                                                @foreach (unserialize($sgrid->observation_detail) as $key => $tempData)
-                                                                <tr>
-                                                                    <td>{{ $key + 1 }}</td>
-                                                                    <td><input type="text" name="divisionCode[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->divisionCode)[$key] ? unserialize($sgrid->divisionCode)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="siteId[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->siteId)[$key] ? unserialize($sgrid->siteId)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="referenceNo[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->referenceNo)[$key] ? unserialize($sgrid->referenceNo)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="observationShortDesc[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationShortDesc)[$key] ? unserialize($sgrid->observationShortDesc)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="observation_detail[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observation_detail)[$key] ? unserialize($sgrid->observation_detail)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="observationCategory[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationCategory)[$key] ? unserialize($sgrid->observationCategory)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="observationSubCat[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationSubCat)[$key] ? unserialize($sgrid->observationSubCat)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="frequency[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->frequency)[$key] ? unserialize($sgrid->frequency)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="auditingAgency[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditingAgency)[$key] ? unserialize($sgrid->auditingAgency)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="audittype[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->audittype)[$key] ? unserialize($sgrid->audittype)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="auditStartDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditStartDate)[$key] ? unserialize($sgrid->auditStartDate)[$key]: "" }}"></td> 
-                                                                    <td><input type="text" name="auditEndDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditEndDate)[$key] ? unserialize($sgrid->auditEndDate)[$key]: "" }}"></td>                       
-                                                                    <td><input type="text" name="auditor[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->auditor)[$key] ? unserialize($sgrid->auditor)[$key]: "" }}"></td>                    
-                                                                    <td><input type="text" name="observation_category[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observation_category)[$key] ? unserialize($sgrid->observation_category)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="observationType[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationType)[$key] ? unserialize($sgrid->observationType)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="observationArea[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationArea)[$key] ? unserialize($sgrid->observationArea)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="observationAreaSubCat[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->observationAreaSubCat)[$key] ? unserialize($sgrid->observationAreaSubCat)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="capaRequired[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->capaRequired)[$key] ? unserialize($sgrid->capaRequired)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="capaOwner[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->capaOwner)[$key] ? unserialize($sgrid->capaOwner)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="capaDescription[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->capaDescription)[$key] ? unserialize($sgrid->capaDescription)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="capaDueDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->capaDueDate)[$key] ? unserialize($sgrid->capaDueDate)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="capaSatus[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->capaSatus)[$key] ? unserialize($sgrid->capaSatus)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="delayJustification[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->delayJustification)[$key] ? unserialize($sgrid->delayJustification)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="delayCategory[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->delayCategory)[$key] ? unserialize($sgrid->delayCategory)[$key]: "" }}"></td>
-                                                                    <td><input type="text" name="remarks[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{unserialize($sgrid->remarks)[$key] ? unserialize($sgrid->remarks)[$key]: "" }}"></td>
-                                                                    <td><input type="text" readonly name="Action[]" >
+    @if ($sgrid->observation_detail)
+        @php
+            $divisionCode = unserialize($sgrid->divisionCode);
+            $siteId = unserialize($sgrid->siteId);
+            $referenceNo = unserialize($sgrid->referenceNo);
+            $observationShortDesc = unserialize($sgrid->observationShortDesc);
+            $observationDetail = unserialize($sgrid->observation_detail);
+            $observationCategory = unserialize($sgrid->observationCategory);
+            $observationSubCat = unserialize($sgrid->observationSubCat);
+            $frequency = unserialize($sgrid->frequency);
+            $auditingAgency = unserialize($sgrid->auditingAgency);
+            $audittype = unserialize($sgrid->audittype);
+            $auditStartDate = unserialize($sgrid->auditStartDate);
+            $auditEndDate = unserialize($sgrid->auditEndDate);
+            $auditor = unserialize($sgrid->auditor);
+            $observation_category = unserialize($sgrid->observation_category);
+            $observationType = unserialize($sgrid->observationType);
+            $observationArea = unserialize($sgrid->observationArea);
+            $observationAreaSubCat = unserialize($sgrid->observationAreaSubCat);
+            $capaRequired = unserialize($sgrid->capaRequired);
+            $capaOwner = unserialize($sgrid->capaOwner);
+            $capaDescription = unserialize($sgrid->capaDescription);
+            $capaDueDate = unserialize($sgrid->capaDueDate);
+            $capaSatus = unserialize($sgrid->capaSatus);
+            $delayJustification = unserialize($sgrid->delayJustification);
+            $delayCategory = unserialize($sgrid->delayCategory);
+            $remarks = unserialize($sgrid->remarks);
+        @endphp
 
-                                                                </tr>
-                                                                @endforeach
-                                                            @endif
-                                                        </tbody>
+        @foreach ($observationDetail as $key => $tempData)
+        <tr>
+            <td>{{ $key + 1 }}</td>
+            <td><input type="text" name="divisionCode[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($divisionCode[$key]) ? $divisionCode[$key] : '' }}"></td>
+            <td><input type="text" name="siteId[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($siteId[$key]) ? $siteId[$key] : '' }}"></td>
+            <td><input type="text" name="referenceNo[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($referenceNo[$key]) ? $referenceNo[$key] : '' }}"></td>
+            <td><input type="text" name="observationShortDesc[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($observationShortDesc[$key]) ? $observationShortDesc[$key] : '' }}"></td>
+            <td><input type="text" name="observation_detail[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($observationDetail[$key]) ? $observationDetail[$key] : '' }}"></td>
+            <td><input type="text" name="observationCategory[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($observationCategory[$key]) ? $observationCategory[$key] : '' }}"></td>
+            <td><input type="text" name="observationSubCat[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($observationSubCat[$key]) ? $observationSubCat[$key] : '' }}"></td>
+            <td><input type="text" name="frequency[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($frequency[$key]) ? $frequency[$key] : '' }}"></td>
+            <td><input type="text" name="auditingAgency[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($auditingAgency[$key]) ? $auditingAgency[$key] : '' }}"></td>
+            <td><input type="text" name="audittype[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($audittype[$key]) ? $audittype[$key] : '' }}"></td>
+            <td><input type="text" name="auditStartDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($auditStartDate[$key]) ? $auditStartDate[$key] : '' }}"></td>
+            <td><input type="text" name="auditEndDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($auditEndDate[$key]) ? $auditEndDate[$key] : '' }}"></td>
+            <td><input type="text" name="auditor[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($auditor[$key]) ? $auditor[$key] : '' }}"></td>
+            <td><input type="text" name="observation_category[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($observation_category[$key]) ? $observation_category[$key] : '' }}"></td>
+            <td><input type="text" name="observationType[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($observationType[$key]) ? $observationType[$key] : '' }}"></td>
+            <td><input type="text" name="observationArea[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($observationArea[$key]) ? $observationArea[$key] : '' }}"></td>
+            <td><input type="text" name="observationAreaSubCat[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($observationAreaSubCat[$key]) ? $observationAreaSubCat[$key] : '' }}"></td>
+            <td><input type="text" name="capaRequired[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($capaRequired[$key]) ? $capaRequired[$key] : '' }}"></td>
+            <td><input type="text" name="capaOwner[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($capaOwner[$key]) ? $capaOwner[$key] : '' }}"></td>
+            <td><input type="text" name="capaDescription[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($capaDescription[$key]) ? $capaDescription[$key] : '' }}"></td>
+            <td><input type="text" name="capaDueDate[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($capaDueDate[$key]) ? $capaDueDate[$key] : '' }}"></td>
+            <td><input type="text" name="capaSatus[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($capaSatus[$key]) ? $capaSatus[$key] : '' }}"></td>
+            <td><input type="text" name="delayJustification[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($delayJustification[$key]) ? $delayJustification[$key] : '' }}"></td>
+            <td><input type="text" name="delayCategory[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($delayCategory[$key]) ? $delayCategory[$key] : '' }}"></td>
+            <td><input type="text" name="remarks[]" {{ $data->stage == 0 || $data->stage == 6 ? 'disabled' : '' }} value="{{ isset($remarks[$key]) ? $remarks[$key] : '' }}"></td>
+            <td><input type="text" readonly name="Action[]">
+        </tr>
+        @endforeach
+    @endif
+</tbody>
+``
+
                                                     </table>
                                                 </div>
                                             </div>

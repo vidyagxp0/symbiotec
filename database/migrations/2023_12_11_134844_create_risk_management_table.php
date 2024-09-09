@@ -43,6 +43,7 @@ return new class extends Migration
             $table->longtext('comments')->nullable();
             $table->string('severity2_level')->nullable();
             $table->longtext('departments2')->nullable();
+            $table->longtext('hazard_analysis')->nullable();
             $table->longtext('source_of_risk2')->nullable();
             $table->longtext('site_name')->nullable();
             $table->longtext('building')->nullable();

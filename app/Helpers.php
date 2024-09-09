@@ -725,7 +725,6 @@ class Helpers
     public static function getDocStatusByStage($stage, $document_training = 'no')
     {
         $status = '';
-        $training_required = $document_training == 'yes' ? true : false;
         switch ($stage) {
             case '1':
                 $status = 'Draft';
@@ -752,18 +751,21 @@ class Helpers
                 $status = 'Final Approval';
                 break;
             case '9':
-                $status = $training_required ? 'Pending-Traning' : 'Effective';
+                $status = 'Traning Pending';
                 break;
             case '10':
-                $status = $training_required ? 'Traning-Complete' : 'Obsolete';
+                $status = 'Traning Started';
                 break;
             case '11':
-                $status = $training_required ? 'Effective' : 'Obsolete';
+                $status = 'Traning Complete';
                 break;
             case '12':
-                $status = 'Obsolete';
+                $status = 'Effective';
                 break;
             case '13':
+                $status = 'Obsolete';
+                break;
+            case '14':
                 $status = 'Closed/Cancel';
                 break;
             default:

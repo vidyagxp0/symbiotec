@@ -92,6 +92,7 @@ class RiskManagementController extends Controller
         $data->schedule_end_date1 = $request->schedule_end_date1;
         $data->estimated_cost = $request->estimated_cost;
         $data->currency = $request->currency;
+        $data->hazard_analysis = $request->hazard_analysis;
 
         $data->root_cause_methodology = implode(',', $request->root_cause_methodology);
         // $data->measurement = json_encode($request->measurement);
@@ -1247,6 +1248,7 @@ class RiskManagementController extends Controller
         $data->schedule_end_date1 = $request->schedule_end_date1;
         $data->estimated_cost = $request->estimated_cost;
         $data->currency = $request->currency;
+        $data->hazard_analysis = $request->hazard_analysis;
 
         $data->root_cause_methodology = implode(',', $request->root_cause_methodology);
         //$data->training_require = $request->training_require;

@@ -938,6 +938,12 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="group-input">
+                                            <label for="root-cause-methodology">Hazard Analysis (HACCP)</label>
+                                            <textarea name="hazard_analysis"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="group-input">
                                             <label for="root-cause-methodology">Root Cause Methodology</label>
                                             <select name="root_cause_methodology[]" multiple placeholder="-- Select --"
                                                 data-search="false" data-silent-initial-value-set="true"

@@ -42,7 +42,7 @@
                                     {{-- @if ($document->stage >= 7)
                                         <button data-bs-toggle="modal" data-bs-target="#child-modal">Child</button>
                                     @endif --}}
-                                    @if ($document->stage >= 8 && $document->status !== 'Obsolete')
+                                    @if ($document->stage >= 12 && $document->status !== 'Obsolete')
                                         {{-- <button type="button" class="btn btn-danger" id="obsolete-button">Obsolete</button> --}}
                                         <button  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#signature-modal">
                                             Obsolete
@@ -96,7 +96,7 @@
                         </div>
                     </div>
 
-                    <div class="col-8">
+                    <div class="col-12">
                         <div class="inner-block tracker">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="main-title">
@@ -131,20 +131,20 @@
                                 @endif
                                 @if ($document->training_required == 'yes')
                                     @if ($document->stage == 9)
-                                        <input type="hidden" name="stage_id" value="6" />
+                                        <input type="hidden" name="stage_id" value="10" />
                                         <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#approve-sign">
                                             Send For Training<i class="fa-regular fa-paper-plane"></i>
                                         </button>
                                     @endif
-                                    @if ($document->stage == 10)
-                                        <input type="hidden" name="stage_id" value="8" />
+                                    @if ($document->stage == 11)
+                                        <input type="hidden" name="stage_id" value="12" />
                                         <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#approve-sign">
                                             Send For Effective<i class="fa-regular fa-paper-plane"></i>
                                         </button>
                                     @endif
                                 @elseif($document->training_required == 'no')
-                                    @if ($document->stage == 10)
-                                        <input type="hidden" name="stage_id" value="8" />
+                                    @if ($document->stage == 11)
+                                        <input type="hidden" name="stage_id" value="12" />
                                         <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#approve-sign">
                                             Send For Effective<i class="fa-regular fa-paper-plane"></i>
                                         </button>
@@ -155,7 +155,7 @@
                             </div>
                             <div class="status">
                                 <div class="head">Current Status</div>
-                                @if ($document->stage < 13)
+                                @if ($document->stage < 14)
                                     <div class="progress-bars">
                                         @if ($document->stage >= 1)
                                             <div class="active">Draft</div>
@@ -198,23 +198,28 @@
                                             <div class="">Final Approval</div>
                                         @endif
                                         @if ($document->training_required == 'yes')
-                                            @if ($document->stage >= 10)
-                                                <div class="active">Pending-Traning</div>
-                                            @else
-                                                <div class="">Pending-Traning</div>
-                                            @endif
                                             @if ($document->stage >= 9)
-                                                <div class="active">Traning-Complete</div>
+                                                <div class="active">Training Pending</div>
                                             @else
-                                                <div class="">Traning-Complete</div>
+                                                <div class="">Training Pending</div>
+                                            @endif
+                                            @if ($document->stage >= 10)
+                                                <div class="active">Training Started</div>
+                                            @else
+                                                <div class="">Training Started</div>
+                                            @endif
+                                            @if ($document->stage >= 11)
+                                                <div class="active">Training Complete</div>
+                                            @else
+                                                <div class="">Training Complete</div>
                                             @endif
                                         @endif
-                                        @if ($document->stage >= 11)
+                                        @if ($document->stage >= 12)
                                             <div class="active">Effective</div>
                                         @else
                                             <div class="">Effective</div>
                                         @endif
-                                        @if ($document->stage == 12)
+                                        @if ($document->stage == 13)
                                             <div class="active">Obsolete</div>
                                         @else
                                             <div class="">Obsolete</div>
@@ -229,35 +234,27 @@
                         </div>
                     </div>
 
-                    <div class="col-4">
-                        <div>
-                            {{-- <div class="inner-block person-table" >
-                                <div class="main-title mb-0" >
-                                    HOD
-                                </div>
-                                <button data-bs-toggle="modal" data-bs-target="#doc-hods">
-                                    View
-                                </button>
-                            </div> --}}
-                            <div class="inner-block person-table" >
-                                <div class="main-title mb-0" >
-                                    Reviewers
-                                </div>
-                                <button data-bs-toggle="modal" data-bs-target="#doc-reviewers">
-                                    View
-                                </button>
+                    <div class="col-6">
+                        <div class="inner-block person-table" >
+                            <div class="main-title mb-0" >
+                                Reviewers
                             </div>
-                            <div class="inner-block person-table" >
-                                <div class="main-title mb-0" >
-                                    Approvers
-                                </div>
-                                <button data-bs-toggle="modal" data-bs-target="#doc-approvers">
-                                    View
-                                </button>
-                            </div>
+                            <button data-bs-toggle="modal" data-bs-target="#doc-reviewers">
+                                View
+                            </button>
                         </div>
                     </div>
-
+                    <div class="col-6">
+                        <div class="inner-block person-table" >
+                            <div class="main-title mb-0" >
+                                Approvers
+                            </div>
+                            <button data-bs-toggle="modal" data-bs-target="#doc-approvers">
+                                View
+                            </button>
+                        </div>
+                    </div>
+                    
                     <div class="col-12">
                         <div class="inner-block doc-overview">
                             <div class="main-title d-flex justify-content-between pa-5">
@@ -858,14 +855,14 @@
                             which is legally binding equivalent of a hand written signature.
                         </div>
                         <div class="group-input">
-                            <label for="username">Username</label>
+                            <label for="username">Username  <span class="text-danger">*</span></label>
                             <input type="text" value="{{ old('username') }}" name="username" required>
                             @if ($errors->has('username'))
                                 <p class="text-danger">User name not matched</p>
                             @endif
                         </div>
                         <div class="group-input">
-                            <label for="password">Password</label>
+                            <label for="password">Password  <span class="text-danger">*</span></label>
                             <input type="password" value="{{ old('password') }}" name="password" required>
                             @if ($errors->has('username'))
                                 <p class="text-danger">E-signature not matched</p>
@@ -892,14 +889,6 @@
                         @if ($document->stage == 9)
                             <input type="hidden" name="stage_id" value="10" />
                         @endif
-                    @else
-                        @if ($document->stage == 11)
-                            <input type="hidden" name="stage_id" value="10" />
-                        @endif
-                    @endif
-
-                    @if ($document->stage == 5)
-                        <input type="hidden" name="stage_id" value="6" />
                     @endif
 
                     <!-- Modal footer -->
@@ -924,7 +913,7 @@
                 <form action="{{ url('sendforstagechanage') }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="stage_id" value="11" />
+                    <input type="hidden" name="stage_id" value="13" />
                     <input type="hidden" name="document_id" value="{{ $document->id }}">
                     <!-- Modal body -->
                     <div class="modal-body">
