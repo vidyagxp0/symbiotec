@@ -50,6 +50,44 @@
             font-size: 20px;
             border: 1px solid #302e2e;
         }
+
+            @media print {
+        .table-responsive {
+            overflow: visible !important;
+            height: auto !important;
+        }
+
+        .table-block {
+            height: auto !important;
+        }
+
+        body {
+            -webkit-print-color-adjust: exact;
+        }
+
+        .main-content {
+            page-break-inside: avoid; 
+        }
+        
+        table {
+            page-break-inside: auto; 
+            width: 100%;
+        }
+
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+
+        header, footer, .btn {
+            display: none !important;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    }
     </style>
     <div id="rcms-desktop">
 
@@ -59,6 +97,9 @@
                     <div class="process-table active" id="internal-audit">
                       
                         <div class="table-block" style="padding: 20px;">
+                        <div class="sub-head " >
+                                    <span class="fw-bold fs-6">Effectiveness-Checks</span>
+                            </div>  
                                      <div class="sub-head " >
                                     <span class="fw-bold fs-6">Format No. : </span><span>CQA-F-001E-R2</span>
                                 </div>
@@ -68,12 +109,12 @@
                                 <!-- <div class="sub-head " >
                                     <span class="fw-bold fs-6">Format No. : </span><span>CQA-F-001E-R2</span>
                                 </div> -->
-                            <button class="btn btn-primary"   onclick="printTable()">Print Table</button>
+                            <button class="btn btn-primary"   onclick="window.print()">Print Table</button>
                             <div class="sub-head ml-3">
                                 <!-- <span class="fw-bold fs-6">Format No. : </span><span>CQA-F-001E-R2</span> -->
                             </div>
                         </div>
-                            <div class="table-responsive" style="height: 450px">
+                            <div class="table-responsive" style="height: 600px">
                                 <div class="main-head-new p-1">
                                     Department :
                                 </div>
@@ -100,7 +141,7 @@
                                                 <td>{{ $doc->record }}</td>
                                                 <td>{{ $doc->parent_id ?  $doc->parent_id : '-' }}</td>
                                                 <td>{{ Helpers::getDivisionName($doc->division_id) ? Helpers::getDivisionName($doc->division_id): "-"}}</td>
-                                                <td>{{  '-' }}</td>
+                                                <td>Effectiveness-Checks</td>
                                                 <td>{{ '-' }}</td>
                                                 <td>{{ $doc->short_description ? $doc->short_description : '-' }}</td>
                                                 <td>{{ $doc->intiation_date ? $doc->intiation_date : '-' }}</td>
@@ -121,16 +162,14 @@
     </div>
 
     <script>
-        function printTable() {
-            var printContents = document.querySelector('.table-block').innerHTML;
-            var originalContents = document.body.innerHTML;
+    function printTable() {
+        var printContents = document.querySelector('.main-content').innerHTML;
+        var originalContents = document.body.innerHTML;
 
-            // Replace body content with table for printing
-            document.body.innerHTML = printContents;
-            window.print();
+        document.body.innerHTML = printContents;
+        window.print(); 
 
-            // Restore original content after printing
-            document.body.innerHTML = originalContents;
-        }
+        document.body.innerHTML = originalContents;
+    }
     </script>
 @endsection
