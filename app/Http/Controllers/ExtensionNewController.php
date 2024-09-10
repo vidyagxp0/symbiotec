@@ -1332,7 +1332,7 @@ class ExtensionNewController extends Controller
                     $extensionNew->send_cqa_comment = $request->comment;
 
                     $history = new ExtensionNewAuditTrail();
-                    $history->deviation_id = $id;
+                    $history->extension_id = $id;
                     $history->activity_type = ' Send for CQA By,  Send for CQA On';
                     if (is_null($lastDocument->send_cqa_by) || $lastDocument->send_cqa_by === '') {
                         $history->previous = "Null";
