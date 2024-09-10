@@ -162,7 +162,7 @@
                                 </script>
                                 <div class="col-lg-6">
                                     <div class="group-input">
-                                        <label for="Assigned To">HOD review </label>
+                                        <label for="Assigned To">HOD Reviewer</label>
                                         <select id="choices-multiple-remove" class="choices-multiple-reviewe"
                                             name="reviewers" placeholder="Select Reviewers">
                                             <option value="">-- Select --</option>
@@ -217,7 +217,7 @@
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
-                                        <label for="Assigned To">QA approval </label>
+                                        <label for="Assigned To">QA Approval</label>
                                         <select id="choices-multiple-remove-but" class="choices-multiple-reviewer"
                                             name="approvers" placeholder="Select Approvers">
                                             <option value="">-- Select --</option>
@@ -301,7 +301,7 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="group-input">
-                                        <label for="Guideline Attachment"> Attachment Extension </label>
+                                        <label for="Guideline Attachment">Attachments</label>
                                         <div><small class="text-primary">Please Attach all relevant or supporting
                                                 documents</small></div>
                                         <div class="file-attachment-field">
@@ -343,7 +343,7 @@
 
                             <div class="col-12">
                                 <div class="group-input">
-                                    <label for="Guideline Attachment">HOD Attachment </label>
+                                    <label for="HOD Attachment">HOD Attachments</label>
                                     <div><small class="text-primary">Please Attach all relevant or supporting
                                             documents</small></div>
                                     <div class="file-attachment-field">
@@ -381,7 +381,7 @@
 
                             <div class="col-12">
                                 <div class="group-input">
-                                    <label for="Guideline Attachment">QA Attachment </label>
+                                    <label for="Guideline Attachment">QA Attachments</label>
                                     <div><small class="text-primary">Please Attach all relevant or supporting
                                             documents</small></div>
                                     <div class="file-attachment-field">
@@ -409,39 +409,174 @@
                 <div id="CCForm6" class="inner-block cctabcontent">
                     <div class="inner-block-content">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="group-input">
-                                    <label for="Activated By">Initiated By</label>
+                                    <label for="Activated By">Submit By</label>
                                     <div class="static"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="group-input">
-                                    <label for="Activated On">Initiated On</label>
+                                    <label for="Activated On">Submit On</label>
                                     <div class="static"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="group-input">
-                                    <label for=" Rejected By">Reviewed By</label>
+                                    <label for="Activated On">Comment</label>
                                     <div class="static"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="group-input">
-                                    <label for="Rejected On">Reviewed On</label>
+                                    <label for=" Rejected By">Cancel By</label>
                                     <div class="static"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="group-input">
-                                    <label for=" Rejected By">Approved By</label>
+                                    <label for="Rejected On">Cancel On</label>
                                     <div class="static"></div>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="group-input">
-                                    <label for="Rejected On">Approved On</label>
+                                    <label for="Rejected On">Comment</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for=" Rejected By">More Information Required By</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">More Information Required On</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">Comment</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for=" Rejected By">Review By</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">Review On</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">Comment</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for=" Rejected By">Reject By</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">Reject On</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">Comment</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for=" Rejected By">More Information Required By</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">More Information Required On</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">Comment</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for=" Rejected By">Send for CQA By</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">Send for CQA On</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">Comment</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for=" Rejected By"> Approved By</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On"> Approved On</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">Comment</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for=" Rejected By"> CQA Approval Complete By</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On"> CQA Approval Complete On</label>
+                                    <div class="static"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="group-input">
+                                    <label for="Rejected On">Comment</label>
                                     <div class="static"></div>
                                 </div>
                             </div>

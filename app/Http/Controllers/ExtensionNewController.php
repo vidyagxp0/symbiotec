@@ -281,6 +281,58 @@ class ExtensionNewController extends Controller
             $history->action_name = 'Create';
             $history->save();
         }
+
+        if (!empty($request->reviewers)) {
+            $history = new ExtensionNewAuditTrail();
+            $history->extension_id = $extensionNew->id;
+            $history->activity_type = 'HOD Reviewer';
+            $history->previous = "Null";
+            $history->current = Helpers::getInitiatorName($extensionNew->reviewers);
+            $history->comment = "Not Applicable";
+            $history->user_id = Auth::user()->id;
+            $history->user_name = Auth::user()->name;
+            $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+            $history->origin_state = $extensionNew->status;
+            $history->change_to =   "Opened";
+            $history->change_from = "Initiation";
+            $history->action_name = 'Create';
+            $history->save();
+        }
+
+        if (!empty($extensionNew->related_records)) {
+            $history = new ExtensionNewAuditTrail();
+            $history->extension_id = $extensionNew->id;
+            $history->activity_type = 'Related Records';
+            $history->previous = "Null";
+            $history->current = str_replace(',', ', ', $extensionNew->related_records);
+            $history->comment = "Not Applicable";
+            $history->user_id = Auth::user()->id;
+            $history->user_name = Auth::user()->name;
+            $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+            $history->origin_state = $extensionNew->status;
+            $history->change_to =   "Opened";
+            $history->change_from = "Initiation";
+            $history->action_name = 'Create';
+            $history->save();
+        }
+
+        if (!empty($request->approvers)) {
+            $history = new ExtensionNewAuditTrail();
+            $history->extension_id = $extensionNew->id;
+            $history->activity_type = 'QA Approval';
+            $history->previous = "Null";
+            $history->current = Helpers::getInitiatorName($extensionNew->approvers);
+            $history->comment = "Not Applicable";
+            $history->user_id = Auth::user()->id;
+            $history->user_name = Auth::user()->name;
+            $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+            $history->origin_state = $extensionNew->status;
+            $history->change_to =   "Opened";
+            $history->change_from = "Initiation";
+            $history->action_name = 'Create';
+            $history->save();
+        }
+        
         if (!empty($request->current_due_date)) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
@@ -329,22 +381,7 @@ class ExtensionNewController extends Controller
             $history->action_name = 'Create';
             $history->save();
         }
-        if (!empty($extensionNew->related_records)) {
-            $history = new ExtensionNewAuditTrail();
-            $history->extension_id = $extensionNew->id;
-            $history->activity_type = 'Related Records';
-            $history->previous = "Null";
-            $history->current = str_replace(',', ', ', $extensionNew->related_records);
-            $history->comment = "Not Applicable";
-            $history->user_id = Auth::user()->id;
-            $history->user_name = Auth::user()->name;
-            $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
-            $history->origin_state = $extensionNew->status;
-            $history->change_to =   "Opened";
-            $history->change_from = "Initiation";
-            $history->action_name = 'Create';
-            $history->save();
-        }
+        
         if (!empty($request->justification_reason)) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
@@ -361,12 +398,47 @@ class ExtensionNewController extends Controller
             $history->action_name = 'Create';
             $history->save();
         }
+
+        if (!empty($request->file_attachment_extension)) {
+            $history = new ExtensionNewAuditTrail();
+            $history->extension_id = $extensionNew->id;
+            $history->activity_type = 'Attachments';
+            $history->previous = "Null";
+            $history->current = $extensionNew->file_attachment_extension;
+            $history->comment = "Not Applicable";
+            $history->user_id = Auth::user()->id;
+            $history->user_name = Auth::user()->name;
+            $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+            $history->origin_state = $extensionNew->status;
+            $history->change_to =   "Opened";
+            $history->change_from = "Initiation";
+            $history->action_name = 'Create';
+            $history->save();
+        }
+
         if (!empty($request->reviewer_remarks)) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
-            $history->activity_type = 'Reviewer Remarks';
+            $history->activity_type = 'HOD Remarks';
             $history->previous = "Null";
             $history->current = $extensionNew->reviewer_remarks;
+            $history->comment = "Not Applicable";
+            $history->user_id = Auth::user()->id;
+            $history->user_name = Auth::user()->name;
+            $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+            $history->origin_state = $extensionNew->status;
+            $history->change_to =   "Opened";
+            $history->change_from = "Initiation";
+            $history->action_name = 'Create';
+            $history->save();
+        }
+
+        if (!empty($request->file_attachment_reviewer)) {
+            $history = new ExtensionNewAuditTrail();
+            $history->extension_id = $extensionNew->id;
+            $history->activity_type = 'HOD Attachments';
+            $history->previous = "Null";
+            $history->current = $extensionNew->file_attachment_reviewer;
             $history->comment = "Not Applicable";
             $history->user_id = Auth::user()->id;
             $history->user_name = Auth::user()->name;
@@ -381,7 +453,7 @@ class ExtensionNewController extends Controller
         if (!empty($request->approver_remarks)) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
-            $history->activity_type = 'Approver Remarks';
+            $history->activity_type = 'QA Remarks';
             $history->previous = "Null";
             $history->current = $extensionNew->approver_remarks;
             $history->comment = "Not Applicable";
@@ -394,6 +466,24 @@ class ExtensionNewController extends Controller
             $history->action_name = 'Create';
             $history->save();
         }
+
+        if (!empty($request->file_attachment_approver)) {
+            $history = new ExtensionNewAuditTrail();
+            $history->extension_id = $extensionNew->id;
+            $history->activity_type = 'QA Attachments';
+            $history->previous = "Null";
+            $history->current = $extensionNew->file_attachment_approver;
+            $history->comment = "Not Applicable";
+            $history->user_id = Auth::user()->id;
+            $history->user_name = Auth::user()->name;
+            $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
+            $history->origin_state = $extensionNew->status;
+            $history->change_to =   "Opened";
+            $history->change_from = "Initiation";
+            $history->action_name = 'Create';
+            $history->save();
+        }
+
         // return redirect()->back()->with('success', 'Induction training data saved successfully!');
         // return redirect()->route('TMS.index')->with('success', 'Induction training data saved successfully!');
         toastr()->success("Record is created Successfully");
@@ -601,9 +691,9 @@ class ExtensionNewController extends Controller
         if ($lastDocument->reviewers != $extensionNew->reviewers) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
-            $history->activity_type = 'HOD review';
-            $history->previous = $lastDocument->reviewers;
-            $history->current = $extensionNew->reviewers;
+            $history->activity_type = 'HOD Reviewer';
+            $history->previous = Helpers::getInitiatorName($lastDocument->reviewers);
+            $history->current = Helpers::getInitiatorName($extensionNew->reviewers);
             $history->comment = $request->reviewers_comment;
             $history->user_id = Auth::user()->id;
             $history->user_name = Auth::user()->name;
@@ -623,9 +713,9 @@ class ExtensionNewController extends Controller
         if ($lastDocument->approvers != $extensionNew->approvers) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
-            $history->activity_type = 'QA approval';
-            $history->previous = $lastDocument->approvers;
-            $history->current = $extensionNew->approvers;
+            $history->activity_type = 'QA Approval';
+            $history->previous = Helpers::getInitiatorName($lastDocument->approvers);
+            $history->current = Helpers::getInitiatorName($extensionNew->approvers);
             $history->comment = $request->approvers_comment;
             $history->user_id = Auth::user()->id;
             $history->user_name = Auth::user()->name;
@@ -798,7 +888,7 @@ class ExtensionNewController extends Controller
         if ($lastDocument->file_attachment_reviewer != $extensionNew->file_attachment_reviewer) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
-            $history->activity_type = 'HOD Attachment';
+            $history->activity_type = 'HOD Attachments';
             $history->previous = str_replace(',', ', ', $lastDocument->file_attachment_reviewer);
             $history->current = str_replace(',', ', ', $extensionNew->file_attachment_reviewer);
             $history->comment = $request->short_description_comment;
@@ -842,7 +932,7 @@ class ExtensionNewController extends Controller
         if ($lastDocument->file_attachment_approver != $extensionNew->file_attachment_approver) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
-            $history->activity_type = 'QA Attachment';
+            $history->activity_type = 'QA Attachments';
             $history->previous = str_replace(',', ', ', $lastDocument->file_attachment_approver);
             $history->current = str_replace(',', ', ', $extensionNew->file_attachment_approver);
             $history->comment = $request->file_attachment_approver_comment;

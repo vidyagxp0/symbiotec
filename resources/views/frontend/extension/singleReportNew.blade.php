@@ -244,7 +244,7 @@
                 </table>
                 <table>
                     <tr>
-                        <th class="w-20">HOD reviewer</th>
+                        <th class="w-20">HOD Reviewer</th>
                         <td class="w-80">
                             @if ($data->reviewers)
                                 {{ Helpers::getInitiatorName($data->reviewers) }}
@@ -252,7 +252,7 @@
                                 Not Applicable
                             @endif
                         </td>
-                        <th class="w-20">Approver</th>
+                        <th class="w-20">QA Approval</th>
                         <td class="w-80">
                             @if ($data->approvers)
                                 {{ Helpers::getInitiatorName($data->approvers) }}
@@ -304,7 +304,7 @@
                 </table>
             </div>
             <div class="block">
-                <div class="block-head">Extension Attachments</div>
+                <div class="block-head">Attachments</div>
                 <div class="border-table">
                     <table>
                         <tr class="table_bg">
@@ -329,11 +329,11 @@
                 </div>
             </div>
             <div class="block">
-                <div class="block-head">Reviewer Feedbacks</div>
+                <div class="block-head">HOD Review</div>
                 <table>
 
                     <tr>
-                        <th class="w-20">Reviewer Remarks </th>
+                        <th class="w-20">HOD Remarks</th>
                         <td class="w-80">
                             @if ($data->reviewer_remarks)
                                 {{ $data->reviewer_remarks }}
@@ -346,7 +346,7 @@
                 </table>
             </div>
             <div class="block">
-                <div class="block-head">Reviewer Attachment</div>
+                <div class="block-head">HOD Attachments</div>
                 <div class="border-table">
                     <table>
                         <tr class="table_bg">
@@ -372,11 +372,11 @@
             </div>
 
             <div class="block">
-                <div class="block-head">Approver Feedbacks</div>
+                <div class="block-head">QA Approval</div>
                 <table>
 
                     <tr>
-                        <th class="w-20">Approver Remarks </th>
+                        <th class="w-20">QA Remarks</th>
                         <td class="w-80">
                             @if ($data->approver_remarks)
                                 {{ $data->approver_remarks }}
@@ -389,7 +389,7 @@
                 </table>
             </div>
             <div class="block">
-                <div class="block-head">Approver Attachment</div>
+                <div class="block-head">QA Attachments</div>
                 <div class="border-table">
                     <table>
                         <tr class="table_bg">
@@ -416,24 +416,99 @@
             <div class="block">
                 <div class="block-head">Activity Log</div>
                 <table>
-                    <tr>
-                        <th class="w-20">Initiated By</th>
-                        <td class="w-30">{{ $data->submit_by }}</td>
-                        <th class="w-20">Initiated On</th>
-                        <td class="w-30">{{ $data->submit_on }}</td>
-                    </tr>
-                    <tr>
-                        <th class="w-20">Reviewed By</th>
-                        <td class="w-30">{{ $data->submit_by_review }}</td>
-                        <th class="w-20">Reviewed On</th>
-                        <td class="w-30">{{ $data->submit_on_review }}</td>
-                    </tr>
-                    <tr>
-                        <th class="w-20">Approved By</th>
-                        <td class="w-30">{{ $data->submit_by_approved }}</td>
-                        <th class="w-20">Approved On</th>
-                        <td class="w-30">{{ $data->submit_on_approved }}</td>
-                    </tr>
+                    <table>
+                        <tr>
+                            <th class="w-20">Submit By</th>
+                            <td class="w-80">{{ $data->submit_by }}</td>
+                            <th class="w-20">Submit On</th>
+                            <td class="w-80">{{ $data->submit_on }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Comment</th>
+                            <td class="w-80">{{ $data->submit_comment }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Cancel By</th>
+                            <td class="w-80">{{ $data->reject_by }}</td>
+                            <th class="w-20">Cancel On</th>
+                            <td class="w-80">{{ $data->reject_on }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Comment</th>
+                            <td class="w-80">{{ $data->reject_comment }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">More Information Required By</th>
+                            <td class="w-80">{{ $data->more_info_review_by }}</td>
+                            <th class="w-20">More Information Required On</th>
+                            <td class="w-80">{{ $data->more_info_review_on }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Comment</th>
+                            <td class="w-80">{{ $data->more_info_review_comment }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Review By</th>
+                            <td class="w-80">{{ $data->submit_by_review }}</td>
+                            <th class="w-20">Review On</th>
+                            <td class="w-80">{{ $data->submit_on_review }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Comment</th>
+                            <td class="w-80">{{ $data->submit_comment_review }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Reject By</th>
+                            <td class="w-80">{{ $data->submit_by_inapproved }}</td>
+                            <th class="w-20">Reject On</th>
+                            <td class="w-80">{{ $data->submit_on_inapproved }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Comment</th>
+                            <td class="w-80">{{ $data->submit_commen_inapproved }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">More Information Required By</th>
+                            <td class="w-80">{{ $data->more_info_inapproved_by }}</td>
+                            <th class="w-20">More Information Required On</th>
+                            <td class="w-80">{{ $data->more_info_inapproved_on }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Comment</th>
+                            <td class="w-80">{{ $data->more_info_inapproved_comment }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Send for CQA By</th>
+                            <td class="w-80">{{ $data->send_cqa_by }}</td>
+                            <th class="w-20">Send for CQA On</th>
+                            <td class="w-80">{{ $data->send_cqa_on }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Comment</th>
+                            <td class="w-80">{{ $data->send_cqa_comment }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Approved By</th>
+                            <td class="w-80">{{ $data->submit_by_approved }}</td>
+                            <th class="w-20">Approved On</th>
+                            <td class="w-80">{{ $data->submit_on_approved }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Comment</th>
+                            <td class="w-80">{{ $data->submit_comment_approved }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">CQA Approval Complete By</th>
+                            <td class="w-80">{{ $data->cqa_approval_by }}</td>
+                            <th class="w-20">CQA Approval Complete On</th>
+                            <td class="w-80">{{ $data->cqa_approval_on }}</td>
+                        </tr>
+                        <tr>
+                            <th class="w-20">Comment</th>
+                            <td class="w-80">{{ $data->cqa_approval_comment }}</td>
+                        </tr>
+                    </table>
+
 
                 </table>
             </div>

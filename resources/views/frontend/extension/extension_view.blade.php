@@ -383,7 +383,7 @@
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
-                                        <label for="Assigned To">HOD reviewer </label>
+                                        <label for="Assigned To">HOD Reviewer</label>
                                         <select id="choices-multiple-remove" class="choices-multiple-reviewe"
                                             name="reviewers" placeholder="Select Reviewers"
                                             {{ $extensionNew->stage == 0 || $extensionNew->stage == 4 ? 'disabled' : '' }}>
@@ -504,7 +504,7 @@
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
-                                        <label for="Assigned To">QA approval </label>
+                                        <label for="Assigned To">QA Approval </label>
                                         <select id="choices-multiple-remove-but" class="choices-multiple-reviewer"
                                             name="approvers" placeholder="Select Approvers"
                                             {{ $extensionNew->stage == 0 || $extensionNew->stage == 4 ? 'disabled' : '' }}>
@@ -730,7 +730,7 @@
                                                                                                                                                                                                                                                                                                         </div> -->
                             <div class="col-12">
                                 <div class="group-input">
-                                    <label for="Effectiveness check Attachments">Effectiveness check Attachment</label>
+                                    <label for="HOD Attachment">HOD Attachments</label>
                                     <div><small class="text-primary">Please Attach all relevant or supporting
                                             documents</small></div>
                                     <div class="file-attachment-field">
@@ -785,7 +785,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="group-input">
-                                    <label for="Inv Attachments"> QA Attachment</label>
+                                    <label for="Inv Attachments"> QA Attachments</label>
                                     <div><small class="text-primary">Please Attach all relevant or supporting
                                             documents</small></div>
                                     <div class="file-attachment-field">
