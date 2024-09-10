@@ -3743,7 +3743,7 @@ if ($lastDocument->qah_cq_attachment != $capa->qah_cq_attachment || !empty($requ
             $record = str_pad($record, 4, '0', STR_PAD_LEFT);
             $record_number = $record;
             $relatedRecords= Helpers::getAllRelatedRecords();            
-            return view('frontend.extension.extension_new', compact('parent_id', 'parent_name','relatedRecords', 'record_number', 'parent_due_date','parent_type'));
+            return view('frontend.extension.extension_new', compact('parent_id', 'parent_name','relatedRecords', 'record_number', 'parent_due_date','parent_type','parent_record'));
         }
     }
 
