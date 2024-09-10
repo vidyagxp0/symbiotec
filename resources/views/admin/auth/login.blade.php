@@ -17,7 +17,7 @@
             <div class="login-logo">
               <div class="logo-container">
                         <div class="logo" style="display:flex; justify-content: center;">
-                    <img src="{{ asset('user/images/vidyagxplogo.png') }}" alt="..." style="max-width: 300px; width: 50%; height 50%; scale: 2;">
+                    <img src="{{ asset('user/images/logo1.png') }}" alt="..." style="margin-left: 80px; width: 50%; height 50%; scale: 1.5;">
                         </div>
                         <div class="logo">
                             {{-- <img src="{{ asset('user/images/agio.jpg') }}" alt="..." class="w-100 h-100" style="max-width: 150px"> --}}

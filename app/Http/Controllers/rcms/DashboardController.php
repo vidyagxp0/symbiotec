@@ -987,7 +987,7 @@ class DashboardController extends Controller
         } elseif ($type == "Action-Item") {
             $data = ActionItem::find($id);
             $single = "actionitemSingleReport/"  . $data->id;
-            $audit = "actionitemauditTrailPdf/" . $data->id;
+            $audit = "actionitemauditTrailPdfNew/" . $data->id;
             $division = QMSDivision::find($data->division_id);
             $division_name = $division->name;
         } elseif ($type == "Extension") {

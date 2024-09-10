@@ -73,7 +73,7 @@ Route::group(['prefix' => 'rcms'], function () {
             Route::get('action-item-audittrialdetails/{id}', [ActionItemController::class, 'actionItemAuditTrialDetails'])->name('showaudittrialactionItem');
             Route::get('actionitemSingleReport/{id}', [ActionItemController::class, 'singleReport'])->name('actionitemSingleReport');
             Route::get('actionitemAuditReport/{id}', [ActionItemController::class, 'auditReport'])->name('actionitemAuditReport');
-            Route::get('actionitemauditTrailPdf/{id}', [ActionItemController::class, 'auditTrailPdf'])->name('actionitemauditTrailPdf');
+            Route::get('actionitemauditTrailPdfNew/{id}', [ActionItemController::class, 'auditTrailPdf'])->name('actionitemauditTrailPdfNew');
             Route::post('send-At-new/{id}', [ActionItemController::class, 'stageChange']);
             Route::post('moreinfoState_actionitem/{id}', [ActionItemController::class, 'actionmoreinfo']);
 
@@ -311,6 +311,7 @@ Route::group(['prefix' => 'rcms'], function () {
             // =====================extesnion new report and audit trail ===============
             Route::get('singleReportNew/{id}', [ExtensionNewController::class, 'singleReport'])->name('singleReportNew');
             Route::get('audit_trailNew/{id}', [ExtensionNewController::class, 'extensionNewAuditTrail']);
+            Route::get('extensionAuditReport/{id}', [ExtensionNewController::class, 'auditReport'])->name('extensionAuditReport');
             //----------------------------------- OOT ----------------------------------//
 
             Route::get('oot/', [OOTController::class, 'index']);
