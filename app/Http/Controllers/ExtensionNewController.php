@@ -198,12 +198,12 @@ class ExtensionNewController extends Controller
 
 
         $extensionNew->save();
-        if (!empty($request->record_number)) {
+        
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
             $history->activity_type = 'Record Number';
             $history->previous = "Null";
-            $history->current = $extensionNew->record_number;
+            $history->current = Helpers::divisionNameForQMS($extensionNew->site_location_code) .'/Ext/'. Helpers::year($extensionNew->created_at) .'/'. str_pad($extensionNew->record_number, 4, '0', STR_PAD_LEFT) ;
             $history->comment = "Not Applicable";
             $history->user_id = Auth::user()->id;
             $history->user_name = Auth::user()->name;
@@ -213,13 +213,13 @@ class ExtensionNewController extends Controller
             $history->change_from = "Initiation";
             $history->action_name = 'Create';
             $history->save();
-        }
+       
         if (!empty($request->site_location_code)) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
             $history->activity_type = 'Site/Location Code';
             $history->previous = "Null";
-            $history->current = $extensionNew->site_location_code;
+            $history->current = Helpers::getDivisionName($extensionNew->site_location_code);
             $history->comment = "Not Applicable";
             $history->user_id = Auth::user()->id;
             $history->user_name = Auth::user()->name;
@@ -231,12 +231,12 @@ class ExtensionNewController extends Controller
             $history->save();
         }
 
-        if (!empty($request->initiator)) {
+        
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
             $history->activity_type = 'Initiator';
             $history->previous = "Null";
-            $history->current = $extensionNew->initiator;
+            $history->current = Helpers::getInitiatorName($extensionNew->initiator);
             $history->comment = "Not Applicable";
             $history->user_id = Auth::user()->id;
             $history->user_name = Auth::user()->name;
@@ -246,14 +246,14 @@ class ExtensionNewController extends Controller
             $history->change_from = "Initiation";
             $history->action_name = 'Create';
             $history->save();
-        }
+      
 
         if (!empty($request->initiation_date)) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
             $history->activity_type = 'Date of Initiation';
             $history->previous = "Null";
-            $history->current = $extensionNew->initiation_date;
+            $history->current = Helpers::getdateFormat($extensionNew->initiation_date);
             $history->comment = "Not Applicable";
             $history->user_id = Auth::user()->id;
             $history->user_name = Auth::user()->name;
@@ -329,7 +329,7 @@ class ExtensionNewController extends Controller
             $history->action_name = 'Create';
             $history->save();
         }
-        if (!empty($request->related_records)) {
+        if (!empty($extensionNew->related_records)) {
             $history = new ExtensionNewAuditTrail();
             $history->extension_id = $extensionNew->id;
             $history->activity_type = 'Related Records';
@@ -1379,12 +1379,12 @@ class ExtensionNewController extends Controller
                     $history = new ExtensionNewAuditTrail();
                     $history->extension_id = $id;
                     $history->activity_type = 'Approved By, Approved On';
-                    if (is_null($lastDocument->cqa_approval_by) || $lastDocument->cqa_approval_by === '') {
+                    if (is_null($lastDocument->submit_by_approved) || $lastDocument->submit_by_approved === '') {
                         $history->previous = "Null";
                     } else {
-                        $history->previous = $lastDocument->cqa_approval_by . ' , ' . $lastDocument->cqa_approval_on;
+                        $history->previous = $lastDocument->submit_by_approved . ' , ' . $lastDocument->submit_on_approved;
                     }
-                    $history->current = $extensionNew->cqa_approval_by . ' , ' . $extensionNew->cqa_approval_on;
+                    $history->current = $extensionNew->submit_by_approved . ' , ' . $extensionNew->submit_on_approved;
                     $history->action = 'Approved';
                     $history->comment = $request->comment;
                     $history->user_id = Auth::user()->id;
@@ -1394,7 +1394,7 @@ class ExtensionNewController extends Controller
                     $history->user_role = RoleGroup::where('id', Auth::user()->role)->value('name');
                     $history->origin_state = $lastDocument->status;
                     $history->stage = 'Closed - Done';
-                    if (is_null($lastDocument->cqa_approval_by) || $lastDocument->cqa_approval_by === '') {
+                    if (is_null($lastDocument->submit_by_approved) || $lastDocument->submit_by_approved === '') {
                         $history->action_name = 'New';
                     } else {
                         $history->action_name = 'Update';

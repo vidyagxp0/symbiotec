@@ -247,7 +247,7 @@
                         <th class="w-20">HOD reviewer</th>
                         <td class="w-80">
                             @if ($data->reviewers)
-                                {{ $data->reviewers }}
+                                {{ Helpers::getInitiatorName($data->reviewers) }}
                             @else
                                 Not Applicable
                             @endif
