@@ -311,6 +311,7 @@ Route::group(['prefix' => 'rcms'], function () {
             // =====================extesnion new report and audit trail ===============
             Route::get('singleReportNew/{id}', [ExtensionNewController::class, 'singleReport'])->name('singleReportNew');
             Route::get('audit_trailNew/{id}', [ExtensionNewController::class, 'extensionNewAuditTrail']);
+            Route::get('extensionAuditReport/{id}', [ExtensionNewController::class, 'auditReport'])->name('extensionAuditReport');
             //----------------------------------- OOT ----------------------------------//
 
             Route::get('oot/', [OOTController::class, 'index']);
