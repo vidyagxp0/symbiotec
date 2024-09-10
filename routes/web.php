@@ -417,6 +417,8 @@ Route::get('meeting', [ManagementReviewController::class, 'meeting']);
 //Route::view('lab-incident', 'frontend.forms.lab-incident');
 
 Route::view('classroom-training', 'frontend.forms.classroom-training');
+// Route::view('classroom', 'frontend.forms.cc_show');
+
 
 Route::view('employee', 'frontend.forms.employee');
 
@@ -612,6 +614,17 @@ Route::get('/test-sms', function() {
 });
 // ====================SOP Index==============
 Route::view('sop-index-show', 'frontend.sop-index.sop-index-show');
+Route::view('capa-show', 'frontend.sop-index.capa-show');
+Route::view('extensions-show', 'frontend.sop-index.extensions-show');
+Route::view('cc-show', 'frontend.sop-index.cc-index-show');
+Route::view('rca-show', 'frontend.sop-index.rca-show');
+Route::view('action-item-show', 'frontend.sop-index.action-item-show');
+Route::view('effectiveness-checks', 'frontend.sop-index.effectiveness-checks-show');
+
+
+
+// Route::get('cc_show', [ReportController::class, 'index']);
+
 
 //=====================================================================
 // >>>>>>> B-backup
