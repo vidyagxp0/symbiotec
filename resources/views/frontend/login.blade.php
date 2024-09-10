@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>VidyaGxp - Software</title>
+    <title>Connexo - Software</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/fontawesome.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
@@ -246,7 +246,7 @@
     <img src="{{ asset('user/images/agio-removebg-preview.png') }}" alt="..." style="filter: none; scale: 1; max-width: 100px; margin: auto; margin-bottom: 33px;">
 
 
-    <img  src="{{ asset('user/images/vidhyaGxp.png') }}" alt="..." style="filter: none; scale: 2; max-width: 100px; margin: auto">
+    <img  src="{{ asset('user/images/logo1.png') }}" alt="..." style="filter: none; scale: 2; max-width: 100px; margin: auto">
 
 
                     </div> --}}
@@ -257,7 +257,7 @@
                       <!-- <img src="https://sunpharma.com/wp-content/uploads/2020/12/logo.png" alt="..." style="filter: none; scale: 0.6; max-width: 100px; margin: auto; margin-bottom: 14px;">  -->
 
 
-                     <img  src="{{ asset('user/images/vidhyaGxp.png') }}" alt="..." style="filter: none; scale: 1.8; max-width: 100px; margin: auto">
+                     <img  src="{{ asset('user/images/logo1.png') }}" alt="..." style="filter: none; scale: 1.8; max-width: 100px; margin: auto">
 
 
                     </div> 

@@ -81,7 +81,7 @@
                 <div class="middle-head">
                     <div class="logo-container">
                         <div class="logo">
-                            <img src="{{ asset('user/images/vidhyaGxp.png') }}" alt="..." class="w-100 h-100"
+                            <img src="{{ asset('user/images/logo1.png') }}" alt="..." class="w-100 h-100"
                                 style="scale: 1">
                         </div>
                         <div class="logo">
