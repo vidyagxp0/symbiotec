@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('extension_news', function (Blueprint $table) {
-            $table->text('parent_type ')->nullable();
-            $table->text('record  ')->nullable();
-            $table->longText('related_records ')->nullable();
-            $table->longText('justification_reason ')->nullable();
+            $table->text('parent_type')->nullable();
+            $table->text('record')->nullable();
+            $table->longText('related_records')->nullable();
+            $table->longText('justification_reason')->nullable();
         });
     }
 
