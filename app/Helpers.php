@@ -919,5 +919,38 @@ class Helpers
 
         return $roleExists ? true : false;
     }
+    public static function getDueDatemonthly($date = null, $addDays = false, $format = null)
+    {
+        try {
+            $format = $format ? $format : 'd-M-Y';
+            $dateInstance = $date ? Carbon::parse($date) : Carbon::now();
+
+            if ($addDays) {
+                $dateInstance->addDays($addDays);
+            } else {
+                // Add 30 days instead of adding a month
+                $dateInstance->addDays(30);
+            }
+
+            return $dateInstance->format($format);
+        } catch (\Exception $e) {
+            return 'NA';
+        }
+    }
+    public static function getHODDropdown() {
+        $hodUserList = DB::table('user_roles')
+            ->join('users', 'user_roles.user_id', '=', 'users.id')
+            ->where('user_roles.q_m_s_roles_id', '4')
+            ->select('users.id', 'users.name')
+            ->distinct()
+            ->get();
+
+        $dropdown = [];
+        foreach ($hodUserList as $hodUser) {
+            $dropdown[] = ['id' => $hodUser->id, 'name' => $hodUser->name];
+        }
+
+        return $dropdown;
+    }
 
 }

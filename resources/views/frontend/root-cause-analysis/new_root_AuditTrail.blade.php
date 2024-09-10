@@ -186,9 +186,7 @@
                             ->get();
                         $userRoleIds = $userRoles->pluck('q_m_s_roles_id')->toArray();
                         $auditCollect = DB::table('audit_reviewers_details')
-                            ->where(['doc_id' => $document->id, 'user_id' => Auth::user()->id])
-                            ->latest()
-                            ->first();
+                            ->where(['doc_id' => $document->id, 'user_id' => Auth::user()->id])->latest()->first();
                     @endphp
 
                     <div class="d-flex justify-content-between align-items-center">
@@ -198,14 +196,17 @@
                             <div style="color: red; font-weight: 600">The Audit Trail has is yet to be reviewed.</div>
                         @endif
                         <div class="buttons-new">
-                            @if ($document->stage < 7 && !(count($userRoleIds) === 1 && in_array(3, $userRoleIds)))
-                                {{--  <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#auditReviewer">
+                            {{-- @if ($document->stage < 7 && !(count($userRoleIds) === 1 && in_array(3, $userRoleIds)))
+                                 <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#auditReviewer">
                                     Review
-                                </button>  --}}
-                            @endif
-                            {{--  <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#auditViewers">
+                                </button>   
+                            @endif --}}
+                            <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#auditReviewer">
+                                Review
+                            </button> 
+                             <button class="button_theme1" data-bs-toggle="modal" data-bs-target="#auditViewers">
                                 View
-                            </button>  --}}
+                            </button> 
                             <button class="button_theme1"><a class="text-white"
                                     href="{{ url('rootshow/' . $document->id) }}"> Back
                                 </a>
@@ -327,12 +328,12 @@
                                 Audit Trail
                             </div>
                         
-                            <div> <strong>Record ID.</strong> {{ str_pad($document->record, 4, '0', STR_PAD_LEFT) }}</div>
+                            <div> <strong>Record ID:</strong> {{ str_pad($document->record, 4, '0', STR_PAD_LEFT) }}</div>
                             <div style="margin-bottom: 5px;  font-weight: bold;"> Originator
                                 :{{ $document->record_initiator ? $document->record_initiator->name : '' }}</div>
                             <div style="margin-bottom: 5px; font-weight: bold;">Short Description :
                                 {{ $document->short_description }}</div>
-                            <div style="margin-bottom: 5px;  font-weight: bold;">Due Date : {{ $document->due_date }}</div>
+                            <div style="margin-bottom: 5px;  font-weight: bold;">Due Date :  {{ \Carbon\Carbon::parse($document->due_date)->format('d-M-Y') }}</div>
 
                         </div>
         </div>
@@ -387,7 +388,7 @@
                                     @if($dataDemo->activity_type == "Activity Log")
                                         <strong>Change From :</strong>{{ $dataDemo->change_from ? $dataDemo->change_from : 'Not Applicable' }}
                                     @else
-                                        <strong>Change From :</strong>{{ $dataDemo->previous ? $dataDemo->previous : 'Not Applicable' }}
+                                        <strong>Change From :</strong>{{ $dataDemo->previous ? $dataDemo->previous : 'NULL' }}
                                     @endif
                                 </div>
                                 <br>
@@ -414,7 +415,7 @@
                                         :</strong>{{ $dataDemo->user_name ? $dataDemo->user_name : 'Not Applicable' }}
                                 </div>
                                 <div style="margin-top: 5px;"> <strong>Performed On
-                                        :</strong>{{ $dataDemo->created_at ? $dataDemo->created_at : 'Not Applicable' }}
+                                        :</strong>{{ $dataDemo->created_at ? $dataDemo->created_at->format('d-M-Y H:i:s') : 'Not Applicable' }}
                                 </div>
                                 <div style="margin-top: 5px;"><strong> Comments
                                         :</strong>{{ $dataDemo->comment ? $dataDemo->comment : 'Not Applicable' }}</div>
