@@ -139,4 +139,18 @@
 
     </div>
    
+
+    <script>
+        function printTable() {
+            var printContents = document.querySelector('.table-block').innerHTML;
+            var originalContents = document.body.innerHTML;
+
+            // Replace body content with table for printing
+            document.body.innerHTML = printContents;
+            window.print();
+
+            // Restore original content after printing
+            document.body.innerHTML = originalContents;
+        }
+    </script>
 @endsection

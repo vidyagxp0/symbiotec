@@ -424,9 +424,8 @@
             <!-- </div>
             <div class="modal-body"> -->
                 
-                {{-- @foreach ($logs_list as $log_list) --}}
-                    <p> <a href="/cc-show" target="">Change Control</a> </p>
-                {{-- @endforeach --}}
+                <p> <a href="/cc-show" target="">Change Control</a> </p>
+                  
                 <p> <a href="/action-item-show" target="_blank">Action Item</a> </p>
 
                 <p> <a href="/rca-show" target="_blank">RCA</a> </p>
