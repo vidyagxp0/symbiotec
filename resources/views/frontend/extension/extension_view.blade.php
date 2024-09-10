@@ -915,7 +915,7 @@
                             <div class="col-lg-4">
                                 <div class="group-input">
                                     <label for="Rejected On">Reject On</label>
-                                    <div class="static">{{ $extensionNew->submit_on_approved }}</div>
+                                    <div class="static">{{ $extensionNew->submit_on_inapproved }}</div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
