@@ -262,7 +262,7 @@
 
                     </div> 
                     <div class="head" style="margin-top: 2rem;">
-                        Welcome To VidyaGxP
+                        Welcome To Connexo Asia Limited
                     </div>
                     <form action="{{ url('rcms_check') }}" method="POST">
                         @csrf

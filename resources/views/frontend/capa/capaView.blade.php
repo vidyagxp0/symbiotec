@@ -226,7 +226,7 @@
                             @endif
 
                             @if ($data->stage >= 4)
-                                <div class="active">QAH/CQA Approval</div>
+                                <div class="active">QA/CQA Approval</div>
                             @else
                                 <div class="">QA/CQA Approval</div>
                             @endif
@@ -330,7 +330,7 @@
                                         <div class="col-lg-6">
                                             <div class="group-input">
                                                 <label for="Division Code">Site/Location Code</label>
-                                                <input readonly type="text" name="division_code"
+                                                <input readonly type="text" name="division_code"  id="division_code"
                                                     value="{{ Helpers::getDivisionName(session()->get('division')) }}">
                                                 <input type="hidden" name="division_id" value="{{ session()->get('division') }}">
                                                 {{-- <div class="static">{{ Helpers::getDivisionName(session()->get('division')) }}</div> --}}
@@ -434,7 +434,7 @@
                                                 <label for="Initiator Group">Department Group </label>
                                                 <select name="initiator_Group" {{ $data->stage == 0 || $data->stage == 9 ? 'disabled' : '' }}
                                                      id="initiator_group">
-                                                     <option value="0">-- Select --</option>
+                                                     <option value="">-- Select --</option>
                                                     <option value="CQA"
                                                         @if ($data->initiator_Group== 'CQA') selected @endif>Corporate
                                                         Quality Assurance</option>
@@ -1442,7 +1442,7 @@
                                                 {{-- <input type="file" id="myfile" name="closure_attachment"
                                                     {{ $data->stage == 0 || $data->stage == 9 ? 'disabled' : '' }}> --}}
                                                 <div class="file-attachment-field">
-                                                    <div class="file-attachment-list" id="closure_attachment1">
+                                                    <div class="file-attachment-list" id="closure_attachment">
                                                         @if ($data->closure_attachment)
                                                             @foreach (json_decode($data->closure_attachment) as $file)
                                                                 <h6 type="button" class="file-container text-dark"
@@ -1464,7 +1464,7 @@
                                                         <input
                                                             {{ $data->stage == 0 || $data->stage == 9 ? 'disabled' : '' }}
                                                             type="file" id="myfile" name="closure_attachment[]"{{ $data->stage == 0 || $data->stage == 9 ? 'disabled' : '' }}
-                                                            oninput="addMultipleFiles(this, 'closure_attachment1')"
+                                                            oninput="addMultipleFiles(this, 'closure_attachment')"
                                                             multiple>
                                                     </div>
                                                 </div>
@@ -1573,7 +1573,7 @@
                             documents</small></div>
                     {{-- <input multiple type="file" id="myfile" name="closure_attachment[]"> --}}
                     <div class="file-attachment-field">
-                        <div class="file-attachment-list" id="qa_attachment">
+                        <div class="file-attachment-list" id="hod_final_attachment">
 
                             @if ($data->hod_final_attachment)
                             @foreach (json_decode($data->hod_final_attachment) as $file)
@@ -1595,7 +1595,7 @@
                         <div class="add-btn">
                             <div>Add</div>
                             <input type="file" id="myfile" name="hod_final_attachment[]"
-                                oninput="addMultipleFiles(this, 'qa_attachment')" multiple {{ $data->stage == 0 || $data->stage == 9 ? 'disabled' : '' }}>
+                                oninput="addMultipleFiles(this, 'hod_final_attachment')" multiple {{ $data->stage == 0 || $data->stage == 9 ? 'disabled' : '' }}>
                         </div>
                     </div>
                 </div>
@@ -1673,7 +1673,7 @@
                             documents</small></div>
                     {{-- <input multiple type="file" id="myfile" name="closure_attachment[]"> --}}
                     <div class="file-attachment-field">
-                        <div class="file-attachment-list" id="qa_attachmentb">
+                        <div class="file-attachment-list" id="qa_closure_attachment">
 
                             @if ($data->qa_closure_attachment)
                             @foreach (json_decode($data->qa_closure_attachment) as $file)
@@ -1695,7 +1695,7 @@
                         <div class="add-btn">
                             <div>Add</div>
                             <input type="file" id="myfileb" name="qa_closure_attachment[]"
-                                oninput="addMultipleFiles(this, 'qa_attachmentb')" multiple {{ $data->stage == 0 || $data->stage == 9 ? 'disabled' : '' }}>
+                                oninput="addMultipleFiles(this, 'qa_closure_attachment')" multiple {{ $data->stage == 0 || $data->stage == 9 ? 'disabled' : '' }}>
                         </div>
                     </div>
                 </div>
@@ -1772,7 +1772,7 @@
                             documents</small></div>
                     {{-- <input multiple type="file" id="myfile" name="closure_attachment[]"> --}}
                     <div class="file-attachment-field">
-                        <div class="file-attachment-list" id="qa_attachmentc">
+                        <div class="file-attachment-list" id="qah_cq_attachment">
 
                             @if ($data->qah_cq_attachment)
                             @foreach (json_decode($data->qah_cq_attachment) as $file)
@@ -1794,7 +1794,7 @@
                         <div class="add-btn">
                             <div>Add</div>
                             <input type="file" id="myfilec" name="qah_cq_attachment[]"
-                                oninput="addMultipleFiles(this, 'qa_attachmentc')" multiple {{ $data->stage == 0 || $data->stage == 9 ? 'disabled' : '' }}>
+                                oninput="addMultipleFiles(this, 'qah_cq_attachment')" multiple {{ $data->stage == 0 || $data->stage == 9 ? 'disabled' : '' }}>
                         </div>
                     </div>
                 </div>
