@@ -61,6 +61,9 @@ class ProcessSeeder extends Seeder
         $process->save();
 
         $processNames = [
+            "Regulatory Inspection",
+            "Regulatory Change",
+            "Critical Action",
             "Extension",
             "Action Item",
             "Resampling",
@@ -80,7 +83,6 @@ class ProcessSeeder extends Seeder
             "OOT",
             "OOC",
             "Deviation",
-            //new added
             "Market Complaint",
             "Non Conformance",
             "Incident",

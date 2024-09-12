@@ -32,6 +32,9 @@ class RoleGroupSeeder extends Seeder
             'CAPA' => ['Initiator', 'HOD/Designee', 'CQA Reviewer', 'QA Approver', 'CQA Approver', 'QA', 'CQA Head', 'Head QA', 'QA Head/Designee', 'View Only', 'FP', 'Closed Record'],
             'Action Item' => ['Initiator', 'Action Owner', 'QA', 'CQA', 'View Only', 'FP', 'Closed Record'],
             'Extension' => ['Initiator', 'Head QA/Designee', 'QA Approver', 'CQA Approver', 'View Only', 'FP', 'Closed Record', 'HOD/Designee'],
+            'Regulatory Inspection' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
+            'Regulatory Change' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
+            'Critical Action' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP']
 
             // 'Lab Incident' => ['Initiator', 'HOD/Supervisor/Designee', 'Head QA', 'Initiator', 'Head QA', 'View Only', 'FP', 'Closed Record'],
             // 'Audit Program' => ['Initiator', 'Audit Manager', 'View Only', 'FP', 'Closed Record'],
@@ -87,9 +90,9 @@ class RoleGroupSeeder extends Seeder
 
         $processes = [
             'Change Control',
-            'Deviation',
-            'Non Conformance',
-            'Incident',
+            // 'Deviation',
+            // 'Non Conformance',
+            // 'Incident',
         ];
 
         $incrementCount = $start_from_id;
@@ -129,7 +132,7 @@ class RoleGroupSeeder extends Seeder
 
         $processes2 = [
             'Change Control',
-            'Failure Investigation',
+            // 'Failure Investigation',
         ];
 
         $incrementCount1 = $incrementCount;
