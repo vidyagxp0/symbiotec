@@ -810,13 +810,19 @@
                                                         class="text-primary">255 </span><span class="text-primary">
                                                         characters remaining</span>
 
+                                                   <div class="relative-container">
 
-                                                    <input name="short_description" id="docname" type="text" maxlength="255" required type="text"
+                                                    <input name="short_description" id="docname" type="text" maxlength="255" required type="text" class="mic-input"
                                                         {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} value="{{ $data->short_description }}">
-                                                </div>
-                                                <p id="docnameError" style="color:red">**Short Description is required</p>
+                                                        @component('frontend.change-control.language_modal')
+                                                        @endcomponent
+                                                        <p id="docnameError" style="color:red">**Short Description is required</p>
+                                                    </div>
 
                                             </div>
+                                            </div>
+
+                                            
                                             
 
                                             
@@ -902,7 +908,12 @@
                                                 <div class="group-input" id="initiated_through_req">
                                                     <label for="initiated_through">Others<span
                                                             class="text-danger d-none">*</span></label>
-                                                    <textarea name="initiated_through_req"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $data->initiated_through_req }}</textarea>
+                                                            <div class="relative-container">
+
+                                                    <textarea name="initiated_through_req" class="mic-input" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $data->initiated_through_req }}</textarea>
+                                                    @component('frontend.change-control.language_modal')
+                                                    @endcomponent
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
@@ -926,7 +937,12 @@
                                                 <div class="group-input" id="repeat_nature">
                                                     <label for="repeat_nature">Repeat Nature<span
                                                             class="text-danger d-none">*</span></label>
-                                                    <textarea name="repeat_nature"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $data->repeat_nature }}</textarea>
+                                                    <div class="relative-container">
+
+                                                    <textarea name="repeat_nature" class="mic-input" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $data->repeat_nature }}</textarea>
+                                                    @component('frontend.change-control.language_modal')
+            @endcomponent
+                                                </div>
                                                 </div>
                                             </div>
 
@@ -947,7 +963,12 @@
                                             <div class="col-lg-6">
                                                 <div class="group-input">
                                                     <label for="others">If Others</label>
-                                                    <textarea name="others">{{ $data->If_Others }}</textarea>
+                                                    <div class="relative-container">
+
+                                                    <textarea name="others" class="mic-input">{{ $data->If_Others }}</textarea>
+                                                    @component('frontend.change-control.language_modal')
+            @endcomponent
+                                                </div>
                                                 </div>
                                             </div>
 
@@ -1129,8 +1150,14 @@
                                         <div class="group-input">
                                             <label for="qa-eval-comments">HOD Assessment Comments  @if($data->stage == 2) <span class="text-danger">*</span>@endif
                                         </label>
+                                        <div class="relative-container">
+
                                             <textarea name="hod_assessment_comments" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} >{{$cc_cfts->hod_assessment_comments}}</textarea>
+                                            @component('frontend.change-control.language_modal')
+                                            @endcomponent
                                         </div>
+                                        </div>
+
 
                            
                                         {{-- <div class="group-input">
@@ -1225,7 +1252,12 @@
                                                     <label for="current-practice">
                                                         Current Practice
                                                     </label>
-                                                    <textarea name="current_practice"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->current_practice }}</textarea>
+                                                    <div class="relative-container">
+
+                                                    <textarea name="current_practice" class="mic-input"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->current_practice }}</textarea>
+                                                    @component('frontend.change-control.language_modal')
+                                                    @endcomponent
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -1233,7 +1265,12 @@
                                                     <label for="proposed_change">
                                                         Proposed Change
                                                     </label>
-                                                    <textarea name="proposed_change"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->proposed_change }}</textarea>
+                                                    <div class="relative-container">
+
+                                                    <textarea name="proposed_change" class="mic-input"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->proposed_change }}</textarea>
+                                                    @component('frontend.change-control.language_modal')
+                                                    @endcomponent
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -1241,7 +1278,12 @@
                                                     <label for="reason_change">
                                                         Reason for Change
                                                     </label>
+                                                    <div class="relative-container">
+
                                                     <textarea name="reason_change"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->reason_change }}</textarea>
+                                                    @component('frontend.change-control.language_modal')
+                                                    @endcomponent
+                                                </div>
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -1249,7 +1291,12 @@
                                                     <label for="other_comment">
                                                         Any Other Comments
                                                     </label>
+                                                    <div class="relative-container">
+
                                                     <textarea name="other_comment"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->other_comment }}</textarea>
+                                                    @component('frontend.change-control.language_modal')
+                                                    @endcomponent
+                                                </div>
                                                 </div>
                                             </div>
                                             <!-- <div class="col-12">
@@ -1522,8 +1569,14 @@
                                             <div class="col-12">
                                                 <div class="group-input">
                                                     <label for="qa_comments">QA Initial Review Comments @if($data->stage == 3) <span class="text-danger">*</span>@endif</label>
-                                                    <textarea name="qa_review_comments" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $review->qa_comments }}</textarea>
+                                                    <div class="relative-container">
+
+                                                    <textarea name="qa_review_comments"  {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $review->qa_comments }}</textarea>
+                                                    @component('frontend.change-control.language_modal')
+                                                    @endcomponent
                                                 </div>
+                                                </div>
+
                                             </div>
 
                                             <div class="col-12">
@@ -8277,7 +8330,12 @@
                                             <label for="qa-eval-comments">QA Final Review Comments
                                                 @if($data->stage==5) <span class="text-danger">*</span>@endif
                                             </label>
-                                            <textarea name="qa_final_comments"{{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} >{{ $cc_cfts->qa_final_comments }}</textarea>
+                                            <div class="relative-container">
+
+                                            <textarea name="qa_final_comments" class="mic-input"{{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} >{{ $cc_cfts->qa_final_comments }}</textarea>
+                                            @component('frontend.change-control.language_modal')
+                                                    @endcomponent
+                                        </div>
                                         </div>
 
                                         @if ($data1->qa_final_attach)
@@ -8396,7 +8454,12 @@
                                         </div>
                                         <div class="group-input">
                                             <label for="qa-eval-comments">QA/CQA Head/Manager Designee Approval Comments</label>
-                                            <textarea name="qa_cqa_comments"  {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{$cc_cfts->qa_cqa_comments}}</textarea>
+                                            <div class="relative-container">
+
+                                            <textarea name="qa_cqa_comments" class="mic-input"  {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{$cc_cfts->qa_cqa_comments}}</textarea>
+                                            @component('frontend.change-control.language_modal')
+                                                    @endcomponent
+                                        </div>
                                         </div>
 
                               
@@ -8452,7 +8515,12 @@
                                         </div>
                                         <div class="group-input">
                                             <label for="qa-eval-comments">QA Evaluation Comments</label>
-                                            <textarea name="qa_eval_comments" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $evaluation->qa_eval_comments }}</textarea>
+                                            <div class="relative-container">
+
+                                            <textarea name="qa_eval_comments" class="mic-input" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $evaluation->qa_eval_comments }}</textarea>
+                                            @component('frontend.change-control.language_modal')
+                                            @endcomponent
+                                        </div>
                                         </div>
 
                                         @if ($data1->qa_final_attach)
@@ -8511,8 +8579,14 @@
                                         </div>
                                         <div class="group-input">
                                             <label for="qa-eval-comments"> Initiator Update Comments @if($data->stage == 9) <span class="text-danger">*</span>@endif</label>
-                                            <textarea name="intial_update_comments" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{$cc_cfts->intial_update_comments}}</textarea>
+                                            <div class="relative-container">
+
+                                            <textarea name="intial_update_comments" class="mic-input" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{$cc_cfts->intial_update_comments}}</textarea>
+                                            @component('frontend.change-control.language_modal')
+                                            @endcomponent    
                                         </div>
+                                            </div>
+
 
                               
                                         @if ($data1->Production_Injection_Attachment)
@@ -8567,7 +8641,12 @@
                                         </div>
                                         <div class="group-input">
                                             <label for="qa-eval-comments">HOD Final Review Comments @if($data->stage == 10) <span class="text-danger">*</span>@endif</label>
+                                            <div class="relative-container">
+
                                             <textarea name="hod_final_review_comment" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} >{{$cc_cfts->hod_final_review_comment}}</textarea>
+                                            @component('frontend.change-control.language_modal')
+                                            @endcomponent
+                                        </div>
                                         </div>
 
                            
@@ -8620,11 +8699,21 @@
                                     <div class="inner-block-content">
                                         <div class="group-input">
                                             <label for="qa-appro-comments">Implementation Verification Comments @if($data->stage == 11) <span class="text-danger">*</span>@endif</label>
-                                            <textarea name="implementation_verification_comments" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $cc_cfts->implementation_verification_comments }}</textarea>
+                                            <div class="relative-container">
+
+                                            <textarea name="implementation_verification_comments" class="mic-input" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $cc_cfts->implementation_verification_comments }}</textarea>
+                                            @component('frontend.change-control.language_modal')
+                                            @endcomponent
+                                        </div>
                                         </div>
                                         <div class="group-input">
                                             <label for="feedback">Training Feedback</label>
-                                            <textarea name="feedback" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $approcomments->feedback }}</textarea>
+                                            <div class="relative-container">
+
+                                            <textarea name="feedback" class="mic-input" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $approcomments->feedback }}</textarea>
+                                            @component('frontend.change-control.language_modal')
+                                            @endcomponent
+                                        </div>
                                         </div>
 
                                         @if ($data1->Production_Injection_Attachment)
@@ -8757,8 +8846,13 @@
                                         
                                 <div class="group-input">
                                     <label for="qa-closure-comments">QA Closure Comments @if($data->stage == 12) <span class="text-danger">*</span>@endif</label>
-                                    <textarea name="qa_closure_comments" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $closure->qa_closure_comments }}</textarea>
+                                    <div class="relative-container">
+
+                                    <textarea name="qa_closure_comments" class="mic-input" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $closure->qa_closure_comments }}</textarea>
+                                    @component('frontend.change-control.language_modal')
+                                    @endcomponent    
                                 </div>
+                                    </div>
 
                                 @if ($closure->tran_attach)
                                     @foreach (json_decode($closure->tran_attach) as $file)
@@ -8848,7 +8942,12 @@
                                 <div class="group-input">
                                     <label for="due_date_extension">Due Date Extension
                                         Justification</label>
-                                    <textarea name="due_date_extension" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}> {{ $due_date_extension }}</textarea>
+                                        <div class="relative-container">
+
+                                    <textarea name="due_date_extension" class="mic-input" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}> {{ $due_date_extension }}</textarea>
+                                    @component('frontend.change-control.language_modal')
+                                    @endcomponent
+                                </div>
                                 </div>
                     <div class="button-block">
                         <button type="submit" class="saveButton">Save</button>

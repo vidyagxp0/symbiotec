@@ -298,7 +298,7 @@
 
                 // Translate the text before converting to speech
                 translateText(textToSpeak, selectedLanguage).then(translatedText => {
-                    const apiKey = '7fdc735bbfea4bfab96b30db2001d0cc';
+                    const apiKey = 'ccbde869c1a6450fad7a53c40ea868b1';
                     const url =
                         `https://api.voicerss.org/?key=${apiKey}&hl=${selectedLanguage}&src=${encodeURIComponent(translatedText)}&r=0&c=WAV&f=44khz_16bit_stereo`;
                     audio = new Audio(url);
@@ -351,7 +351,7 @@
             const options = {
                 method: 'POST',
                 headers: {
-                    'x-rapidapi-key': 'd643df7db0msh30dc3dc2b5d04b8p12c47cjsnc87514f75cb8',
+                    'x-rapidapi-key': '158e65ca7emsh2c150fbd5900c81p1bc209jsn286cd3a8cb24',
                     'x-rapidapi-host': 'google-translate1.p.rapidapi.com',
                     'Accept-Encoding': 'application/gzip',
                     'Content-Type': 'application/x-www-form-urlencoded'

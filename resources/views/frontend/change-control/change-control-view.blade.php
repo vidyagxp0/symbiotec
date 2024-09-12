@@ -177,11 +177,32 @@
                                         <div class="col-md-6">
                                             <div class="group-input">
                                                 <label for="short-desc">Short Description1<span class="text-danger">*</span></label>
+                                                <div class="relative-container">
+
                                                 <input type="text" id="Changeshort_description" name="short_description"
                                                     value="{{ $openStage->short_description }}">
+                                                    
                                             </div>
+                                            </div>
+
                                             <p id="Changeshort_descriptionError" style="color:red"> **Short description is required
                                             </p>
+
+
+                                            <div class="col-md-6">
+    <div class="group-input">
+        <label for="short-desc">Short Description1<span class="text-danger">*</span></label>
+        <span id="rchars">255</span> characters remaining
+        <div class="relative-container">
+            <input type="text" id="Changeshort_description" name="short_description"
+                class="mic-input" maxlength="255" required
+                value="{{ $openStage->short_description }}">
+            @component('frontend.change-control.language_modal')
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                             <div class="comment">
                                                 <div>
                                                     <p class="timestamp" style="color: blue">Modify by {{ Auth::user()->name }} at
