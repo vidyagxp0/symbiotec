@@ -388,17 +388,32 @@
                                             </div>
 
 
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="Short Description">Short Description<span
-                                                class="text-danger">*</span></label><span id="rchars"
-                                            class="text-primary">255 </span><span class="text-primary"> characters
-                                            remaining</span>
+                                            <div class="col-12">
+    <div class="group-input">
+        <label for="Short Description">
+            Short Description<span class="text-danger">*</span>
+        </label>
+        <span id="rchars" class="text-primary">255</span>
+        <span class="text-primary"> characters remaining</span>
+        <div class="relative-container">
 
-                                        <input id="docname" type="text" name="short_description" maxlength="255"
-                                            required>
-                                    </div>
-                                </div>
+        <input id="docname" type="text" name="short_description" class="mic-input" maxlength="255" value="" required>
+
+        @component('frontend.change-control.language_modal')
+        @endcomponent
+    </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+                                
+
+                                
 
 
 
@@ -489,8 +504,13 @@
                                     <div class="group-input" id="initiated_through_req">
                                         <label for="initiated_through">Others<span
                                                 class="text-danger d-none">*</span></label>
+                    <div class="relative-container">
+
                                         <textarea name="initiated_through_req"></textarea>
+                                        @component('frontend.change-control.language_modal', ['name' => 'initiated_through_req', 'id' => 'initiated_through_req'])
+                                        @endcomponent
                                     </div>
+                                </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="group-input">
@@ -510,9 +530,15 @@
                                     <div class="group-input" id="repeat_nature">
                                         <label for="repeat_nature">Repeat Nature<span
                                                 class="text-danger d-none">*</span></label>
-                                        <textarea name="repeat_nature"></textarea>
+                    <div class="relative-container">
+                                        <textarea name="repeat_nature" class="mic-input"></textarea>
+                                         @component('frontend.change-control.language_modal', ['name' => 'repeat_nature', 'id' => 'repeat_nature'])
+                                        @endcomponent
                                     </div>
+                                    
                                 </div>
+                                </div>
+
                                 {{-- <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="risk_level">Risk Level</label>
@@ -539,7 +565,11 @@
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="others">If Others</label>
+                                        <div class="relative-container">
                                         <textarea name="others"></textarea>
+                                        @component('frontend.change-control.language_modal', ['name' => 'others', 'id' => 'others'])
+                                        @endcomponent
+                                </div>
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-6">
@@ -648,8 +678,13 @@
                             </div>
                             <div class="group-input">
                                 <label for="qa-eval-comments">HOD Assessment Comments</label>
+                                <div class="relative-container">
+
                                 <textarea name="hod_assessment_comments" readonly></textarea>
+                                @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
+                                        @endcomponent
                             </div>
+                                </div>
                             <div class="col-lg-12">
                                 <div class="group-input">
                                     <label for="qa-eval-attach">HOD Assessment Attachments</label>
@@ -738,23 +773,39 @@
                                         <label for="current-practice">
                                             Current Practice
                                         </label>
+                                        <div class="relative-container">
                                         <textarea name="current_practice" disabled></textarea>
+                                        @component('frontend.change-control.language_modal', ['name' => 'current_practice', 'id' => 'current_practice'])
+                                        @endcomponent
                                     </div>
+                                </div>
+
                                 </div>
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="proposed_change">
                                             Proposed Change
                                         </label>
+                                        <div class="relative-container">
+
                                         <textarea name="proposed_change" disabled></textarea>
+                                        @component('frontend.change-control.language_modal', ['name' => 'proposed_change', 'id' => 'proposed_change'])
+                                        @endcomponent
                                     </div>
+                                    </div>
+
                                 </div>
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="reason_change">
                                             Reason for Change
                                         </label>
+                                        <div class="relative-container">
+
                                         <textarea name="reason_change" disabled></textarea>
+                                        @component('frontend.change-control.language_modal', ['name' => 'reason_change', 'id' => 'reason_change'])
+                                        @endcomponent
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -762,7 +813,12 @@
                                         <label for="other_comment">
                                             Any Other Comments
                                         </label>
+                                        <div class="relative-container">
+
                                         <textarea name="other_comment" disabled></textarea>
+                                        @component('frontend.change-control.language_modal', ['name' => 'other_comment', 'id' => 'other_comment'])
+                                        @endcomponent
+                                    </div>
                                     </div>
                                 </div>
                                 <!-- <div class="col-12">
@@ -850,7 +906,12 @@
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="qa_comments">QA Review Comments</label>
+                                        <div class="relative-container">
+
                                         <textarea name="qa_comments" disabled></textarea>
+                                        @component('frontend.change-control.language_modal', ['name' => 'qa_comments', 'id' => 'qa_comments'])
+                                        @endcomponent
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -3200,7 +3261,12 @@
 
                                         <div class="group-input">
                                             <label for="qa-eval-comments">QA Final Review Comments</label>
+                                            <div class="relative-container">
+
                                             <textarea name="qa_final_comments" readonly></textarea>
+                                            @component('frontend.change-control.language_modal', ['name' => 'qa_final_comments', 'id' => 'qa_final_comments'])
+                                        @endcomponent
+                                        </div>
                                         </div>
 
                                         <div class="col-lg-12">
@@ -3242,7 +3308,12 @@
                                                         <label for="RA feedback">RA Comment</label>
                                                         <div><small class="text-primary">Please insert "NA" in the data field if it
                                                                 does not require completion</small></div>
+                                                                <div class="relative-container">
+
                                                         <textarea class="tiny" name="RA_feedback" id="summernote-18" readonly></textarea>
+                                                        @component('frontend.change-control.language_modal', ['name' => 'RA_feedback', 'id' => 'RA_feedback'])
+                                                        @endcomponent
+                                                    </div>
                                                     </div>
                                                 </div>
 
@@ -3283,7 +3354,12 @@
                             </div>
                             <div class="group-input">
                                 <label for="qa-eval-comments">QA Evaluation Comments</label>
+                                <div class="relative-container">
+
                                 <textarea name="qa_eval_comments" readonly></textarea>
+                                @component('frontend.change-control.language_modal', ['name' => 'qa_eval_comments', 'id' => 'qa_eval_comments'])
+                                @endcomponent
+                            </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="group-input">
@@ -3332,11 +3408,21 @@
                         <div class="inner-block-content">
                             <div class="group-input">
                                 <label for="qa-appro-comments">QA Approval Comments</label>
+                                <div class="relative-container">
+
                                 <textarea name="qa_appro_comments" disabled></textarea>
+                                @component('frontend.change-control.language_modal', ['name' => 'qa_appro_comments', 'id' => 'qa_appro_comments'])
+                                @endcomponent
+                            </div>
                             </div>
                             <div class="group-input">
                                 <label for="feedback">Training Feedback</label>
+                                <div class="relative-container">
+
                                 <textarea name="feedback" disabled></textarea>
+                                @component('frontend.change-control.language_modal', ['name' => 'feedback', 'id' => 'feedback'])
+                                @endcomponent
+                            </div>
                             </div>
                             <div class="group-input">
                                 <label for="tran-attach">Training Attachments</label>
@@ -3368,7 +3454,12 @@
                             
                             <div class="group-input">
                                 <label for="qa-closure-comments">QA Closure Comments</label>
+                                <div class="relative-container">
+
                                 <textarea name="qa_closure_comments" disabled></textarea>
+                                @component('frontend.change-control.language_modal', ['name' => 'qa_closure_comments', 'id' => 'qa_closure_comments'])
+                                @endcomponent
+                            </div>
                             </div>
                             <div class="group-input">
                                 <label for="attach-list">List Of Attachments</label>
@@ -3434,7 +3525,12 @@
                                     <label for="due_date_extension">Due Date Extension Justification</label>
                                     <div><small class="text-primary">Please Mention justification if due date is
                                             crossed</small></div>
+                                            <div class="relative-container">
+
                                     <textarea name="due_date_extension"></textarea>
+                                    @component('frontend.change-control.language_modal', ['name' => 'due_date_extension', 'id' => 'due_date_extension'])
+                                    @endcomponent
+                                </div>
                                 </div>
                             </div>
                         <!-- </div> -->
@@ -3513,7 +3609,12 @@
                             </div>
                             <div class="group-input">
                                 <label for="qa-eval-comments">QA/CQA Head/Manager Designee Approval Comments</label>
+                                <div class="relative-container">
+
                                 <textarea name="hod_assessment_comments" readonly></textarea>
+                                @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
+                                @endcomponent
+                            </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="group-input">
@@ -3565,7 +3666,12 @@
                             </div>
                             <div class="group-input">
                                 <label for="qa-eval-comments">HOD Final Review Comments</label>
+                                <div class="relative-container">
+
                                 <textarea name="hod_assessment_comments" readonly></textarea>
+                                @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
+                                @endcomponent
+                            </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="group-input">
@@ -3865,7 +3971,12 @@
                             </div>
                             <div class="group-input">
                                 <label for="qa-eval-comments">Initiator Update Comments</label>
+                                <div class="relative-container">
+
                                 <textarea name="hod_assessment_comments" readonly></textarea>
+                                @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
+                                @endcomponent
+                            </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="group-input">
@@ -3907,7 +4018,12 @@
                             </div>
                             <div class="group-input">
                                 <label for="qa-eval-comments">Initial Update Comments</label>
+                                <div class="relative-container">
+
                                 <textarea name="hod_assessment_comments" readonly></textarea>
+                                @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
+                                @endcomponent
+                            </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="group-input">
