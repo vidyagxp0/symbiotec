@@ -436,9 +436,14 @@
 <body>
 
     <header class="">
-        <p style="text-align: center; font-weight: bold;">
-            COMPANY NAME
-        </p>
+        <div style="text-align: center; font-weight: bold;">
+            <img src="https://www.connexo.io/assets/img/logo/logo.png" style="scale: 0.5; width:200px;"  class="h-100 w-100" alt="Logo">
+           
+        </div>
+        {{-- <br>
+        <br> --}}
+
+       
         <table class="table-bordered">
             <tbody>
                 <tr>
