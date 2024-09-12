@@ -81,7 +81,7 @@
 <script src="{{ asset('user/js/index.js') }}"></script>
 <script src="{{ asset('user/js/validate.js') }}"></script>
 <script src="{{ asset('user/js/countryState.js') }}"></script>
-<script src="https://cdn.tiny.cloud/1/5vbh0y1nq5y6uokc071mjvy9n4fnss5ctasrjft7x7ajm9fl/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/d4jnpbcnjlfdqcv1e6q86bb244nopswwdhygb27z4m9f33fp/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 
 {{-- @toastr_js @toastr_render @jquery --}}
 @yield('footer_cdn')
@@ -118,6 +118,7 @@
 
         // $(document).ready(function(){
         //     var editor = new FroalaEditor('textarea.tiny', {
+        
         //         key: "uXD2lC7C4B4D4D4J4B11dNSWXf1h1MDb1CF1PLPFf1C1EESFKVlA3C11A8D7D2B4B4G2D3J3==",
         //         imageUploadParam: 'image_param',
         //         imageUploadMethod: 'POST',
