@@ -76,6 +76,8 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script src="{{ asset('user/js/index.js') }}"></script>
 <script src="{{ asset('user/js/validate.js') }}"></script>
 <script src="{{ asset('user/js/countryState.js') }}"></script>

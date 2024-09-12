@@ -158,6 +158,7 @@ class CCController extends Controller
         // $openState->train_comments = $request->train_comments;
 
         //     $openState->Microbiology_Person = implode(',', $request->Microbiology_Person);
+        // $openState->reviewer_person_value = implode(',', $request->reviewer_person_value);
         $openState->goup_review = $request->goup_review;
         $openState->Production = $request->Production;
         $openState->Production_Person = $request->Production_Person;
@@ -2583,6 +2584,7 @@ $Cft->update();
             $openState->related_records = implode(',', $request->related_records);
         }
         $openState->Microbiology = $request->Microbiology;
+        $openState->reviewer_person_value = implode(',', $request->reviewer_person_value);
         // if (is_array($request->reviewer_person_value)) {
         //     $openState->reviewer_person_value = implode(',', $request->reviewer_person_value);
         // } else {

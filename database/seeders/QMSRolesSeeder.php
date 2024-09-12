@@ -374,6 +374,7 @@ class QMSRolesSeeder extends Seeder
             ['id' => 64, 'name' => 'CQA Approver', 'description' => 'CQA Approver', 'permission' => ['read' => true, 'create' => true, 'edit' => true, 'delete' => true]],
             ['id' => 65, 'name' => 'CQA Head', 'description' => 'CQA Head', 'permission' => ['read' => true, 'create' => true, 'edit' => true, 'delete' => true]],
             ['id' => 66, 'name' => 'CQA', 'description' => 'CQA', 'permission' => ['read' => true, 'create' => true, 'edit' => true, 'delete' => true]],
+            ['id' => 67, 'name' => 'QA Approver', 'description' => 'QA Approver', 'permission' => ['read' => true, 'create' => true, 'edit' => true, 'delete' => true]],
         ];
 
 

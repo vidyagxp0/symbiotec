@@ -792,7 +792,7 @@
                             <div class="col-lg-6">
                                 <div class="group-input">
                                     <label for="Microbiology-Person">CFT Reviewer Person</label>
-                                    <select multiple name="cft_reviewer[]" placeholder="Select CFT Reviewers" data-search="false"
+                                    <select multiple name="reviewer_person_value[]" placeholder="Select CFT Reviewers" data-search="false"
                                         data-silent-initial-value-set="true" id="cft_reviewer" disabled>
                                         <option value="">-- Select --</option>
                                         @foreach ($cft as $data1)
@@ -1938,17 +1938,7 @@
                                     $userRoleIds = $userRoles->pluck('user_id')->toArray();
                                     $users = DB::table('users')->whereIn('id', $userRoleIds)->get(); // Fetch user data based on user IDs
                                 @endphp
-                                <div class="col-lg-6 Microbiology">
-                                    <div class="group-input">
-                                        <label for="Microbiology notification">Microbiology Person</label>
-                                        <select name="Microbiology_Person" class="Microbiology_Person" id="Microbiology_Person">
-                                            <option value="">-- Select --</option>
-                                            @foreach ($users as $user)
-                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+                                <!--  -->
                                 <div class="col-md-12 mb-3 Microbiology">
                                     <div class="group-input">
                                         <label for="Microbiology assessment">Impact Assessment (By Microbiology)</label>
