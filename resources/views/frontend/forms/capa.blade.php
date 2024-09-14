@@ -262,14 +262,31 @@
                                     </div>
                                 </div> --}}
                                 <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="Short Description">Short Description<span
-                                                class="text-danger">*</span></label><span id="rchars">255</span>
-                                        characters remaining
-                                        <input id="docname" type="text" name="short_description" maxlength="255"
-                                            required>
-                                    </div>
-                                </div>
+    <div class="group-input">
+        <label for="Short Description">Short Description<span class="text-danger">*</span></label>
+        <span id="rchars">255</span> characters remaining
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Input field for Short Description -->
+            <input id="docname" type="text" name="short_description" maxlength="255" required>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'short_description', 'id' => 'short_description'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                     <p id="docnameError" style="color:red">**Short Description is required</p>
                                
                                 <div class="col-lg-6">
@@ -302,12 +319,30 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="group-input" id="initiated_through_req">
-                                        <label for="initiated_through">Others<span
-                                                class="text-danger d-none">*</span></label>
-                                        <textarea name="initiated_through_req"></textarea>
-                                    </div>
-                                </div>
+    <div class="group-input" id="initiated_through_req">
+        <label for="initiated_through">Others<span class="text-danger d-none">*</span></label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Others -->
+            <textarea name="initiated_through_req"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'initiated_through_req', 'id' => 'initiated_through_req'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="repeat">Repeat</label>
@@ -323,18 +358,55 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="group-input" id="repeat_nature">
-                                        <label for="repeat_nature">Repeat Nature<span
-                                                class="text-danger d-none">*</span></label>
-                                        <textarea name="repeat_nature"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="Problem Description">Problem Description</label>
-                                        <textarea name="problem_description"></textarea>
-                                    </div>
-                                </div>
+    <div class="group-input" id="repeat_nature">
+        <label for="repeat_nature">Repeat Nature<span class="text-danger d-none">*</span></label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Repeat Nature -->
+            <textarea name="repeat_nature"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'repeat_nature', 'id' => 'repeat_nature'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="group-input">
+        <label for="Problem Description">Problem Description</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Problem Description -->
+            <textarea name="problem_description"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'problem_description', 'id' => 'problem_description'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                 {{-- <div class="col-12">
                                     <div class="group-input">
                                         <label for="CAPA Team">CAPA Team</label>
@@ -399,11 +471,30 @@
                                 </div>
                                           
                                 <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="Initial Observation">Initial Observation</label>
-                                        <textarea name="initial_observation"></textarea>
-                                    </div>
-                                </div>
+    <div class="group-input">
+        <label for="Initial Observation">Initial Observation</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Initial Observation -->
+            <textarea name="initial_observation"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'initial_observation', 'id' => 'initial_observation'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Interim Containnment">Interim Containnment</label>
@@ -416,13 +507,32 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="group-input" id="containment_comments">
-                                        <label for="Containment Comments">
-                                            Containment Comments <span class="text-danger d-none">*</span>
-                                        </label>
-                                        <textarea name="containment_comments" id="capa_attachment"></textarea>
-                                    </div>
-                                </div>
+    <div class="group-input" id="containment_comments">
+        <label for="Containment Comments">
+            Containment Comments <span class="text-danger d-none">*</span>
+        </label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Containment Comments -->
+            <textarea name="containment_comments" id="capa_attachment"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'containment_comments', 'id' => 'containment_comments'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
 
                                 <div class="col-12">
                                     <div class="group-input">
@@ -445,18 +555,55 @@
                                     Other type Details
                                 </div>
                                 <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="Details">Investigation </label>
-                                        {{-- <input type="text" name="investigation"> --}}
-                                    <textarea name="investigation" ></textarea>
-                                    </div>
-                                    <div class="group-input">
-                                        <label for="Details">Root Cause Analysis  </label>
-                                        {{-- <input type="text" name="rcadetails"> --}}
-                                    <textarea name="rcadetails" ></textarea>
+    <!-- Investigation Section -->
+    <div class="group-input">
+        <label for="Details">Investigation</label>
+        
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Investigation -->
+            <textarea name="investigation"></textarea>
 
-                                    </div>
-                                </div>
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'investigation', 'id' => 'investigation'])
+            @endcomponent
+        </div>
+    </div>
+
+    <!-- Root Cause Analysis Section -->
+    <div class="group-input">
+        <label for="Details">Root Cause Analysis</label>
+        
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Root Cause Analysis -->
+            <textarea name="rcadetails"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'rcadetails', 'id' => 'rcadetails'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                               
                             </div>
                             <div class="button-block">
@@ -764,12 +911,30 @@
                                     Other type CAPA Details
                                 </div>
                                 <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="Details">Details</label>
-                                        {{-- <input type="text" name="details_new"> --}}
-                                        <textarea name="details_new" ></textarea>
-                                    </div>
-                                </div>
+    <div class="group-input">
+        <label for="Details">Details</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Details -->
+            <textarea name="details_new"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'details_new', 'id' => 'details_new'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                
                                 
                             </div>
@@ -804,17 +969,55 @@
                                                 </div>
                                             </div>
                                             <div class="col-12">
-                                                <div class="group-input">
-                                                    <label for="Corrective Action">Corrective Action</label>
-                                                    <textarea name="corrective_action"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="group-input">
-                                                    <label for="Preventive Action">Preventive Action</label>
-                                                    <textarea name="preventive_action"></textarea>
-                                                </div>
-                                            </div>
+    <div class="group-input">
+        <label for="Corrective Action">Corrective Action</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Corrective Action -->
+            <textarea name="corrective_action"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'corrective_action', 'id' => 'corrective_action'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="group-input">
+        <label for="Preventive Action">Preventive Action</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Preventive Action -->
+            <textarea name="preventive_action"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'preventive_action', 'id' => 'preventive_action'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                             {{-- <div class="col-12">
                                                 <div class="group-input">
                                                     <label for="Supervisor Review Comments">QA Review Comments</label>
@@ -854,12 +1057,31 @@
 <div id="CCForm11" class="inner-block cctabcontent">
     <div class="inner-block-content">
         <div class="row">
-            <div class="col-12">
-                <div class="group-input">
-                    <label for="QA Head Review & Closure">HOD Remark</label>
-                    <textarea name="hod_remarks"></textarea>
-                </div>
-            </div>
+        <div class="col-12">
+    <div class="group-input">
+        <label for="hod_remarks">HOD Remark</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for HOD Remark -->
+            <textarea name="hod_remarks"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'hod_remarks', 'id' => 'hod_remarks'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
             <div class="col-12">
                 <div class="group-input">
                     <label for="Closure Attachments">HOD Attachment</label>
@@ -938,12 +1160,31 @@
 <div id="CCForm12" class="inner-block cctabcontent">
     <div class="inner-block-content">
         <div class="row">
-            <div class="col-12">
-                <div class="group-input">
-                    <label for="Comments"> CAPA QA Review </label>
-                    <textarea name="capa_qa_comments"></textarea>
-                </div>
-            </div>
+        <div class="col-12">
+    <div class="group-input">
+        <label for="capa_qa_comments">CAPA QA Review</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for CAPA QA Review -->
+            <textarea name="capa_qa_comments"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'capa_qa_comments', 'id' => 'capa_qa_comments'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
             <div class="col-12">
                 <div class="group-input">
                     <label for="Closure Attachments">QA Attachment</label>
@@ -1018,12 +1259,31 @@
                     <div id="CCForm7" class="inner-block cctabcontent">
                         <div class="inner-block-content">
                             <div class="row">
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="QA Review & Closure">QA Review & Closure</label>
-                                        <textarea name="qa_review"></textarea>
-                                    </div>
-                                </div>
+                            <div class="col-12">
+    <div class="group-input">
+        <label for="qa_review">QA Review & Closure</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for QA Review & Closure -->
+            <textarea name="qa_review"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'qa_review', 'id' => 'qa_review'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="Closure Attachments">Closure Attachment</label>
@@ -1087,13 +1347,31 @@
                                     Extension Justification
                                 </div>
                                 <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="due_date_extension">Due Date Extension Justification</label>
-                                        <div><small class="text-primary">Please Mention justification if due date is
-                                                crossed</small></div>
-                                        <textarea name="due_date_extension"></textarea>
-                                    </div>
-                                </div>
+    <div class="group-input">
+        <label for="due_date_extension">Due Date Extension Justification</label>
+        <div><small class="text-primary">Please mention justification if due date is crossed</small></div>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Due Date Extension Justification -->
+            <textarea name="due_date_extension"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'due_date_extension', 'id' => 'due_date_extension'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                             </div>
                             <div class="button-block">
                                 <button type="submit" class="saveButton">Save</button>
@@ -1108,12 +1386,31 @@
 <div id="CCForm13" class="inner-block cctabcontent">
     <div class="inner-block-content">
         <div class="row">
-            <div class="col-12">
-                <div class="group-input">
-                    <label for="Comments"> Hod Final Review Comment</label>
-                    <textarea name="hod_final_review"></textarea>
-                </div>
-            </div>
+        <div class="col-12">
+    <div class="group-input">
+        <label for="hod_final_review">HOD Final Review Comment</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for HOD Final Review Comment -->
+            <textarea name="hod_final_review"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'hod_final_review', 'id' => 'hod_final_review'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
             <div class="col-12">
                 <div class="group-input">
                     <label for="Closure Attachments">Hod Final Attachment</label>
@@ -1189,12 +1486,31 @@
 <div id="CCForm14" class="inner-block cctabcontent">
     <div class="inner-block-content">
         <div class="row">
-            <div class="col-12">
-                <div class="group-input">
-                    <label for="Comments">QA/CQA Closure Review Comment</label>
-                    <textarea name="qa_cqa_qa_comments"></textarea>
-                </div>
-            </div>
+        <div class="col-12">
+    <div class="group-input">
+        <label for="Comments">QA/CQA Closure Review Comment</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for QA/CQA Closure Review Comment -->
+            <textarea name="qa_cqa_qa_comments"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'qa_cqa_qa_comments', 'id' => 'qa_cqa_qa_comments'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
             <div class="col-12">
                 <div class="group-input">
                     <label for="Closure Attachments">QA/CQA Closure Review Attachment</label>
@@ -1270,12 +1586,31 @@
 <div id="CCForm15" class="inner-block cctabcontent">
     <div class="inner-block-content">
         <div class="row">
-            <div class="col-15">
-                <div class="group-input">
-                    <label for="Comments"> QAH/CQAH Approval Comment</label>
-                    <textarea name="qah_cq_comments"></textarea>
-                </div>
-            </div>
+        <div class="col-15">
+    <div class="group-input">
+        <label for="Comments">QAH/CQAH Approval Comment</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for QAH/CQAH Approval Comment -->
+            <textarea name="qah_cq_comments"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'qah_cq_comments', 'id' => 'qah_cq_comments'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
             <div class="col-12">
                 <div class="group-input">
                     <label for="Closure Attachments">QAH/CQAH Approval Attachment</label>

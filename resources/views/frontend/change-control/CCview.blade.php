@@ -804,23 +804,36 @@
                                                 </div>
                                             </div>  --}}
                                             <div class="col-12">
-                                                <div class="group-input">
-                                                    <label for="Short Description">Short Description<span
-                                                            class="text-danger">*</span></label><span id="rchars"
-                                                        class="text-primary">255 </span><span class="text-primary">
-                                                        characters remaining</span>
+    <div class="group-input">
+        <label for="Short Description">Short Description<span class="text-danger">*</span></label>
+        <span id="rchars" class="text-primary">255</span> <span class="text-primary">characters remaining</span>
 
-                                                   <div class="relative-container">
+        <div class="relative-container" style="position: relative;">
+            <!-- Short Description Input -->
+            <input name="short_description" id="docname" type="text" maxlength="255" required 
+                class="mic-input" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} 
+                value="{{ $data->short_description }}">
 
-                                                    <input name="short_description" id="docname" type="text" maxlength="255" required type="text" class="mic-input"
-                                                        {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} value="{{ $data->short_description }}">
-                                                        @component('frontend.change-control.language_modal')
-                                                        @endcomponent
-                                                        <p id="docnameError" style="color:red">**Short Description is required</p>
-                                                    </div>
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
 
-                                            </div>
-                                            </div>
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'short_description', 'id' => 'short_description'])
+            @endcomponent
+
+            <!-- Error Message for Empty Short Description -->
+            <p id="docnameError" style="color:red; display: none;">**Short Description is required</p>
+        </div>
+    </div>
+</div>
+
 
                                             
                                             
@@ -905,17 +918,31 @@
                                             </div>
 
                                             <div class="col-lg-6">
-                                                <div class="group-input" id="initiated_through_req">
-                                                    <label for="initiated_through">Others<span
-                                                            class="text-danger d-none">*</span></label>
-                                                            <div class="relative-container">
+    <div class="group-input" id="initiated_through_req">
+        <label for="initiated_through">Others<span class="text-danger d-none">*</span></label>
+        <div class="relative-container" style="position: relative;">
+            
+            <!-- Textarea for Others -->
+            <textarea name="initiated_through_req" class="mic-input" 
+                {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $data->initiated_through_req }}</textarea>
 
-                                                    <textarea name="initiated_through_req" class="mic-input" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $data->initiated_through_req }}</textarea>
-                                                    @component('frontend.change-control.language_modal')
-                                                    @endcomponent
-                                                </div>
-                                                </div>
-                                            </div>
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'initiated_through_req', 'id' => 'initiated_through_req'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                             <div class="col-lg-6">
                                                 <div class="group-input">
                                                     <label for="repeat">Repeat</label>
@@ -934,17 +961,31 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="group-input" id="repeat_nature">
-                                                    <label for="repeat_nature">Repeat Nature<span
-                                                            class="text-danger d-none">*</span></label>
-                                                    <div class="relative-container">
+    <div class="group-input" id="repeat_nature">
+        <label for="repeat_nature">Repeat Nature<span class="text-danger d-none">*</span></label>
+        <div class="relative-container" style="position: relative;">
+            
+            <!-- Textarea for Repeat Nature -->
+            <textarea name="repeat_nature" class="mic-input" 
+                {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $data->repeat_nature }}</textarea>
 
-                                                    <textarea name="repeat_nature" class="mic-input" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $data->repeat_nature }}</textarea>
-                                                    @component('frontend.change-control.language_modal')
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'repeat_nature', 'id' => 'repeat_nature'])
             @endcomponent
-                                                </div>
-                                                </div>
-                                            </div>
+        </div>
+    </div>
+</div>
+
 
                                             <div class="col-lg-6">
                                                 <div class="group-input">
@@ -961,16 +1002,30 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <div class="group-input">
-                                                    <label for="others">If Others</label>
-                                                    <div class="relative-container">
+    <div class="group-input">
+        <label for="others">If Others</label>
+        <div class="relative-container" style="position: relative;">
+            
+            <!-- Textarea for If Others -->
+            <textarea name="others" class="mic-input">{{ $data->If_Others }}</textarea>
 
-                                                    <textarea name="others" class="mic-input">{{ $data->If_Others }}</textarea>
-                                                    @component('frontend.change-control.language_modal')
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'others', 'id' => 'others'])
             @endcomponent
-                                                </div>
-                                                </div>
-                                            </div>
+        </div>
+    </div>
+</div>
+
 
                                             <!-- <div class="col-md-6">
                                                 <div class="group-input">
@@ -1148,15 +1203,34 @@
                                         HOD Assessment 
                                         </div>
                                         <div class="group-input">
-                                            <label for="qa-eval-comments">HOD Assessment Comments  @if($data->stage == 2) <span class="text-danger">*</span>@endif
-                                        </label>
-                                        <div class="relative-container">
+    <label for="qa-eval-comments">HOD Assessment Comments
+        @if($data->stage == 2)
+            <span class="text-danger">*</span>
+        @endif
+    </label>
+    
+    <div class="relative-container" style="position: relative;">
+        
+        <!-- Textarea for HOD Assessment Comments -->
+        <textarea name="hod_assessment_comments" 
+            {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{$cc_cfts->hod_assessment_comments}}</textarea>
 
-                                            <textarea name="hod_assessment_comments" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} >{{$cc_cfts->hod_assessment_comments}}</textarea>
-                                            @component('frontend.change-control.language_modal')
-                                            @endcomponent
-                                        </div>
-                                        </div>
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
+        @endcomponent
+    </div>
+</div>
+
 
 
                            
@@ -1247,58 +1321,110 @@
                                             
                                            
 
-                                            <div class="col-12">
-                                                <div class="group-input">
-                                                    <label for="current-practice">
-                                                        Current Practice
-                                                    </label>
-                                                    <div class="relative-container">
+                                        <div class="col-12">
+    <div class="group-input">
+        <label for="current-practice">Current Practice</label>
+        <div class="relative-container" style="position: relative;">
+            
+            <!-- Textarea for Current Practice -->
+            <textarea name="current_practice" class="mic-input" 
+                {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->current_practice }}</textarea>
 
-                                                    <textarea name="current_practice" class="mic-input"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->current_practice }}</textarea>
-                                                    @component('frontend.change-control.language_modal')
-                                                    @endcomponent
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="group-input">
-                                                    <label for="proposed_change">
-                                                        Proposed Change
-                                                    </label>
-                                                    <div class="relative-container">
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
 
-                                                    <textarea name="proposed_change" class="mic-input"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->proposed_change }}</textarea>
-                                                    @component('frontend.change-control.language_modal')
-                                                    @endcomponent
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="group-input">
-                                                    <label for="reason_change">
-                                                        Reason for Change
-                                                    </label>
-                                                    <div class="relative-container">
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
 
-                                                    <textarea name="reason_change"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->reason_change }}</textarea>
-                                                    @component('frontend.change-control.language_modal')
-                                                    @endcomponent
-                                                </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="group-input">
-                                                    <label for="other_comment">
-                                                        Any Other Comments
-                                                    </label>
-                                                    <div class="relative-container">
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'current_practice', 'id' => 'current_practice'])
+            @endcomponent
+        </div>
+    </div>
+</div>
 
-                                                    <textarea name="other_comment"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->other_comment }}</textarea>
-                                                    @component('frontend.change-control.language_modal')
-                                                    @endcomponent
-                                                </div>
-                                                </div>
-                                            </div>
+<div class="col-12">
+    <div class="group-input">
+        <label for="proposed_change">Proposed Change</label>
+        <div class="relative-container" style="position: relative;">
+            
+            <!-- Textarea for Proposed Change -->
+            <textarea name="proposed_change" class="mic-input" 
+                {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->proposed_change }}</textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'proposed_change', 'id' => 'proposed_change'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="group-input">
+        <label for="reason_change">Reason for Change</label>
+        <div class="relative-container" style="position: relative;">
+            
+            <!-- Textarea for Reason for Change -->
+            <textarea name="reason_change" class="mic-input" 
+                {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->reason_change }}</textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'reason_change', 'id' => 'reason_change'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="group-input">
+        <label for="other_comment">Any Other Comments</label>
+        <div class="relative-container" style="position: relative;">
+            
+            <!-- Textarea for Any Other Comments -->
+            <textarea name="other_comment" class="mic-input" 
+                {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $docdetail->other_comment }}</textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'other_comment', 'id' => 'other_comment'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                             <!-- <div class="col-12">
                                                 <div class="group-input">
                                                     <label for="supervisor_comment">
@@ -1567,17 +1693,35 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <div class="group-input">
-                                                    <label for="qa_comments">QA Initial Review Comments @if($data->stage == 3) <span class="text-danger">*</span>@endif</label>
-                                                    <div class="relative-container">
+    <div class="group-input">
+        <label for="qa_comments">QA Initial Review Comments
+            @if($data->stage == 3) 
+                <span class="text-danger">*</span>
+            @endif
+        </label>
+        <div class="relative-container" style="position: relative;">
+            
+            <!-- Textarea for QA Initial Review Comments -->
+            <textarea name="qa_review_comments" class="mic-input" 
+                {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $review->qa_comments }}</textarea>
 
-                                                    <textarea name="qa_review_comments"  {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $review->qa_comments }}</textarea>
-                                                    @component('frontend.change-control.language_modal')
-                                                    @endcomponent
-                                                </div>
-                                                </div>
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
 
-                                            </div>
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'qa_review_comments', 'id' => 'qa_review_comments'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
 
                                             <div class="col-12">
                                                 <div class="group-input">
@@ -8326,16 +8470,35 @@
                                                 </div>
                                             </div>
 
-                                        <div class="group-input">
-                                            <label for="qa-eval-comments">QA Final Review Comments
-                                                @if($data->stage==5) <span class="text-danger">*</span>@endif
-                                            </label>
-                                            <div class="relative-container">
+                                            <div class="group-input">
+    <label for="qa-eval-comments">QA Final Review Comments
+        @if($data->stage == 5)
+            <span class="text-danger">*</span>
+        @endif
+    </label>
+    
+    <div class="relative-container" style="position: relative;">
+        
+        <!-- Textarea for QA Final Review Comments -->
+        <textarea name="qa_final_comments" class="mic-input" 
+            {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{ $cc_cfts->qa_final_comments }}</textarea>
 
-                                            <textarea name="qa_final_comments" class="mic-input"{{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} >{{ $cc_cfts->qa_final_comments }}</textarea>
-                                            @component('frontend.change-control.language_modal')
-                                                    @endcomponent
-                                        </div>
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'qa_final_comments', 'id' => 'qa_final_comments'])
+        @endcomponent
+    </div>
+</div>
+
                                         </div>
 
                                         @if ($data1->qa_final_attach)
@@ -8453,14 +8616,30 @@
                                         QA/CQA Head/Manager Designee Approval
                                         </div>
                                         <div class="group-input">
-                                            <label for="qa-eval-comments">QA/CQA Head/Manager Designee Approval Comments</label>
-                                            <div class="relative-container">
+    <label for="qa-eval-comments">QA/CQA Head/Manager Designee Approval Comments</label>
+    
+    <div class="relative-container" style="position: relative;">
+        
+        <!-- Textarea for QA/CQA Head/Manager Designee Approval Comments -->
+        <textarea name="qa_cqa_comments" class="mic-input" 
+            {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{$cc_cfts->qa_cqa_comments}}</textarea>
 
-                                            <textarea name="qa_cqa_comments" class="mic-input"  {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{$cc_cfts->qa_cqa_comments}}</textarea>
-                                            @component('frontend.change-control.language_modal')
-                                                    @endcomponent
-                                        </div>
-                                        </div>
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'qa_cqa_comments', 'id' => 'qa_cqa_comments'])
+        @endcomponent
+    </div>
+</div>
+
 
                               
                                         @if ($data1->Production_Injection_Attachment)
@@ -8514,14 +8693,30 @@
                                             Evaluation Detail
                                         </div>
                                         <div class="group-input">
-                                            <label for="qa-eval-comments">QA Evaluation Comments</label>
-                                            <div class="relative-container">
+    <label for="qa-eval-comments">QA Evaluation Comments</label>
+    
+    <div class="relative-container" style="position: relative;">
+        
+        <!-- Textarea for QA Evaluation Comments -->
+        <textarea name="qa_eval_comments" class="mic-input" 
+            {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $evaluation->qa_eval_comments }}</textarea>
 
-                                            <textarea name="qa_eval_comments" class="mic-input" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $evaluation->qa_eval_comments }}</textarea>
-                                            @component('frontend.change-control.language_modal')
-                                            @endcomponent
-                                        </div>
-                                        </div>
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'qa_eval_comments', 'id' => 'qa_eval_comments'])
+        @endcomponent
+    </div>
+</div>
+
 
                                         @if ($data1->qa_final_attach)
                                             @foreach (json_decode($data1->qa_final_attach) as $file)
@@ -8578,14 +8773,34 @@
                                             Initiator Update
                                         </div>
                                         <div class="group-input">
-                                            <label for="qa-eval-comments"> Initiator Update Comments @if($data->stage == 9) <span class="text-danger">*</span>@endif</label>
-                                            <div class="relative-container">
+    <label for="qa-eval-comments">Initiator Update Comments
+        @if($data->stage == 9) 
+            <span class="text-danger">*</span>
+        @endif
+    </label>
+    
+    <div class="relative-container" style="position: relative;">
+        
+        <!-- Textarea for Initiator Update Comments -->
+        <textarea name="intial_update_comments" class="mic-input" 
+            {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{$cc_cfts->intial_update_comments}}</textarea>
 
-                                            <textarea name="intial_update_comments" class="mic-input" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{$cc_cfts->intial_update_comments}}</textarea>
-                                            @component('frontend.change-control.language_modal')
-                                            @endcomponent    
-                                        </div>
-                                            </div>
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'intial_update_comments', 'id' => 'intial_update_comments'])
+        @endcomponent
+    </div>
+</div>
+
 
 
                               
@@ -8640,14 +8855,34 @@
                                         HOD Final Review 
                                         </div>
                                         <div class="group-input">
-                                            <label for="qa-eval-comments">HOD Final Review Comments @if($data->stage == 10) <span class="text-danger">*</span>@endif</label>
-                                            <div class="relative-container">
+    <label for="qa-eval-comments">HOD Final Review Comments
+        @if($data->stage == 10) 
+            <span class="text-danger">*</span>
+        @endif
+    </label>
+    
+    <div class="relative-container" style="position: relative;">
+        
+        <!-- Textarea for HOD Final Review Comments -->
+        <textarea name="hod_final_review_comment" class="mic-input"
+            {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }}>{{$cc_cfts->hod_final_review_comment}}</textarea>
 
-                                            <textarea name="hod_final_review_comment" {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} >{{$cc_cfts->hod_final_review_comment}}</textarea>
-                                            @component('frontend.change-control.language_modal')
-                                            @endcomponent
-                                        </div>
-                                        </div>
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'hod_final_review_comment', 'id' => 'hod_final_review_comment'])
+        @endcomponent
+    </div>
+</div>
+
 
                            
                                         @if ($data1->Production_Injection_Attachment)
@@ -8697,24 +8932,60 @@
 
                                 <div id="CCForm16" class="inner-block cctabcontent">
                                     <div class="inner-block-content">
-                                        <div class="group-input">
-                                            <label for="qa-appro-comments">Implementation Verification Comments @if($data->stage == 11) <span class="text-danger">*</span>@endif</label>
-                                            <div class="relative-container">
+                                    <div class="group-input">
+    <label for="qa-appro-comments">Implementation Verification Comments
+        @if($data->stage == 11) 
+            <span class="text-danger">*</span>
+        @endif
+    </label>
+    
+    <div class="relative-container" style="position: relative;">
+        
+        <!-- Textarea for Implementation Verification Comments -->
+        <textarea name="implementation_verification_comments" class="mic-input"
+            {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $cc_cfts->implementation_verification_comments }}</textarea>
 
-                                            <textarea name="implementation_verification_comments" class="mic-input" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $cc_cfts->implementation_verification_comments }}</textarea>
-                                            @component('frontend.change-control.language_modal')
-                                            @endcomponent
-                                        </div>
-                                        </div>
-                                        <div class="group-input">
-                                            <label for="feedback">Training Feedback</label>
-                                            <div class="relative-container">
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
 
-                                            <textarea name="feedback" class="mic-input" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $approcomments->feedback }}</textarea>
-                                            @component('frontend.change-control.language_modal')
-                                            @endcomponent
-                                        </div>
-                                        </div>
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'implementation_verification_comments', 'id' => 'implementation_verification_comments'])
+        @endcomponent
+    </div>
+</div>
+
+<div class="group-input">
+    <label for="feedback">Training Feedback</label>
+    
+    <div class="relative-container" style="position: relative;">
+        
+        <!-- Textarea for Training Feedback -->
+        <textarea name="feedback" class="mic-input"
+            {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $approcomments->feedback }}</textarea>
+
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'feedback', 'id' => 'feedback'])
+        @endcomponent
+    </div>
+</div>
+
 
                                         @if ($data1->Production_Injection_Attachment)
                                             @foreach (json_decode($data1->Production_Injection_Attachment) as $file)
@@ -8844,15 +9115,35 @@
                                         </div> --}}
                                         
                                         
-                                <div class="group-input">
-                                    <label for="qa-closure-comments">QA Closure Comments @if($data->stage == 12) <span class="text-danger">*</span>@endif</label>
-                                    <div class="relative-container">
+                                        <div class="group-input">
+    <label for="qa-closure-comments">QA Closure Comments
+        @if($data->stage == 12)
+            <span class="text-danger">*</span>
+        @endif
+    </label>
+    
+    <div class="relative-container" style="position: relative;">
+        
+        <!-- Textarea for QA Closure Comments -->
+        <textarea name="qa_closure_comments" class="mic-input"
+            {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $closure->qa_closure_comments }}</textarea>
 
-                                    <textarea name="qa_closure_comments" class="mic-input" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}>{{ $closure->qa_closure_comments }}</textarea>
-                                    @component('frontend.change-control.language_modal')
-                                    @endcomponent    
-                                </div>
-                                    </div>
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'qa_closure_comments', 'id' => 'qa_closure_comments'])
+        @endcomponent
+    </div>
+</div>
+
 
                                 @if ($closure->tran_attach)
                                     @foreach (json_decode($closure->tran_attach) as $file)
@@ -8939,16 +9230,31 @@
                                 Extension Justification
                             </div>
                             <div class="col-12">
-                                <div class="group-input">
-                                    <label for="due_date_extension">Due Date Extension
-                                        Justification</label>
-                                        <div class="relative-container">
+                            <div class="group-input">
+    <label for="due_date_extension">Due Date Extension Justification</label>
+    
+    <div class="relative-container" style="position: relative;">
+        
+        <!-- Textarea for Due Date Extension Justification -->
+        <textarea name="due_date_extension" class="mic-input"
+            {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}> {{ $due_date_extension }}</textarea>
 
-                                    <textarea name="due_date_extension" class="mic-input" {{ $data->stage == 0 || $data->stage == 8 || $data->stage == 13 ? 'disabled' : '' }}> {{ $due_date_extension }}</textarea>
-                                    @component('frontend.change-control.language_modal')
-                                    @endcomponent
-                                </div>
-                                </div>
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'due_date_extension', 'id' => 'due_date_extension'])
+        @endcomponent
+    </div>
+</div>
+
                     <div class="button-block">
                         <button type="submit" class="saveButton">Save</button>
                         <button type="button" class="backButton" onclick="previousStep()">Back</button>

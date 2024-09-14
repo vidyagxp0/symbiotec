@@ -34,7 +34,10 @@
         }
                      
     </style>
+<script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+</script>
     <script>
         function otherController(value, checkValue, blockID) {
             let block = document.getElementById(blockID)
@@ -350,14 +353,61 @@
                                 </div>
                                 
                                 <div class="col-lg-6" id="justification_div" style="display:none;">
-                                    <div class="group-input">
-                                        <label for="Justification">Justification</label>
-                                        <textarea name="risk_identification" id="justification" rows="4" placeholder="Provide justification if risk assessment is not required."></textarea>
-                                        <!-- @error('justification')
-                                            <div class="text-danger">{{ $message }}</div>
-                                        @enderror -->
-                                    </div>
-                                </div>
+    <div class="group-input">
+        <label for="Justification">Justification</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for input -->
+            <textarea name="risk_identification" id="justification" rows="4" placeholder="Provide justification if risk assessment is not required."></textarea>
+
+            <!-- Microphone button -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal -->
+            <div class="mini-modal" style="display: none; position: absolute; z-index: 999;">
+                <div class="mini-modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Select Language</h2>
+                    <select id="language-select">
+                        <option value="en-us">English</option>
+                        <option value="hi-in">Hindi</option>
+                        <option value="te-in">Telugu</option>
+                        <option value="fr-fr">French</option>
+                        <option value="es-es">Spanish</option>
+                        <option value="zh-cn">Chinese (Mandarin)</option>
+                        <option value="ja-jp">Japanese</option>
+                        <option value="de-de">German</option>
+                        <option value="ru-ru">Russian</option>
+                        <option value="ko-kr">Korean</option>
+                        <option value="it-it">Italian</option>
+                        <option value="pt-br">Portuguese (Brazil)</option>
+                        <option value="ar-sa">Arabic</option>
+                        <option value="bn-in">Bengali</option>
+                        <option value="pa-in">Punjabi</option>
+                        <option value="mr-in">Marathi</option>
+                        <option value="gu-in">Gujarati</option>
+                        <option value="ur-pk">Urdu</option>
+                        <option value="ta-in">Tamil</option>
+                        <option value="kn-in">Kannada</option>
+                        <option value="ml-in">Malayalam</option>
+                        <option value="or-in">Odia</option>
+                        <option value="as-in">Assamese</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+                    <button id="select-language-btn">Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
                                             @php
                                             $division = DB::table('q_m_s_divisions')
@@ -390,32 +440,62 @@
 
                                             <div class="col-12">
     <div class="group-input">
-        <label for="Short Description">
-            Short Description<span class="text-danger">*</span>
-        </label>
+        <label for="Short Description">Short Description <span class="text-danger">*</span></label>
         <span id="rchars" class="text-primary">255</span>
         <span class="text-primary"> characters remaining</span>
-        <div class="relative-container">
-
-        <input id="docname" type="text" name="short_description" class="mic-input" maxlength="255" value="" required>
-
-        @component('frontend.change-control.language_modal')
-        @endcomponent
+        <div class="relative-container" style="position: relative;">
+            <input id="docname" type="text" value="{{ $data->short_description }}" name="short_description" class="mic-input" maxlength="255" required>
+            
+            <!-- Microphone button -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+            
+            <!-- Speaker button -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            
+            <!-- Language selection mini modal -->
+            <div class="mini-modal" style="display: none; position: absolute; z-index: 999;">
+                <div class="mini-modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Select Language</h2>
+                    <select id="language-select">
+                        <option value="en-us">English</option>
+                        <option value="hi-in">Hindi</option>
+                        <option value="te-in">Telugu</option>
+                        <option value="fr-fr">French</option>
+                        <option value="es-es">Spanish</option>
+                        <option value="zh-cn">Chinese (Mandarin)</option>
+                        <option value="ja-jp">Japanese</option>
+                        <option value="de-de">German</option>
+                        <option value="ru-ru">Russian</option>
+                        <option value="ko-kr">Korean</option>
+                        <option value="it-it">Italian</option>
+                        <option value="pt-br">Portuguese (Brazil)</option>
+                        <option value="ar-sa">Arabic</option>
+                        <option value="bn-in">Bengali</option>
+                        <option value="pa-in">Punjabi</option>
+                        <option value="mr-in">Marathi</option>
+                        <option value="gu-in">Gujarati</option>
+                        <option value="ur-pk">Urdu</option>
+                        <option value="ta-in">Tamil</option>
+                        <option value="kn-in">Kannada</option>
+                        <option value="ml-in">Malayalam</option>
+                        <option value="or-in">Odia</option>
+                        <option value="as-in">Assamese</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+                    <button id="select-language-btn">Select</button>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-
 </div>
 
 
-
-
-
-
-                                
-
-                                
-
-
+   
 
                                 <div class="col-lg-6">
                                     <div class="group-input">
@@ -501,17 +581,61 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="group-input" id="initiated_through_req">
-                                        <label for="initiated_through">Others<span
-                                                class="text-danger d-none">*</span></label>
-                    <div class="relative-container">
+    <div class="group-input" id="initiated_through_req">
+        <label for="initiated_through">Others<span class="text-danger d-none">*</span></label>
+        
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for input -->
+            <textarea name="initiated_through_req" class="mic-input" id="initiated_through_req_textarea"></textarea>
+            
+            <!-- Microphone button -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+            
+            <!-- Speaker button -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            
+            <!-- Language selection mini modal -->
+            <div class="mini-modal" style="display: none; position: absolute; z-index: 999;">
+                <div class="mini-modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Select Language</h2>
+                    <select id="language-select">
+                        <option value="en-us">English</option>
+                        <option value="hi-in">Hindi</option>
+                        <option value="te-in">Telugu</option>
+                        <option value="fr-fr">French</option>
+                        <option value="es-es">Spanish</option>
+                        <option value="zh-cn">Chinese (Mandarin)</option>
+                        <option value="ja-jp">Japanese</option>
+                        <option value="de-de">German</option>
+                        <option value="ru-ru">Russian</option>
+                        <option value="ko-kr">Korean</option>
+                        <option value="it-it">Italian</option>
+                        <option value="pt-br">Portuguese (Brazil)</option>
+                        <option value="ar-sa">Arabic</option>
+                        <option value="bn-in">Bengali</option>
+                        <option value="pa-in">Punjabi</option>
+                        <option value="mr-in">Marathi</option>
+                        <option value="gu-in">Gujarati</option>
+                        <option value="ur-pk">Urdu</option>
+                        <option value="ta-in">Tamil</option>
+                        <option value="kn-in">Kannada</option>
+                        <option value="ml-in">Malayalam</option>
+                        <option value="or-in">Odia</option>
+                        <option value="as-in">Assamese</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+                    <button id="select-language-btn">Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                        <textarea name="initiated_through_req" class="mic-input"></textarea>
-                                        @component('frontend.change-control.language_modal', ['name' => 'initiated_through_req', 'id' => 'initiated_through_req'])
-                                        @endcomponent
-                                    </div>
-                                </div>
-                                </div>
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="repeat">Repeat</label>
@@ -527,17 +651,61 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="group-input" id="repeat_nature">
-                                        <label for="repeat_nature">Repeat Nature<span
-                                                class="text-danger d-none">*</span></label>
-                    <div class="relative-container">
-                                        <textarea name="repeat_nature" class="mic-input" class="mic-input"></textarea>
-                                         @component('frontend.change-control.language_modal', ['name' => 'repeat_nature', 'id' => 'repeat_nature'])
-                                        @endcomponent
-                                    </div>
-                                    
-                                </div>
-                                </div>
+    <div class="group-input" id="repeat_nature">
+        <label for="repeat_nature">Repeat Nature<span class="text-danger d-none">*</span></label>
+        
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for input -->
+            <textarea name="repeat_nature" class="mic-input" id="repeat_nature_textarea"></textarea>
+            
+            <!-- Microphone button -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+            
+            <!-- Speaker button -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            
+            <!-- Language selection mini modal -->
+            <div class="mini-modal" style="display: none; position: absolute; z-index: 999;">
+                <div class="mini-modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Select Language</h2>
+                    <select id="language-select">
+                        <option value="en-us">English</option>
+                        <option value="hi-in">Hindi</option>
+                        <option value="te-in">Telugu</option>
+                        <option value="fr-fr">French</option>
+                        <option value="es-es">Spanish</option>
+                        <option value="zh-cn">Chinese (Mandarin)</option>
+                        <option value="ja-jp">Japanese</option>
+                        <option value="de-de">German</option>
+                        <option value="ru-ru">Russian</option>
+                        <option value="ko-kr">Korean</option>
+                        <option value="it-it">Italian</option>
+                        <option value="pt-br">Portuguese (Brazil)</option>
+                        <option value="ar-sa">Arabic</option>
+                        <option value="bn-in">Bengali</option>
+                        <option value="pa-in">Punjabi</option>
+                        <option value="mr-in">Marathi</option>
+                        <option value="gu-in">Gujarati</option>
+                        <option value="ur-pk">Urdu</option>
+                        <option value="ta-in">Tamil</option>
+                        <option value="kn-in">Kannada</option>
+                        <option value="ml-in">Malayalam</option>
+                        <option value="or-in">Odia</option>
+                        <option value="as-in">Assamese</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+                    <button id="select-language-btn">Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
                                 {{-- <div class="col-lg-6">
                                     <div class="group-input">
@@ -563,15 +731,61 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="group-input">
-                                        <label for="others">If Others</label>
-                                        <div class="relative-container">
-                                        <textarea name="others" class="mic-input"></textarea>
-                                        @component('frontend.change-control.language_modal', ['name' => 'others', 'id' => 'others'])
-                                        @endcomponent
-                                </div>
-                                    </div>
-                                </div>
+    <div class="group-input">
+        <label for="others">If Others</label>
+        
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for input -->
+            <textarea name="others" class="mic-input" id="others_textarea"></textarea>
+            
+            <!-- Microphone button -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 40px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+            
+            <!-- Speaker button -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+            
+            <!-- Language selection mini modal -->
+            <div class="mini-modal" style="display: none; position: absolute; z-index: 999;">
+                <div class="mini-modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Select Language</h2>
+                    <select id="language-select">
+                        <option value="en-us">English</option>
+                        <option value="hi-in">Hindi</option>
+                        <option value="te-in">Telugu</option>
+                        <option value="fr-fr">French</option>
+                        <option value="es-es">Spanish</option>
+                        <option value="zh-cn">Chinese (Mandarin)</option>
+                        <option value="ja-jp">Japanese</option>
+                        <option value="de-de">German</option>
+                        <option value="ru-ru">Russian</option>
+                        <option value="ko-kr">Korean</option>
+                        <option value="it-it">Italian</option>
+                        <option value="pt-br">Portuguese (Brazil)</option>
+                        <option value="ar-sa">Arabic</option>
+                        <option value="bn-in">Bengali</option>
+                        <option value="pa-in">Punjabi</option>
+                        <option value="mr-in">Marathi</option>
+                        <option value="gu-in">Gujarati</option>
+                        <option value="ur-pk">Urdu</option>
+                        <option value="ta-in">Tamil</option>
+                        <option value="kn-in">Kannada</option>
+                        <option value="ml-in">Malayalam</option>
+                        <option value="or-in">Odia</option>
+                        <option value="as-in">Assamese</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+                    <button id="select-language-btn">Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
                                 <!-- <div class="col-md-6">
                                     <div class="group-input">
                                         <label for="div_code">Division Code</label>
@@ -636,12 +850,113 @@
                                 </div>
                             </div>
 
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="migration-action">comments</label>
-                                        <textarea name="migration_action" class="mic-input" disabled></textarea>
-                                    </div>
-                                </div>
+<div class="col-12">
+    <div class="group-input">
+        <label for="migration-action">Comments</label>
+        
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for input (disabled) -->
+            <textarea name="migration_action" class="mic-input" disabled></textarea>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal -->
+            <div class="mini-modal" style="display: none; position: absolute; z-index: 999;">
+                <div class="mini-modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Select Language</h2>
+                    <select id="language-select">
+                        <option value="en-us">English</option>
+                        <option value="hi-in">Hindi</option>
+                        <option value="te-in">Telugu</option>
+                        <option value="fr-fr">French</option>
+                        <option value="es-es">Spanish</option>
+                        <option value="zh-cn">Chinese (Mandarin)</option>
+                        <option value="ja-jp">Japanese</option>
+                        <option value="de-de">German</option>
+                        <option value="ru-ru">Russian</option>
+                        <option value="ko-kr">Korean</option>
+                        <option value="it-it">Italian</option>
+                        <option value="pt-br">Portuguese (Brazil)</option>
+                        <option value="ar-sa">Arabic</option>
+                        <option value="bn-in">Bengali</option>
+                        <option value="pa-in">Punjabi</option>
+                        <option value="mr-in">Marathi</option>
+                        <option value="gu-in">Gujarati</option>
+                        <option value="ur-pk">Urdu</option>
+                        <option value="ta-in">Tamil</option>
+                        <option value="kn-in">Kannada</option>
+                        <option value="ml-in">Malayalam</option>
+                        <option value="or-in">Odia</option>
+                        <option value="as-in">Assamese</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+                    <button id="select-language-btn">Select</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="group-input">
+    <label for="qa-eval-comments">HOD Assessment Comments</label>
+
+    <div class="relative-container" style="position: relative;">
+        <!-- Readonly Textarea for input -->
+        <textarea name="hod_assessment_comments" class="mic-input" readonly></textarea>
+
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal -->
+        <div class="mini-modal" style="display: none; position: absolute; z-index: 999;">
+            <div class="mini-modal-content">
+                <span class="close">&times;</span>
+                <h2>Select Language</h2>
+                <select id="language-select">
+                    <option value="en-us">English</option>
+                    <option value="hi-in">Hindi</option>
+                    <option value="te-in">Telugu</option>
+                    <option value="fr-fr">French</option>
+                    <option value="es-es">Spanish</option>
+                    <option value="zh-cn">Chinese (Mandarin)</option>
+                    <option value="ja-jp">Japanese</option>
+                    <option value="de-de">German</option>
+                    <option value="ru-ru">Russian</option>
+                    <option value="ko-kr">Korean</option>
+                    <option value="it-it">Italian</option>
+                    <option value="pt-br">Portuguese (Brazil)</option>
+                    <option value="ar-sa">Arabic</option>
+                    <option value="bn-in">Bengali</option>
+                    <option value="pa-in">Punjabi</option>
+                    <option value="mr-in">Marathi</option>
+                    <option value="gu-in">Gujarati</option>
+                    <option value="ur-pk">Urdu</option>
+                    <option value="ta-in">Tamil</option>
+                    <option value="kn-in">Kannada</option>
+                    <option value="ml-in">Malayalam</option>
+                    <option value="or-in">Odia</option>
+                    <option value="as-in">Assamese</option>
+                    <!-- Add more languages as needed -->
+                </select>
+                <button id="select-language-btn">Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
                                 <div class="col-lg-12">
                                         <div class="group-input">
@@ -677,14 +992,55 @@
                                 HOD Assessment
                             </div>
                             <div class="group-input">
-                                <label for="qa-eval-comments">HOD Assessment Comments</label>
-                                <div class="relative-container">
+    <label for="qa-eval-comments">HOD Assessment Comments</label>
 
-                                <textarea name="hod_assessment_comments" class="mic-input" readonly></textarea>
-                                @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
-                                        @endcomponent
-                            </div>
-                                </div>
+    <div class="relative-container" style="position: relative;">
+        <!-- Textarea for input (readonly) -->
+        <textarea name="hod_assessment_comments" class="mic-input" readonly></textarea>
+
+        <!-- Microphone button (not applicable since the textarea is readonly) -->
+        <!-- Speaker button -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal -->
+        <div class="mini-modal" style="display: none; position: absolute; z-index: 999;">
+            <div class="mini-modal-content">
+                <span class="close">&times;</span>
+                <h2>Select Language</h2>
+                <select id="language-select">
+                    <option value="en-us">English</option>
+                    <option value="hi-in">Hindi</option>
+                    <option value="te-in">Telugu</option>
+                    <option value="fr-fr">French</option>
+                    <option value="es-es">Spanish</option>
+                    <option value="zh-cn">Chinese (Mandarin)</option>
+                    <option value="ja-jp">Japanese</option>
+                    <option value="de-de">German</option>
+                    <option value="ru-ru">Russian</option>
+                    <option value="ko-kr">Korean</option>
+                    <option value="it-it">Italian</option>
+                    <option value="pt-br">Portuguese (Brazil)</option>
+                    <option value="ar-sa">Arabic</option>
+                    <option value="bn-in">Bengali</option>
+                    <option value="pa-in">Punjabi</option>
+                    <option value="mr-in">Marathi</option>
+                    <option value="gu-in">Gujarati</option>
+                    <option value="ur-pk">Urdu</option>
+                    <option value="ta-in">Tamil</option>
+                    <option value="kn-in">Kannada</option>
+                    <option value="ml-in">Malayalam</option>
+                    <option value="or-in">Odia</option>
+                    <option value="as-in">Assamese</option>
+                    <!-- Add more languages as needed -->
+                </select>
+                <button id="select-language-btn">Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+
                             <div class="col-lg-12">
                                 <div class="group-input">
                                     <label for="qa-eval-attach">HOD Assessment Attachments</label>
@@ -769,58 +1125,111 @@
                                 </div> -->
 
                                 <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="current-practice">
-                                            Current Practice
-                                        </label>
-                                        <div class="relative-container">
-                                        <textarea name="current_practice" class="mic-input" disabled></textarea>
-                                        @component('frontend.change-control.language_modal', ['name' => 'current_practice', 'id' => 'current_practice'])
-                                        @endcomponent
-                                    </div>
-                                </div>
+    <div class="group-input">
+        <label for="current-practice">Current Practice</label>
 
-                                </div>
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for input (disabled) -->
+            <textarea name="current_practice" class="mic-input" disabled></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'current_practice', 'id' => 'current_practice'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
+
+<div class="col-12">
+    <div class="group-input">
+        <label for="proposed_change">Proposed Change</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for input (disabled) -->
+            <textarea name="proposed_change" class="mic-input" disabled></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'proposed_change', 'id' => 'proposed_change'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
+
                                 <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="proposed_change">
-                                            Proposed Change
-                                        </label>
-                                        <div class="relative-container">
+    <div class="group-input">
+        <label for="reason_change">Reason for Change</label>
 
-                                        <textarea name="proposed_change" class="mic-input" disabled></textarea>
-                                        @component('frontend.change-control.language_modal', ['name' => 'proposed_change', 'id' => 'proposed_change'])
-                                        @endcomponent
-                                    </div>
-                                    </div>
+        <div class="relative-container" style="position: relative;">
+            <!-- Disabled Textarea for input -->
+            <textarea name="reason_change" class="mic-input" disabled></textarea>
 
-                                </div>
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="reason_change">
-                                            Reason for Change
-                                        </label>
-                                        <div class="relative-container">
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
 
-                                        <textarea name="reason_change" class="mic-input" disabled></textarea>
-                                        @component('frontend.change-control.language_modal', ['name' => 'reason_change', 'id' => 'reason_change'])
-                                        @endcomponent
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="other_comment">
-                                            Any Other Comments
-                                        </label>
-                                        <div class="relative-container">
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
 
-                                        <textarea name="other_comment" class="mic-input" disabled></textarea>
-                                        @component('frontend.change-control.language_modal', ['name' => 'other_comment', 'id' => 'other_comment'])
-                                        @endcomponent
-                                    </div>
-                                    </div>
-                                </div>
+            <!-- Language selection mini modal -->
+            @component('frontend.change-control.language_modal', ['name' => 'reason_change', 'id' => 'reason_change'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="col-12">
+    <div class="group-input">
+        <label for="other_comment">Any Other Comments</label>
+
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for input (disabled) -->
+            <textarea name="other_comment" class="mic-input" disabled></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'other_comment', 'id' => 'other_comment'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                 <!-- <div class="col-12">
                                     <div class="group-input">
                                         <label for="supervisor_comment">
@@ -904,16 +1313,30 @@
                                 </div> -->
 
                                 <div class="col-12">
-                                    <div class="group-input">
-                                        <label for="qa_comments">QA Review Comments</label>
-                                        <div class="relative-container">
+    <div class="group-input">
+        <label for="qa_comments">QA Review Comments</label>
 
-                                        <textarea name="qa_comments" class="mic-input" disabled></textarea>
-                                        @component('frontend.change-control.language_modal', ['name' => 'qa_comments', 'id' => 'qa_comments'])
-                                        @endcomponent
-                                    </div>
-                                    </div>
-                                </div>
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for input (disabled) -->
+            <textarea name="qa_comments" class="mic-input" disabled></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'qa_comments', 'id' => 'qa_comments'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                                 <div class="col-12">
                                     <div class="group-input">
                                         <label for="related_records">Related Records</label>
@@ -3259,15 +3682,29 @@
                                                 </div>
                                             </div>
 
-                                        <div class="group-input">
-                                            <label for="qa-eval-comments">QA Final Review Comments</label>
-                                            <div class="relative-container">
+                                            <div class="group-input">
+    <label for="qa-eval-comments">QA Final Review Comments</label>
 
-                                            <textarea name="qa_final_comments" readonly></textarea>
-                                            @component('frontend.change-control.language_modal', ['name' => 'qa_final_comments', 'id' => 'qa_final_comments'])
-                                        @endcomponent
-                                        </div>
-                                        </div>
+    <div class="relative-container" style="position: relative;">
+        <!-- Readonly Textarea for input -->
+        <textarea name="qa_final_comments" class="mic-input" readonly></textarea>
+
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'qa_final_comments', 'id' => 'qa_final_comments'])
+        @endcomponent
+    </div>
+</div>
+
 
                                         <div class="col-lg-12">
                                             <div class="group-input">
@@ -3304,18 +3741,33 @@
                                             RA
                                         </div>
                                         <div class="col-md-12">
-                                                    <div class="group-input">
-                                                        <label for="RA feedback">RA Comment</label>
-                                                        <div><small class="text-primary">Please insert "NA" in the data field if it
-                                                                does not require completion</small></div>
-                                                                <div class="relative-container">
+    <div class="group-input">
+        <label for="RA feedback">RA Comment</label>
+        <div>
+            <small class="text-primary">Please insert "NA" in the data field if it does not require completion</small>
+        </div>
+        
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for TinyMCE input (readonly) -->
+            <textarea class="tiny mic-input" name="RA_feedback" id="summernote-18" readonly></textarea>
 
-                                                        <textarea class="tiny" name="RA_feedback" class="mic-input" id="summernote-18" readonly></textarea>
-                                                        @component('frontend.change-control.language_modal', ['name' => 'RA_feedback', 'id' => 'RA_feedback'])
-                                                        @endcomponent
-                                                    </div>
-                                                    </div>
-                                                </div>
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'RA_feedback', 'id' => 'RA_feedback'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
 
                                       
                                         <div class="col-lg-12">
@@ -3353,14 +3805,28 @@
                                 Evaluation Detail
                             </div>
                             <div class="group-input">
-                                <label for="qa-eval-comments">QA Evaluation Comments</label>
-                                <div class="relative-container">
+    <label for="qa-eval-comments">QA Evaluation Comments</label>
 
-                                <textarea name="qa_eval_comments" class="mic-input" readonly></textarea>
-                                @component('frontend.change-control.language_modal', ['name' => 'qa_eval_comments', 'id' => 'qa_eval_comments'])
-                                @endcomponent
-                            </div>
-                            </div>
+    <div class="relative-container" style="position: relative;">
+        <!-- Readonly Textarea for QA Evaluation Comments -->
+        <textarea name="qa_eval_comments" class="mic-input" readonly></textarea>
+
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'qa_eval_comments', 'id' => 'qa_eval_comments'])
+        @endcomponent
+    </div>
+</div>
+
                             <div class="col-lg-12">
                                 <div class="group-input">
                                     <label for="qa-eval-attach">QA Evaluation Attachments</label>
@@ -3406,24 +3872,52 @@
 
                     <div id="CCForm9" class="inner-block cctabcontent">
                         <div class="inner-block-content">
-                            <div class="group-input">
-                                <label for="qa-appro-comments">QA Approval Comments</label>
-                                <div class="relative-container">
+                        <div class="group-input">
+    <label for="qa-appro-comments">QA Approval Comments</label>
 
-                                <textarea name="qa_appro_comments" class="mic-input" disabled></textarea>
-                                @component('frontend.change-control.language_modal', ['name' => 'qa_appro_comments', 'id' => 'qa_appro_comments'])
-                                @endcomponent
-                            </div>
-                            </div>
-                            <div class="group-input">
-                                <label for="feedback">Training Feedback</label>
-                                <div class="relative-container">
+    <div class="relative-container" style="position: relative;">
+        <!-- Disabled Textarea for QA Approval Comments -->
+        <textarea name="qa_appro_comments" class="mic-input" disabled></textarea>
 
-                                <textarea name="feedback" disabled></textarea>
-                                @component('frontend.change-control.language_modal', ['name' => 'feedback', 'id' => 'feedback'])
-                                @endcomponent
-                            </div>
-                            </div>
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'qa_appro_comments', 'id' => 'qa_appro_comments'])
+        @endcomponent
+    </div>
+</div>
+
+<div class="group-input">
+    <label for="feedback">Training Feedback</label>
+
+    <div class="relative-container" style="position: relative;">
+        <!-- Disabled Textarea for Training Feedback -->
+        <textarea name="feedback" class="mic-input" disabled></textarea>
+
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'feedback', 'id' => 'feedback'])
+        @endcomponent
+    </div>
+</div>
+
                             <div class="group-input">
                                 <label for="tran-attach">Training Attachments</label>
                                 <div><small class="text-primary">Please Attach all relevant or supporting documents</small>
@@ -3452,15 +3946,29 @@
                     <div id="CCForm10" class="inner-block cctabcontent">
                         <div class="inner-block-content">
                             
-                            <div class="group-input">
-                                <label for="qa-closure-comments">QA Closure Comments</label>
-                                <div class="relative-container">
+                        <div class="group-input">
+    <label for="qa-closure-comments">QA Closure Comments</label>
 
-                                <textarea name="qa_closure_comments" class="mic-input" disabled></textarea>
-                                @component('frontend.change-control.language_modal', ['name' => 'qa_closure_comments', 'id' => 'qa_closure_comments'])
-                                @endcomponent
-                            </div>
-                            </div>
+    <div class="relative-container" style="position: relative;">
+        <!-- Disabled Textarea for QA Closure Comments -->
+        <textarea name="qa_closure_comments" class="mic-input" disabled></textarea>
+
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'qa_closure_comments', 'id' => 'qa_closure_comments'])
+        @endcomponent
+    </div>
+</div>
+
                             <div class="group-input">
                                 <label for="attach-list">List Of Attachments</label>
                                 <div><small class="text-primary">Please Attach all relevant or supporting documents</small>
@@ -3521,18 +4029,33 @@
                                 Extension Justification
                             </div>
                             <div class="col-12">
-                                <div class="group-input">
-                                    <label for="due_date_extension">Due Date Extension Justification</label>
-                                    <div><small class="text-primary">Please Mention justification if due date is
-                                            crossed</small></div>
-                                            <div class="relative-container">
+    <div class="group-input">
+        <label for="due_date_extension">Due Date Extension Justification</label>
+        <div>
+            <small class="text-primary">Please Mention justification if due date is crossed</small>
+        </div>
 
-                                    <textarea name="due_date_extension" class="mic-input"></textarea>
-                                    @component('frontend.change-control.language_modal', ['name' => 'due_date_extension', 'id' => 'due_date_extension'])
-                                    @endcomponent
-                                </div>
-                                </div>
-                            </div>
+        <div class="relative-container" style="position: relative;">
+            <!-- Textarea for Due Date Extension Justification -->
+            <textarea name="due_date_extension" class="mic-input"></textarea>
+
+            <!-- Microphone button (for speech-to-text functionality) -->
+            <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Speaker button (for text-to-speech functionality) -->
+            <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+                <i class="fas fa-volume-up"></i>
+            </button>
+
+            <!-- Language selection mini modal component -->
+            @component('frontend.change-control.language_modal', ['name' => 'due_date_extension', 'id' => 'due_date_extension'])
+            @endcomponent
+        </div>
+    </div>
+</div>
+
                         <!-- </div> -->
                         <div class="button-block">
                             <button type="submit" class="saveButton">Save</button>
@@ -3608,14 +4131,28 @@
                             QA/CQA Head/Manager Designee Approval
                             </div>
                             <div class="group-input">
-                                <label for="qa-eval-comments">QA/CQA Head/Manager Designee Approval Comments</label>
-                                <div class="relative-container">
+    <label for="qa-eval-comments">QA/CQA Head/Manager Designee Approval Comments</label>
 
-                                <textarea name="hod_assessment_comments" class="mic-input" readonly></textarea>
-                                @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
-                                @endcomponent
-                            </div>
-                            </div>
+    <div class="relative-container" style="position: relative;">
+        <!-- Readonly Textarea for input -->
+        <textarea name="hod_assessment_comments" class="mic-input" readonly></textarea>
+
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
+        @endcomponent
+    </div>
+</div>
+
                             <div class="col-lg-12">
                                 <div class="group-input">
                                     <label for="qa-eval-attach">QA/CQA Head/Manager Designee Approval Attachments</label>
@@ -3665,14 +4202,28 @@
                                 HOD Final Review
                             </div>
                             <div class="group-input">
-                                <label for="qa-eval-comments">HOD Final Review Comments</label>
-                                <div class="relative-container">
+    <label for="qa-eval-comments">HOD Final Review Comments</label>
 
-                                <textarea name="hod_assessment_comments" class="mic-input" readonly></textarea>
-                                @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
-                                @endcomponent
-                            </div>
-                            </div>
+    <div class="relative-container" style="position: relative;">
+        <!-- Readonly Textarea for HOD Final Review Comments -->
+        <textarea name="hod_assessment_comments" class="mic-input" readonly></textarea>
+
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
+        @endcomponent
+    </div>
+</div>
+
                             <div class="col-lg-12">
                                 <div class="group-input">
                                     <label for="qa-eval-attach">HOD Final Review Attachments</label>
@@ -3970,14 +4521,28 @@
                                 Initiator Update
                             </div>
                             <div class="group-input">
-                                <label for="qa-eval-comments">Initiator Update Comments</label>
-                                <div class="relative-container">
+    <label for="qa-eval-comments">Initiator Update Comments</label>
 
-                                <textarea name="hod_assessment_comments" readonly></textarea>
-                                @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
-                                @endcomponent
-                            </div>
-                            </div>
+    <div class="relative-container" style="position: relative;">
+        <!-- Readonly Textarea for Initiator Update Comments -->
+        <textarea name="hod_assessment_comments" class="mic-input" readonly></textarea>
+
+        <!-- Microphone button (for speech-to-text functionality) -->
+        <button class="mic-btn" type="button" style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-microphone"></i>
+        </button>
+
+        <!-- Speaker button (for text-to-speech functionality) -->
+        <button class="speak-btn" type="button" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+            <i class="fas fa-volume-up"></i>
+        </button>
+
+        <!-- Language selection mini modal component -->
+        @component('frontend.change-control.language_modal', ['name' => 'hod_assessment_comments', 'id' => 'hod_assessment_comments'])
+        @endcomponent
+    </div>
+</div>
+
                             <div class="col-lg-12">
                                 <div class="group-input">
                                     <label for="qa-eval-attach">Initiator Update Attachments</label>
@@ -4543,4 +5108,713 @@
         });
     });
     </script>
+
+
+<!-- language_modal_file -->
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize speech recognition
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+
+        // Function to start speech recognition and append result to the target element
+        function startRecognition(targetElement) {
+            recognition.start();
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                targetElement.value += transcript;
+            };
+            recognition.onerror = function(event) {
+                console.error(event.error);
+            };
+        }
+
+        // Event delegation for all mic buttons
+        document.addEventListener('click', function(event) {
+            const button = event.target.closest('.mic-btn');
+            if (button) {
+                const inputField = button.previousElementSibling;
+                if (inputField && inputField.classList.contains('mic-input')) {
+                    startRecognition(inputField);
+                }
+                return;
+            }
+        });
+
+        // Show/hide mic button on focus/blur of input fields
+        const micInputs = document.querySelectorAll('.mic-input');
+        micInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                const micBtn = this.nextElementSibling;
+                if (micBtn && micBtn.classList.contains('mic-btn')) {
+                    micBtn.style.display = 'block';
+                }
+            });
+            input.addEventListener('blur', function(event) {
+                const micBtn = this.nextElementSibling;
+                if (micBtn && micBtn.classList.contains('mic-btn')) {
+                    // Use a timeout to prevent immediate hiding when the button is clicked
+                    setTimeout(() => {
+                        if (!event.relatedTarget || !event.relatedTarget.classList.contains('mic-btn')) {
+                            micBtn.style.display = 'none';
+                        }
+                    }, 200);
+                }
+            });
+        });
+    });
+
+    // Show/hide the container based on user selection
+    function toggleOthersField(selectedValue) {
+        const container = document.getElementById('external_agencies_req');
+        if (selectedValue === 'others') {
+            container.classList.remove('d-none');
+        } else {
+            container.classList.add('d-none');
+        }
+    }
+</script>
+<script>
+$(document).ready(function() {
+    let audio = null;
+    let selectedLanguage = 'en-US'; // Default language
+    let inputText = '';
+
+    // When the user clicks the button, open the mini modal 
+    $(document).on('click', '.speak-btn', function() {
+        let inputField = $(this).siblings('textarea, input');
+        inputText = inputField.val();
+        let modal = $(this).siblings('.mini-modal');
+        if (inputText) {
+            // Store the input field element
+            $(modal).data('inputField', inputField);
+            modal.css({
+                display: 'block',
+                top: $(this).position().top - modal.outerHeight() - 10,
+                left: $(this).position().left + $(this).outerWidth() - modal.outerWidth()
+            });
+        }
+    });
+
+    // When the user clicks on <span> (x), close the mini modal
+    $(document).on('click', '.close', function() {
+        $(this).closest('.mini-modal').css('display', 'none');
+    });
+
+    // When the user selects a language and clicks the button
+    $(document).on('click', '#select-language-btn', function(event) {
+        event.preventDefault(); // Prevent form submission
+        let modal = $(this).closest('.mini-modal');
+        selectedLanguage = modal.find('#language-select').val(); // Get selected language
+        let inputField = modal.data('inputField');
+        let textToSpeak = inputText;
+
+        if (textToSpeak) {
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+
+            // Translate the text before converting to speech
+            translateText(textToSpeak, selectedLanguage.split('-')[0]).then(translatedText => {
+                const utterance = new SpeechSynthesisUtterance(translatedText);
+                utterance.lang = selectedLanguage; // Set the language for speech synthesis
+                speechSynthesis.speak(utterance); // Speak the translated text
+
+                utterance.onend = function() {
+                    audio = null;
+                };
+            }).catch(error => {
+                console.error('Translation failed: ', error);
+            });
+        }
+
+        modal.css('display', 'none');
+    });
+
+    // Speech-to-Text functionality
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+
+    function startRecognition(targetElement) {
+        recognition.start();
+        recognition.onresult = function(event) {
+            const transcript = event.results[0][0].transcript;
+            targetElement.value += transcript;
+        };
+        recognition.onerror = function(event) {
+            console.error(event.error);
+        };
+    }
+
+    $(document).on('click', '.mic-btn', function() {
+        const inputField = $(this).siblings('textarea, input');
+        startRecognition(inputField[0]);
+    });
+
+    // Show mic button on hover
+    $('.relative-container').hover(
+        function() {
+            $(this).find('.mic-btn').show();
+        },
+        function() {
+            $(this).find('.mic-btn').hide();
+        }
+    );
+
+    // Function to translate text using RapidAPI
+    async function translateText(text, targetLanguage) {
+        const url = 'https://google-translate1.p.rapidapi.com/language/translate/v2';
+        const data = {
+            q: text,
+            target: targetLanguage
+        };
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'x-rapidapi-key': '1e6d004c41msh632fcdce8857b28p197054jsn63ba6760d863', // Replace with your RapidAPI key
+                'x-rapidapi-host': 'google-translate1.p.rapidapi.com',
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(data)
+        };
+
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            return result.data.translations[0].translatedText;
+        } catch (error) {
+            console.error('Error occurred:', error);
+        }
+    }
+
+    // Update remaining characters
+    $('#docname').on('input', function() {
+        const remaining = 255 - $(this).val().length;
+        $('#rchars').text(remaining);
+    });
+
+    // Initialize remaining characters count
+    const remaining = 255 - $('#docname').val().length;
+    $('#rchars').text(remaining);
+});
+</script>
+
+
+
+
+
+
+<!-- Ensure this CSS is present to initially hide the Others field and its group -->
+<style>
+    #others_group {
+        display: none;
+    }
+</style>
+
+<style>
+        .group-input {
+            margin-bottom: 20px;
+        }
+        .mic-btn, .speak-btn {
+            background: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: none;
+        }
+        .mic-btn i, .speak-btn i {
+            color: black;
+        }
+        .mic-btn:focus,
+        .mic-btn:hover,
+        .mic-btn:active,
+        .speak-btn:focus,
+        .speak-btn:hover,
+        .speak-btn:active {
+            box-shadow: none;
+        }
+        .relative-container {
+            position: relative;
+        }
+        .relative-container input {
+            width: 100%;
+            padding-right: 40px;
+        }
+    </style>
+
+    <style>
+    #start-record-btn {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    #start-record-btn i {
+        color: black; /* Set the color of the icon */
+        box-shadow: none; /* Remove shadow */
+    }
+    #start-record-btn:focus,
+    #start-record-btn:hover,
+    #start-record-btn:active {
+        box-shadow: none; /* Remove shadow on hover/focus/active */
+    }
+</style>
+<style>
+    .mic-btn {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        position: absolute;
+        right: 10px; /* Position the button at the right corner */
+        top: 50%; /* Center the button vertically */
+        transform: translateY(-50%); /* Adjust for the button's height */
+        box-shadow: none;
+         /* Remove shadow */
+    }
+    .mic-btn {
+            right: 50px; /* Adjust position to avoid overlap with speaker button */
+        }
+
+        .speak-btn {
+            right: 16px;
+        }
+    .mic-btn i {
+        color: black; /* Set the color of the icon */
+        // box-shadow: none; /* Remove shadow */
+    }
+    .mic-btn:focus,
+    .mic-btn:hover,
+    .mic-btn:active {
+        box-shadow: none; /* Remove shadow on hover/focus/active */
+        // display: none;
+    }
+
+    .relative-container {
+        position: relative;
+    }
+
+    .relative-container textarea {
+        width: 100%;
+        padding-right: 40px; /* Ensure the text does not overlap the button */
+    }
+</style>
+<style>
+          .mini-modal {
+            display: none;
+            position: absolute;
+            z-index: 1;
+            padding: 10px;
+            background-color: #fefefe;
+            border: 1px solid #888;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 200px; /* Adjust width as needed */
+        }
+        .mini-modal-content {
+            background-color: #fefefe;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .mini-modal-content h2 {
+            font-size: 16px;
+            margin-top: 0;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+        button {
+    border: 0;
+    background: white;
+    color: #060606;
+    /* border: 2px solid black; */
+    transition: all 0.3s linear;
+}
+
+button:hover {
+    color: #0c0c0c;
+}
+    </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize speech recognition
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+
+        // Function to start speech recognition and append result to the target element
+        function startRecognition(targetElement) {
+            recognition.start();
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                targetElement.value += transcript;
+            };
+            recognition.onerror = function(event) {
+                console.error(event.error);
+            };
+        }
+
+        // Event delegation for all mic buttons
+        document.addEventListener('click', function(event) {
+            if (event.target.closest('.mic-btn')) {
+                const button = event.target.closest('.mic-btn');
+                const inputField = button.previousElementSibling;
+                if (inputField && inputField.classList.contains('mic-input')) {
+                    startRecognition(inputField);
+                }
+            }
+        });
+    });
+
+    // Show/hide the container based on user selection
+    function toggleOthersField(selectedValue) {
+        const container = document.getElementById('external_agencies_req');
+        if (selectedValue === 'others') {
+            container.classList.remove('d-none');
+        } else {
+            container.classList.add('d-none');
+        }
+    }
+</script>
+
+<style>
+    .mic-btn {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        position: absolute;
+        right: 10px; /* Position the button at the right corner */
+        top: 50%; /* Center the button vertically */
+        transform: translateY(-50%); /* Adjust for the button's height */
+        box-shadow: none; /* Remove shadow */
+    }
+    .mic-btn i {
+        color: black; /* Set the color of the icon */
+        box-shadow: none; /* Remove shadow */
+    }
+    .mic-btn:focus,
+    .mic-btn:hover,
+    .mic-btn:active {
+        box-shadow: none; /* Remove shadow on hover/focus/active */
+    }
+
+    .relative-container {
+        position: relative;
+    }
+
+    .relative-container textarea {
+        width: 100%;
+        padding-right: 40px; /* Ensure the text does not overlap the button */
+    }
+</style>
+
+    <style>
+    #start-record-btn {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    #start-record-btn i {
+        color: black; /* Set the color of the icon */
+        box-shadow: none; /* Remove shadow */
+    }
+    #start-record-btn:focus,
+    #start-record-btn:hover,
+    #start-record-btn:active {
+        box-shadow: none; /* Remove shadow on hover/focus/active */
+    }
+</style>
+
+
+<style>
+    .mic-btn {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        position: absolute;
+        right: 10px; /* Position the button at the right corner */
+        top: 50%; /* Center the button vertically */
+        transform: translateY(-50%); /* Adjust for the button's height */
+        box-shadow: none; /* Remove shadow */
+    }
+    .mic-btn i {
+        color: black; /* Set the color of the icon */
+        box-shadow: none; /* Remove shadow */
+    }
+    .mic-btn:focus,
+    .mic-btn:hover,
+    .mic-btn:active {
+        box-shadow: none; /* Remove shadow on hover/focus/active */
+    }
+
+    .relative-container {
+        position: relative;
+    }
+
+    .relative-container textarea {
+        width: 100%;
+        padding-right: 40px; /* Ensure the text does not overlap the button */
+    }
+</style>
+
+<!-- Ensure this CSS is present to initially hide the Others field and its group -->
+<style>
+    #others_group {
+        display: none;
+    }
+</style>
+
+<style>
+        .group-input {
+            margin-bottom: 20px;
+        }
+        .mic-btn, .speak-btn {
+            background: none;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: none;
+        }
+        .mic-btn i, .speak-btn i {
+            color: black;
+        }
+        .mic-btn:focus,
+        .mic-btn:hover,
+        .mic-btn:active,
+        .speak-btn:focus,
+        .speak-btn:hover,
+        .speak-btn:active {
+            box-shadow: none;
+        }
+        .relative-container {
+            position: relative;
+        }
+        .relative-container input {
+            width: 100%;
+            padding-right: 40px;
+        }
+    </style>
+
+    <style>
+    #start-record-btn {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+    #start-record-btn i {
+        color: black; /* Set the color of the icon */
+        box-shadow: none; /* Remove shadow */
+    }
+    #start-record-btn:focus,
+    #start-record-btn:hover,
+    #start-record-btn:active {
+        box-shadow: none; /* Remove shadow on hover/focus/active */
+    }
+</style>
+<style>
+    .mic-btn {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        position: absolute;
+        right: 10px; /* Position the button at the right corner */
+        top: 50%; /* Center the button vertically */
+        transform: translateY(-50%); /* Adjust for the button's height */
+        box-shadow: none;
+         /* Remove shadow */
+    }
+    .mic-btn {
+            right: 50px; /* Adjust position to avoid overlap with speaker button */
+        }
+
+        .speak-btn {
+            right: 16px;
+        }
+    .mic-btn i {
+        color: black; /* Set the color of the icon */
+        // box-shadow: none; /* Remove shadow */
+    }
+    .mic-btn:focus,
+    .mic-btn:hover,
+    .mic-btn:active {
+        box-shadow: none; /* Remove shadow on hover/focus/active */
+        // display: none;
+    }
+
+    .relative-container {
+        position: relative;
+    }
+
+    .relative-container textarea {
+        width: 100%;
+        padding-right: 40px; /* Ensure the text does not overlap the button */
+    }
+</style>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize speech recognition
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+
+        // Function to start speech recognition and append result to the target element
+        function startRecognition(targetElement) {
+            recognition.start();
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                targetElement.value += transcript;
+            };
+            recognition.onerror = function(event) {
+                console.error(event.error);
+            };
+        }
+
+        // Event delegation for all mic buttons
+        document.addEventListener('click', function(event) {
+            if (event.target.closest('.mic-btn')) {
+                const button = event.target.closest('.mic-btn');
+                const inputField = button.previousElementSibling;
+                if (inputField && inputField.classList.contains('mic-input')) {
+                    startRecognition(inputField);
+                }
+            }
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize speech recognition
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+
+        // Function to start speech recognition and append result to the target element
+        function startRecognition(targetElement) {
+            recognition.start();
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                targetElement.value += transcript;
+            };
+            recognition.onerror = function(event) {
+                console.error(event.error);
+            };
+        }
+
+        // Event delegation for all mic buttons
+        document.addEventListener('click', function(event) {
+            if (event.target.closest('.mic-btn')) {
+                const button = event.target.closest('.mic-btn');
+                const inputField = button.previousElementSibling;
+                if (inputField && inputField.classList.contains('mic-input')) {
+                    startRecognition(inputField);
+                }
+            }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize speech recognition
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+
+        // Function to start speech recognition and append result to the target element
+        function startRecognition(targetElement) {
+            recognition.start();
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                targetElement.value += transcript;
+            };
+            recognition.onerror = function(event) {
+                console.error(event.error);
+            };
+        }
+
+        // Event delegation for all mic buttons
+        document.addEventListener('click', function(event) {
+            const button = event.target.closest('.mic-btn');
+            if (button) {
+                const inputField = button.previousElementSibling;
+                if (inputField && inputField.classList.contains('mic-input')) {
+                    startRecognition(inputField);
+                }
+                return;
+            }
+        });
+
+        // Show/hide mic button on focus/blur of input fields
+        const micInputs = document.querySelectorAll('.mic-input');
+        micInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                const micBtn = this.nextElementSibling;
+                if (micBtn && micBtn.classList.contains('mic-btn')) {
+                    micBtn.style.display = 'block';
+                }
+            });
+            input.addEventListener('blur', function(event) {
+                const micBtn = this.nextElementSibling;
+                if (micBtn && micBtn.classList.contains('mic-btn')) {
+                    // Use a timeout to prevent immediate hiding when the button is clicked
+                    setTimeout(() => {
+                        if (!event.relatedTarget || !event.relatedTarget.classList.contains('mic-btn')) {
+                            micBtn.style.display = 'none';
+                        }
+                    }, 200);
+                }
+            });
+        });
+    });
+
+    // Show/hide the container based on user selection
+    function toggleOthersField(selectedValue) {
+        const container = document.getElementById('external_agencies_req');
+        if (selectedValue === 'others') {
+            container.classList.remove('d-none');
+        } else {
+            container.classList.add('d-none');
+        }
+    }
+</script>
+
+
 @endsection
