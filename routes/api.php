@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AllFormsController;
 use App\Http\Controllers\Api\ChartController;
 use App\Http\Controllers\Api\HelperController;
 use App\Http\Controllers\ApiController;
@@ -68,3 +69,5 @@ Route::post('upload-files', [HelperController::class, 'upload_file'])->name('api
  Route::post('/ooc',[LogFilterController::class,'ooc_filter'])->name('api.ooc.filter');
  Route::post('/capa',[LogFilterController::class,'capa_filter'])->name('api.capa.filter');
  Route::post('/risk-management',[LogFilterController::class,'risk_management_filter'])->name('api.riskmanagement.filter');
+
+ Route::get('/test',[AllFormsController::class,'AllForms']);
