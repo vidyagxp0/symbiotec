@@ -365,9 +365,6 @@ class DocumentController extends Controller
                 ->where('user_roles.q_m_s_roles_id', 2)
                 ->groupBy('user_roles.q_m_s_processes_id', 'users.id','users.role','users.name') // Include all selected columns in the group by clause
                 ->get();
-
-
-        //sdd($temp->division_id);
         $approvers = DB::table('user_roles')
                 ->join('users', 'user_roles.user_id', '=', 'users.id')
                 ->select('user_roles.q_m_s_processes_id', 'users.id','users.role','users.name') // Include all selected columns in the select statement

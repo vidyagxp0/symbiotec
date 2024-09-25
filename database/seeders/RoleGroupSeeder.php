@@ -34,7 +34,9 @@ class RoleGroupSeeder extends Seeder
             'Extension' => ['Initiator', 'Head QA/Designee', 'QA Approver', 'CQA Approver', 'View Only', 'FP', 'Closed Record', 'HOD/Designee'],
             'Regulatory Inspection' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
             'Regulatory Change' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
-            'Critical Action' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP']
+            'Critical Action' => ['Initiator',  'Approver', 'Reviewer', 'Drafter', 'View Only', 'FP'],
+            'Deviation' => ['Initiator', 'HOD/Designee', 'QA', 'CFT', 'QA', 'QA Head/Designee', 'Initiator', 'QA', 'View Only', 'FP', 'Closed Record'],
+            'New Document' => ['Initiator', 'Author', 'HOD/Designee', 'Approver', 'Reviewer', 'View Only', 'FP', 'Trainer', 'Closed Record'],
 
             // 'Lab Incident' => ['Initiator', 'HOD/Supervisor/Designee', 'Head QA', 'Initiator', 'Head QA', 'View Only', 'FP', 'Closed Record'],
             // 'Audit Program' => ['Initiator', 'Audit Manager', 'View Only', 'FP', 'Closed Record'],
@@ -47,8 +49,6 @@ class RoleGroupSeeder extends Seeder
             // 'OOS Chemical' => ['Initiator', 'Lab Supervisor', 'QC Head/Designee', 'Lab Supervisor', 'QA', 'Lab Supervisor', 'QA', 'Head QA/Designee', 'View Only', 'FP', 'Closed Record'],
             // 'OOT' => ['Initiator', 'HOD/Supervisor/Designee', 'Head QA', 'Initiator', 'Head QA/Designee', 'View Only', 'FP', 'Closed Record'],
             // 'OOC' => ['Initiator', 'HOD/Designee', 'QC Head', 'QA', 'QC Supervisor', 'Manufacturing QA', 'QA', 'QA Head/Designee', 'View Only', 'FP', 'Closed Record'],
-            // 'Deviation' => ['Initiator', 'HOD/Designee', 'QA', 'CFT', 'QA', 'QA Head/Designee', 'Initiator', 'QA', 'View Only', 'FP', 'Closed Record'],
-            // 'New Document' => ['Initiator', 'Author', 'HOD/Designee', 'Approver', 'Reviewer', 'View Only', 'FP', 'Trainer', 'Closed Record'],
             // 'Market Complaint' => ['Initiator', 'Supervisor', 'QA', 'Responsible Person', 'Supervisor', 'QA Head/Designee', 'Initiator', 'View Only', 'FP', 'Closed Record'],
             // 'Non Conformance' => ['Initiator', 'HOD/Designee', 'QA', 'CFT', 'QA', 'QA Head/Designee', 'Initiator', 'QA', 'View Only', 'FP', 'Closed Record'],
             // 'Incident' => ['Initiator', 'HOD/Designee', 'QA', 'CFT', 'QA', 'QA Head/Designee', 'Initiator', 'QA', 'View Only', 'FP', 'Closed Record'],
@@ -90,7 +90,7 @@ class RoleGroupSeeder extends Seeder
 
         $processes = [
             'Change Control',
-            // 'Deviation',
+            'Deviation',
             // 'Non Conformance',
             // 'Incident',
         ];
