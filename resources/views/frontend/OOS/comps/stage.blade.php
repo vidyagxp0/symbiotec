@@ -249,7 +249,7 @@
     </div>
 </div>
 <!-- child model -->
-<div class="modal fade" id="child-modal">
+{{-- <div class="modal fade" id="child-modal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -278,7 +278,7 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Current Status -->
 <div class="status" id="statusBlock">
     <div class="head">Current Status</div>
