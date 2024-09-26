@@ -82,6 +82,7 @@ class LabIncidentController extends Controller
         $data->initiator_group_code= $request->initiator_group_code;
         $data->Other_Ref= $request->Other_Ref;
         $data->due_date = $request->due_date;
+        $data->product_name = $request->product_name;
         $data->assign_to = $request->assign_to;
         $data->Incident_Category= $request->Incident_Category;
         $data->Invocation_Type = $request->Invocation_Type;
@@ -1954,7 +1955,7 @@ class LabIncidentController extends Controller
         {
             $data->due_date = $request->due_date;
         }
-
+        $data->product_name = $request->product_name;
         $data->assign_to = $request->assign_to;
         $data->Incident_Category= $request->Incident_Category;
         $data->suit_qc_review_to =$request->suit_qc_review_to;

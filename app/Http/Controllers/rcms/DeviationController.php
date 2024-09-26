@@ -112,6 +112,7 @@ class DeviationController extends Controller
         $deviation->due_date = $request->due_date;
         // $deviation->intiation_date = Carbon::parse($initiationDate)->format('d-M-Y');
         $deviation->Deviation_category = $deviationCategory;
+        $deviation->product_name_text = $request->product_name_text;
         $deviation->days = $days;
         $deviation->Initiator_Group = $request->Initiator_Group;
         $deviation->initiator_group_code = $request->initiator_group_code;
@@ -1261,7 +1262,7 @@ class DeviationController extends Controller
         $deviation->how = $request->how;
         $deviation->how_much = $request->how_much;
         $deviation->Detail_Of_Root_Cause=$request->Detail_Of_Root_Cause;
-
+        $deviation->product_name_text = $request->product_name_text;
 
         if ($request->Deviation_category == 'major' || $request->Deviation_category == 'critical')
         {

@@ -165,7 +165,12 @@
                                 </div>
 
 
-
+                                <div class="col-12">
+                                    <div class="group-input">
+                                        <label for="Product">Product Name</label>
+                                        <input  type="text" name="product_name" maxlength="255">
+                                    </div>
+                                </div>
 
 
                             <!----------------------------------------------------------new table-------------------------------------------------------------------------->

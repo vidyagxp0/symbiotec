@@ -519,7 +519,18 @@
 
                                         </div>
 
-
+                                        <div class="col-6">
+                                            <div class="group-input">
+                                                <label for="Product">Product Name</label>
+                                                <input  type="text" id="product_name" name="product_name"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} value="{{ $data->product_name }}" maxlength="255">
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="group-input">
+                                                <label for="CAPA Source & Number">CAPA Source & Number</label>
+                                                <input  type="number" id="capa_source_number" name="capa_source_number"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} value="{{ $data->capa_source_number }}" maxlength="255">
+                                            </div>
+                                        </div>
                                        
                                         <div class="col-lg-6">
                                             <div class="group-input">

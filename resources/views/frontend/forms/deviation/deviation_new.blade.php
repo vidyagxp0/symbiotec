@@ -1029,6 +1029,13 @@
                                         });
                                     });
                                 </script>
+
+                                    <div class="col-12">
+                                        <div class="group-input">
+                                            <label for="Product">Product Name</label>
+                                            <input  type="text" name="product_name_text" maxlength="255">
+                                        </div>
+                                    </div>
                                 <div class="col-lg-12">
                                     <div class="group-input">
                                         <label for="Facility/Equipment"> Facility/ Equipment/ Instrument/ System Details

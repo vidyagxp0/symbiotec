@@ -85,7 +85,8 @@ class CapaController extends Controller
         $capa->problem_description = $request->problem_description;
         $capa->due_date= $request->due_date;
         $capa->assign_to = $request->assign_to;
-
+        $capa->product_name = $request->product_name;
+        $capa->capa_source_number = $request->capa_source_number;
         $capa->capa_team =  implode(',', $request->capa_team);
         $capa_teamIdsArray = explode(',', $capa->capa_team);
         $capa_teamNames = User::whereIn('id', $capa_teamIdsArray)->pluck('name')->toArray();
@@ -1320,6 +1321,8 @@ if (!empty($capa->qa_attachmentc)) {
         $capa->problem_description = $request->problem_description;
         $capa->due_date= $request->due_date;
         $capa->assign_to = $request->assign_to;
+        $capa->product_name = $request->product_name;
+        $capa->capa_source_number = $request->capa_source_number;
       //  $capa->capa_team = $request->capa_team;
         // $capa->capa_team = implode(',', $request->capa_team);
         

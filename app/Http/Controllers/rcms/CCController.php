@@ -128,6 +128,8 @@ class CCController extends Controller
         $openState->severity_level1 = $request->severity_level1;
 
         $openState->parent_id = $request->parent_id;
+        $openState->product_name = $request->product_name;
+
         $openState->due_date = $request->due_date;
         $openState->parent_type = $request->parent_type;
         $openState->intiation_date = $request->intiation_date;
@@ -2579,6 +2581,8 @@ $Cft->update();
         $openState->short_description = $request->short_description;
         $openState->assign_to = $request->assign_to;
         $openState->due_date = $request->due_date;
+        $openState->product_name = $request->product_name;
+
         //dd($request->related_records)
         if ($request->related_records) {
             $openState->related_records = implode(',', $request->related_records);

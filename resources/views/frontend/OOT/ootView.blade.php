@@ -410,7 +410,22 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-
+                            <div class="col-6">
+                                <div class="group-input">
+                                    <label for="Product">Product Name</label>
+                                    <input  type="text" name="product_name" value="{{ $data->product_name }}" maxlength="255">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="group-input">
+                                    <label for="Is Valid / Invalid">Is Valid / Invalid</label>
+                                    <select id="valid_invalid" name="valid_invalid">
+                                        <option value="">-- Select --</option>
+s                                            <option value="Valid" @if ($data->valid_invalid == 'Valid') selected @endif>Valid </option>
+                                        <option value="Invalid" @if ($data->valid_invalid == 'Invalid') selected @endif>Invalid </option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-12">
                                 <div class="group-input">
                                     <label class="mt-4" for="Audit Comments">If Others </label>

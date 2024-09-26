@@ -818,7 +818,12 @@
 
                                             </div>
                                             
-
+                                            <div class="col-12">
+                                                <div class="group-input">
+                                                    <label for="Product">Product Name</label>
+                                                    <input  type="text" id="product_name" name="product_name"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} value="{{ $data->product_name }}" maxlength="255">
+                                                </div>
+                                            </div>
                                             
                                              <div class="col-lg-6">
                                                 <div class="group-input">

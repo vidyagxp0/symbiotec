@@ -119,6 +119,10 @@ class OOTController extends Controller
             // Save the file paths in the database
             $data->Attachment = json_encode($files);
         }
+        $data->product_name = $request->product_name;
+        $data->valid_invalid = $request->valid_invalid;
+
+
 
         $data->pli_finaly_validity_check          = $request->pli_finaly_validity_check;
         $data->finaly_validity_check              = $request->finaly_validity_check;

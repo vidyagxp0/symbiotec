@@ -219,13 +219,29 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="group-input">
 
                                     <label for="Short Description">Short Description<span class="text-danger">
                                         *</span></label><span id="rchars">255</span>characters remaining
 
-                                        <textarea name="short_description" value="" required></textarea>
+                                        <input name="short_description" value="" required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="group-input">
+                                        <label for="Product">Product Name</label>
+                                        <input  type="text" name="product_name" maxlength="255">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="group-input">
+                                        <label for="Is Valid / Invalid">Is Valid / Invalid</label>
+                                        <select id="valid_invalid" name="valid_invalid">
+                                            <option value="">-- Select --</option>
+s                                            <option value="Valid">Valid </option>
+                                            <option value="Invalid">Invalid </option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -240,6 +256,7 @@
                                     <div class="group-input">
                                         <label for="Short Description">Is Repeat<span class="text-danger"></span></label>
                                         <select id="is_repeat" name="is_repeat">
+                                            <option value="">-- Select --</option>
 s                                            <option value="yes">Yes </option>
                                             <option value="no">No </option>
                                         </select>

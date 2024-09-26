@@ -268,10 +268,23 @@
                                         characters remaining
                                         <input id="docname" type="text" name="short_description" maxlength="255"
                                             required>
-                                    </div>
+                                        </div>
+                                        <p id="docnameError" style="color:red">**Short Description is required</p>
                                 </div>
-                                    <p id="docnameError" style="color:red">**Short Description is required</p>
                                
+                                    <div class="col-6">
+                                        <div class="group-input">
+                                            <label for="Product">Product Name</label>
+                                            <input  type="text" name="product_name" maxlength="255">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="group-input">
+                                            <label for="CAPA Source & Number">CAPA Source & Number</label>
+                                            <input  type="number" name="capa_source_number" maxlength="255">
+                                        </div>
+                                    </div>
+
                                 <div class="col-lg-6">
                                     <div class="group-input">
                                         <label for="Initiator Group">Initiated Through</label>

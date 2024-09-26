@@ -1355,6 +1355,13 @@
                                             });
                                         });
                                     </script>
+                                     <div class="col-12">
+                                        <div class="group-input">
+                                            <label for="Product">Product Name</label>
+                                            <input  type="text" id="product_name_text" name="product_name_text"  {{ $data->stage == 0 || $data->stage == 13 ? 'disabled' : '' }} value="{{ $data->product_name_text }}" maxlength="255">
+                                        </div>
+                                    </div>
+                                    
                                     <div class="col-lg-12">
                                         <div class="group-input">
                                             <label for="Facility/Equipment"> Facility/ Equipment/ Instrument/ System
