@@ -157,7 +157,7 @@
         {{-- Header Bottom --}}
         <div class="container-fluid header-bottom">
             <div class="container-fluid">
-                <div class="bottom-links">
+                <div class="bottom-links" style="font-size: 14px;">
                     <div>
                         <a href="#"><i class="fa-solid fa-braille"></i></a>
                     </div>
